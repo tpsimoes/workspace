@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: setup-script
+  namespace: kube-system
+data:
+  setup.sh: |
+    sysctl -w kernel.unprivileged_userns_clone=0
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  namespace: kube-system
+  name: node-custom-setup
+  labels:
+    k8s-app: node-custom-setup
+spec:
+  selector:
+    matchLabels:
+      k8s-app: node-custom-setup
+  template:
+    metadata:
+      labels:
+        k8s-app: node-custom-setup
+    spec:
+      hostPID: true
+      hostNetwork: true
+      initContainers:
+      - name: init-node
+        command: ["nsenter"]
+        args: ["--mount=/proc/1/ns/mnt", "--", "sh", "-c", "$(SETUP_SCRIPT)"]
+        image: alpine
+        resources:
+          requests:
+            memory: "8Mi"
+            cpu: "100m"
+          limits:
+            memory: "16Mi"
+            cpu: "150m"
+        env:
+        - name: SETUP_SCRIPT
+          valueFrom:
+            configMapKeyRef:
+              name: setup-script
+              key: setup.sh
+        securityContext:
+          privileged: true
+      containers:
+      - name: wait
+        image: k8s.gcr.io/pause:3.1
+        resources:
+          requests:
+            memory: "8Mi"
+            cpu: "50m"
+          limits:
+            memory: "16Mi"
+            cpu: "100m"

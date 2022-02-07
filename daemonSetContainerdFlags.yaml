@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: config-containerd-flags
+  labels:
+    app: config-containerd-flags
+spec:
+  selector:
+    matchLabels:
+      app: config-containerd-flags
+  template:
+    metadata:
+      labels:
+        app: config-containerd-flags
+    spec:
+      containers:
+      - name: config-containerd-flags
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        command:
+          - nsenter
+          - --target
+          - "1"
+          - --mount
+          - --uts
+          - --ipc
+          - --net
+          - --pid
+          - --
+          - sh
+          - -c
+          - |
+            echo "LimitNOFILE=infinity >> /etc/systemd/system/containerd.service.d/exec_start.conf && echo "TasksMax=infinity" >> /etc/systemd/system/containerd.service.d/exec_start.conf && systemctl daemon-reload
+            while true; do sleep 86400; done
+        securityContext:
+          privileged: true
+      dnsPolicy: ClusterFirst
+      hostPID: true
