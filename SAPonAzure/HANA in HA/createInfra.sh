@@ -1,10 +1,14 @@
 #!/bin/sh
 
+################ Change Variables - Mandatory! ################
+
+export sapfileBlobURL="https://sapsoftwarerepro.blob.core.windows.net/sapsoftware?sp=rl&st=2023-03-24T10:44:26Z&se=2023-03-24T18:44:26Z&sv=2021-12-02&sr=c&sig=%2B5oD6t0LyOqXTlBXdAXQj6SWbT1zowjBKttzi41hSK0%3D" # This is can be obtained from: Storage Account > Containers > Shared access tokens > HTTPS/HTTP SAS Token - with Read & List > "Blob SAS URL"
+export subscriptionId=b7b83ce4-d953-4285-b8f4-d791ed252e4a;
+
 ################ INFRA > Networking Variables ################
 
 export LOCATION=eastus;
 export RESOURCE_GROUP=hana_script;
-export subscriptionId=XXXXXXXX-XXX-XXX-XXXX-XXXXXXXXXXX;
 export sapvnet=vnet-sap;
 export sapvnetaddress="10.23.0.0/22"
 export clientsubnet=client;
@@ -20,8 +24,6 @@ export netappsubnetaddress="10.23.1.0/26"
 INTERNAL_ADDRESS=${hanasubnetaddress:0:7}/24
 netappIP=${netappsubnetaddress:0:8}4
 storageIP=${storagesubnetaddress:0:7}
-
-################################################################
 
 ################################################################ SAP HANA - HA    ################################################################
 # https://learn.microsoft.com/en-us/azure/sap/workloads/sap-hana-scale-out-standby-netapp-files-suse
@@ -96,7 +98,7 @@ export volume_usrsap3_path=$sapID-usrsap-$vmsapname3
 ################################################################ Create ANF & Volumes ################################################################
 
 #https://learn.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes?tabs=azure-cli
-az netappfiles account create -g $RESOURCE_GROUP --name $ANF_ACCOUNT_NAME -l $LOCATION --no-wait;
+az netappfiles account create -g $RESOURCE_GROUP --name $ANF_ACCOUNT_NAME -l $LOCATION;
 
 # https://learn.microsoft.com/en-us/cli/azure/netappfiles/volume?view=azure-cli-latest#az-netappfiles-volume-create
 
@@ -303,7 +305,7 @@ az storage container create -g $RESOURCE_GROUP -n $storage_container_name --acco
 destinyKEY=$(az storage account keys list --account-name $storage_name -g $RESOURCE_GROUP --output table | grep key1 | awk '{print $4}')
 
 # origin - Tiago Simoes Storage Account
-originKEY='ErIeSu4uCqgvepXW0pYcJX+EzBENM3tYu5+WVg0Wm8uewRzOzaZzTq1h+t9y4diX3g87q+bgTSET+AStp/G6jg=='
+originKEY=$(az storage account keys list --account-name sapsoftwarerepro -g rsg-mce-hana --output table | grep key1 | awk '{print $4}')
 
 # Copy Between Storage Accounts
 az storage blob copy start-batch --destination-container sapsoftwarerepro --account-name $storage_name --account-key $destinyKEY --source-account-name sapsoftwarerepro --source-account-key $originKEY --source-container sapsoftware
@@ -462,7 +464,7 @@ az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname3 --command-id RunShell
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'cd /usr/sap/'${sapID}' && wget -O azcopy_v10.tar.gz https://azcopyvnext.azureedge.net/release20230123/azcopy_linux_amd64_10.17.0.tar.gz && tar -xf azcopy_v10.tar.gz && chown root:root -R azcopy_linux_amd64_10.17.0 && export PATH=$PATH:/usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0'
 
 ###### Decompress
-az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts "cd /usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0 && ./azcopy copy '${blobsasURL}' '/hana/shared/'${sapID}'/download' --recursive=TRUE"
+az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts "cd /usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0 && ./azcopy copy '${sapfileBlobURL}' '/hana/shared/'${sapID}'/download' --recursive=TRUE"
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'unzip -d /hana/shared/'${sapID}'/download/hanainstall /hana/shared/'${sapID}'/download/'${storage_container_name}'/51056431.ZIP'
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'cd /hana/shared/'${sapID}'/download/hanainstall/DATA_UNITS && chmod +x HDB_SERVER_LINUX_X86_64 && cd /hana/shared/'${sapID}'/download/hanainstall/DATA_UNITS/HDB_SERVER_LINUX_X86_64;'
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'chmod o+rx /hana/shared'
