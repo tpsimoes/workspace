@@ -26,9 +26,6 @@ myKEY=$(az storage account keys list --account-name $storage_name -g $RESOURCE_G
 # Generate SAS TOKEN for Download
 sasTOKEN=$(az storage container generate-sas --account-name $storage_name --account-key $myKEY --name $storage_container_name --permissions rl --expiry 2024-04-30T12:00:00Z --output tsv)
 
-# Create BlobURL for AZCopy
-blobsasURL=https://$storage_name.blob.core.windows.net/$storage_container_name/?$sasTOKEN
-
 # Upload File
 az storage blob upload --account-name $storage_name  --account-key $myKEY --container-name $storage_container_name --type block --file $sasfilePATH --name $sasfileNAME
 
