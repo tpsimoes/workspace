@@ -303,7 +303,7 @@ az storage container create -g $RESOURCE_GROUP -n $storage_container_name --acco
 destinyKEY=$(az storage account keys list --account-name $storage_name -g $RESOURCE_GROUP --output table | grep key1 | awk '{print $4}')
 
 # origin - Tiago Simoes Storage Account
-originKEY=$(az storage account keys list --account-name sapsoftwarerepro -g rsg-mce-hana --output table | grep key1 | awk '{print $4}')
+originKEY='ErIeSu4uCqgvepXW0pYcJX+EzBENM3tYu5+WVg0Wm8uewRzOzaZzTq1h+t9y4diX3g87q+bgTSET+AStp/G6jg=='
 
 # Copy Between Storage Accounts
 az storage blob copy start-batch --destination-container sapsoftwarerepro --account-name $storage_name --account-key $destinyKEY --source-account-name sapsoftwarerepro --source-account-key $originKEY --source-container sapsoftware
