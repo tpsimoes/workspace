@@ -26,7 +26,7 @@ Before run the script createStorageAccount.sh you need to fill up the follwing t
 - sasfileNAME
 - sasfilePATH
 
-After completition, you will get SASToken output, this values must be added to the variable installerZipUrl on the script createInfra.sh.
+After completition, you will get SASToken output, this value/output must be added to the variable installerZipUrl on the script createInfra.sh.
 
 USE CASE
                                       HANA DB in HA - 3 Nodes (2 Workers - 1 Standby)
