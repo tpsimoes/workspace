@@ -1,14 +1,12 @@
 #!/bin/sh
 
 ################ Variables - Change Mandatory! ################
-
 export subscriptionId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX;
 export sasfileNAME='FILENAME.ZIP'
 export sasfilePATH='/PATH/TOFILE/FILENAME.ZIP'
 
 ################################################################ SET Subscription ################################################################
 
-#Set Subscription
 az account set --subscription $subscriptionId;
 
 ################################################################# Storage Account ################################################################ 
@@ -33,5 +31,15 @@ blobsasURL=https://$storage_name.blob.core.windows.net/$storage_container_name/?
 
 # Upload File
 az storage blob upload --account-name $storage_name  --account-key $myKEY --container-name $storage_container_name --type block --file $sasfilePATH --name $sasfileNAME
+
+# Create BlobURL for AZCopy
+installerZipUrl=https://$storage_name.blob.core.windows.net/$storage_container_name/?$sasTOKEN
+
+echo ""
+echo "*******************************************************************************************"
+echo "** This token MUST be added to the variable installerZipUrl on the script createInfra.sh **"
+echo "*******************************************************************************************"
+echo ""
+echo $installerZipUrl
 
 ######################################################################################################################################## 

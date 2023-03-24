@@ -10,26 +10,23 @@ To create the infrasture for run SAP on Azure, you need to have already:
 - A SAP instalation file - Example: SAP HANA Platform Edt. 2.0 SPS06 rev65 Linux x86_6 file - 51056431.ZIP
 
 **HOW TO**
-*1st Cenario - You have already the SAP Installation file in a Storage Account*
-*2nd Cenario - You have the file, but you still need to create a Storage Account*
+*1st Cenario - You have already the SAP Installation file URL to be downloaded*
+*2nd Cenario - You only have the file locally*
 
 **Option 1**
 Before run the script *createInfra.sh* you need to fill up the follwing the mandatory variables:
 - subscriptionId
-- sapfileBlobURL
+- installerZipUrl
 
 **Option 2**
-We need to create a Storage Account and upload the file.
+We will create a Storage Account and upload the SAP installation file.
 
 Before run the script *createStorageAccount.sh* you need to fill up the follwing the mandatory variables:
 - subscriptionId
 - sasfileNAME
 - sasfilePATH
 
-And then to run the script *createInfra.sh* you need to fill up the follwing the mandatory variables:
-- subscriptionId
-- sapfileBlobURL
-
+After completition, you will get SASToken output, this values must be added to the variable *installerZipUrl* on the script *createInfra.sh*.
 
 **USE CASE**
                                       *HANA DB in HA - 3 Nodes (2 Workers - 1 Standby)*
