@@ -4,7 +4,7 @@
 
 # If you have a file on a StorageAccount - this is can be obtained from: Storage Account > Containers > Shared access tokens > HTTPS/HTTP SAS Token - with Read & List > "Blob SAS URL"
 export installerZipUrl="https://URL/FILENAME"
-export subscriptionId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX;
+export subscriptionId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX
 
 ################ INFRA > Networking Variables ################
 
