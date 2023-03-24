@@ -4,32 +4,32 @@
 
                                         
 
-**Pre-Requirements** 
+Pre-Requirements 
 To create the infrasture for run SAP on Azure, you need to have already:
 - An Azure Subsciption 
 - A SAP instalation file - Example: SAP HANA Platform Edt. 2.0 SPS06 rev65 Linux x86_6 file - 51056431.ZIP
 
-**HOW TO**
-*1st Cenario - You have already the SAP Installation file URL to be downloaded*
-*2nd Cenario - You only have the file locally*
+HOW TO
+1st Cenario - You have already the SAP Installation file URL to be downloaded
+2nd Cenario - You only have the file locally*
 
-**Option 1**
-Before run the script *createInfra.sh* you need to fill up the follwing the mandatory variables:
+1st Cenario:
+Before run the script createInfra.sh you need to fill up the follwing the mandatory variables:
 - subscriptionId
 - installerZipUrl
 
-**Option 2**
+2nd Cenario:
 We will create a Storage Account and upload the SAP installation file.
 
-Before run the script *createStorageAccount.sh* you need to fill up the follwing the mandatory variables:
+Before run the script createStorageAccount.sh you need to fill up the follwing the mandatory variables:
 - subscriptionId
 - sasfileNAME
 - sasfilePATH
 
-After completition, you will get SASToken output, this values must be added to the variable *installerZipUrl* on the script *createInfra.sh*.
+After completition, you will get SASToken output, this values must be added to the variable installerZipUrl on the script createInfra.sh.
 
-**USE CASE**
-                                      *HANA DB in HA - 3 Nodes (2 Workers - 1 Standby)*
+USE CASE
+                                      HANA DB in HA - 3 Nodes (2 Workers - 1 Standby)
 
 | Host    | Host   | Host   | Failover | Remove | Storage   | Storage   | Failover | Failover | NameServer | NameServer | IndexServer | IndexServer | Host    | Host    | Worker  | Worker  |
 |         | Active | Status | Status   | Status | Config    | Actual    | Config   | Actual   | Config     | Actual     | Config      | Actual      | Config  | Actual  | Config  | Actual  |
