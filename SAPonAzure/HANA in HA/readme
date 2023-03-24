@@ -17,14 +17,15 @@ HOW TO
 Before run the script createInfra.sh you need to fill up the follwing the mandatory variables:
 - subscriptionId
 - installerZipUrl
+- sapfileNAME
 
 2nd Cenario:
 We will create a Storage Account and upload the SAP installation file.
 
 Before run the script createStorageAccount.sh you need to fill up the follwing the mandatory variables:
 - subscriptionId
-- sasfileNAME
-- sasfilePATH
+- sapfileNAME
+- sapfilePATH
 
 After completition, you will get SASToken output, this value/output must be added to the variable installerZipUrl on the script createInfra.sh
 

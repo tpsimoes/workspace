@@ -3,8 +3,9 @@
 ################ Change Variables - Mandatory! ################
 
 # If you have a file on a StorageAccount - this is can be obtained from: Storage Account > Containers > Shared access tokens > HTTPS/HTTP SAS Token - with Read & List > "Blob SAS URL"
-export installerZipUrl="https://URL/FILENAME"
+export installerZipUrl="https://URL/"
 export subscriptionId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX
+export sapfileNAME='FILENAME.ZIP'
 
 ################ INFRA > Networking Variables ################
 
@@ -441,7 +442,7 @@ az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShell
 
 ###### Decompress
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts "cd /usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0 && ./azcopy copy '${installerZipUrl}' '/hana/shared/'${sapID}'/download' --recursive=TRUE"
-az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'unzip -d /hana/shared/'${sapID}'/download/hanainstall /hana/shared/'${sapID}'/download/'${storage_container_name}'/51056431.ZIP'
+az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'unzip -d /hana/shared/'${sapID}'/download/hanainstall /hana/shared/'${sapID}'/download/'${storage_container_name}'/'${sapfileNAME}'' 
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'cd /hana/shared/'${sapID}'/download/hanainstall/DATA_UNITS && chmod +x HDB_SERVER_LINUX_X86_64 && cd /hana/shared/'${sapID}'/download/hanainstall/DATA_UNITS/HDB_SERVER_LINUX_X86_64;'
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'chmod o+rx /hana/shared'
 
