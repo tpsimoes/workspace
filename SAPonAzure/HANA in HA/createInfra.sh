@@ -441,8 +441,8 @@ az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname3 --command-id RunShell
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'cd /usr/sap/'${sapID}' && wget -O azcopy_v10.tar.gz https://azcopyvnext.azureedge.net/release20230123/azcopy_linux_amd64_10.17.0.tar.gz && tar -xf azcopy_v10.tar.gz && chown root:root -R azcopy_linux_amd64_10.17.0 && export PATH=$PATH:/usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0'
 
 ###### Decompress
-az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts "cd /usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0 && ./azcopy copy '${installerZipUrl}' '/hana/shared/'${sapID}'/download' --recursive=TRUE"
-az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'unzip -d /hana/shared/'${sapID}'/download/hanainstall /hana/shared/'${sapID}'/download/'${storage_container_name}'/'${sapfileNAME}'' 
+az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts "cd /usr/sap/'${sapID}'/azcopy_linux_amd64_10.17.0 && ./azcopy copy '${installerZipUrl}' '/hana/shared/'${sapID}'/download/'${sasfileNAME}'' --recursive=TRUE"
+az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'unzip -d /hana/shared/'${sapID}'/download/hanainstall /hana/shared/'${sapID}'/download/'${sasfileNAME}'' 
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'cd /hana/shared/'${sapID}'/download/hanainstall/DATA_UNITS && chmod +x HDB_SERVER_LINUX_X86_64 && cd /hana/shared/'${sapID}'/download/hanainstall/DATA_UNITS/HDB_SERVER_LINUX_X86_64;'
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'chmod o+rx /hana/shared'
 
