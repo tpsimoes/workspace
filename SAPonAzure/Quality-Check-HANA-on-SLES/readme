@@ -1,5 +1,5 @@
                                                        Quality Check
-            Deploy a Windows VM, a jumbox VM in your SAP HANA VNET to in one shoot run 
+            Deploy a Windows VM, a jumpbox VM in your SAP HANA VNET, to in one shoot run the tool: 
             https://learn.microsoft.com/en-us/azure/sap/workloads/sap-hana-high-availability
 
                                         
@@ -8,6 +8,7 @@ Pre-Requirements
 To create the infrasture for run SAP on Azure, you need to have already:
 - An Azure Subsciption 
 - A SAP instalation on a SUSE Azure VM
+- Azure Storage Account to store the HANA ssh keys and the generated HTML reports
 - WSL Ubuntu on a Local Machine (in case you dont have - just need to adapt to your system where the sensible-browser opens the generated HTML reports)
 
 Assumptions
