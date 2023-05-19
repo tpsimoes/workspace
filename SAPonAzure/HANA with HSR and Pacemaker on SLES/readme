@@ -1,6 +1,6 @@
                                                        SAP on Azure
-            Deploy a SAP HANA scale-out system with standby node on Azure VMs by using Azure NetApp Files on SUSE Linux Enterprise Server
-            https://learn.microsoft.com/en-us/azure/sap/workloads/sap-hana-scale-out-standby-netapp-files-suse
+            Deploy a SAP HANA High Avaibility system with HSR and Pacamker on Azure VMs on SUSE Linux Enterprise Server
+            https://learn.microsoft.com/en-us/azure/sap/workloads/sap-hana-high-availability
 
                                         
 
@@ -20,8 +20,7 @@ Before run the script createInfra.sh you need to fill up the follwing the mandat
 - sapfileNAME
 
 2nd Cenario:
-We will create a Storage Account and upload the SAP installation file - you can find this script:
-- 
+We will create a Storage Account and upload the SAP installation file.
 
 Before run the script createStorageAccount.sh you need to fill up the follwing the mandatory variables:
 - subscriptionId
@@ -31,7 +30,7 @@ Before run the script createStorageAccount.sh you need to fill up the follwing t
 After completition, you will get SASToken output, this value/output must be added to the variable installerZipUrl on the script createInfra.sh
 
 USE CASE
-                                      HANA DB in HA - 3 Nodes (2 Workers - 1 Standby)
+                                      HANA DB in HA - 2 Nodes (1 Worker - 1 Standby)
 
 | Host    | Host   | Host   | Failover | Remove | Storage   | Storage   | Failover | Failover | NameServer | NameServer | IndexServer | IndexServer | Host    | Host    | Worker  | Worker  |
 |         | Active | Status | Status   | Status | Config    | Actual    | Config   | Actual   | Config     | Actual     | Config      | Actual      | Config  | Actual  | Config  | Actual  |
@@ -42,3 +41,4 @@ USE CASE
 | hanadb3 | yes    | ignore |          |        |         0 |         0 | default  | default  | master 3   | slave      | standby     | standby     | standby | standby | default | -       |
 
 NOTE: Just change the subscriptionId in create.sh
+
