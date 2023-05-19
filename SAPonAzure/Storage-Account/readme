@@ -1,0 +1,7 @@
+                                                       Create Storage Account
+            Deploy a Storage Account on Azure - to store your SAP installation file - and also for you HTML generated reports
+                                                 
+
+Pre-Requirements 
+To create the infrasture for run SAP on Azure, you need to have already:
+- An Azure Subsciption 

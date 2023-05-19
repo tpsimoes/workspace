@@ -30,20 +30,28 @@ Before run the script createStorageAccount.sh you need to fill up the follwing t
 
 After completition, you will get SASToken output, this value/output must be added to the variable installerZipUrl on the script createInfra.sh
 
-                                                     Quality Check
+                                                          Quality Check
 If you need to validate your SAP on Azure installation - you can also run the script:
 https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheck.sh
 
                                                        USE CASE - TOBE REVISED
                                       HANA DB in HA - 2 Nodes (1 Worker - 1 Standby)
 
-| Host    | Host   | Host   | Failover | Remove | Storage   | Storage   | Failover | Failover | NameServer | NameServer | IndexServer | IndexServer | Host    | Host    | Worker  | Worker  |
-|         | Active | Status | Status   | Status | Config    | Actual    | Config   | Actual   | Config     | Actual     | Config      | Actual      | Config  | Actual  | Config  | Actual  |
-|         |        |        |          |        | Partition | Partition | Group    | Group    | Role       | Role       | Role        | Role        | Roles   | Roles   | Groups  | Groups  |
-| ------- | ------ | ------ | -------- | ------ | --------- | --------- | -------- | -------- | ---------- | ---------- | ----------- | ----------- | ------- | ------- | ------- | ------- |
-| hanadb1 | yes    | ok     |          |        |         1 |         1 | default  | default  | master 1   | master     | worker      | master      | worker  | worker  | default | default |
-| hanadb2 | yes    | ok     |          |        |         2 |         2 | default  | default  | master 2   | slave      | worker      | slave       | worker  | worker  | default | default |
-| hanadb3 | yes    | ignore |          |        |         0 |         0 | default  | default  | master 3   | slave      | standby     | standby     | standby | standby | default | -       |
+| Host    | Host   | Host   | Failover | Remove | Storage   | Storage   | Failover | Failover | NameServer | NameServer | IndexServer | IndexServer | Host   | Host   | Worker  | Worker  |
+|         | Active | Status | Status   | Status | Config    | Actual    | Config   | Actual   | Config     | Actual     | Config      | Actual      | Config | Actual | Config  | Actual  |
+|         |        |        |          |        | Partition | Partition | Group    | Group    | Role       | Role       | Role        | Role        | Roles  | Roles  | Groups  | Groups  |
+| ------- | ------ | ------ | -------- | ------ | --------- | --------- | -------- | -------- | ---------- | ---------- | ----------- | ----------- | ------ | ------ | ------- | ------- |
+| hanadb1 | yes    | ok     |          |        |         1 |         1 | default  | default  | master 1   | master     | worker      | master      | worker | worker | default | default |
+
+Sites srHook 
+-------------
+SITE1 SOK    
+SITE2 PRIM   
+
+Hosts   clone_state lpa_hn1_lpt node_state op_mode   remoteHost roles                            score site  srah srmode sync_state version     vhost   
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+hanadb1 DEMOTED     30          online     logreplay hanadb2    4:S:master1:master:worker:master 100   SITE1 -    sync   SOK        2.00.065.00 hanadb1 
+hanadb2 PROMOTED    1684505444  online     logreplay hanadb1    4:P:master1:master:worker:master 150   SITE2 -    sync   PRIM       2.00.065.00 hanadb2 
 
 NOTE: Just change the subscriptionId in create.sh
 
