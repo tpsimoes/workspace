@@ -30,7 +30,11 @@ Before run the script createStorageAccount.sh you need to fill up the follwing t
 
 After completition, you will get SASToken output, this value/output must be added to the variable installerZipUrl on the script createInfra.sh
 
-USE CASE
+                                                     Quality Check
+If you need to validate your SAP on Azure installation - you can also run the script:
+https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheck.sh
+
+                                                       USE CASE - TOBE REVISED
                                       HANA DB in HA - 2 Nodes (1 Worker - 1 Standby)
 
 | Host    | Host   | Host   | Failover | Remove | Storage   | Storage   | Failover | Failover | NameServer | NameServer | IndexServer | IndexServer | Host    | Host    | Worker  | Worker  |

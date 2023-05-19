@@ -7,39 +7,5 @@
 Pre-Requirements 
 To create the infrasture for run SAP on Azure, you need to have already:
 - An Azure Subsciption 
-- A SAP instalation file - Example: SAP HANA Platform Edt. 2.0 SPS06 rev65 Linux x86_6 file - 51056431.ZIP
-
-HOW TO
-1st Cenario - You have already the SAP Installation file URL to be downloaded
-2nd Cenario - You only have the file locally*
-
-1st Cenario:
-Before run the script createInfra.sh you need to fill up the follwing the mandatory variables:
-- subscriptionId
-- installerZipUrl
-- sapfileNAME
-
-2nd Cenario:
-We will create a Storage Account and upload the SAP installation file - you can find this script:
-- https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Storage%20Account/createStorageAccount.sh
-
-Before run the script createStorageAccount.sh you need to fill up the follwing the mandatory variables:
-- subscriptionId
-- sapfileNAME
-- sapfilePATH
-
-After completition, you will get SASToken output, this value/output must be added to the variable installerZipUrl on the script createInfra.sh
-
-USE CASE
-                                      HANA DB in HA - 2 Nodes (1 Worker - 1 Standby)
-
-| Host    | Host   | Host   | Failover | Remove | Storage   | Storage   | Failover | Failover | NameServer | NameServer | IndexServer | IndexServer | Host    | Host    | Worker  | Worker  |
-|         | Active | Status | Status   | Status | Config    | Actual    | Config   | Actual   | Config     | Actual     | Config      | Actual      | Config  | Actual  | Config  | Actual  |
-|         |        |        |          |        | Partition | Partition | Group    | Group    | Role       | Role       | Role        | Role        | Roles   | Roles   | Groups  | Groups  |
-| ------- | ------ | ------ | -------- | ------ | --------- | --------- | -------- | -------- | ---------- | ---------- | ----------- | ----------- | ------- | ------- | ------- | ------- |
-| hanadb1 | yes    | ok     |          |        |         1 |         1 | default  | default  | master 1   | master     | worker      | master      | worker  | worker  | default | default |
-| hanadb2 | yes    | ok     |          |        |         2 |         2 | default  | default  | master 2   | slave      | worker      | slave       | worker  | worker  | default | default |
-| hanadb3 | yes    | ignore |          |        |         0 |         0 | default  | default  | master 3   | slave      | standby     | standby     | standby | standby | default | -       |
-
-NOTE: Just change the subscriptionId in create.sh
-
+- A SAP instalation on a SUSE Azure VM
+- WSL Ubuntu on a Local Machine (in case you dont have - just need to adapt to your system where the sensible-browser opens the generated HTML reports)

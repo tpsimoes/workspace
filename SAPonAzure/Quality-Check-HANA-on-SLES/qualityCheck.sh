@@ -15,7 +15,7 @@ localUser=$(whoami)
 # this variable is to used for sensible-browser - if yu have another app to open HTML files on linux you can change the final URL
 localMachine="wsl.localhost/"$wslDistro
 
-### FW / Route Table
+### FW / Route Table - if you have a Route Table associated to your HANA VNET
 export fwrt=null
 
 ###### Run Quality Check to validate cluster setup - TO BE REVISED
