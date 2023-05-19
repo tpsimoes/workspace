@@ -11,4 +11,4 @@ To create the infrasture for run SAP on Azure, you need to have already:
 - WSL Ubuntu on a Local Machine (in case you dont have - just need to adapt to your system where the sensible-browser opens the generated HTML reports)
 
 Assumptions
-Currently this script is design to work on a SAP HANA Arquitecture with two VMs
+Currently this script is design to work on a SAP HANA High Availability Arquitecture with two VMs
