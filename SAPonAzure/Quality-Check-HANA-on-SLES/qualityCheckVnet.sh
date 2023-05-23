@@ -148,10 +148,6 @@ while IFS= read -r vmsapname; do
     az vm user update -u $adminUser --ssh-key-value "$(< /home/${localUser}/.ssh/${vmsapname}-cert.pub)" -g $RESOURCE_GROUP -n $vmsapname
 done <<< "$hanaVMlist"
 
-#[IF NEEDED] confirm is valid private key
-#ssh-keygen -y -f /home/$localUser/.ssh/${vmsapname1}-cert
-#ssh-keygen -y -f /home/$localUser/.ssh/${vmsapname2}-cert
-
 ########################### Connect to Storage Account | Create .ssh Directory if not present and Download SSH Key
 
 newContainerName="qualitycheckhtml"
