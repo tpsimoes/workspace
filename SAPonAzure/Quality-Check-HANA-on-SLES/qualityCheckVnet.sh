@@ -39,7 +39,7 @@ export clientsubnet=client;
 ################ Change Variables - Mandatory! ################
 
 export adminUser=azureuser
-export PASSWORD=Password2023!
+export PASSWORD=XXXXXXXXX
 
 export vmjmp_size=Standard_D2s_v5
 export winVmName=jumpSapbox
@@ -88,8 +88,6 @@ az role assignment create --assignee $ApplicationId --role Contributor --scope /
 
 # Deactivate the Startup of SConfig
 az vm run-command invoke -g $RESOURCE_GROUP --name $winVmName --command-id RunPowerShellScript --scripts 'Set-SConfig -AutoLaunch $false'
-
-Invoke-RestMethod -Uri "raw.githubusercontent.com"
 
 # Install PWS 7.X
 az vm run-command invoke -g $RESOURCE_GROUP --name $winVmName --command-id RunPowerShellScript --scripts 'Invoke-WebRequest -Uri https://aka.ms/install-powershell.ps1 -OutFile install-powershell.ps1; .\install-powershell.ps1 -UseMSI -EnablePSRemoting -Quiet'
@@ -156,10 +154,6 @@ done <<< "$hanaVMlist"
 
 ########################### Connect to Storage Account | Create .ssh Directory if not present and Download SSH Key
 
-#blobNameVM1="\$vmsapname1-cert"
-#blobNameVM2="\$vmsapname2-cert"
-#destinationPathVM1="C:\Users\\$adminUser\.ssh\\$vmsapname1-cert"
-#destinationPathVM2="C:\Users\\$adminUser\.ssh\\$vmsapname2-cert"
 newContainerName="qualitycheckhtml"
 
 ##### Create Directory and Upload Files
@@ -178,7 +172,6 @@ done <<< "$hanaVMlist"
 hanaVMlist=$(az vm list -g $RESOURCE_GROUP --query "[].name" --output json | grep $vmsapnameVM  | sed '$s/\,//g') 
 
 # https://social.technet.microsoft.com/wiki/contents/articles/52870.powershell-finding-ip-of-vm-from-azure-portal-az-module.aspx
-
 # Create a Variable with the system current date - so it can in the end work with the HTML reports generated after this timestamp
 systemDate=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
