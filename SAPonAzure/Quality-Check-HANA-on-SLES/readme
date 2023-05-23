@@ -14,4 +14,4 @@ To create the infrasture for run SAP on Azure, you need to have already:
 Assumptions
 Currently this script is design to work on a SAP HANA High Availability Arquitecture:
 - For a typical Repro with two VMs - please use the https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheck.sh
-- To check a list/VNET of Hana VMs - please use the 
+- To check a list/VNET of Hana VMs - please use the https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheckVnet.sh
