@@ -7,11 +7,11 @@
 Pre-Requirements 
 To create the infrasture for run SAP on Azure, you need to have already:
 - An Azure Subsciption 
-- A SAP instalation on a SUSE Azure VM
-- Azure Storage Account to store the HANA ssh keys and the generated HTML reports
-- WSL Ubuntu on a Local Machine (in case you dont have - just need to adapt to your system where the sensible-browser opens the generated HTML reports)
+- A SAP HANA installation  on a SUSE Azure VM
+- Azure Storage Account to store the HANA VMs ssh keys and the generated HTML reports
+- WSL Ubuntu on a Local Machine (in case you dont have - just need to adapt to your system where the tool wslview opens the generated HTML reports)
 
 Assumptions
 Currently this script is design to work on a SAP HANA High Availability Arquitecture:
 - For a typical Repro with two VMs - please use the https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheck.sh
-- To check a list/VNET of Hana VMs - please use the https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheckVnet.sh
+- To check a list/Subnet of Hana VMs - please use the https://github.com/tpsimoes/workspace/blob/master/SAPonAzure/Quality-Check-HANA-on-SLES/qualityCheckVnet.sh
