@@ -81,7 +81,7 @@ export fwColName=afw-ruleco-mce-hana
 export collectiongroup=DefaultNetworkRuleCollectionGroup
 
 az network firewall policy create --name $fwPolName --resource-group $RESOURCE_GROUP --location $LOCATION --sku Standard --enable-dns-proxy true
-az network firewall update --name $fwname --resource-group $RESOURCE_GROUP --firewall-policy $fwPolName;
+#az network firewall update --name $fwname --resource-group $RESOURCE_GROUP --firewall-policy $fwPolName;
 
 # https://learn.microsoft.com/en-us/cli/azure/network/firewall/policy/rule-collection-group/collection?view=azure-cli-latest#az-network-firewall-policy-rule-collection-group-collection-add-filter-collection-examples
 # https://learn.microsoft.com/en-us/cli/azure/network/firewall/policy/rule-collection-group?view=azure-cli-latest#az-network-firewall-policy-rule-collection-group-create
