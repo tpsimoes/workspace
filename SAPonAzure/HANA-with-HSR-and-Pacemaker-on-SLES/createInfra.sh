@@ -72,7 +72,7 @@ az network firewall ip-config create --firewall-name $fwname --name $fwconfig --
 az network firewall update --name $fwname --resource-group $RESOURCE_GROUP;
 az network public-ip show --name $fwpip --resource-group $RESOURCE_GROUP;
 	
-fwprivaddr=$(az network firewall show -g $RESOURCE_GROUP -n $fwname --query "ipConfigurations[0].privateIpAddress" --output tsv)
+fwprivaddr=$(az network firewall show -g $RESOURCE_GROUP -n $fwname --query "ipConfigurations[0].privateIPAddress" --output tsv)
 
 ################ FW -  Rule Collection ################
 # https://learn.microsoft.com/en-us/azure/firewall/deploy-cli#configure-a-network-rule
