@@ -4,7 +4,7 @@
     "infrastructureConfiguration": {
       "deploymentType": "<infraDeploymentType>",
       "highAvailabilityConfig": {
-        "highAvailabilityType": "<infraHighAvailabilityType>"
+        "highAvailabilityType": "<infraHighAvailabilityType >"
       },
       "centralServer": {
         "subnetId": "/subscriptions/<subscriptionID>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/virtualNetworks/<vnetName>/subnets/<centralSubnetName>",
