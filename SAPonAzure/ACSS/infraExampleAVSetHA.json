@@ -1,0 +1,231 @@
+  {
+      "configurationType": "DeploymentWithOSConfig",
+      "appLocation": "eastus",
+      "infrastructureConfiguration": {
+        "deploymentType": "ThreeTier",
+        "highAvailabilityConfig": {
+          "highAvailabilityType": "AvailabilitySet"
+        },
+        "centralServer": {
+          "subnetId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX/resourceGroups/acss_script/providers/Microsoft.Network/virtualNetworks/acss-vnet-sap/subnets/app",
+          "virtualMachineConfiguration": {
+            "vmSize": "Standard_E8ds_v5",
+            "imageReference": {
+                "sku": "gen2",
+                "publisher": "SUSE",
+                "version": "latest",
+                "offer": "sles-sap-15-sp3"
+            },
+            "osProfile": {
+              "adminUsername": "azureuser",
+              "osConfiguration": {
+                "osType": "Linux",
+                "disablePasswordAuthentication": true,
+                "sshKeyPair": {
+                    "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADCS/GAKTBZzF9+ezttimIKRlzGUw9DnxdwOlEiQ5ufFdbeVrVpSlpC5MJ6xRqVcPaTqH3iYQ== 'azureuser'@'HN1'",
+                    "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIJKQIBAAKCAgEA2F8QIanX9Duu0yPAb9ACzB8FX...etc...o16h0yzMqQBEA\n-----END RSA PRIVATE KEY-----"
+                }
+              }
+            }
+          },
+          "instanceCount": 2
+        },
+        "applicationServer": {
+          "subnetId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX/resourceGroups/acss_script/providers/Microsoft.Network/virtualNetworks/acss-vnet-sap/subnets/app",
+          "virtualMachineConfiguration": {
+            "vmSize": "Standard_E8ds_v5",
+            "imageReference": {
+                "sku": "gen2",
+                "publisher": "SUSE",
+                "version": "latest",
+                "offer": "sles-sap-15-sp3"
+            },
+            "osProfile": {
+              "adminUsername": "azureuser",
+              "osConfiguration": {
+                "osType": "Linux",
+                "disablePasswordAuthentication": true,
+                "sshKeyPair": {
+                    "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADCS/GAKTBZzF9+ezttimIKRlzGUw9DnxdwOlEiQ5ufFdbeVrVpSlpC5MJ6xRqVcPaTqH3iYQ== 'azureuser'@'HN1'",
+                    "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIJKQIBAAKCAgEA2F8QIanX9Duu0yPAb9ACzB8FX...etc...o16h0yzMqQBEA\n-----END RSA PRIVATE KEY-----"
+                }
+              }
+            }
+          },
+          "instanceCount": 2
+        },
+        "databaseServer": {
+          "subnetId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX/resourceGroups/acss_script/providers/Microsoft.Network/virtualNetworks/acss-vnet-sap/subnets/db",
+          "virtualMachineConfiguration": {
+            "vmSize": "Standard_E16ds_v5",
+            "imageReference": {
+                "sku": "gen2",
+                "publisher": "SUSE",
+                "version": "latest",
+                "offer": "sles-sap-15-sp3"
+            },
+            "osProfile": {
+              "adminUsername": "azureuser",
+              "osConfiguration": {
+                "osType": "Linux",
+                "disablePasswordAuthentication": true,
+                "sshKeyPair": {
+                  "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADCS/GAKTBZzF9+ezttimIKRlzGUw9DnxdwOlEiQ5ufFdbeVrVpSlpC5MJ6xRqVcPaTqH3iYQ== 'azureuser'@'HN1'",
+                  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIJKQIBAAKCAgEA2F8QIanX9Duu0yPAb9ACzB8FX...etc...o16h0yzMqQBEA\n-----END RSA PRIVATE KEY-----"
+                }
+              }
+            }
+          },
+          "instanceCount": 2
+        },
+        "customResourceNames": {
+          "namingPatternType": "FullResourceName",
+          "centralServer": {
+            "virtualMachines": [
+              {
+                "vmName": "hn1ascsvm",
+                "hostName": "hn1ascshost",
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "hn1ascsnic"
+                  }
+                ]
+              },
+              {
+                "vmName": "hn1ersvm",
+                "hostName": "hn1ershost",
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "hn1ersnic"
+                  }
+                ]
+              }
+            ],
+            "loadBalancer": {
+              "loadBalancerName": "hn1ascslb",
+              "frontendIpConfigurationNames": [
+                "hn1ascsip0",
+                "hn1ersip0"
+              ],
+              "backendPoolNames": [
+                "hn1ascsBackendPool"
+              ],
+              "healthProbeNames": [
+                "hn1ascsHealthProbe",
+                "hn1ersHealthProbe"
+              ]
+            }
+          },
+          "applicationServer": {
+            "virtualMachines": [
+              {
+                "vmName": "hn1appvm0",
+                "hostName": "hn1apphost0",
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "hn1appnic0"
+                  }
+                ],
+                "dataDiskNames": {
+                  "default": [
+                    "hn1app0disk0"
+                  ]
+                }
+              },
+              {
+                "vmName": "hn1appvm1",
+                "hostName": "hn1apphost1",
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "hn1appnic1"
+                  }
+                ],
+                "dataDiskNames": {
+                  "default": [
+                    "hn1app1disk0"
+                  ]
+                }
+              }
+            ]
+          },
+          "databaseServer": {
+            "virtualMachines": [
+              {
+                "vmName": "hn1dbvmpr",
+                "hostName": "hn1dbprhost",
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "hn1dbprnic"
+                  }
+                ],
+                "dataDiskNames": {
+                  "hanaData": [
+                    "hanadatapr0",
+                    "hanadatapr1"
+                  ],
+                  "hanaLog": [
+                    "hanalogpr0",
+                    "hanalogpr1",
+                    "hanalogpr2"
+                  ],
+                  "usrSap": [
+                    "usrsappr0"
+                  ],
+                  "hanaShared": [
+                    "hanasharedpr0",
+                    "hanasharedpr1"
+                  ]
+                }
+              },
+              {
+                "vmName": "hn1dbvmsr",
+                "hostName": "hn1dbsrhost",
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "hn1dbsrnic"
+                  }
+                ],
+                "dataDiskNames": {
+                  "hanaData": [
+                    "hanadatasr0",
+                    "hanadatasr1"
+                  ],
+                  "hanaLog": [
+                    "hanalogsr0",
+                    "hanalogsr1",
+                    "hanalogsr2"
+                  ],
+                  "usrSap": [
+                    "usrsapsr0"
+                  ],
+                  "hanaShared": [
+                    "hanasharedsr0",
+                    "hanasharedsr1"
+                  ]
+                }
+              }
+            ],
+            "loadBalancer": {
+              "loadBalancerName": "hn1dblb",
+              "frontendIpConfigurationNames": [
+                "dbip"
+              ],
+              "backendPoolNames": [
+                "dbBackendPool"
+              ],
+              "healthProbeNames": [
+                "dbHealthProbe"
+              ]
+            }
+          },
+          "sharedStorage": {
+            "sharedStorageAccountName": "hn1storageacc",
+            "sharedStorageAccountPrivateEndPointName": "hn1peForxNFS"
+          }
+        },
+        "appResourceGroup": "acss_script"
+      },
+      "osSapConfiguration": {
+        "sapFqdn": "hn1.local"
+      }
+    }
