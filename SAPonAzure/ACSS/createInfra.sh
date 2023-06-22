@@ -8,7 +8,6 @@ export tenantId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX
 export sap_user="USER@XXXX.com"
 export sap_password="SAPPASSWORD"
 
-
 ################ INFRA > Networking Variables ################
 
 export LOCATION=eastus;
@@ -311,24 +310,17 @@ az sshkey create --location $LOCATION --resource-group $RESOURCE_GROUP --name $A
 # PEM Pub
 pubKeyPEM=$(cat $keyDIR/${ACSSID}-PEM.pub)
 sed -i 's,'"PublicSSHKey"','${pubKeyPEM}',' "$payloadFILE"
-#cat $payloadFILE | grep publicKey
 
 # PEM Private Key Escape Char replacement_text
 export hashKEYFile=$dataDIR/temp.file
-
 sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g' ${keyDIR}/${ACSSID}-PEM | sed 's/\\n$//' > $hashKEYFile
 replacement_text=$(<"$hashKEYFile")
 escaped_replacement_text=$(sed 's/[\&/]/\\&/g; s/$/\\/' <<< "$replacement_text")
-
 awk -v replacement="$escaped_replacement_text" '{gsub(/PrivateSSHKey/, replacement)} 1' FS="\n" OFS="\n" "$payloadFILE" > temp && mv temp "$payloadFILE";
 
-#cat $payloadFILE | grep privateKey
-
-#acssMIRGID="/subscriptions/b7b83ce4-d953-4285-b8f4-d791ed252e4a/resourcegroups/acss_script/providers/Microsoft.ManagedIdentity/userAssignedIdentities/acss-managedIdentity"
 acssMIRGID=/subscriptions/$subscriptionId/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$acssMIName
 
-
-
+# Create ACSS VISS
 az workloads sap-virtual-instance create -g $RESOURCE_GROUP -n $ACSSID --environment $enviromentType --sap-product $visProduct --configuration $payloadFILE \
 --identity "{type:UserAssigned,userAssignedIdentities:{$acssMIRGID:{}}}"
 
