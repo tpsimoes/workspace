@@ -187,7 +187,6 @@ git clone https://github.com/Azure/SAP-automation-samples.git
 git clone https://github.com/Azure/sap-automation.git
 cd sap-automation/;
 git checkout main;
-git status;
 
 export bom_base_name='${bom_base_name}'
 export s_user='${sap_user}'
@@ -198,8 +197,8 @@ export BOM_directory='${BOM_directory}'
 export orchestration_ansible_user='${orchestration_ansible_user}'
 export playbook_path='${playbook_path}'
 
-ansible-playbook '${playbook_path}' \
--e "bom_base_name='${bom_base_name}'" \
+sudo ansible-playbook ${playbook_path} \
+-e "bom_base_name=${bom_base_name}" \
 -e "deployer_kv_name=dummy_value" \
 -e "s_user=${sap_user}" \
 -e "s_password=${sap_password}" \
