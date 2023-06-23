@@ -1,0 +1,246 @@
+{
+    "configurationType": "DeploymentWithOSConfig",
+    "appLocation": "<infraLocation>",
+    "infrastructureConfiguration": {
+      "deploymentType": "<infraDeploymentType>",
+      "highAvailabilityConfig": {
+        "highAvailabilityType": "<infraHighAvailabilityType>"
+      },
+          "storageConfiguration": {
+            "transportFileShareConfiguration": {
+              "configurationType": "CreateAndMount"
+            }
+          },
+      "centralServer": {
+        "subnetId": "/subscriptions/<subscriptionID>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/virtualNetworks/<vnetName>/subnets/<centralSubnetName>",
+        "virtualMachineConfiguration": {
+          "vmSize": "<centralVMSize>",
+          "imageReference": {
+              "sku": "<skuVM>",
+              "publisher": "<vmImagePublisher>",
+              "version": "<vmImageVersion>",
+              "offer": "<offerVMImage>"
+          },
+          "osProfile": {
+            "adminUsername": "azureuser",
+            "osConfiguration": {
+              "osType": "Linux",
+              "disablePasswordAuthentication": true,
+              "sshKeyPair": {
+                "publicKey": "PublicSSHKey",
+                "privateKey": "PrivateSSHKey"
+              }
+            }
+          }
+        },
+        "instanceCount": 2
+      },
+      "applicationServer": {
+        "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/loop-test-vnet/subnets/loopsubnet",
+        "virtualMachineConfiguration": {
+          "vmSize": "<appVMSize>",
+          "imageReference": {
+              "sku": "<skuVM>",
+              "publisher": "<vmImagePublisher>",
+              "version": "<vmImageVersion>",
+              "offer": "<offerVMImage>"
+          },
+          "osProfile": {
+            "adminUsername": "azureuser",
+            "osConfiguration": {
+              "osType": "Linux",
+              "disablePasswordAuthentication": true,
+              "sshKeyPair": {
+                "publicKey": "PublicSSHKey",
+                "privateKey": "PrivateSSHKey"
+              }
+            }
+          }
+        },
+        "instanceCount": 2
+      },
+      "databaseServer": {
+        "subnetId": "/subscriptions/<subscriptionID>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/virtualNetworks/<vnetName>/subnets/<dbSubnetName>",
+        "virtualMachineConfiguration": {
+          "vmSize": "<dbVMSize>",
+          "imageReference": {
+              "sku": "<skuVM>",
+              "publisher": "<vmImagePublisher>",
+              "version": "<vmImageVersion>",
+              "offer": "<offerVMImage>"
+          },
+          "osProfile": {
+            "adminUsername": "azureuser",
+            "osConfiguration": {
+              "osType": "Linux",
+              "disablePasswordAuthentication": true,
+              "sshKeyPair": {
+                "publicKey": "PublicSSHKey",
+                "privateKey": "PrivateSSHKey"
+              }
+            }
+          }
+        },
+        "instanceCount": 2
+      },
+      "customResourceNames": {
+        "namingPatternType": "FullResourceName",
+        "centralServer": {
+          "virtualMachines": [
+            {
+              "vmName": "<acssid>ascsvm",
+              "hostName": "<acssid>ascshost",
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "<acssid>ascsnic"
+                }
+              ]
+            },
+            {
+              "vmName": "<acssid>ersvm",
+              "hostName": "<acssid>ershost",
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "<acssid>ersnic"
+                }
+              ]
+            }
+          ],
+          "loadBalancer": {
+            "loadBalancerName": "<acssid>ascslb",
+            "frontendIpConfigurationNames": [
+              "<acssid>ascsip0",
+              "<acssid>ersip0"
+            ],
+            "backendPoolNames": [
+              "<acssid>ascsBackendPool"
+            ],
+            "healthProbeNames": [
+              "<acssid>ascsHealthProbe",
+              "<acssid>ersHealthProbe"
+            ]
+          }
+        },
+        "applicationServer": {
+          "virtualMachines": [
+            {
+              "vmName": "<acssid>appvm0",
+              "hostName": "<acssid>apphost0",
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "<acssid>appnic0"
+                }
+              ],
+              "dataDiskNames": {
+                "default": [
+                  "<acssid>app0disk0"
+                ]
+              }
+            },
+            {
+              "vmName": "<acssid>appvm1",
+              "hostName": "<acssid>apphost1",
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "<acssid>appnic1"
+                }
+              ],
+              "dataDiskNames": {
+                "default": [
+                  "<acssid>app1disk0"
+                ]
+              }
+            }
+          ]
+        },
+        "databaseServer": {
+          "virtualMachines": [
+            {
+              "vmName": "<acssid>dbvmpr",
+              "hostName": "<acssid>dbprhost",
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "<acssid>dbprnic"
+                }
+              ],
+              "dataDiskNames": {
+                "hanaData": [
+                  "hanadatapr0",
+                  "hanadatapr1"
+                ],
+                "hanaLog": [
+                  "hanalogpr0",
+                  "hanalogpr1",
+                  "hanalogpr2"
+                ],
+                "usrSap": [
+                  "usrsappr0"
+                ],
+                "hanaShared": [
+                  "hanasharedpr0",
+                  "hanasharedpr1"
+                ]
+              }
+            },
+            {
+              "vmName": "<acssid>dbvmsr",
+              "hostName": "<acssid>dbsrhost",
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "<acssid>dbsrnic"
+                }
+              ],
+              "dataDiskNames": {
+                "hanaData": [
+                  "hanadatasr0",
+                  "hanadatasr1"
+                ],
+                "hanaLog": [
+                  "hanalogsr0",
+                  "hanalogsr1",
+                  "hanalogsr2"
+                ],
+                "usrSap": [
+                  "usrsapsr0"
+                ],
+                "hanaShared": [
+                  "hanasharedsr0",
+                  "hanasharedsr1"
+                ]
+              }
+            }
+          ],
+          "loadBalancer": {
+            "loadBalancerName": "<acssid>dblb",
+            "frontendIpConfigurationNames": [
+              "dbip"
+            ],
+            "backendPoolNames": [
+              "dbBackendPool"
+            ],
+            "healthProbeNames": [
+              "dbHealthProbe"
+            ]
+          }
+        },
+        "sharedStorage": {
+          "sharedStorageAccountName": "<acssid>storageacc",
+          "sharedStorageAccountPrivateEndPointName": "<acssid>peForxNFS"
+        }
+      },
+      "appResourceGroup": "<appResourceGroupName>"
+    },
+    "osSapConfiguration": {
+      "sapFqdn": "<sapFqdn>"
+    },
+        "softwareConfiguration": {
+          "softwareInstallationType": "SAPInstallWithoutOSConfig",
+          "bomUrl": "<sapstgBOMUrl>",
+          "softwareVersion": "<softwareBOMVersion>",
+          "sapBitsStorageAccountId": "<sapBitsSTGId>",
+          "highAvailabilitySoftwareConfiguration": {
+            "fencingClientId": "YourClientID",
+            "fencingClientPassword": "YourPassword"
+          }
+     }
+  }
