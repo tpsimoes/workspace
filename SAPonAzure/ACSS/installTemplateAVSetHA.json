@@ -240,7 +240,7 @@
         "sapBitsStorageAccountId": "<sapBitsSTGId>",
         "highAvailabilitySoftwareConfiguration": {
           "fencingClientId": "<fencingID>",
-          "fencingClientPassword": "<fencingPassword"
+          "fencingClientPassword": "<fencingPassword>"
         }
    }
 }
