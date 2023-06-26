@@ -239,8 +239,8 @@
         "softwareVersion": "<softwareBOMVersion>",
         "sapBitsStorageAccountId": "<sapBitsSTGId>",
         "highAvailabilitySoftwareConfiguration": {
-          "fencingClientId": "YourClientID",
-          "fencingClientPassword": "YourPassword"
+          "fencingClientId": "<fencingID>",
+          "fencingClientPassword": "<fencingPassword"
         }
    }
 }
