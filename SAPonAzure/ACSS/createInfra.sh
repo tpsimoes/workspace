@@ -77,7 +77,7 @@ echo "Creating $natGateway for $subnet"
 az network vnet subnet update --resource-group $RESOURCE_GROUP --vnet-name $sapvnet --name $appsubnet --nat-gateway $natGateway
 az network vnet subnet update --resource-group $RESOURCE_GROUP --vnet-name $sapvnet --name $dbsubnet  --nat-gateway $natGateway
 
-########################## StorageAccount for SAP BOOM File
+########################## StorageAccount for SAP BOM File
 
 export storage_name=acsssapscript
 export storage_container_name=sapbits
@@ -151,7 +151,7 @@ az vm create -g $RESOURCE_GROUP --name $jmpVmName --location $LOCATION --image $
 # Test Conn from JumpBox to the Internet
 az vm run-command invoke -g $RESOURCE_GROUP -n $jmpVmName --command-id RunShellScript --scripts 'nc -z -v 40.121.202.140 80' --query "value[].message" -o tsv;
 
-############################################################## Create Boom File ##################################################################
+############################################################## Create Bom File ##################################################################
 
 ######### Create Managed Identity for ACSS/STG 
 export acssMIName=acss-managedIdentity
@@ -166,7 +166,7 @@ export orchestration_ansible_user="azureuser"
 export BOM_directory="/home/$orchestration_ansible_user/SAP-automation-samples/SAP"
 export playbook_path="/home/$orchestration_ansible_user/sap-automation/deploy/ansible/playbook_bom_downloader.yaml"
 
-cat <<EOF > $dataDIR/scriptBOOM.sh
+cat <<EOF > $dataDIR/scriptBOM.sh
 su - azureuser;
 cd /home/azureuser;
 
@@ -209,9 +209,9 @@ sudo ansible-playbook ${playbook_path} \
 
 EOF
 
-# TEM Q SER DADAS AS PERMISSOES PARA A MANAGED IDENTITY - ACSS
+# Must be giving permission to the MI on ACSS
 # Run BOM Script on your Jumpbox - this will take some time! Over 40mn to create
-az vm run-command invoke -g $RESOURCE_GROUP --name $jmpVmName --command-id RunShellScript --scripts @$dataDIR/scriptBOOM.sh --query "value[].message" -o tsv;
+az vm run-command invoke -g $RESOURCE_GROUP --name $jmpVmName --command-id RunShellScript --scripts @$dataDIR/scriptBOM.sh --query "value[].message" -o tsv;
 
 ######### Create Managed Identity Roles ACSS/STG 
 az role assignment create --assignee $acssMIID --role Contributor --scope /subscriptions/$subscriptionId --output tsv > $credDIR/$acssMI-RG.txt
