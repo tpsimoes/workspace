@@ -324,6 +324,7 @@ az workloads sap-virtual-instance create -g $RESOURCE_GROUP -n $ACSSID --environ
 --identity "{type:UserAssigned,userAssignedIdentities:{$acssMIRGID:{}}}"
 
 # Create Key Vault Roles - for future AMS Configuration
+export myADUserID=$(az ad signed-in-user show --query "id" --output tsv)
 az role assignment create --role "Key Vault Administrator" --assignee $acssMIID --scope /subscriptions/$subscriptionId/resourcegroups/mrg-HN1-d3e0b4/providers/Microsoft.KeyVault/vaults/hn1e58-8f50-cb5f69f0f8dd --output tsv > $credDIR/$acssMI-KV-Role.txt
 az role assignment create --role "Key Vault Administrator" --assignee $myADUserID --scope /subscriptions/$subscriptionId/resourcegroups/mrg-HN1-d3e0b4/providers/Microsoft.KeyVault/vaults/hn1e58-8f50-cb5f69f0f8dd --output tsv > $credDIR/$acssMI-KV-Role.txt
 
