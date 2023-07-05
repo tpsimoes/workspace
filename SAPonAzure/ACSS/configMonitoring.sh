@@ -52,7 +52,7 @@ az workloads monitor create -g $RESOURCE_GROUP -n $amsName --location $LOCATION 
 #az workloads monitor provider-instance create --monitor-name $amsName -n $provider_name -g $RESOURCE_GROUP --provider-settings sap-hana="??"
 
 # The KV => Should be Azure role-based access control (recommended) 
-# HN1-HN1-sap-password
+# Secret HN1-HN1-sap-password
 
 # Create Key Vault Roles - for future AMS Configuration
 export myADUserID=$(az ad signed-in-user show --query "id" --output tsv)
@@ -63,8 +63,10 @@ export instanceNumber=00;
 export acssKVname=$(az keyvault list --query "[?location=='$LOCATION'].{name:name} | [?contains(name,'$acssid')]" -o tsv | tail -1) ;
 
 # Create KV Roles to access SAP DB Secret
-az role assignment create --role "Key Vault Administrator" --assignee $acssMIID --scope /subscriptions/$subscriptionId/resourcegroups/mrg-HN1-d3e0b4/providers/Microsoft.KeyVault/vaults/$acssKVname --output tsv > $credDIR/$acssMI-KV-Role.txt
-az role assignment create --role "Key Vault Administrator" --assignee $myADUserID --scope /subscriptions/$subscriptionId/resourcegroups/mrg-HN1-d3e0b4/providers/Microsoft.KeyVault/vaults/$acssKVname --output tsv > $credDIR/$localUser-KV-Role.txt
+az role assignment create --role "Key Vault Contributor" --assignee $acssMIID --scope $acssKVID --output tsv > $credDIR/$acssMI-KV-Role.txt
+az role assignment create --role "Key Vault Contributor" --assignee $myADUserID --scope $acssKVID --output tsv > $credDIR/$localUser-KV-Role.txt
+
+az keyvault set-policy -n $acssKVname --object-id $myADUserID --secret-permissions get list --output tsv > $credDIR/$localUser-KV-Policy.txt
 
 # Get DB PAssword from KV
 export acssDBPassword=$(az keyvault secret show --name "${ACSSID}-${ACSSID}-sap-password" --vault-name $acssKVname --query "value")
@@ -94,4 +96,3 @@ az workloads monitor provider-instance create --monitor-name $amsName -n $provid
 
 # Shoe Instance/Provider Information
 az workloads monitor provider-instance show --monitor-name $amsName -n $provider_name -g $RESOURCE_GROUP;
-
