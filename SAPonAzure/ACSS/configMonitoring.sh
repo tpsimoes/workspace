@@ -66,6 +66,7 @@ export acssKVname=$(az keyvault list --query "[?location=='$LOCATION'].{name:nam
 az role assignment create --role "Key Vault Contributor" --assignee $acssMIID --scope $acssKVID --output tsv > $credDIR/$acssMI-KV-Role.txt
 az role assignment create --role "Key Vault Contributor" --assignee $myADUserID --scope $acssKVID --output tsv > $credDIR/$localUser-KV-Role.txt
 
+# Set KV Policy to be able to get/list secrets
 az keyvault set-policy -n $acssKVname --object-id $myADUserID --secret-permissions get list --output tsv > $credDIR/$localUser-KV-Policy.txt
 
 # Get DB PAssword from KV
