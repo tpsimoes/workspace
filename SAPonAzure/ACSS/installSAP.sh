@@ -197,6 +197,10 @@ sed -i "s/<fencingPassword>/${fencingPassword}/g" $payloadInstallFILE
 # * Estimated time for each task to complete could be less or more depending upon various factors such as deployment type, network bandwidth, retries, etc.
 # ** This step will be carried out only when the deployment type is "Distributed with High Availability".
 
+# Open Browser to check Installation
+wslview https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.Workloads/sapVirtualInstances/HN1/LeftNavSVIOverview
+
+# Install SAP
 az workloads sap-virtual-instance create -g $RESOURCE_GROUP -n $ACSSID --environment $enviromentType --sap-product $visProduct --configuration $payloadInstallFILE \
 --identity "{type:UserAssigned,userAssignedIdentities:{$acssMIRGID:{}}}"
 
