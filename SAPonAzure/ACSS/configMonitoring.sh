@@ -1,11 +1,11 @@
 #!/bin/sh
 
+# Based on https://learn.microsoft.com/en-us/azure/sap/monitor/quickstart-powershell
 ################ Change Variables - Mandatory! ################
 
 export subscriptionId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX
 export tenantId=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX
-
-# Based on https://learn.microsoft.com/en-us/azure/sap/monitor/quickstart-powershell
+export acssKVname=""
 
 ################ INFRA > Networking Variables ################
 export LOCATION=eastus;
@@ -32,11 +32,11 @@ az group create --name $AMS_RESOURCE_GROUP --location $LOCATION;
 az network vnet subnet create -g $RESOURCE_GROUP --vnet-name $sapvnet  -n $amssubnet  --address-prefixes $amssubnetaddress --delegations Microsoft.Web/serverfarms;
 
 # Azure Monitor Variables
-# Ensure Azure CLI version is 2.48.1. Latest version available is 2.49.0
 export amsName="AMS-Monitor"
 export amsSubnetID="/subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.Network/virtualNetworks/$sapvnet/subnets/$amssubnet"
 export amsRouteOption="RouteAll"
 
+# Ensure Azure CLI version is 2.48.1. Latest version available is 2.49.0
 # update AZ Cli
 az upgrade
 
@@ -52,15 +52,21 @@ az workloads monitor create -g $RESOURCE_GROUP -n $amsName --location $LOCATION 
 #az workloads monitor provider-instance create --monitor-name $amsName -n $provider_name -g $RESOURCE_GROUP --provider-settings sap-hana="??"
 
 # The KV => Should be Azure role-based access control (recommended) 
-# Secret HN1-HN1-sap-password
+# Secret will be: HN1-HN1-sap-password
 
 # Create Key Vault Roles - for future AMS Configuration
 export myADUserID=$(az ad signed-in-user show --query "id" --output tsv)
 export provider_name="AMS-Monitor-HANA"
 export instanceNumber=00;
 
-## please keap in mind that this step is not 100% failsafe
-export acssKVname=$(az keyvault list --query "[?location=='$LOCATION'].{name:name} | [?contains(name,'$acssid')]" -o tsv | tail -1) ;
+## IF you dont put the correspondent KeyVault - it will fetch one KV that correspond to your ACSSID 
+
+if [ -z "$acssKVname" ]; then
+	acssKVname=$(az keyvault list --query "[?location=='$LOCATION'].{name:name} | [?contains(name,'$acssid')]" -o tsv | tail -1) 
+	echo "\nThe acssKVname was Updated to:\n$acssKVname"
+else
+    echo "\nThe current acssKVname is:\n$acssKVname"
+fi
 
 # Create KV Roles to access SAP DB Secret
 az role assignment create --role "Key Vault Contributor" --assignee $acssMIID --scope $acssKVID --output tsv > $credDIR/$acssMI-KV-Role.txt
