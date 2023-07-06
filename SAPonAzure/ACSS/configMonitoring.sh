@@ -52,7 +52,7 @@ az workloads monitor create -g $RESOURCE_GROUP -n $amsName --location $LOCATION 
 #az workloads monitor provider-instance create --monitor-name $amsName -n $provider_name -g $RESOURCE_GROUP --provider-settings sap-hana="??"
 
 # The KV => Should be Azure role-based access control (recommended) 
-# Secret will be: HN1-HN1-sap-password
+# # Secret will be, example: HN1-HN1-sap-password
 
 # Create Key Vault Roles - for future AMS Configuration
 export myADUserID=$(az ad signed-in-user show --query "id" --output tsv)
@@ -101,5 +101,5 @@ az workloads monitor provider-instance create --monitor-name $amsName -n $provid
 
 # If the provider is recently added, it may take up to 15 minutes for the initial telemetry information to be available for review. Else, check if system is down, or health of AMS system is degraded.
 
-# Shoe Instance/Provider Information
+# Check Instance/Provider Information
 az workloads monitor provider-instance show --monitor-name $amsName -n $provider_name -g $RESOURCE_GROUP;
