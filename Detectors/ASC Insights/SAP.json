@@ -1,0 +1,29 @@
+{
+    "Id": "4dd15f47-058d-4397-8638-fed8385b8d65",
+    "OwnershipId": "diramire",
+    "Title": "SAP Process insight - SAP detected",
+    "ImportanceLevel": 2,
+    "InsightFriendlyName": "SAP Process insight - SAP detected",
+    "IssueCategory": "SAP Process insight",
+    "IssueSubCategory": "SAP detected",
+    "Description": {
+      "IsMarkdown": true,
+      "Value": "This case has been detected as a RedHat case because the OS is RedHat. Please remember that RHEL images are maintained by Microsoft more information at <a href='https://aka.ms/rhel-images' target='_blank' >https://aka.ms/rhel-images </a> <br/>For RHUI related questions please <a href='https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/redhat/redhat-rhui' target='_blank'>read this first  </a> <br/>For BYOS related questions please <a href='https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/redhat/byos' target='_blank'>read this first  </a>  "
+    },
+    "RecommendedAction": {
+      "Id": "42a76eb9-afd2-4149-a48a-78c8052eef6c",
+      "Text": {
+        "IsMarkdown": true,
+        "Value": "If help is required to resolve the issue, please follow the next steps <ul><li>Review any TSG presented, most common scenarios are detected by ASC and it would help most of the times.</li><li>If you cant get a solution on the case please post your question along with case details and number at <a href='https://teams.microsoft.com/l/team/19%3a76df9033b64e4947830d86d7604e303e%40thread.skype/conversations?groupId=fcbce985-e18c-4ece-ba14-acaff37ecf70&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47' target='_blank'>Azure Linux Ninjas </a> teams channel and email <a href='mailto:rhcollab@microsoft.com'>rhcollab@microsoft.com </a> </li><li>If you need to initiate collaboration with Azure Linux Escalation support team, Please follow the instructions provided <a href='https://internal.support.services.microsoft.com/en-us/help/3171065' target='_blank'>here </a></li><li>Make sure a <a href='https://access.redhat.com/solutions/3592' target='_blank'>'sosreport' </a> is collected before engaging the Azure Linux Escalation Team.</li></ul>"
+      }
+    },
+    "Links": [
+      {
+        "Type": 0,
+        "Text": "For SAP public documentation",
+        "Uri": "https://azure.microsoft.com/en-us/overview/linux-on-azure/red-hat/"
+      }
+    ],
+    "ConfidenceLevel": "High",
+    "Scope": "ResourceLevel"
+  }
