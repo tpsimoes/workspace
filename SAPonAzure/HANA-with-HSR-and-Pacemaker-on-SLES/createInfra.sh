@@ -30,7 +30,6 @@ export fwsubnetaddress="10.33.2.0/26"
 az config set core.allow_broker=true
 az account clear
 az login
-#az login --tenant 72f988bf-86f1-41af-91ab-2d7cd011db47;
 
 #Set Subscription
 az account set --subscription $subscriptionId;
@@ -211,8 +210,11 @@ export adminUser=azureuser
 # https://learn.microsoft.com/en-us/azure/virtual-machines/linux/create-cli-availability-zone
 # https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm#system-assigned-managed-identity
 
-az vm create -g $RESOURCE_GROUP --name $vmsapname1 --location $LOCATION --image $suseimage --size $vmdb_size --public-ip-address $vmsap1_ip_address --generate-ssh-keys --assign-identity --role contributor --scope /subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP --admin-username $adminUser --admin-password $PASSWORD --nics $vmsap1nic_client --zone 1 
-az vm create -g $RESOURCE_GROUP --name $vmsapname2 --location $LOCATION --image $suseimage --size $vmdb_size --public-ip-address $vmsap2_ip_address --generate-ssh-keys --assign-identity --role contributor --scope /subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP --admin-username $adminUser --admin-password $PASSWORD --nics $vmsap2nic_client --zone 3
+# az vm create -g $RESOURCE_GROUP --name $vmsapname1 --location $LOCATION --image $suseimage --size $vmdb_size --public-ip-address $vmsap1_ip_address --generate-ssh-keys --assign-identity --role contributor --scope /subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP --admin-username $adminUser --admin-password $PASSWORD --nics $vmsap1nic_client --zone 1 
+# az vm create -g $RESOURCE_GROUP --name $vmsapname2 --location $LOCATION --image $suseimage --size $vmdb_size --public-ip-address $vmsap2_ip_address --generate-ssh-keys --assign-identity --role contributor --scope /subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP --admin-username $adminUser --admin-password $PASSWORD --nics $vmsap2nic_client --zone 3
+
+az vm create -g $RESOURCE_GROUP --name $vmsapname1 --location $LOCATION --image $suseimage --size $vmdb_size --generate-ssh-keys --assign-identity --role contributor --scope /subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP --admin-username $adminUser --admin-password $PASSWORD --nics $vmsap1nic_client --zone 1 
+az vm create -g $RESOURCE_GROUP --name $vmsapname2 --location $LOCATION --image $suseimage --size $vmdb_size --generate-ssh-keys --assign-identity --role contributor --scope /subscriptions/$subscriptionId/resourceGroups/$RESOURCE_GROUP --admin-username $adminUser --admin-password $PASSWORD --nics $vmsap2nic_client --zone 3
 
 # Add the virtual machines to the backend pool with
 # https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-internal-cli#add-virtual-machines-to-the-backend-pool
