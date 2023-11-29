@@ -756,8 +756,8 @@ az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShell
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'crm status' --query "value[].message" -o tsv;
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'SAPHanaSR-showAttr' --query "value[].message" -o tsv;
 az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'crm configure show SAPHanaSR'  --query "value[].message" -o tsv;
-az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'sudo su - hn1adm -c "python /usr/sap/HN1/HDB00/exe/python_support/systemReplicationStatus.py"'  --query "value[].message" -o tsv;
-az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'sudo su - hn1adm -c "python /usr/sap/HN1/HDB00/exe/python_support/landscapeHostConfiguration.py"'  --query "value[].message" -o tsv;
+az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'sudo su - '${sapid}'adm -c "python /usr/sap/HN1/HDB00/exe/python_support/systemReplicationStatus.py"'  --query "value[].message" -o tsv;
+az vm run-command invoke -g $RESOURCE_GROUP -n $vmsapname1 --command-id RunShellScript --scripts 'sudo su - '${sapid}'adm -c "python /usr/sap/HN1/HDB00/exe/python_support/landscapeHostConfiguration.py"'  --query "value[].message" -o tsv;
 
 
 
