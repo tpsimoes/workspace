@@ -1,0 +1,87 @@
+{
+  "servers": {
+    "mslearn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp",
+      "headers": {},
+      "tools": ["*"]
+    },
+    "ado": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp@next",
+        "supportability",
+        "-d",
+        "core",
+        "Wiki",
+        "Search",
+        "Pipelines",
+        "Work-Items",
+        "Repositories",
+        "Work"
+      ],
+      "tools": [
+        "core_get_identity_ids",
+        "core_list_project_teams",
+        "core_list_projects",
+        "search_wiki",
+        "wiki_get_page",
+        "wiki_get_page_content",
+        "wiki_get_wiki",
+        "wiki_list_pages",
+        "wiki_list_wikis"
+      ],
+      "env": {}
+    },
+    "kusto": {
+      "type": "local",
+      "command": "uvx",
+      "args": ["microsoft-fabric-rti-mcp"],
+      "tools": [
+        "kusto_command",
+        "kusto_known_services",
+        "kusto_query",
+        "kusto_list_entities",
+        "kusto_describe_database",
+        "kusto_graph_query",
+        "kusto_describe_database_entity",
+        "kusto_sample_entity"
+      ],
+      "env": {
+        "KUSTO_SERVICE_URI": "https://your-cluster.kusto.windows.net",
+        "KUSTO_SERVICE_DEFAULT_DB": "DefaultDB"
+      }
+    },
+    "workiq": {
+      "command": "npx",
+      "args": ["-y", "@microsoft/workiq", "mcp"],
+      "tools": ["*"]
+    },
+    "internalkb": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp@next",
+        "ContentIdea",
+        "-d",
+        "work-items",
+        "search"
+      ]
+    },
+    "OSBugs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp@next",
+        "Microsoft",
+        "-d",
+        "work-items",
+        "search"
+      ]
+    }
+  }
+}

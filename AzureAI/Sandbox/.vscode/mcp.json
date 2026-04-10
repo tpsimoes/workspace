@@ -1,0 +1,22 @@
+{
+  "inputs": [
+    {
+      "id": "ado-org",
+      "type": "promptString",
+      "description": "Azure DevOps organization name",
+      "default": "Supportability"
+    }
+  ],
+  "servers": {
+    "ado": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp@latest",
+        "${input:ado-org}",
+        "-d", "core", "wiki", "repositories", "search"
+      ]
+    }
+  }
+}

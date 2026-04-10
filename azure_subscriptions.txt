@@ -1,0 +1,108 @@
+1ES-DevBoxInfra|dde02a76-63cf-4f5f-be84-c943b4da4409|False
+PJ-CSSDEVBOX|5c4c58f3-6614-43d6-a4f8-d438b060cd18|False
+MSFT-WindowsVirtualDesktop-01|54b875cc-a81a-4914-8bfd-1a36bc7ddf4d|False
+MSFT-Provisioning-01[Prod]|0832b3b6-22b3-4c47-8d8b-572054b97257|False
+Service 360 Test|8cff5c8a-98f3-44ad-b300-2d44716c802c|False
+COIE-EHS-CORP-DEV|d36c99c1-a188-46d4-b2ed-920e20dd554e|False
+AI Impact Analyzer|879c3e12-a379-45c7-b1b1-5a44f3cc2713|False
+Azure Strategic Workloads - Supportability and Tools - CSS|236fe132-a464-475f-a865-fd236dfa4e27|False
+1ES-AI-PLAYGROUND|bda700b3-0ba7-479d-83af-67c43f637d7e|False
+1ESBot-NonProd|b508a1f2-96c0-4610-8711-2ae95b7ae781|False
+SAP on Azure|64d4c625-dc09-4748-b65a-677a6836b66c|False
+OpenAI Enterprise Bug Bash|6a6fff00-4464-4eab-a6b1-0b533c7202e0|False
+A&I Readiness|856a1d16-0757-45d5-b341-c58a58c61400|False
+Device Health Modeling|dfb9bf84-495b-478d-bd3f-7c0d67584012|False
+SAP HANA solution lab subscription|6488549f-ccd1-462f-a46e-154644e5bedd|False
+AG_CI_CE_SAP_takhoshi|8c9977a1-0559-4d02-b78b-47118ee5a9ea|False
+AVNM-MSFT-05|7ea7f0a6-7ba1-4165-ae53-33d63d627f94|False
+HLS.PLATFORM.PE.SANDBOX1|e9c0e7fc-82d1-4aeb-b184-d254d33a68cd|False
+FoSSE Redmond|66522bd8-56b0-44fa-bd1f-23485611a6c3|False
+MTP_BAND_STG|821eb853-2617-44be-935b-0f88b3b0b0cd|False
+nonprod.1soc.engineering.system|d770d4b2-ffe5-4ebb-b2f9-c9a59fbdf5b2|False
+MTP_ResourceScraper_PRDMS|f249f80b-b743-45e0-861c-0d4e2a7fb19d|False
+SuryaTeamSub|1cba1da6-5a83-45e1-a88e-8b397eb84356|False
+MSFT-MVD-05-Shared-EUDB|a1ffc958-d2c7-493e-9f1e-125a0477f536|False
+Shared Internal Workbooks|b11727d3-cf5a-4917-ac31-6f06460ff9b2|False
+Base-Platform Bring Up|706f1b44-c292-46f0-8731-a3a460381c4a|False
+VMPHU Node Flighting|f0398290-ac7a-430e-a621-88b018ddb54d|False
+Albus Analytics Service - Stage|8d5565a3-dec1-4ee2-86d6-8aabb315eec4|False
+GDT - Cosmos_C&E_Azure_AzureEngineeringSystems_100200|8c4b5b03-3b24-4ed0-91f5-a703cd91b412|False
+Cosmos DB Stage Env|80be3961-0521-4a0a-8570-5cd5a4e2f98c|False
+Matt Clark Dev Test|e4addc1b-81a6-4093-adba-cf291ec1a36b|False
+Cosmos_C&E_Azure_Azure Compute_100366|81085761-7f82-4df9-ae0b-7adb3a322bd1|False
+ExoMigration_PPE|e2ec1fd6-6704-48aa-b1c9-0d80f4b524c8|False
+SFDAIntelOpsTelemetryInsights|d4cba6f9-bd6c-4192-b3b6-b6da2459c349|False
+SQLPAL-Dev-R&D-60843|e060f0f0-64e3-43f3-99ad-fce54ae45637|False
+COSINE-ES-FailureAnalysis|96f7a6ad-39d4-42e5-b676-a510a9e6fd22|False
+Cosmos_C&E_Azure_Azure Resource Manager_100424|87e8a61c-4832-4cfe-8b72-c12554f2309a|False
+R&D Correlation Platform|054306be-4bb9-4031-962c-99ac18eb7adf|False
+Sky_ConfigGuard_Prod|c1082f79-523f-4af3-9f7e-3f117b1b5822|False
+Applied Sciences Group Dev|e686ef8c-d35d-4e9b-92f8-caaaa7948c0a|False
+IDEAs MS Reporting|bac420ed-c6fc-4a05-8ac1-8c0c52da1d6e|False
+AG_Arch_jasonrobert|a1e43715-e363-4f91-a4d8-b5ea2299cd0c|False
+MSFT-Modern Device-Modern Mgmt-Imaging00|29de2cfc-f00a-43bb-bdc8-3108795bd282|False
+Efficiency Pack Services (MSIT)|f7c445af-a4de-4264-9e87-3196d6bc384d|False
+Sky_ConfigGuard_Test|bd66cbb4-bdee-48ca-9fdf-a3e2d214db22|False
+1ES-MCP|076b00c5-69cb-4fbf-927c-e3473de84ab5|False
+Azure DNS LKG Client Cache - Test|b01d20f7-9367-4764-9778-dfaf98a89389|False
+ARM Test Environment|2145a411-d149-4010-84d4-40fe8a55db44|False
+IOT_PLATFORM_UPX_TEST|a386d5ea-ea90-441a-8263-d816368c84a1|False
+OCTO - MADE Explorations|8a673afb-d858-4a97-a490-2625396d1484|False
+EngThrive-DEV|0f41c216-ad1c-4cf2-b9f5-170ea4128a68|False
+Observability_AzMon_Grafana_Dev|4dc2cd39-7a89-43d8-bebe-8bb501359891|False
+BIC Content Internal|402a287f-acb5-4f8b-a5e7-a27d2f76f450|False
+Azure Profiler - Testing|432a7068-99ae-4975-ad38-d96b71172cdf|False
+Developer VM Optimization|e188d541-aa57-45e8-8687-c83dc57a671e|False
+Data Pillar Security Tooling|60214a3c-65a2-46f8-8b32-f959f2454106|False
+LA_VMInsights_Telemetry_All_NonProd|526094ba-add2-4793-905d-a99153306c9d|False
+AnmInfrastructure|08615b4b-bc9c-4a70-be1b-2ea10bc97b52|False
+WAN Optical|e7cc6a8c-618e-4d1e-9c0d-df412c47b7e9|False
+Datapath Test Subscription|014e7430-fd92-4579-9119-e861d926508a|False
+ODSP EFun Dev Resources|a471d615-ff98-4e80-b375-a19543d4691e|False
+OneBranch Services ER - Dev|b65b516b-415b-4c68-a254-bfa7411275f8|False
+AzPIESecurity-DEV-Apple|4c33a6bb-d566-4d0b-8951-00b55a91fba8|False
+AML Infra - Engineering System|f1d79e73-f8e3-4b10-bfdb-4207ca0723ed|False
+FunGates-DiffPipeline-Dev|96c1e83f-a544-4a27-86bc-b0c821745ae7|False
+emilyzhu dev subscription|86f010b8-6473-4cb9-90c1-671c74faa4ee|False
+Python_AI_Tools_PM_Team_Sub (jbinder)|1163fbbe-27e7-4b0f-8466-195fe5417043|False
+Babel|a1920ebd-59b7-4f19-af9f-5e80599e88e4|False
+Edge_AzureStackZ_Haas_Release|f1f95d34-0719-46a3-b2b5-d91d73e2c08c|False
+AISC-EngSys-01|eef8b6d5-94da-4b36-9327-a662f2674efb|False
+Internal App Insights Resources for Perflens|3cd95ff9-ac62-4b5c-8240-0cd046687ea0|False
+Quantus Singularity|f6993bd6-e1fe-4f22-82f5-54d28c51e589|False
+AML - Responsible AI R&D|e0fd569c-e34a-4249-8c24-e8d723c7f054|False
+Pytorch Build|3905431d-c062-4c17-8fd9-c51f89f334c4|False
+LinuxMdsd Test|13723929-6644-4060-a50a-cc38ebc5e8b1|False
+TScience|9ec1d932-0f3f-486c-acc6-e7d78b358f9b|False
+HPCScrub1|d2c9544f-4329-4642-b73d-020e7fef844f|False
+Speech Services - DEV - SDK (carbon)|e72e5254-f265-4e95-9bd2-9ee8e7329051|False
+ODM VC Management|dd3c9375-db7a-49b4-87b4-c112ee51a191|False
+UI Fabric|bac044cf-49e1-4843-8dda-1ce9662606c8|False
+xt-teams-migration-dev|6760347d-9ffe-41a9-ba11-c139dcea5ce6|False
+Speech Services - EXP2|a1c3dc6b-8630-4bb7-a29e-4ed4407c329b|False
+ITSM Integration - Production - New|6a0ab98c-24d4-4131-8cd7-0a78bfce58f5|False
+INVICTUS.DEV|6b801395-2a16-4dc6-bc50-588ad59e686d|False
+ASZ_Lab_Hardware_Dev_1|e2a8a7b3-cb7a-4930-9c79-2b0eb7bf843c|False
+Engineering Hub Dev|2e31a12f-3c42-43f7-adba-c2d3385b5d6d|False
+Responsible & OpenAi Research|3f577935-3138-4d07-86b3-75651b696483|False
+Marvel Intelligence Model Training Subscription|98b02a69-28a5-4ee7-a622-cd69c7a59c4e|False
+Core-ES-STREAM-DeXDI|38dbd059-bd26-4172-af17-bcc5a00744de|False
+AISC-DEV-02|b2a328a7-ffff-4c09-b643-a4758cf170bc|False
+Microsoft CIS Lionrock - Dev|4496e94c-b276-44d5-8809-1233f334e678|False
+Azure Portal Telemetry Reporting|4bbecc02-f2c3-402a-8e01-1dfb1ffef499|False
+TEST - IaaS UX - Dev Tools|47013160-2f48-4226-8331-256b8c5cad14|False
+IDXXpertRandD Dev Data Catalog|50ff7bc0-cd15-49d5-abb2-e975184c2f65|False
+CPlat_CRP_Grafana_NonProd_Public|0f73d262-6f18-49ca-87e1-91f5b07ae309|False
+Tip Node Service|73c84423-276c-4f33-8048-2225a4ade5e7|False
+ASM Kustodian Corp|a178425c-491a-416c-b313-39dce68d9b86|False
+Service Fabric Team - Observability|8c2648d7-ba20-463e-83d9-c45a1d3f20c1|False
+RC NonProd -001|aac83de9-b56c-4fab-a73f-c80d6a0c9261|False
+Azure Carbon Testing|326daf21-cbc6-40c8-877f-10324177771e|False
+AKS Global corpdev|f7616b56-4c4f-481f-8a80-0e0f51d430c5|False
+Azure System Lockdown Internal NonProd|d2a3f240-56f3-45bf-a0be-1d497a230cf4|False
+TEST - IbizaFx misc|8168a4f2-74d6-4663-9951-8e3a454937b7|False
+AEP_CorePlatform_Playground_Dev|84ca48fe-c942-42e5-b492-d56681d058fa|False
+Liftr-CFT-IDC-Test|eb4814af-a562-4d37-bb59-5314ae1d7926|False
+AMVM-DF|bc754900-752f-49a2-9455-08b3c09334e8|False
+MCAPS-Support-tiagosimoes|2ca58bd2-895e-47a3-b63f-b3f53462929d|True
+joaguas - msft|422c3c8f-6204-418d-bc64-a568488ee84a|False
