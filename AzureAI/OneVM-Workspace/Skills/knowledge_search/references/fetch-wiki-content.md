@@ -1,33 +1,34 @@
 # Fetch Wiki Content via Git Items API
 
-Supportability 的 Wiki 均为 **Code Wiki**，必须使用 Git Items API（而非 Wiki Page API）获取内容。
+All Supportability Wikis are **Code Wikis**, and their content must be retrieved using the Git Items API (**not** the Wiki Page API).
 
-## PowerShell 脚本
+## PowerShell Script
 
 ```powershell
-# 1. 获取 Azure DevOps 访问令牌
+# 1. Get Azure DevOps access token
 $token = az account get-access-token `
   --resource 499b84ac-1321-427f-aa17-267ca6975798 `
   --query accessToken -o tsv
 
-# 2. 构建请求并下载页面
+# 2. Build request and download the page
 $headers = @{ Authorization = "Bearer $token" }
 $org  = "Supportability"
 $uri  = "https://dev.azure.com/$org/{project}/_apis/git/repositories/{repositoryId}/items?path={filePath}&api-version=7.1"
 
 Invoke-RestMethod -Uri $uri -Headers $headers -Method Get -OutFile "$env:TEMP\wiki_page.md"
 Get-Content "$env:TEMP\wiki_page.md"
-```
 
-### 变量说明
+## Variable Description
 
-| 变量 | 来源 |
-|---|---|
-| `{project}` | 搜索结果中的 `project.name` |
-| `{repositoryId}` | `mcp_ado_wiki_list_wikis` 返回的 `repositoryId`（≠ wiki id） |
-| `{filePath}` | 搜索结果中的 `path`，保留 `.md` 扩展名 |
+| Variable         | Source                                                                                  |
+|------------------|-----------------------------------------------------------------------------------------|
+| `{project}`      | `project.name` from the search result                                                   |
+| `{repositoryId}` | `repositoryId` returned by `mcp_ado_wiki_list_wikis` (not the wiki id)                 |
+| `{filePath}`     | `path` from the search result, keep the `.md` extension                                 |
 
-## Wiki 链接格式
+---
+
+## Wiki Link Format
 
 ```
 https://supportability.visualstudio.com/{project}/_wiki/wikis/{wikiName}/{pageId}/{pageName}
