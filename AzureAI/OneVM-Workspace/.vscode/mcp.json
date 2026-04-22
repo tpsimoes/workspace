@@ -1,5 +1,16 @@
 {
   "servers": {
+    
+"grafana": {
+  "type": "local",
+  "command": "uvx",
+  "args": ["mcp-grafana"],
+  "env": {
+    "GRAFANA_URL": "https://your-grafana-url",
+    "GRAFANA_SERVICE_ACCOUNT_TOKEN": "your-token-here"
+  }
+},
+
     "mslearn": {
       "type": "http",
       "url": "https://learn.microsoft.com/api/mcp",
