@@ -24,11 +24,13 @@ The skill library will be continuously updated.
 
 ### Current Skills
 
-| Skill              | Trigger Scenario                                                                 |
-|--------------------|----------------------------------------------------------------------------------|
-| `kusto_query`      | Query Azure internal telemetry data: VM investigation, outage analysis, disk lifecycle, node failures, hardware events, RCA reports |
-| `knowledge_search` | Retrieve reference materials: Internal ADO Wiki TSG, Microsoft Learn documentation, public technical materials |
-| `log_analyzer`     | Analyze log files: syslog, dmesg, Nginx, SAP trace, K8s pod logs, pcap network captures; supports multi-file cross-layer correlation; **Windows VM** log analysis (RDP connection issues, BSOD / No Boot, CBS / Windows Update failures, Domain Join / Netlogon / w32tm); supports TSS, xray, IID packages |
+| Skill                 | Trigger Scenario                                                                 |
+|-----------------------|----------------------------------------------------------------------------------|
+| `kusto_query`         | Query Azure internal telemetry data: VM investigation, outage analysis, disk lifecycle, node failures, hardware events, RCA reports |
+| `knowledge_search`    | Retrieve reference materials: Internal ADO Wiki TSG, Microsoft Learn documentation, public technical materials |
+| `log_analyzer`        | Analyze log files: syslog, dmesg, Nginx, SAP trace, K8s pod logs, pcap network captures; supports multi-file cross-layer correlation; **Windows VM** log analysis (RDP connection issues, BSOD / No Boot, CBS / Windows Update failures, Domain Join / Netlogon / w32tm); supports TSS, xray, IID packages |
+| `load-balancer`       | Azure Load Balancer (Layer 4) issues: backend pool connectivity, health probe failures, SNAT/outbound connectivity, inbound NAT rules, load distribution, Basic→Standard SKU upgrade, Gateway Load Balancer, global (cross-region) load balancer, CRUD failures, SLB/MUX backend data-path RCA |
+| `application-gateway` | Azure Application Gateway (Layer 7) / WAF issues: 4xx/5xx/502/504 errors, backend connectivity, WAF rule tuning & exclusions, SSL/TLS, listener/routing rules, multi-site hosting, IPv6, deployment/Failed-state, connection timeouts, App Service backend integration |
 
 > Continuously updating...
 
@@ -80,7 +82,17 @@ Answer directly without triggering any skill
 
 ---
 
-### Scenario 5: Code / Script Assistance
+### Scenario 5: Load Balancer / Application Gateway Troubleshooting
+> Example: Backend pool marked unhealthy, SNAT port exhaustion, 502/504 errors from App Gateway, WAF blocking legitimate traffic
+
+1. `load-balancer` — Follow GT decision trees for LB symptoms; run B01 Kusto queries for health probes, SNAT, SLB/MUX RCA  
+2. `application-gateway` — Follow GT decision trees for App Gateway symptoms; run B01 Kusto queries for backend status, WAF logs, access logs, config changes  
+3. `kusto_query` — (Optional) Cross-validate with additional internal telemetry  
+4. `knowledge_search` — (Optional) Retrieve TSG for specific error codes or WAF rule IDs  
+
+---
+
+### Scenario 6: Code / Script Assistance
 > Example: Write a KQL query, generate a Bash script, review a Python snippet
 
 Write directly.  
