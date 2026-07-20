@@ -1,0 +1,219 @@
+[
+  {
+    "index": 0,
+    "title": "",
+    "no_data": false,
+    "text": "Virtual Machine Insights",
+    "file": "panel-00-panel.png"
+  },
+  {
+    "index": 1,
+    "title": "Virtual Machine - Current Info",
+    "no_data": false,
+    "text": "Virtual Machine - Current Info\nARM Id\n/subscriptions/c94548cf-d314-4bd5-abd2-eee92de2aab7/resourcegroups/az-rg-sap-kaq-eastus/providers/microsoft.compute/virtualmachines/azlsapkaqdb06\nContainer Id\nb03127fd-9c69-490e-bd49-b69f8fce73d2\nCustomer\nThe Procter & Gamble U.S. Business Services Company\nNode Id\n4566616c-b55f-a597-da36-305020a925e9\nRegion\nuseast\nResource Name\nazlsapkaqdb06\nSubscription Name\nPG-NA-ENTERPRISE-PROD-05\nTenant Name\ne8fd089b-37ee-4314-b626-95e10d1c8969\nVirtualMachine Id\n5634283c-d1cc-4186-ac37-6878e183935f",
+    "file": "panel-01-virtual-machine-current-info.png"
+  },
+  {
+    "index": 2,
+    "title": "Installed Extensions",
+    "no_data": false,
+    "text": "Installed Extensions\nName\nPuppetEnterpriseAgent\nRunCommandLinux\nSAPExtensions",
+    "file": "panel-02-installed-extensions.png"
+  },
+  {
+    "index": 3,
+    "title": "VM Tags",
+    "no_data": false,
+    "text": "VM Tags\nName\nValue\nAdmins_Group\nT1G-OTC-IT_DC-PROD T1-SAP-AzCloudOps T1-Cloud-Servers-Access-Ops-L1 T1-Cloud-Servers-Access-Ops-L2 T1G-SAPOps-OSCloud-CTE T1-CTE-SCPTBasis T1-Cloud-Servers-Access-CTE-DBA-L3\nApplication_Id\nCI004289939\nApplication_Name\nKAQ\nArcher_Exception\nREDACTED\nBIA\n{\"Confidentiality\":\"\",\"Integrity\":\"\",\"Availability\":\"\"}\nBilling_Notification_Group\n\"\"\nBusiness_Criticality\n3 - less critical\nCapacity_Controller\nREDACTED\ncentrify_restrict_t1\nCost_Center\n8000501610\nData_Classification\nHighly Restricted\nData_Privacy_Risk\nHigh\nDepartment\nGTO SAP CTR TECH EXPERTISE\nExcludePolicy\nStorage_Default_Network_Action\nIrisk_Completion_Date\nREDACTED\nLast Backup\n07/16/2026, 05:01:16 AM\nMega_Id\n19A82B085B0039AF\nNPAs_Group\nOriginal_Requestor\nREDACTED\nOwned_By\nREDACTED\nOwner_Notification_Group\n\"\"\nPES_Approvers\nITSG-SAPCTE-OSACCESS-PES-APPROVERS\nPuppet_Role\nRegulated_System\nYes\nresource_set_name\nAzure SAP Non-prod\nSox_Criticality\nYes\nStage\nQA\nUsers_Group\nSAP-OSAllUsr T1G-SAPOps-OSCloud-CTE T1G-SAPOps-OSCloud-Ext T1-Cloud-Servers-Access-CTE-DBA-L1\nWBS_Element\n1.519.0005.1235.G1006349",
+    "file": "panel-03-vm-tags.png"
+  },
+  {
+    "index": 4,
+    "title": "VM Events:",
+    "no_data": false,
+    "text": "VM Events:\nPlacements\n1\nLive Migration\n1\nNodes Degraded\n2\nScheduled Events\n1\nReboots\n1\nVM CRUD\n0",
+    "file": "panel-04-vm-events.png"
+  },
+  {
+    "index": 5,
+    "title": "VM Details (Features)",
+    "no_data": false,
+    "text": "VM Details (Features)\nSKU\nStandard_M128ds_v2\nSAP Certified Sku\nYes\nRuns SAP image\nNo\nVM Pinned\nNo\nVM in PPG\nYes\nAvailability Set\nYes\nAccelerated Networking\nYes\nLiveMigration Eligible\nYes",
+    "file": "panel-05-vm-details-features.png"
+  },
+  {
+    "index": 6,
+    "title": "OS Image Details",
+    "no_data": false,
+    "text": "OS Image Details\nSAP Image\nNo\nOS Billing Type\nLinux_IaaS_Software_suse_sles_sap_byos\nOS License Type\nNONE\nOS Image License\nBYOS\nOS Azure Supported\nNo",
+    "file": "panel-06-os-image-details.png"
+  },
+  {
+    "index": 7,
+    "title": "",
+    "no_data": false,
+    "text": "Outages impacting Virtual Machines",
+    "file": "panel-07-panel.png"
+  },
+  {
+    "index": 8,
+    "title": "Outages",
+    "no_data": true,
+    "text": "Outages\nNo data",
+    "file": "panel-08-outages.png"
+  },
+  {
+    "index": 9,
+    "title": "",
+    "no_data": false,
+    "text": "CPU & Memory",
+    "file": "panel-09-panel.png"
+  },
+  {
+    "index": 10,
+    "title": "CPU % (Avg)",
+    "no_data": false,
+    "text": "CPU % (Avg)\nPercentage CPU Consumed % AVG -5634283c-d1cc-4186-ac37-6878e183935f\nPercentage CPU Consumed % MAX -5634283c-d1cc-4186-ac37-6878e183935f",
+    "file": "panel-10-cpu-avg.png"
+  },
+  {
+    "index": 11,
+    "title": "% Memory Pressure (Max)",
+    "no_data": false,
+    "text": "% Memory Pressure (Max)\nMemory % _azlsapkaqdb06",
+    "file": "panel-11-memory-pressure-max.png"
+  },
+  {
+    "index": 12,
+    "title": "Ram size and Available ram (Max)",
+    "no_data": false,
+    "text": "Ram size and Available ram (Max)\nAvailable Memory Bytes 5634283c-d1cc-4186-ac37-6878e183935f\nRamSize",
+    "file": "panel-12-ram-size-and-available-ram-max.png"
+  },
+  {
+    "index": 13,
+    "title": "",
+    "no_data": false,
+    "text": "VM Placement",
+    "file": "panel-13-panel.png"
+  },
+  {
+    "index": 14,
+    "title": "VM Placement",
+    "no_data": false,
+    "text": "VM Placement\nLog timestamp\nContainer creation\nNode Id\nContainer Id\nCluster Name\nAvailability Zone\nASI Node\nNetVMA Node\nNetVMA Container\nEphemeral VM\n2026-07-10 00:28:07\n2026-07-07 22:17:21\n4566616c-b55f-a597-da36-305020a925e9\nb03127fd-9c69-490e-bd49-b69f8fce73d2\nIAD20PrdApp22\nuseast-AZ01\nClick Here\nClick Here\nClick Here\nFalse\n2026-07-07 22:01:37\n2026-03-25 14:21:07\n55f0378e-29d8-7595-d123-9f1dfa9a5046\nd338c642-59a8-4a3b-97d2-c418da575b48\nIAD20PrdApp22\nuseast-AZ01\nClick Here\nClick Here\nClick Here\nFalse",
+    "file": "panel-14-vm-placement.png"
+  },
+  {
+    "index": 15,
+    "title": "",
+    "no_data": false,
+    "text": "VM Node Events",
+    "file": "panel-15-panel.png"
+  },
+  {
+    "index": 16,
+    "title": "Node and TOR Placement (<60 Days)",
+    "no_data": false,
+    "text": "Node and TOR Placement (<60 Days)\nTimestamp\nContainer StartTime\nInstance Name\nDataCenter\nCluesterName\nNode ID\nNode IP\nTOR\nOS\nOS Version\n2026-07-16 15:51:44\n2026-07-07T22:17:21.4989198Z\nazlsapkaqdb06\nIAD20AzSet1\nIAD20PrdApp22\n4566616c-b55f-a597-da36-305020a925e9\n10.253.38.67\niad20-0101-0709-07t0\nLinux_IaaS_Software_suse_sles_sap_byos\n2026-07-07 22:01:37\n2026-04-17T17:39:07.8050852Z\nazlsapkaqdb06\nIAD20AzSet1\nIAD20PrdApp22\n55f0378e-29d8-7595-d123-9f1dfa9a5046\n10.253.37.66\niad20-0101-0709-05t0\nLinux_IaaS_Software_suse_sles_sap_byos\n5.14.21",
+    "file": "panel-16-node-and-tor-placement-60-days.png"
+  },
+  {
+    "index": 17,
+    "title": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)",
+    "no_data": false,
+    "text": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)\nTimestamp\nNodeID\nImpact\n07/09/2026 16:16\n55f0378e\nOrig_Node | NodeId(55f0378e) | PfClientDeploymentMaintenance | CurrentVersion: hotpatch_2607_1_26_06_12_1 | NewVersion: hotpatch_2607_2_26_06_26_1 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE\n07/09/2026 14:24\n4566616c\nNodeId(4566616c) | PfClientDeploymentMaintenance | CurrentVersion: hotpatch_2607_1_26_06_12_1 | NewVersion: hotpatch_2607_2_26_06_26_1 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE\n07/09/2026 14:23\n55f0378e\nOrig_Node | NodeId(55f0378e) | BackupHostServer | CurrentVersion: storage_agent_bhs_1_0_17_483 | NewVersion: bhs_3_0_106 | SourceOfService: CEG_AZURECOMPUTE-BACKUPHOSTSERVICE-PROD-VE\n07/09/2026 14:22\n55f0378e\nOrig_Node | NodeId(55f0378e) | CarbonHostAgent | CurrentVersion: | NewVersion: CarbonHostAgent_2026_01_14_1_0_03300_721 | SourceOfService: CEG_AZURECOMPUTE-COMPUTECLIENT-VE\n07/09/2026 14:22\n55f0378e\nOrig_Node | NodeId(55f0378e) | OneDeployTestHelloWorld | CurrentVersion: | NewVersion: 24_9_18003_0 | SourceOfService: AUTOPILOT-ONEDEPLOYTEST-2-VE\n07/09/2026 14:22\n55f0378e\nOrig_Node | NodeId(55f0378e) | StagerDummyService | CurrentVersion: | NewVersion: 24_8_29002_0 | SourceOfService: AUTOPILOT-ONEDEPLOYTEST-2-VE\n07/09/2026 14:22\n55f0378e\nOrig_Node | NodeId(55f0378e) | AzureSecurityPack | CurrentVersion: azsecpack_ap_2023_6_9002 | NewVersion: azsecpack_ap_2026_04_28 | SourceOfService: CEG_AZURESECURITY-AZSECPACK-PROD-VE\n07/09/2026 14:22\n55f0378e\nOrig_Node | NodeId(55f0378e) | NativePowerAgent | CurrentVersion: ap_2026_05_11_10004 | NewVersion: ap_2026_04_01_1005_multiarch | SourceOfService: CEG_AZURECOMPUTE-COMPUTECLIENT-VE\n07/09/2026 14:21\n55f0378e\nOrig_Node | NodeId(55f0378e) | ImpactfulHelloWorld | CurrentVersion: | NewVersion: OSUpgrade_22_05_3004_0 | SourceOfService: CEG_AZURECOMPUTE-HOSTOSUPGRADE_TEST-VE\n07/09/2026 14:21\n55f0378e\nOrig_Node | NodeId(55f0378e) | AzureTelemetryFramework | CurrentVersion: | NewVersion: AzureTelemetryFramework_app_2026_03_12 | SourceOfService: CEG_AZURECOMPUTE-DCFW-PROD-VE\n07/09/2026 14:21\n55f0378e\nOrig_Node | NodeId(55f0378e) | FirmwareAgent | CurrentVersion: | NewVersion: FirmwareAgent_app_v3_1_2_cv | SourceOfService: CEG_AZURECOMPUTE-DCFW-PROD-VE\n07/09/2026 14:19\n55f0378e\nOrig_Node | NodeId(55f0378e) | BscCertifier | CurrentVersion: | NewVersion: bsc_master_26_03_05002 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-6-VE\n07/09/2026 14:18\n55f0378e\nOrig_Node | NodeId(55f0378e) | CHIEDiskUpdate | CurrentVersion: | NewVersion: PM1735_EPK91A3Q_26_05_19002 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-5-VE\n07/09/2026 14:17\n55f0378e\nOrig_Node | NodeId(55f0378e) | CatapultImageUpdateAgent | CurrentVersion: | NewVersion: CUA_1_4_02610_1120_main | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-3-VE\n07/09/2026 14:17\n55f0378e\nOrig_Node | NodeId(55f0378e) | CatapultAgent | CurrentVersion: | NewVersion: catapultagent_1_7_03393_1499_release_1_7 | SourceOfService: CEG_AZURECSI-FAST-PROD-VE\n07/09/2026 14:16\n55f0378e\nOrig_Node | NodeId(55f0378e) | ComputeDatapathSettings | CurrentVersion: | NewVersion: computedatapathsettings_7_0_11_990_RdmaConditional | SourceOfService: CEG_AZURECOMPUTE-ONEDEPLOYRESERVED-VE\n07/09/2026 14:16\n55f0378e\nOrig_Node | NodeId(55f0378e) | UltraClientSettings | CurrentVersion: | NewVersion: ultraclientsettings_7_99_11_2752 | SourceOfService: CEG_AZURECOMPUTE-ONEDEPLOYRESERVED-VE\n07/09/2026 14:16\n55f0378e\nOrig_Node | NodeId(55f0378e) | StagerHelloWorld | CurrentVersion: | NewVersion: ap_24_4_5005 | SourceOfService: AUTOPILOT-STAGERHELLOWORLD-VE\n07/09/2026 14:16\n55f0378e\nOrig_Node | NodeId(55f0378e) | OneDeployHelloWorld | CurrentVersion: | NewVersion: 1DHW_2026_04_27 | SourceOfService: AUTOPILOT-ONEDEPLOYHELLOWORLD-VE\n07/09/2026 14:16\n55f0378e\nOrig_Node | NodeId(55f0378e) | SDNDataSync | CurrentVersion: | NewVersion: sdn_2023_01_25_25003 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-NETWORKING-SDNDATA-VE\n07/09/2026 14:15\n55f0378e\nOrig_Node | NodeId(55f0378e) | AzureWatsonAgent | CurrentVersion: | NewVersion: pie_2026_02_02_2002_azwatson | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE\n07/09/2026 14:15\n55f0378e\nOrig_Node | NodeId(55f0378e) | BMCUpdater | CurrentVersion: | NewVersion: mihamidi_BMCUpdater_BeastMv2_d98296ad | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-2-VE\n07/09/2026 14:15\n55f0378e\nOrig_Node | NodeId(55f0378e) | FleetDiagnosticsAgent | CurrentVersion: | NewVersion: pie_2026_02_03_37_fda_3_1_26034_37 | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE\n07/09/2026 14:15\n55f0378e\nOrig_Node | NodeId(55f0378e) | GenevaMetricsExtension | CurrentVersion: ap_2026_05_11_10004 | NewVersion: pie_2026_01_18_18003_gme_2_2026_113_1623 | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE",
+    "file": "panel-17-rca-helper-node-events-and-errors-check-https-supp.png"
+  },
+  {
+    "index": 18,
+    "title": "",
+    "no_data": false,
+    "text": "Reboots & Scheduled Events",
+    "file": "panel-18-panel.png"
+  },
+  {
+    "index": 19,
+    "title": "Scheduled Events & Reboots",
+    "no_data": false,
+    "text": "Scheduled Events & Reboots\nScheduledEvent\nDuration\nReboot",
+    "file": "panel-19-scheduled-events-reboots.png"
+  },
+  {
+    "index": 20,
+    "title": "Reboot Detail",
+    "no_data": false,
+    "text": "Reboot Detail\nStartTime\nEndTime\nDuration (mn)\nRCA_CSS\nTM_RCA\nDetail\nASW_Wiki\n2026-07-07 22:52:50\n2026-07-07 22:53:51\n1\nPlanned.RootHEUpdate Rebootful.Out_of_band_HE_update_by_BatchingManager\nUnplanned.ContainerFault.LiveMigration TriggerType,UnallocatableNode\nUpdateTime:7/7/2026 11:01:08 PM;HEComponent:NodeOSBaseImage;OldVersion:WAOS_WS19H.210913-1312.20348.1075.amd64fre.fe_release_azcc.210913-1312_CLOUDHOST_HV;NewVersion:WAOS_WS19H.250825-0123.26102.1083.amd64fre.ge_release_azcc_r2.250825-0123_CLOUDHOST_HV|UpdateTime:7/7/2026 11:01:08 PM;HEComponent:NodeOSTargetImage;OldVersion:WAOS_WS19H.210913-1312.20348.1075.amd64fre.fe_release_azcc.210913-1312_CLOUDHOST_HV;NewVersion:WAOS_WS19H.250825-0123.26102.1083.amd64fre.ge_release_azcc_r2.250825-0123_CLOUDHOST_HV-target",
+    "file": "panel-20-reboot-detail.png"
+  },
+  {
+    "index": 21,
+    "title": "Scheduled Events Detail",
+    "no_data": false,
+    "text": "Scheduled Events Detail\nStartTime\nEndTime\nInitiator\nDurationInMn\nEstimatedDurationInMn\nType\nDisk\nNetwork\nCompute\nOS\nCreator\nImpactState\nResponsibleTeam_ImpactInfo\n2026-07-07 22:19:06\n2026-07-07 23:01:02\nInfrastructure\n42\n5\nLiveMigration\nFreeze\nFreeze\nFreeze\nFreeze\nProcessImpactsChange\nApprovalRequested\nCompute Manager/Holmes",
+    "file": "panel-21-scheduled-events-detail.png"
+  },
+  {
+    "index": 22,
+    "title": "Live Migration Events",
+    "no_data": false,
+    "text": "Live Migration Events\nEventTime\nEventType\nASW_Wiki\nFailureReason\nRCALevel1\nRCALevel2\nmessage\nDiagnostics\nASI Link\n2026-07-07 23:00:16\nCompleted\nClick Here\n1083 Samsung CB2 prediction (Parameterized Action) and RuleType: Failure Prediction\nUnallocatableNode:Bad hardware health\nFinal memory transfer pass (source node)\nnull\n{\"TriggerType\":\"UnallocatableNode\"\n\"FaultTime\":null\n\"isFaultySourceContainer\":null\n\"DestinationContainerFaultReason\":\"\"\n\"HyperVVMId\":\"0039b729-a799-4511-9add-963c1f6398e2\"\n\"MigrationConstraint\":\"None\"\n\"isSocCrashFailure\":false\n\"isOvlFailure\":false\n\"isFaultyDestinationContainer\":null\n\"SessionId\":\"ec3dc32f-2294-43fa-87dd-bbaeeefcb76b\"\n\"LiveMigrationStartTime\":\"2026-07-07T22:17:21.0999506Z\"\n\"FaultCode\":null\n\"IsNodeFault\":null\n\"NodeFaultReason\":\"\"\n\"BlockDestroyReason\":\"\"\n\"DestinationContainerFaultErrorCode\":\"\"\n\"FabricOperation\":\"\"\n\"GuestOsCrashErrorCode\":null\n\"allocationid\":\"b71a7d9b-a929-4547-aff7-30c6d7516715\"\n\"HasUnachievableGoalNoContainerConfig\":null\n\"IsCustomerInitiatedOperation\":false\n\"CustomerInitiatedOperationDetails\":[]\n\"SourceLMAgentCrashDiagnostics\":null\n\"DestinationLMAgentCrashDiagnostics\":null\n\"isGuestOsCrash\":false\n\"IsVMPHUSession\":false\n\"DestinationContainerId\":\"b03127fd-9c69-490e-bd49-b69f8fce73d2\"\n\"DestinationNodeId\":\"4566616c-b55f-a597-da36-305020a925e9\"}\nClick Here",
+    "file": "panel-22-live-migration-events.png"
+  },
+  {
+    "index": 23,
+    "title": "VM Health Annotations",
+    "no_data": false,
+    "text": "VM Health Annotations\nTimestamp\nRegion\nnodeId\ncontainerId\ncontainerType\nannotation\n07-07-2026 22:54\nuseast\n4566616c-b55f-a597-da36-305020a925e9\nb03127fd-9c69-490e-bd49-b69f8fce73d2\nStandard_M128ds_v2\nLiveMigrationSucceeded, 2.581000, 1100997.000000, UnallocatableNode,\n07-07-2026 22:07\nuseast\n4566616c-b55f-a597-da36-305020a925e9\nb03127fd-9c69-490e-bd49-b69f8fce73d2\nStandard_M128ds_v2\nVirtualMachinePossiblyDegradedDueToHardwareFailureLiveMigrationEligible, degraded, memory, crashes,\n07-07-2026 22:06\nuseast\n4566616c-b55f-a597-da36-305020a925e9\nb03127fd-9c69-490e-bd49-b69f8fce73d2\nStandard_M128ds_v2\nVirtualMachinePossiblyDegradedDueToHardwareFailureLiveMigrationEligible, degraded, memory, crashes,",
+    "file": "panel-23-vm-health-annotations.png"
+  },
+  {
+    "index": 24,
+    "title": "",
+    "no_data": false,
+    "text": "Disk Metrics",
+    "file": "panel-24-panel.png"
+  },
+  {
+    "index": 25,
+    "title": "Data/OS/Temp Disk Queue Length",
+    "no_data": false,
+    "text": "Data/OS/Temp Disk Queue Length\nData Disk 0\nData Disk 1\nData Disk 2\nData Disk 3\nData Disk 4\nData Disk 5\nData Disk 6\nOS Disk\nTemp Disk",
+    "file": "panel-25-data-os-temp-disk-queue-length.png"
+  },
+  {
+    "index": 26,
+    "title": "Data/OS/Temp Disk Latency (in milliseconds)",
+    "no_data": false,
+    "text": "Data/OS/Temp Disk Latency (in milliseconds)\nData Disk 1\nData Disk 4\nData Disk 3\nData Disk 2\nData Disk 5\nData Disk 6\nData Disk 0\nOS Disk\nTEMP Disk",
+    "file": "panel-26-data-os-temp-disk-latency-in-milliseconds.png"
+  },
+  {
+    "index": 27,
+    "title": "VM Bandwidth Consumed %",
+    "no_data": false,
+    "text": "VM Bandwidth Consumed %\nVM cached Bandwidth Consumed Percentage -5634283c-d1cc-4186-ac37-6878e183935f\nVM Uncached Bandwidth Consumed Percentage -5634283c-d1cc-4186-ac37-6878e183935f\nVM Bandwidth Consumed (Cached & Uncached) Percentage",
+    "file": "panel-27-vm-bandwidth-consumed.png"
+  },
+  {
+    "index": 28,
+    "title": "VM IOPS Consumed %",
+    "no_data": false,
+    "text": "VM IOPS Consumed %\nVM Cached IOPS Consumed Percentage -5634283c-d1cc-4186-ac37-6878e183935f\nVM Uncached IOPS Consumed Percentage -5634283c-d1cc-4186-ac37-6878e183935f\nVM IOPS Consumed (Cached & Uncached) Percentage",
+    "file": "panel-28-vm-iops-consumed.png"
+  },
+  {
+    "index": 29,
+    "title": "Data and OS Disk Bandwidth Consumed % (per Lun)",
+    "no_data": false,
+    "text": "Data and OS Disk Bandwidth Consumed % (per Lun)\nData Disk 0\nData Disk 1\nData Disk 2\nData Disk 3\nData Disk 4\nData Disk 5\nData Disk 6\nOS Disk\nBurst Data Disk LUN 0\nOS Disk Burst",
+    "file": "panel-29-data-and-os-disk-bandwidth-consumed-per-lun.png"
+  },
+  {
+    "index": 30,
+    "title": "Data and OS Disk IOPS Consumed % (per Lun)",
+    "no_data": false,
+    "text": "Data and OS Disk IOPS Consumed % (per Lun)\nData Disk 0\nData Disk 1\nData Disk 2\nData Disk 3\nData Disk 4\nData Disk 5\nData Disk 6\nOS Disk\nBurst Data Disk LUN 0\nOS Disk Burst",
+    "file": "panel-30-data-and-os-disk-iops-consumed-per-lun.png"
+  }
+]

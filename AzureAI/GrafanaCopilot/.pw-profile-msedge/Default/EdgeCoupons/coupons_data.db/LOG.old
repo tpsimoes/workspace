@@ -1,0 +1,15 @@
+2026/07/16-18:18:52.095 5a94 Reusing MANIFEST C:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/07/16-18:18:52.097 5a94 Recovering log #120
+2026/07/16-18:18:52.098 5a94 Reusing old log C:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\EdgeCoupons/coupons_data.db/000120.log 
+2026/07/16-18:18:52.149 ac38 Level-0 table #124: started
+2026/07/16-18:18:52.152 ac38 Level-0 table #124: 683144 bytes OK
+2026/07/16-18:18:52.154 ac38 Delete type=0 #120
+2026/07/16-18:18:52.155 ac38 Compacting 4@0 + 1@1 files
+2026/07/16-18:18:52.160 ac38 Generated table #125@0: 3 keys, 683144 bytes
+2026/07/16-18:18:52.160 ac38 Compacted 4@0 + 1@1 files => 683144 bytes
+2026/07/16-18:18:52.161 ac38 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/16-18:18:52.162 ac38 Delete type=2 #112
+2026/07/16-18:18:52.162 ac38 Delete type=2 #115
+2026/07/16-18:18:52.162 ac38 Delete type=2 #118
+2026/07/16-18:18:52.162 ac38 Delete type=2 #121
+2026/07/16-18:18:52.162 ac38 Delete type=2 #124

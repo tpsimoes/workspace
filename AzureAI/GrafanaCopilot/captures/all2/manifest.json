@@ -1,0 +1,226 @@
+[
+  {
+    "index": 0,
+    "title": "",
+    "no_data": false,
+    "text": "Virtual Machine Insights",
+    "file": "panel-00-panel.png"
+  },
+  {
+    "index": 1,
+    "title": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)",
+    "no_data": false,
+    "text": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)\nARM Id\n/subscriptions/be9d60fb-f36a-4b27-bf41-aa14215b2724/resourcegroups/m1-rg-alz-esserp-saperpus-p-1/providers/microsoft.compute/virtualmachines/prdsapeccap04\nContainer Id\n3853186b-f480-4f60-966c-b0ecfaafa186\nCustomer\nMedline Industries, LP\nNode Id\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\nRegion\nuseast\nResource Name\nprdsapeccap04\nSubscription Name\nM1-ALZ-ESSERP-P-1\nTenant Name\nd8c58747-d567-4a9f-bcc7-86faa7947656\nVirtualMachine Id\n6e965a4d-9d96-49ea-bb97-d866f1247659",
+    "file": "panel-01-virtual-machine-current-info-ignores-selected-time.png"
+  },
+  {
+    "index": 2,
+    "title": "VM Details (Features)",
+    "no_data": false,
+    "text": "VM Details (Features)\nSKU\nStandard_E16s_v5\nSAP Certified Sku\nYes\nRuns SAP image\nNo\nVM Pinned\nNo\nVM in PPG\nNo\nAvailability Set\nNo\nAccelerated Networking\nYes\nLiveMigration Eligible\nYes",
+    "file": "panel-02-vm-details-features.png"
+  },
+  {
+    "index": 3,
+    "title": "Installed Extensions",
+    "no_data": false,
+    "text": "Installed Extensions\nMonitorX64Linux\nRunCommandLinux\nSiteRecovery-Linux\nSiteRecovery-LinuxSLES15\nVMSnapshotLinux",
+    "file": "panel-03-installed-extensions.png"
+  },
+  {
+    "index": 4,
+    "title": "VM Tags",
+    "no_data": false,
+    "text": "VM Tags\nName\nValue\ntags\n{}",
+    "file": "panel-04-vm-tags.png"
+  },
+  {
+    "index": 5,
+    "title": "VM Events:",
+    "no_data": false,
+    "text": "VM Events:\nPlacements\n2\nLive Migration\n1\nScheduled Events\n1\nVM CRUD\n0",
+    "file": "panel-05-vm-events.png"
+  },
+  {
+    "index": 6,
+    "title": "OS Image Details",
+    "no_data": false,
+    "text": "OS Image Details\nSAP Image\nNo\nOS Billing Type\nLinux_IaaS\nOS License Type\nNONE\nOS Image License\nBYOS\nOS Azure Supported\nNo",
+    "file": "panel-06-os-image-details.png"
+  },
+  {
+    "index": 7,
+    "title": "",
+    "no_data": false,
+    "text": "Outages impacting Virtual Machines",
+    "file": "panel-07-panel.png"
+  },
+  {
+    "index": 8,
+    "title": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###",
+    "no_data": false,
+    "text": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###\nTracking ID\nIcM\nStarted\nMitigated\nStage\nTitle\nLatest Update\nLast Updated\nZH_0-XKZ\n824520159\n2026-06-26 17:29:44\n2026-06-27 02:01:20\nRCA\nPIR - Azure Virtual Machines Scale Sets and VM Management Operation Errors in East US\nWhat happened? Between 17:43 UTC and 22:40 UTC on 26 Jun 2026, a platform issue resulted in an impact to the Virtual Machine Scale Sets and Virtual Machine service in the East US. Impacted customers experienced error notifications when performing service management operations - such as create, delete, update, restart, reimage, start, scale, stop - for resources hosted in this region What went wrong, and why? We determined that Virtual Machines and Virtual Machine Scale Sets management operations in the East US region experienced failures due to an uneven distribution of service resources, which led to increased utilization and delays in request processing. This condition occurred during platform upgrade activities, which temporarily impacted how workloads were distributed, causing some resources to become overloaded. As a result, this led to intermittent request failures and increased response times for management operations. How did we respond? 17:43 UTC on 26 June 2026 \u2013 Customer impact began, with intermittent failures observed in Virtual Machine Scale Set management operations in the East US region.18:00 UTC on 26 June 2026 \u2013 Automated service monitoring detected an increase in failed requests and a drop in success rates.18:05 UTC on 26 June 2026 \u2013 Investigation identified uneven distribution of service resources, resulting in increased utilization and delays in request processing during ongoing update activities.18:10 UTC on 26 June 2026 \u2013 Mitigation workstream was initiated, including pausing update activities to prevent further resource imbalance and starting workload rebalancing efforts.19:00 UTC on 26 June 2026 - Additional corrective actions were taken, including targeted redistribution of workloads and controlled restarts of select service components to reduce pressure and improve stability.19:15 UTC on 26 June 2026 -Continuous monitoring and adjustments were performed to optimize resource distribution and support recovery22:40 UTC on 26 June 2026 - Service stability improved, with request success rates returning to expected levels. Customer impact was mitigated, and monitoring continued to validate full recovery. What happens next? This Mitigation Statement is the final communication for this incident. For details about which Azure incidents qualify for which Post Incident Reviews (PIRs), refer to https://aka.ms/AzurePIRs. The impact times above represent the full incident duration, so are not specific to any individual customer. Actual impact to service availability may vary between customers and resources \u2013 for guidance on implementing monitoring to understand granular impact: https://aka.ms/AzPIR/Monitoring To stay informed about future Azure service issues, make sure that you configure and maintain Azure Service Health alerts \u2013 these can trigger emails, SMS, push notifications, webhooks, and more: https://aka.ms/ash-alerts. For broader guidance on preparing for cloud incidents, refer to https://aka.ms/incidentreadiness.\n2026-06-27 03:41:17",
+    "file": "panel-08-outages-impacting-virtual-machines-in-this-vm-s-su.png"
+  },
+  {
+    "index": 9,
+    "title": "",
+    "no_data": false,
+    "text": "CPU & Memory",
+    "file": "panel-09-panel.png"
+  },
+  {
+    "index": 10,
+    "title": "CPU % (Avg)",
+    "no_data": false,
+    "text": "CPU % (Avg)\nPercentage CPU Consumed % AVG -6e965a4d-9d96-49ea-bb97-d866f1247659\nPercentage CPU Consumed % MAX -6e965a4d-9d96-49ea-bb97-d866f1247659",
+    "file": "panel-10-cpu-avg.png"
+  },
+  {
+    "index": 11,
+    "title": "% Memory Pressure (Max)",
+    "no_data": false,
+    "text": "% Memory Pressure (Max)\nMemory % _prdsapeccap04",
+    "file": "panel-11-memory-pressure-max.png"
+  },
+  {
+    "index": 12,
+    "title": "Ram size and Available ram (Max)",
+    "no_data": false,
+    "text": "Ram size and Available ram (Max)\nAvailable Memory Bytes 6e965a4d-9d96-49ea-bb97-d866f1247659\nRamSize",
+    "file": "panel-12-ram-size-and-available-ram-max.png"
+  },
+  {
+    "index": 13,
+    "title": "",
+    "no_data": false,
+    "text": "VM Placement",
+    "file": "panel-13-panel.png"
+  },
+  {
+    "index": 14,
+    "title": "VM Placement",
+    "no_data": false,
+    "text": "VM Placement\nLog timestamp\nContainer creation\nNode Id\nContainer Id\nCluster Name\nAvailability Zone\nASI Node\nNetVMA Node\nNetVMA Container\nEphemeral VM\n2026-06-29 00:28:55\n2026-06-27 13:13:36\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\n3853186b-f480-4f60-966c-b0ecfaafa186\nIAD01PrdApp45\nuseast-AZ02\nClick Here\nClick Here\nClick Here\nFalse\n2026-06-27 13:07:26\n2026-06-26 07:39:33\n026a845f-c1ec-c881-784f-0c7bac0cbd0d\ndbfef662-2a5f-4ddf-a480-d252ae9c9268\nIAD01PrdApp45\nuseast-AZ02\nClick Here\nClick Here\nClick Here\nFalse\n2026-06-26 07:41:22\n2025-02-16 03:06:30\n6d389155-ed46-0ead-9379-6a842a123479\n5c243d3c-dceb-462f-b649-ecc780565de0\nIAD01PrdApp45\nuseast-AZ02\nClick Here\nClick Here\nClick Here\nFalse",
+    "file": "panel-14-vm-placement.png"
+  },
+  {
+    "index": 15,
+    "title": "",
+    "no_data": false,
+    "text": "VM Node Events",
+    "file": "panel-15-panel.png"
+  },
+  {
+    "index": 16,
+    "title": "Node and TOR Placement (<60 Days)",
+    "no_data": false,
+    "text": "Node and TOR Placement (<60 Days)\nTimestamp\nContainer StartTime\nInstance Name\nDataCenter\nCluesterName\nNode ID\nNode IP\nTOR\nSwithcPort\nPortId\nOS\nOS Version\nFPGA Dashboard\n2026-07-15 15:37:50\n2026-06-27T13:13:36.5974392Z\nprdsapeccap04\nIAD01AzSet1\nIAD01PrdApp45\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\n10.122.223.136\niad01-0101-0908-06t0\nEthernet15/1\nLinux_IaaS\nClick Here\n2026-06-27 13:07:26\n2026-06-26T07:39:33.3539133Z\nprdsapeccap04\nIAD01AzSet1\nIAD01PrdApp45\n026a845f-c1ec-c881-784f-0c7bac0cbd0d\n10.122.223.6\niad01-0101-0908-04sc5\nN\nLinux_IaaS\nClick Here\n2026-06-26 07:41:22\n2026-04-16T17:23:28.3545452Z\nprdsapeccap04\nIAD01AzSet1\nIAD01PrdApp45\n6d389155-ed46-0ead-9379-6a842a123479\n10.122.222.152\niad01-0101-0908-02sc23\nN\nLinux_IaaS\nClick Here",
+    "file": "panel-16-node-and-tor-placement-60-days.png"
+  },
+  {
+    "index": 17,
+    "title": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)",
+    "no_data": false,
+    "text": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)\nTimestamp\nNodeID\nImpact\n06/28/2026 19:55\n026a845f\nNodeId(026a845f) | BscCertifier | CurrentVersion: | NewVersion: bsc_master_26_03_05002 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-6-VE\n06/28/2026 04:50\n026a845f\nNodeId(026a845f) | VMApiQosEvent | allocationAction: None | operationName: RestorePoints.RestorePointOperation.PUT\n06/27/2026 17:59\n026a845f\nNodeId(026a845f) | HostGAPlugin | CurrentVersion: hgap_04_01_2026_184 | NewVersion: hgap_05_03_2026_185 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 17:59\n026a845f\nNodeId(026a845f) | HostGateway | CurrentVersion: ahg_04_30_2026_555 | NewVersion: ahg_05_20_2026_588 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 17:59\n026a845f\nNodeId(026a845f) | MetadataServerPF | CurrentVersion: imds_04_28_2026_2118 | NewVersion: imds_05_08_2026_2128 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 14:11\n72a7cab6\nNodeId(72a7cab6) | HostGAPlugin | CurrentVersion: hgap_04_01_2026_184 | NewVersion: hgap_05_03_2026_185 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 14:11\n72a7cab6\nNodeId(72a7cab6) | HostGateway | CurrentVersion: ahg_04_30_2026_555 | NewVersion: ahg_05_20_2026_588 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 14:11\n72a7cab6\nNodeId(72a7cab6) | MetadataServerPF | CurrentVersion: imds_04_28_2026_2118 | NewVersion: imds_05_08_2026_2128 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 13:14\nLiveMigration\nNodeId(LiveMigration) | AzPEWorkflowEvent | Initiator: Infrastructure | NetworkImpact: Freeze | DiskImpact: Freeze | ComputeImpact: Freeze | OSImpact: Freeze | Creator: ProcessImpactsChange\n06/27/2026 13:13\n72a7cab6\n***VM PLACEMENT*** | creationTime: 6/27/2026 1:13:36 PM | NodeId(72a7cab6-98b6-66a2-79a4-4107f4fae86d) | containerId(3853186b-f480-4f60-966c-b0ecfaafa186)\n06/27/2026 02:36\n6d389155\nOrig_Node | NodeId(6d389155) | NtpAgentNative | CurrentVersion: ap_2026_03_09_8004 | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE\n06/27/2026 02:36\n6d389155\nOrig_Node | NodeId(6d389155) | HostGAPlugin | CurrentVersion: hgap_04_01_2026_184 | NewVersion: hgap_05_03_2026_185 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 02:36\n6d389155\nOrig_Node | NodeId(6d389155) | HostGateway | CurrentVersion: ahg_04_30_2026_555 | NewVersion: ahg_05_20_2026_588 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/27/2026 02:36\n6d389155\nOrig_Node | NodeId(6d389155) | MetadataServerPF | CurrentVersion: imds_04_28_2026_2118 | NewVersion: imds_05_08_2026_2128 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE\n06/26/2026 22:40\n026a845f\nNodeId(026a845f) | NtpAgentNative | CurrentVersion: ap_2026_03_09_8004 | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE",
+    "file": "panel-17-rca-helper-node-events-and-errors-check-https-supp.png"
+  },
+  {
+    "index": 18,
+    "title": "Node Storage Error Events",
+    "no_data": true,
+    "text": "Node Storage Error Events\nNo data",
+    "file": "panel-18-node-storage-error-events.png"
+  },
+  {
+    "index": 19,
+    "title": "",
+    "no_data": false,
+    "text": "Reboots & Scheduled Events",
+    "file": "panel-19-panel.png"
+  },
+  {
+    "index": 20,
+    "title": "Scheduled Events & Reboots",
+    "no_data": false,
+    "text": "Scheduled Events & Reboots\nScheduledEvent\nDuration",
+    "file": "panel-20-scheduled-events-reboots.png"
+  },
+  {
+    "index": 21,
+    "title": "Reboot Detail",
+    "no_data": true,
+    "text": "Reboot Detail\nNo data",
+    "file": "panel-21-reboot-detail.png"
+  },
+  {
+    "index": 22,
+    "title": "Scheduled Events Detail",
+    "no_data": false,
+    "text": "Scheduled Events Detail\nStartTime\nEndTime\nInitiator\nDurationInMn\nEstimatedDurationInMn\nType\nDisk\nNetwork\nCompute\nOS\n_tenantName\nCreator\nApplicationConfig\nSchemaName\nImpactState\n2026-06-27 13:14:39\n2026-06-27 13:24:23\nInfrastructure\n10\n5\nLiveMigration\nFreeze\nFreeze\nFreeze\nFreeze\nd8c58747-d567-4a9f-bcc7-86faa7947656\nProcessImpactsChange\nNone\nMicrosoft.Bond.Polymorphic\nApprovalRequested\n2026-06-26 07:40:36\n2026-06-26 07:49:42\nInfrastructure\n9\n5\nLiveMigration\nFreeze\nFreeze\nFreeze\nFreeze\nd8c58747-d567-4a9f-bcc7-86faa7947656\nProcessImpactsChange\nNone\nMicrosoft.Bond.Polymorphic\nApprovalRequested",
+    "file": "panel-22-scheduled-events-detail.png"
+  },
+  {
+    "index": 23,
+    "title": "Live Migration Events",
+    "no_data": false,
+    "text": "Live Migration Events\nEventTime\nEventType\nASW_Wiki\nFailureReason\nRCALevel1\nRCALevel2\nmessage\nDiagnostics\nASI Link\nMigrationPhaseFailing\nEscalateTo\n2026-06-27 13:23:24\nCompleted\nDefrag\nNetworkReady\nnull\n{\"isSocCrashFailure\":false,\"FaultCode\":null,\"FabricOperation\":\"\",\"IsVMPHUSession\":false,\"NodeFaultReason\":\"\",\"DestinationContainerFaultErrorCode\":\"\",\"DestinationContainerId\":\"3853186b-f480-4f60-966c-b0ecfaafa186\",\"TriggerType\":\"Defrag\",\"LiveMigrationStartTime\":\"2026-06-27T13:13:36.4459639Z\",\"HyperVVMId\":\"3623e468-14c2-49db-bb96-6e9c0a47b210\",\"GuestOsCrashErrorCode\":null,\"IsNodeFault\":null,\"DestinationContainerFaultReason\":\"\",\"HasUnachievableGoalNoContainerConfig\":null,\"SessionId\":\"7f5cad50-819e-4ec9-80b2-bd402c9c7ae2\",\"FaultTime\":null,\"isFaultyDestinationContainer\":null,\"MigrationConstraint\":\"None\",\"CustomerInitiatedOperationDetails\":[],\"SourceLMAgentCrashDiagnostics\":null,\"isOvlFailure\":false,\"DestinationNodeId\":\"72a7cab6-98b6-66a2-79a4-4107f4fae86d\",\"isFaultySourceContainer\":null,\"isGuestOsCrash\":false,\"BlockDestroyReason\":\"\",\"allocationid\":\"65482a35-6fca-4e30-9b77-f1b75eec2e36\",\"IsCustomerInitiatedOperation\":false,\"DestinationLMAgentCrashDiagnostics\":null}\nClick Here\n2026-06-26 07:48:59\nCompleted\nDefrag\nNetworkReady\nnull\n{\"SourceLMAgentCrashDiagnostics\":null,\"DestinationLMAgentCrashDiagnostics\":null,\"LiveMigrationStartTime\":\"2026-06-26T07:39:33.2181010Z\",\"GuestOsCrashErrorCode\":null,\"DestinationContainerFaultErrorCode\":\"\",\"HasUnachievableGoalNoContainerConfig\":null,\"IsCustomerInitiatedOperation\":false,\"CustomerInitiatedOperationDetails\":[],\"isSocCrashFailure\":false,\"isOvlFailure\":false,\"DestinationContainerId\":\"dbfef662-2a5f-4ddf-a480-d252ae9c9268\",\"FaultCode\":null,\"isFaultySourceContainer\":null,\"isGuestOsCrash\":false,\"isFaultyDestinationContainer\":null,\"IsNodeFault\":null,\"NodeFaultReason\":\"\",\"BlockDestroyReason\":\"\",\"DestinationNodeId\":\"026a845f-c1ec-c881-784f-0c7bac0cbd0d\",\"TriggerType\":\"Defrag\",\"HyperVVMId\":\"3623e468-14c2-49db-bb96-6e9c0a47b210\",\"FaultTime\":null,\"FabricOperation\":\"\",\"IsVMPHUSession\":false,\"DestinationContainerFaultReason\":\"\",\"allocationid\":\"ce636156-343d-4822-885d-dbb21a032034\",\"SessionId\":\"31d7409d-54b6-437c-b9d6-ee4d24399a82\",\"MigrationConstraint\":\"None\"}\nClick Here",
+    "file": "panel-23-live-migration-events.png"
+  },
+  {
+    "index": 24,
+    "title": "VM Health Annotations",
+    "no_data": false,
+    "text": "VM Health Annotations\nTimestamp\nRegion\nnodeId\ncontainerId\ncontainerType\nannotation\n27-06-2026 13:17\nuseast\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\n3853186b-f480-4f60-966c-b0ecfaafa186\nStandard_E16s_v5\nLiveMigrationSucceeded//0.951000##58575.000000##Defrag@@\n26-06-2026 07:43\nuseast\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\n3853186b-f480-4f60-966c-b0ecfaafa186\nStandard_E16s_v5\nLiveMigrationSucceeded//0.802000##38662.000000##Defrag@@",
+    "file": "panel-24-vm-health-annotations.png"
+  },
+  {
+    "index": 25,
+    "title": "",
+    "no_data": false,
+    "text": "Disk Metrics",
+    "file": "panel-25-panel.png"
+  },
+  {
+    "index": 26,
+    "title": "Data/OS/Temp Disk Queue Length",
+    "no_data": false,
+    "text": "Data/OS/Temp Disk Queue Length\nData Disk 0\nData Disk 1\nOS Disk\nTemp Disk",
+    "file": "panel-26-data-os-temp-disk-queue-length.png"
+  },
+  {
+    "index": 27,
+    "title": "Data/OS/Temp Disk Latency (in milliseconds)",
+    "no_data": false,
+    "text": "Data/OS/Temp Disk Latency (in milliseconds)\nData Disk 1\nData Disk 0\nOS Disk\nTEMP Disk",
+    "file": "panel-27-data-os-temp-disk-latency-in-milliseconds.png"
+  },
+  {
+    "index": 28,
+    "title": "VM Bandwidth Consumed %",
+    "no_data": false,
+    "text": "VM Bandwidth Consumed %\nVM cached Bandwidth Consumed Percentage -6e965a4d-9d96-49ea-bb97-d866f1247659\nVM Uncached Bandwidth Consumed Percentage -6e965a4d-9d96-49ea-bb97-d866f1247659\nVM Bandwidth Consumed (Cached & Uncached) Percentage",
+    "file": "panel-28-vm-bandwidth-consumed.png"
+  },
+  {
+    "index": 29,
+    "title": "VM IOPS Consumed %",
+    "no_data": false,
+    "text": "VM IOPS Consumed %\nVM Cached IOPS Consumed Percentage -6e965a4d-9d96-49ea-bb97-d866f1247659\nVM Uncached IOPS Consumed Percentage -6e965a4d-9d96-49ea-bb97-d866f1247659\nVM IOPS Consumed (Cached & Uncached) Percentage",
+    "file": "panel-29-vm-iops-consumed.png"
+  },
+  {
+    "index": 30,
+    "title": "Data and OS Disk Bandwidth Consumed % (per Lun)",
+    "no_data": false,
+    "text": "Data and OS Disk Bandwidth Consumed % (per Lun)\nData Disk 0\nData Disk 1\nOS Disk\nBurst Data Disk LUN 0\nBurst Data Disk LUN 1\nOS Disk Burst",
+    "file": "panel-30-data-and-os-disk-bandwidth-consumed-per-lun.png"
+  },
+  {
+    "index": 31,
+    "title": "Data and OS Disk IOPS Consumed % (per Lun)",
+    "no_data": false,
+    "text": "Data and OS Disk IOPS Consumed % (per Lun)\nData Disk 0\nData Disk 1\nOS Disk\nBurst Data Disk LUN 0\nBurst Data Disk LUN 1\nOS Disk Burst",
+    "file": "panel-31-data-and-os-disk-iops-consumed-per-lun.png"
+  }
+]

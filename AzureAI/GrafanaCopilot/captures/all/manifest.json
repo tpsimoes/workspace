@@ -1,0 +1,352 @@
+[
+  {
+    "index": 0,
+    "title": "",
+    "no_data": false,
+    "text": "Virtual Machine Insights",
+    "file": "panel-00-panel.png"
+  },
+  {
+    "index": 1,
+    "title": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)",
+    "no_data": false,
+    "text": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)\nARM Id\n/subscriptions/be9d60fb-f36a-4b27-bf41-aa14215b2724/resourcegroups/m1-rg-alz-esserp-saperpus-p-1/providers/microsoft.compute/virtualmachines/prdsapeccap04\nContainer Id\n3853186b-f480-4f60-966c-b0ecfaafa186\nCustomer\nMedline Industries, LP\nNode Id\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\nRegion\nuseast\nResource Name\nprdsapeccap04\nSubscription Name\nM1-ALZ-ESSERP-P-1\nTenant Name\nd8c58747-d567-4a9f-bcc7-86faa7947656\nVirtualMachine Id\n6e965a4d-9d96-49ea-bb97-d866f1247659",
+    "file": "panel-01-virtual-machine-current-info-ignores-selected-time.png"
+  },
+  {
+    "index": 2,
+    "title": "VM Details (Features)",
+    "no_data": false,
+    "text": "VM Details (Features)",
+    "file": "panel-02-vm-details-features.png"
+  },
+  {
+    "index": 3,
+    "title": "Installed Extensions",
+    "no_data": false,
+    "text": "Installed Extensions\nMonitorX64Linux\nRunCommandLinux\nSiteRecovery-Linux\nSiteRecovery-LinuxSLES15\nVMSnapshotLinux",
+    "file": "panel-03-installed-extensions.png"
+  },
+  {
+    "index": 4,
+    "title": "VM Tags",
+    "no_data": false,
+    "text": "VM Tags\nName\nValue\ntags\n{}",
+    "file": "panel-04-vm-tags.png"
+  },
+  {
+    "index": 5,
+    "title": "VM Events:",
+    "no_data": false,
+    "text": "VM Events:",
+    "file": "panel-05-vm-events.png"
+  },
+  {
+    "index": 6,
+    "title": "Microsoft App Links",
+    "no_data": false,
+    "text": "Microsoft App Links\nASI\nClick Here\nASI EEE\nClick Here\nASI Node\nClick Here\nCloudPrice\nClick Here\nCluster Cap\nClick Here\nDridash\nClick Here\nNetVMA Container\nClick Here\nNetVMA Node\nClick Here\nNode Dashboard\nClick Here\nNode Story\nClick Here\nRdmadash\nClick Here\nVM Dash\nClick Here\nVnet Dridash\nClick Here",
+    "file": "panel-06-microsoft-app-links.png"
+  },
+  {
+    "index": 7,
+    "title": "OS Image Details",
+    "no_data": false,
+    "text": "OS Image Details\nSAP Image\nNo\nOS Billing Type\nLinux_IaaS\nOS License Type\nNONE\nOS Image License\nBYOS\nOS Azure Supported\nNo",
+    "file": "panel-07-os-image-details.png"
+  },
+  {
+    "index": 8,
+    "title": "",
+    "no_data": false,
+    "text": "Previous Support Requests for this Virtual Machine",
+    "file": "panel-08-panel.png"
+  },
+  {
+    "index": 9,
+    "title": "historical data (ignores selected time range) - recent SRs (less than 2d) might not be displayed",
+    "no_data": true,
+    "text": "historical data (ignores selected time range) - recent SRs (less than 2d) might not be displayed\nNo data",
+    "file": "panel-09-historical-data-ignores-selected-time-range-recent.png"
+  },
+  {
+    "index": 10,
+    "title": "",
+    "no_data": false,
+    "text": "ICMs Associated to VM Arm ID: /subscriptions/be9d60fb-f36a-4b27-bf41-aa14215b2724/resourcegroups/m1-rg-alz-esserp-saperpus-p-1/providers/microsoft.compute/virtualmachines/prdsapeccap04",
+    "file": "panel-10-panel.png"
+  },
+  {
+    "index": 11,
+    "title": "ICMs Associated to VM ArmId",
+    "no_data": true,
+    "text": "ICMs Associated to VM ArmId\nNo data",
+    "file": "panel-11-icms-associated-to-vm-armid.png"
+  },
+  {
+    "index": 12,
+    "title": "",
+    "no_data": false,
+    "text": "Outages impacting Virtual Machines",
+    "file": "panel-12-panel.png"
+  },
+  {
+    "index": 13,
+    "title": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###",
+    "no_data": false,
+    "text": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###\nTracking ID\nIcM\nStarted\nMitigated\nStage\nTitle\nLatest Update\nZH_0-XKZ\n824520159\n2026-06-26 17:29:44\n2026-06-27 02:01:20\nRCA\nPIR - Azure Virtual Machines Scale Sets and VM Management Operation Errors in East US\nWhat happened? Between 17:43 UTC and 22:40 UTC on 26 Jun 2026, a platform issue resulted in an impact to the Virtual Machine Scale Sets and Virtual Machine service in the East US. Impacted customers experienced error notifications when performing service management operations - such as create, delete, update, restart, reimage, start, scale, stop - for resources hosted in this region What went wrong, and why? We determined that Virtual Machines and Virtual Machine Scale Sets management operations in the East US region experienced failures due to an uneven distribution of service resources, which led to increased utilization and delays in request processing. This condition occurred during platform upgrade activities, which temporarily impacted how workloads were distributed, causing some resources to become overloaded. As a result, this led to intermittent request failures and increased response times for management operations. How did we respond? 17:43 UTC on 26 June 2026 \u2013 Customer impact began, with intermittent failures observed in Virtual Machine Scale Set management operations in the East US region.18:00 UTC on 26 June 2026 \u2013 Automated service monitoring detected an increase in failed requests and a drop in success rates.18:05 UTC on 26 June 2026 \u2013 Investigation identified uneven distribution of service resources, resulting in increased utilization and delays in request processing during ongoing update activities.18:10 UTC on 26 June 2026 \u2013 Mitigation workstream was initiated, including pausing update activities to prevent further resource imbalance and starting workload rebalancing efforts.19:00 UTC on 26 June 2026 - Additional corrective actions were taken, including targeted redistribution of workloads and controlled restarts of select service components to reduce pressure and improve stability.19:15 UTC on 26 June 2026 -Continuous monitoring and adjustments were performed to optimize resource distribution and support recovery22:40 UTC on 26 June 2026 - Service stability improved, with request success rates returning to expected levels. Customer impact was mitigated, and monitoring continued to validate full recovery. What happens next? This Mitigation Statement is the final communication for this incident. For details about which Azure incidents qualify for which Post Incident Reviews (PIRs), refer to https://aka.ms/AzurePIRs. The impact times above represent the full incident duration, so are not specific to any individual customer. Actual impact to service availability may vary between customers and resources \u2013 for guidance on implementing monitoring to understand granular impact: https://aka.ms/AzPIR/Monitoring To stay informed about future Azure service issues, make sure that you configure and maintain Azure Service Health alerts \u2013 these can trigger emails, SMS, push notifications, webhooks, and more: https://aka.ms/ash-alerts. For broader guidance on preparing for cloud incidents, refer to https://aka.ms/incidentreadiness.",
+    "file": "panel-13-outages-impacting-virtual-machines-in-this-vm-s-su.png"
+  },
+  {
+    "index": 14,
+    "title": "",
+    "no_data": false,
+    "text": "CPU & Memory",
+    "file": "panel-14-panel.png"
+  },
+  {
+    "index": 15,
+    "title": "CPU % (Avg)",
+    "no_data": false,
+    "text": "CPU % (Avg)\nPercentage CPU Consumed % AVG -6e965a4d-9d96-49ea-bb97-d866f1247659\nPercentage CPU Consumed % MAX -6e965a4d-9d96-49ea-bb97-d866f1247659",
+    "file": "panel-15-cpu-avg.png"
+  },
+  {
+    "index": 16,
+    "title": "% Memory Pressure (Max)",
+    "no_data": false,
+    "text": "% Memory Pressure (Max)\nMemory % _prdsapeccap04",
+    "file": "panel-16-memory-pressure-max.png"
+  },
+  {
+    "index": 17,
+    "title": "Ram size and Available ram (Max)",
+    "no_data": false,
+    "text": "Ram size and Available ram (Max)\nAvailable Memory Bytes 6e965a4d-9d96-49ea-bb97-d866f1247659\nRamSize",
+    "file": "panel-17-ram-size-and-available-ram-max.png"
+  },
+  {
+    "index": 18,
+    "title": "",
+    "no_data": false,
+    "text": "VM Placement",
+    "file": "panel-18-panel.png"
+  },
+  {
+    "index": 19,
+    "title": "VM Placement",
+    "no_data": false,
+    "text": "VM Placement\nLog timestamp\nContainer creation\nNode Id\nContainer Id\nCluster Name\n2026-06-29 00:28:55\n2026-06-27 13:13:36\n72a7cab6-98b6-66a2-79a4-4107f4fae86d\n3853186b-f480-4f60-966c-b0ecfaafa186\nIAD01PrdApp45\n2026-06-27 13:07:26\n2026-06-26 07:39:33\n026a845f-c1ec-c881-784f-0c7bac0cbd0d\ndbfef662-2a5f-4ddf-a480-d252ae9c9268\nIAD01PrdApp45\n2026-06-26 07:41:22\n2025-02-16 03:06:30\n6d389155-ed46-0ead-9379-6a842a123479\n5c243d3c-dceb-462f-b649-ecc780565de0\nIAD01PrdApp45",
+    "file": "panel-19-vm-placement.png"
+  },
+  {
+    "index": 20,
+    "title": "VM Sku Capacity",
+    "no_data": false,
+    "text": "VM Sku Capacity",
+    "file": "panel-20-vm-sku-capacity.png"
+  },
+  {
+    "index": 21,
+    "title": "",
+    "no_data": false,
+    "text": "VM Node Events",
+    "file": "panel-21-panel.png"
+  },
+  {
+    "index": 22,
+    "title": "Node and TOR Placement (<60 Days)",
+    "no_data": false,
+    "text": "Node and TOR Placement (<60 Days)",
+    "file": "panel-22-node-and-tor-placement-60-days.png"
+  },
+  {
+    "index": 23,
+    "title": "TOR Events",
+    "no_data": false,
+    "text": "TOR Events",
+    "file": "panel-23-tor-events.png"
+  },
+  {
+    "index": 24,
+    "title": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)",
+    "no_data": false,
+    "text": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)",
+    "file": "panel-24-rca-helper-node-events-and-errors-check-https-supp.png"
+  },
+  {
+    "index": 25,
+    "title": "Node Storage Error Events",
+    "no_data": false,
+    "text": "Node Storage Error Events",
+    "file": "panel-25-node-storage-error-events.png"
+  },
+  {
+    "index": 26,
+    "title": "",
+    "no_data": false,
+    "text": "Reboots & Scheduled Events",
+    "file": "panel-26-panel.png"
+  },
+  {
+    "index": 27,
+    "title": "Scheduled Events & Reboots",
+    "no_data": false,
+    "text": "Scheduled Events & Reboots",
+    "file": "panel-27-scheduled-events-reboots.png"
+  },
+  {
+    "index": 28,
+    "title": "Reboot Detail",
+    "no_data": false,
+    "text": "Reboot Detail",
+    "file": "panel-28-reboot-detail.png"
+  },
+  {
+    "index": 29,
+    "title": "Scheduled Events Detail",
+    "no_data": false,
+    "text": "Scheduled Events Detail",
+    "file": "panel-29-scheduled-events-detail.png"
+  },
+  {
+    "index": 30,
+    "title": "Live Migration Events",
+    "no_data": false,
+    "text": "Live Migration Events",
+    "file": "panel-30-live-migration-events.png"
+  },
+  {
+    "index": 31,
+    "title": "VM Health Annotations",
+    "no_data": false,
+    "text": "VM Health Annotations",
+    "file": "panel-31-vm-health-annotations.png"
+  },
+  {
+    "index": 32,
+    "title": "",
+    "no_data": false,
+    "text": "Disk Details",
+    "file": "panel-32-panel.png"
+  },
+  {
+    "index": 33,
+    "title": "Attached Disk",
+    "no_data": false,
+    "text": "Attached Disk",
+    "file": "panel-33-attached-disk.png"
+  },
+  {
+    "index": 34,
+    "title": "Disk Detach Operations",
+    "no_data": false,
+    "text": "Disk Detach Operations",
+    "file": "panel-34-disk-detach-operations.png"
+  },
+  {
+    "index": 35,
+    "title": "Storage Errors & Events",
+    "no_data": false,
+    "text": "Storage Errors & Events",
+    "file": "panel-35-storage-errors-events.png"
+  },
+  {
+    "index": 36,
+    "title": "",
+    "no_data": false,
+    "text": "Disk Metrics",
+    "file": "panel-36-panel.png"
+  },
+  {
+    "index": 37,
+    "title": "Data/OS/Temp Disk Queue Length",
+    "no_data": false,
+    "text": "Data/OS/Temp Disk Queue Length",
+    "file": "panel-37-data-os-temp-disk-queue-length.png"
+  },
+  {
+    "index": 38,
+    "title": "Data/OS/Temp Disk Latency (in milliseconds)",
+    "no_data": false,
+    "text": "Data/OS/Temp Disk Latency (in milliseconds)",
+    "file": "panel-38-data-os-temp-disk-latency-in-milliseconds.png"
+  },
+  {
+    "index": 39,
+    "title": "VM Bandwidth Consumed %",
+    "no_data": false,
+    "text": "VM Bandwidth Consumed %",
+    "file": "panel-39-vm-bandwidth-consumed.png"
+  },
+  {
+    "index": 40,
+    "title": "VM IOPS Consumed %",
+    "no_data": false,
+    "text": "VM IOPS Consumed %",
+    "file": "panel-40-vm-iops-consumed.png"
+  },
+  {
+    "index": 41,
+    "title": "Data and OS Disk Bandwidth Consumed % (per Lun)",
+    "no_data": false,
+    "text": "Data and OS Disk Bandwidth Consumed % (per Lun)",
+    "file": "panel-41-data-and-os-disk-bandwidth-consumed-per-lun.png"
+  },
+  {
+    "index": 42,
+    "title": "Data and OS Disk IOPS Consumed % (per Lun)",
+    "no_data": false,
+    "text": "Data and OS Disk IOPS Consumed % (per Lun)",
+    "file": "panel-42-data-and-os-disk-iops-consumed-per-lun.png"
+  },
+  {
+    "index": 43,
+    "title": "",
+    "no_data": false,
+    "text": "Network Details",
+    "file": "panel-43-panel.png"
+  },
+  {
+    "index": 44,
+    "title": "Details",
+    "no_data": false,
+    "text": "Details",
+    "file": "panel-44-details.png"
+  },
+  {
+    "index": 45,
+    "title": "Network in bytes Per Minute (Max)",
+    "no_data": false,
+    "text": "Network in bytes Per Minute (Max)",
+    "file": "panel-45-network-in-bytes-per-minute-max.png"
+  },
+  {
+    "index": 46,
+    "title": "Network out bytes Per Minute (Max)",
+    "no_data": false,
+    "text": "Network out bytes Per Minute (Max)",
+    "file": "panel-46-network-out-bytes-per-minute-max.png"
+  },
+  {
+    "index": 47,
+    "title": "Total Portal Bytes In Rate Per Minute (MAX) | | Per Nic -Container - Node ||",
+    "no_data": false,
+    "text": "Total Portal Bytes In Rate Per Minute (MAX) | | Per Nic -Container - Node ||",
+    "file": "panel-47-total-portal-bytes-in-rate-per-minute-max-per-nic-.png"
+  },
+  {
+    "index": 48,
+    "title": "Total Portal Bytes Out Rate Per Minute (MAX)  | | Per Nic -Container - Node ||",
+    "no_data": false,
+    "text": "Total Portal Bytes Out Rate Per Minute (MAX) | | Per Nic -Container - Node ||",
+    "file": "panel-48-total-portal-bytes-out-rate-per-minute-max-per-nic.png"
+  },
+  {
+    "index": 49,
+    "title": "",
+    "no_data": false,
+    "text": "Workload Analysis / Function / Impact\n(2 panels)",
+    "file": "panel-49-panel.png"
+  }
+]

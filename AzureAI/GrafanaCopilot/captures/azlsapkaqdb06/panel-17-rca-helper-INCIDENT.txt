@@ -1,0 +1,128 @@
+***VM PLACEMENT*** | creationTime: 7/7/2026 10:17:21 PM | NodeId(4566616c-b55f-a597-da36-305020a925e9) | containerId(b03127fd-9c69-490e-bd49-b69f8fce73d2)
+07/06/2026 23:49
+07/07/2026 22:06
+07/07/2026 22:17
+07/07/2026 22:19
+07/07/2026 22:27
+07/07/2026 23:09
+07/07/2026 23:20
+07/09/2026 05:01
+07/09/2026 14:05
+07/09/2026 14:06
+07/09/2026 14:09
+07/09/2026 14:12
+07/09/2026 14:13
+07/09/2026 14:15
+07/09/2026 14:16
+07/09/2026 14:17
+07/09/2026 14:18
+07/09/2026 14:19
+07/09/2026 14:21
+07/09/2026 14:22
+07/09/2026 14:23
+07/09/2026 14:24
+07/09/2026 16:16
+4566616c
+55f0378e
+Impact
+LiveMigration
+NodeID
+NodeId(4566616c) | BBANativeAzure | CurrentVersion: | NewVersion: BBANativeAzure_24_4_30005_0 | SourceOfService: CEG_AZURENETWORK-NETWORKING-PROD-7-VE
+NodeId(4566616c) | PfClientDeploymentMaintenance | CurrentVersion: hotpatch_2607_1_26_06_12_1 | NewVersion: hotpatch_2607_2_26_06_26_1 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+NodeId(4566616c) | VMApiQosEvent | allocationAction: None | operationName: VirtualMachines.ResourceOperation.PATCH
+NodeId(LiveMigration) | AzPEWorkflowEvent | Initiator: Infrastructure | NetworkImpact: Freeze | DiskImpact: Freeze | ComputeImpact: Freeze | OSImpact: Freeze | Creator: ProcessImpactsChange
+Orig_Node | ***VM PLACEMENT*** | creationTime: 3/25/2026 2:21:07 PM | NodeId(55f0378e-29d8-7595-d123-9f1dfa9a5046) | containerId(d338c642-59a8-4a3b-97d2-c418da575b48)
+Orig_Node | NodeId(55f0378e) | ACCBootstrapper | CurrentVersion: | NewVersion: ACCBootstrapper_26_5_6001_0 | SourceOfService: CEG_AZURESECURITY-AZURESECURITY-PROD-VE
+Orig_Node | NodeId(55f0378e) | ADECertDownloader | CurrentVersion: | NewVersion: ap_2021_09_22_22002 | SourceOfService: CEG_AZURESECURITY-AZURESECURITY-PROD-VE
+Orig_Node | NodeId(55f0378e) | APTools | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | AntimalwareConfiguration | CurrentVersion: | NewVersion: ap_2025_08_4005 | SourceOfService: CEG_AZURESECURITY-AZURESECURITY-PROD-VE
+Orig_Node | NodeId(55f0378e) | AssetTool | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | AzurePerfCollectorAgent | CurrentVersion: | NewVersion: pie_2026_02_02_2002_azperf | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE
+Orig_Node | NodeId(55f0378e) | AzureProfilerAgent | CurrentVersion: | NewVersion: pie_2026_02_02_2002_azprof | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE
+Orig_Node | NodeId(55f0378e) | AzureSecurityPack | CurrentVersion: azsecpack_ap_2023_6_9002 | NewVersion: azsecpack_ap_2026_04_28 | SourceOfService: CEG_AZURESECURITY-AZSECPACK-PROD-VE
+Orig_Node | NodeId(55f0378e) | AzureSecurityPack | CurrentVersion: azsecpack_ap_2026_04_28 | NewVersion: azsecpack_ap_2023_6_9002 | SourceOfService: CEG_AZURESECURITY-AZURESECURITY-PROD-VE
+Orig_Node | NodeId(55f0378e) | AzureSerialConsole | CurrentVersion: | NewVersion: sc_04_15_2026_003 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE
+Orig_Node | NodeId(55f0378e) | AzureTelemetryFramework | CurrentVersion: | NewVersion: AzureTelemetryFramework_app_2026_03_12 | SourceOfService: CEG_AZURECOMPUTE-DCFW-PROD-VE
+Orig_Node | NodeId(55f0378e) | AzureWatsonAgent | CurrentVersion: | NewVersion: pie_2026_02_02_2002_azwatson | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE
+Orig_Node | NodeId(55f0378e) | BMCUpdater | CurrentVersion: | NewVersion: mihamidi_BMCUpdater_BeastMv2_d98296ad | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-2-VE
+Orig_Node | NodeId(55f0378e) | BackupHostServer | CurrentVersion: storage_agent_bhs_1_0_17_483 | NewVersion: bhs_3_0_106 | SourceOfService: CEG_AZURECOMPUTE-BACKUPHOSTSERVICE-PROD-VE
+Orig_Node | NodeId(55f0378e) | BackupHostServer | CurrentVersion: | NewVersion: storage_agent_bhs_1_0_17_483 | SourceOfService: CEG_AZURESTORAGE-STORAGEAGENT-PROD-VE
+Orig_Node | NodeId(55f0378e) | BarberaSvc | CurrentVersion: | NewVersion: barberasvc_10_2025_7_9_12_54 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-VE
+Orig_Node | NodeId(55f0378e) | BastionAgent | CurrentVersion: | NewVersion: BastionAgent_2025_06_10 | SourceOfService: CEG_AZURENETWORK-NETWORKING-PROD-5-VE
+Orig_Node | NodeId(55f0378e) | BscCertifier | CurrentVersion: | NewVersion: bsc_master_26_03_05002 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-6-VE
+Orig_Node | NodeId(55f0378e) | CCMERootCrlInstaller | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | CHIEDiskUpdate | CurrentVersion: | NewVersion: PM1735_EPK91A3Q_26_05_19002 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-5-VE
+Orig_Node | NodeId(55f0378e) | CSIMicrocodeUpdate | CurrentVersion: | NewVersion: uCodeDisableAgent_24_1_30001_0 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-VE
+Orig_Node | NodeId(55f0378e) | CarbonHostAgent | CurrentVersion: | NewVersion: CarbonHostAgent_2026_01_14_1_0_03300_721 | SourceOfService: CEG_AZURECOMPUTE-COMPUTECLIENT-VE
+Orig_Node | NodeId(55f0378e) | CatapultAgent | CurrentVersion: | NewVersion: catapultagent_1_7_03393_1499_release_1_7 | SourceOfService: CEG_AZURECSI-FAST-PROD-VE
+Orig_Node | NodeId(55f0378e) | CatapultImageUpdateAgent | CurrentVersion: | NewVersion: CUA_1_4_02610_1120_main | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-3-VE
+Orig_Node | NodeId(55f0378e) | CiUpdater | CurrentVersion: | NewVersion: ap_2026_01_27005 | SourceOfService: CEG_AZURESECURITY-AZURESECURITY-PROD-VE
+Orig_Node | NodeId(55f0378e) | ComputeDatapathSettings | CurrentVersion: | NewVersion: computedatapathsettings_7_0_11_990_RdmaConditional | SourceOfService: CEG_AZURECOMPUTE-ONEDEPLOYRESERVED-VE
+Orig_Node | NodeId(55f0378e) | ComputeIODatapath | CurrentVersion: | NewVersion: computeiodatapath_10_2025_7_99_11_91229 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-VE
+Orig_Node | NodeId(55f0378e) | DCMUpdater | CurrentVersion: | NewVersion: DcmUpdater_132_879_5057_137 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-3-VE
+Orig_Node | NodeId(55f0378e) | FirmwareAgent | CurrentVersion: | NewVersion: FirmwareAgent_app_v3_1_2_cv | SourceOfService: CEG_AZURECOMPUTE-DCFW-PROD-VE
+Orig_Node | NodeId(55f0378e) | FleetDiagnosticsAgent | CurrentVersion: | NewVersion: pie_2026_02_03_37_fda_3_1_26034_37 | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE
+Orig_Node | NodeId(55f0378e) | GenevaMetricsExtension | CurrentVersion: ap_2026_05_11_10004 | NewVersion: pie_2026_01_18_18003_gme_2_2026_113_1623 | SourceOfService: CEG_AZUREPIE-AZUREPIE-PROD-VE
+Orig_Node | NodeId(55f0378e) | GenevaMetricsExtension | CurrentVersion: pie_2026_01_18_18003_gme_2_2026_113_1623 | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | HardwareProfilesIniGenerator | CurrentVersion: | NewVersion: ap_2026_04_27_1_hardwareprofiles | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | HawkeyeLogs | HIRCA_Hot -> FaultCode 10038 | https://aka.ms/WhyFaulted?p-faulttime=2026-07-07T23:09:05Z&p-nodeId=55f0378e-29d8-7595-d123-9f1dfa9a5046
+Orig_Node | NodeId(55f0378e) | HostAttestationAgent | CurrentVersion: | NewVersion: haa_ap_2026_03_29003_0 | SourceOfService: CEG_AZURESECURITY-AZURESECURITY-PROD-VE
+Orig_Node | NodeId(55f0378e) | HostGAPlugin | CurrentVersion: | NewVersion: hgap_05_03_2026_185 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE
+Orig_Node | NodeId(55f0378e) | HostGateway | CurrentVersion: | NewVersion: ahg_05_20_2026_588 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE
+Orig_Node | NodeId(55f0378e) | HostNetAgent | CurrentVersion: | NewVersion: HostNetAgent_master_1_0_0_178 | SourceOfService: CEG_AZURENETWORK-NETWORKING-PROD-5-VE
+Orig_Node | NodeId(55f0378e) | HostOsMitigations | CurrentVersion: | NewVersion: hom_23_01_12_237 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+Orig_Node | NodeId(55f0378e) | HostResourceManager | CurrentVersion: | NewVersion: hrm_23_11_3003_0 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+Orig_Node | NodeId(55f0378e) | HwMonPf | CurrentVersion: | NewVersion: HwMonPf_2025_11_5005_0_SP312_CV | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-3-VE
+Orig_Node | NodeId(55f0378e) | HypervisorHotRestart | CurrentVersion: | NewVersion: hhr_23_05_01_995 | SourceOfService: AUTOPILOT-HOSTOS-PROD-3-VE
+Orig_Node | NodeId(55f0378e) | IGVMAgent | CurrentVersion: | NewVersion: IGVMAgent_1_0_0_921_RELEASE | SourceOfService: CEG_AZURESECURITY-ACCBOOTSTRAPPER-VE
+Orig_Node | NodeId(55f0378e) | ImpactfulHelloWorld | CurrentVersion: | NewVersion: OSUpgrade_22_05_3004_0 | SourceOfService: CEG_AZURECOMPUTE-HOSTOSUPGRADE_TEST-VE
+Orig_Node | NodeId(55f0378e) | IsoGenerationDataProvider | CurrentVersion: | NewVersion: ap_d5d467dd795 | SourceOfService: AUTOPILOT-AZURECLUSTER-VE
+Orig_Node | NodeId(55f0378e) | KernelHostAgent | CurrentVersion: | NewVersion: ka_26_1_20002_0 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+Orig_Node | NodeId(55f0378e) | LmAgent | CurrentVersion: | NewVersion: LMAgent_151_26_7_3 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-VE
+Orig_Node | NodeId(55f0378e) | MachineLocalWatchdog | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | MachineLocalWatchdogFast | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | MetadataServerPF | CurrentVersion: | NewVersion: imds_05_08_2026_2128 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-2-VE
+Orig_Node | NodeId(55f0378e) | NativePowerAgent | CurrentVersion: ap_2026_05_11_10004 | NewVersion: ap_2026_04_01_1005_multiarch | SourceOfService: CEG_AZURECOMPUTE-COMPUTECLIENT-VE
+Orig_Node | NodeId(55f0378e) | NativePowerAgent | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | NativeXPingAgent | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | NativeXPingAgentWatchdog | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | NetAnalyticsNodeAgent | CurrentVersion: | NewVersion: NetAnalyticsNodeAgent_1_4_2036_0_rel50 | SourceOfService: CEG_AZURENETWORK-NETWORKING-PROD-7-VE
+Orig_Node | NodeId(55f0378e) | NodeCapabilities | CurrentVersion: | NewVersion: NodeCapabilities_8_19_0_2509 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-VE
+Orig_Node | NodeId(55f0378e) | NodeHealth | Degraded -> Diagnosing | EndTime: 07/07/2026 23:20 -> Diagnosing | EndTime: 07/07/2026 23:20
+Orig_Node | NodeId(55f0378e) | NodeHealth | Degraded -> Unallocatable | EndTime: 07/07/2026 23:09 -> Unallocatable | EndTime: 07/07/2026 23:09
+Orig_Node | NodeId(55f0378e) | NodeHealth | Unhealthy -> Faulted | EndTime: 07/07/2026 23:20 -> Faulted | EndTime: 07/07/2026 23:20
+Orig_Node | NodeId(55f0378e) | NodeHealth | Unhealthy -> OutForRepair | EndTime: 07/09/2026 13:24 -> OutForRepair | EndTime: 07/09/2026 13:24
+Orig_Node | NodeId(55f0378e) | NodeServiceConfiguration | CurrentVersion: | NewVersion: ap_d5d467dd795 | SourceOfService: AUTOPILOT-AZURECLUSTER-VE
+Orig_Node | NodeId(55f0378e) | NtpAgentNative | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | NtpClientNative | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | NtpWatchDogNative | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | OneDeployHelloWorld | CurrentVersion: | NewVersion: 1DHW_2026_04_27 | SourceOfService: AUTOPILOT-ONEDEPLOYHELLOWORLD-VE
+Orig_Node | NodeId(55f0378e) | OneDeployTestHelloWorld | CurrentVersion: | NewVersion: 24_9_18003_0 | SourceOfService: AUTOPILOT-ONEDEPLOYTEST-2-VE
+Orig_Node | NodeId(55f0378e) | OsAnalyzer | CurrentVersion: | NewVersion: osanalyzer_03_2026_7_10_3_151 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-VE
+Orig_Node | NodeId(55f0378e) | OsDiag | CurrentVersion: | NewVersion: osdiag_03_2026_7_10_3_177 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-VE
+Orig_Node | NodeId(55f0378e) | PfClientDeploymentMaintenance | CurrentVersion: hotpatch_2607_1_26_06_12_1 | NewVersion: hotpatch_2607_2_26_06_26_1 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+Orig_Node | NodeId(55f0378e) | PfClientDeploymentMaintenance | CurrentVersion: | NewVersion: hotpatch_2607_1_26_06_12_1 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+Orig_Node | NodeId(55f0378e) | PolicyAgent | CurrentVersion: | NewVersion: OneDeploy_2024_09_09_9003 | SourceOfService: AUTOPILOT-ONEDEPLOYCLIENT-VE
+Orig_Node | NodeId(55f0378e) | RTDBUpdater | CurrentVersion: | NewVersion: master_db_25_12_12001_Critical_0 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-VE
+Orig_Node | NodeId(55f0378e) | RdmaEStatsAgent | CurrentVersion: | NewVersion: 1_1_0_278_rdmaestatsagent | SourceOfService: CEG_AZURENETWORK-NETWORKING-PROD-VE
+Orig_Node | NodeId(55f0378e) | ReportNicProperties | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | RuntimeFWUpdater | CurrentVersion: | NewVersion: master_rtfw_25_5_19002_0 | SourceOfService: CEG_AZURECSI-CSI-FIRMWARE-PROD-VE
+Orig_Node | NodeId(55f0378e) | RustBladeMonRTPF | CurrentVersion: | NewVersion: RustBladeMonRTPF_20260116_2_prod_3 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-3-VE
+Orig_Node | NodeId(55f0378e) | SDNDataSync | CurrentVersion: | NewVersion: sdn_2023_01_25_25003 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-NETWORKING-SDNDATA-VE
+Orig_Node | NodeId(55f0378e) | SdnDataDeploymentAgent | CurrentVersion: | NewVersion: sdndatadeploymentagent_release_2_1_0_19 | SourceOfService: CEG_AZURENETWORK-NETWORKING-PROD-5-VE
+Orig_Node | NodeId(55f0378e) | StagerDummyService | CurrentVersion: | NewVersion: 24_8_29002_0 | SourceOfService: AUTOPILOT-ONEDEPLOYTEST-2-VE
+Orig_Node | NodeId(55f0378e) | StagerHelloWorld | CurrentVersion: | NewVersion: ap_24_4_5005 | SourceOfService: AUTOPILOT-STAGERHELLOWORLD-VE
+Orig_Node | NodeId(55f0378e) | StorageAgent | CurrentVersion: | NewVersion: storage_agent_vdc_rel49_1_0_6_563 | SourceOfService: CEG_AZURESTORAGE-STORAGEAGENT-PROD-VE
+Orig_Node | NodeId(55f0378e) | StorageClientSettings | CurrentVersion: | NewVersion: storageclientsettings_03_2026_7_10_3_168 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-VE
+Orig_Node | NodeId(55f0378e) | StorageHostAgent | CurrentVersion: | NewVersion: sha_26_03_14_445 | SourceOfService: AUTOPILOT-HOSTOS-PROD-VE
+Orig_Node | NodeId(55f0378e) | Tardigrade | CurrentVersion: | NewVersion: Tardigrade_2_0_5_3312 | SourceOfService: CEG_AZURECOMPUTE-COMPUTE-PROD-3-VE
+Orig_Node | NodeId(55f0378e) | UltraClientSettings | CurrentVersion: | NewVersion: ultraclientsettings_7_99_11_2752 | SourceOfService: CEG_AZURECOMPUTE-ONEDEPLOYRESERVED-VE
+Orig_Node | NodeId(55f0378e) | VNetAgent | CurrentVersion: | NewVersion: VNetAgent_2_4_merlin_7_0_0_923 | SourceOfService: CEG_AZURENETWORK-NETWORKING-VNETAGENT-PROD-VE
+Orig_Node | NodeId(55f0378e) | VmphuSvc | CurrentVersion: | NewVersion: 20260415_pf_master_144_0_10_670 | SourceOfService: AUTOPILOT-ONEDEPLOYCLIENT-VE
+Orig_Node | NodeId(55f0378e) | VulnScanner | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | XPingAgentCommonAPHost | CurrentVersion: | NewVersion: ap_2026_04_13_12003 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | XdiskSvc | CurrentVersion: | NewVersion: xdisksvc_03_2026_7_10_3_176 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-VE
+Orig_Node | NodeId(55f0378e) | clientdataserver | CurrentVersion: | NewVersion: ap_2026_05_11_10004 | SourceOfService: AUTOPILOT-AUTOPILOTCLIENT-VE
+Orig_Node | NodeId(55f0378e) | datapath | CurrentVersion: | NewVersion: Datapath_7_10_0_173_153_10_0_173 | SourceOfService: CEG_AZURECOMPUTE-DATAPATH-PROD-2-VE
+Orig_Node | NodeId(55f0378e) | mdsdatalogger | CurrentVersion: | NewVersion: OneDeploy_2026_02_27_27003 | SourceOfService: AUTOPILOT-ONEDEPLOYCLIENT-VE
+Timestamp
