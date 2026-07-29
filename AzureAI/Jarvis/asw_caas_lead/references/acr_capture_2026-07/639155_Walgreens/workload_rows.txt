@@ -1,0 +1,227 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | WN
+Walgreen National Corporation
+639155
+384
+
+United States
+United States
+USA - Retail & CPG Enterprise
+Azure ACE / AED
+Microsoft for Startups 2.0
+S500
+Unified
+Proactive Resilience
+Azure Priority 0
+1
+[3] picker=False | CT
+Capgemini Technology Services India ltd 2
+119375521
+292
+
+India
+India
+India
+0
+
+View
+
+
+
+[4] picker=False | FI
+f956ead3-4c7c-466d-ada3-c0dc44aa9322 IW PII Masked
+126574966
+1
+
+Sweden
+North Europe
+Sweden
+0
+
+View
+
+
+
+[5] picker=False | RN
+ROHNER NETWORK POWER
+101231623
+1
+
+Switzerland
+Switzerland
+Switzerland
+0
+
+View
+
+
+
+[6] picker=False | 6I
+6dd6268c-c320-4c45-acc7-978c8251f87d IW PII Masked
+108588655
+1
+
+North MCC
+North Europe
+Romania and Moldova
+0
+
+View
+
+
+
+[7] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[8] picker=True | WN
+Walgreen National Corporation
+S500
+384
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[9] picker=True | WN
+Walgreen National Corporation (639155)
+Azure ACE / AED
+384
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[10] picker=True | O
+OneNation
+Microsoft for Startups 2.0
+265
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[11] picker=True | BU
+Boots Uk (1197953)
+Azure ACE / AED
+56
+
+USA - Retail & CPG Enterprise, UK, Unmanaged External Non-Billable Account
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE
+[12] picker=True | W
+Walgreens | RxI Platform - WARA Dec 2025
+Proactive Resilience
+4
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[13] picker=True | W
+Walgreens - Digital Platform
+Proactive Resilience
+6
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[14] picker=True | W
+Walgreens - RxR Platform
+Proactive Resilience
+8
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[15] picker=True | W
+Walgreens - SAP Platform
+Proactive Resilience
+2
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[16] picker=True | WD
+Walgreens DataLynx Data Platform
+Proactive Resilience
+2
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[17] picker=True | W
+Walgreens - covid and vaccine app
+Azure Priority 0
+10
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500
+[18] picker=True | W
+Walgreens - Labor Scheduling Optimization
+Proactive Resilience
+2
+
+USA - Retail & CPG Enterprise
+Azure Priority 0
+Proactive Resilience
+Unified
+Microsoft for Startups 2.0
+Azure ACE / AED
+S500

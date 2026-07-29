@@ -1,0 +1,292 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | U
+Unilever
+101552
+428
+
+UK & Ireland
+UK & Ireland
+UK
+Unified
+Pulse
+ARR
+Azure ACE / AED
+S500
+Proactive Resilience
+15
+
+View
+
+
+
+[3] picker=False | VS
+VOLPARA SOLUTIONS
+31563750
+487
+
+ANZ
+ANZ
+ANZ
+0
+
+View
+
+
+
+[4] picker=False | S
+Self
+35112346
+19
+
+India
+India
+India
+0
+
+View
+
+
+
+[5] picker=False | C
+Caolan
+57388701
+1
+
+UK & Ireland
+UK & Ireland
+Ireland
+Microsoft for Startups 2.0
+0
+
+View
+
+
+
+[6] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[7] picker=True | U
+Unilever - LeverEdge
+Proactive Resilience
+3
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[8] picker=True | U
+Unilever
+S500
+428
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[9] picker=True | U
+Unilever - Lever Edge
+Proactive Resilience
+3
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[10] picker=True | U
+Unilever - Foundation Services
+Proactive Resilience
+5
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[11] picker=True | U
+Unilever - SAP
+Proactive Resilience
+6
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[12] picker=True | U
+Unilever - Hyper Automation Platform
+Proactive Resilience
+3
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[13] picker=True | U
+Unilever - AI Foundations
+Proactive Resilience
+6
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[14] picker=True | U
+Unilever - SAP
+Proactive Resilience
+5
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[15] picker=True | U
+Unilever - R&D Datalab
+Proactive Resilience
+2
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[16] picker=True | U
+Unilever - Digital Factories
+Proactive Resilience
+1
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[17] picker=True | U
+Unilever_Leverage_Decode
+Azure ACE / AED
+3
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[18] picker=True | U
+Unilever - Core Data Ecosystem - Datalakes
+Proactive Resilience
+2
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[19] picker=True | U
+Unilever
+Azure ACE / AED
+428
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[20] picker=True | U
+Unilever - SCNC
+Proactive Resilience
+1
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[21] picker=True | U
+Unilever - Hyper Automation - Customer Operations O2C
+Proactive Resilience
+1
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[22] picker=True | U
+Unilever - Livewire
+Proactive Resilience
+1
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse
+[23] picker=True | W
+[Unilever] Workload TWS
+Proactive Resilience
+1
+
+UK
+Proactive Resilience
+S500
+Unified
+ARR
+Azure ACE / AED
+Pulse

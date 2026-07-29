@@ -1,0 +1,407 @@
+{
+  "meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-07-20T03:58:40Z",
+    "last_fetch_run": "2026-07-20T04:14:29Z",
+    "wiki_project": "AzureStrategicWorkloads",
+    "wiki_identifier": "AzureStrategicWorkloads",
+    "sap_parent_page_id": 1720255,
+    "sap_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+    "epic_parent_page_id": 2849066,
+    "epic_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+    "notes": [
+      "Highlights are populated by scripts/fetch_customer_wikis.py (Playwright + external Edge on CDP 9222).",
+      "DO NOT hand-edit highlights — they must be sourced from the actual wiki page.",
+      "If the wiki page does not exist or has no substantive content, leave highlights empty and set has_content=false.",
+      "Keys match generate_dashboard_v1.py::_tpid_key(f).",
+      "last_updated sourced from ADO git commit history (project AzureStrategicWorkloads, wiki repo 4417da5a-4ba2-4720-8824-897f99d5f29a, branch main) — matches the timestamp shown in the wiki UI's <time class=\"last-updated-date\">."
+    ],
+    "carry_over_note": "ADO SfMC Know-Me wiki content is customer-level and time-independent; same file used for FY27. Refresh via fetch_customer_wikis.py when wiki pages update.",
+    "fy27_reuse_ack": "2026-07-20T07:11:59.401542Z"
+  },
+  "by_key": {
+    "603819|15902931|2699441": {
+      "customer": "SAP RISE (tenant)",
+      "workload": "RISE",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": null,
+      "has_content": false,
+      "highlights": [],
+      "last_updated": null,
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "No Know-Me page in SAP/SfMC-Customers CaaS Leads Info table (as of 2026-07-20)."
+    },
+    "636846": {
+      "customer": "PepsiCo",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1256067/PepsiCo",
+      "has_content": true,
+      "highlights": [
+        "PepsiCo — S500 strategic. Microsoft strategic partnership signed December 2019. Part of the ACE Program with a published PepsiCo Know-Me One-Pager in the Azure ACE Wiki.",
+        "Two named architectures — PGT–A1P Production environment (South Central US) and PGT–GCP e-HANA system. HANA storage layouts are documented separately for A1P and GCP.",
+        "Customer hot issues — App-server-to-DB timeouts and SAP latency: once Azure Platform is ruled out, PepsiCo to open OSS ticket with SAP Partners.",
+        "Customer hot issue — VM Hung / KDump: standard playbook links to RHEL and SLES kdump configuration KBs.",
+        "Capacity constraints (specific to the PGT architecture) require immediate escalation to Joanne Marime and the Capacity Customer Experience Operations PD DL (`ccxopspd@microsoft.com`)."
+      ],
+      "last_updated": "2024-10-29",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Tags: asw.Sfmc, asw.SAP, asw.PepsiCo, asw.Know-Me, asw.Reviewed-01-2024. Two SAP subscriptions on file: PEP-SAP-01-SUB and PEP-SAP-NONPROD-01-SUB (both mixed Prod/Non-Prod, Critical). Last-modified 2024-10-29 by Ivan Ayala (from ADO git commit history)."
+    },
+    "1719071": {
+      "customer": "Woolworths",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2485491/Woolworths-Group-Limited",
+      "has_content": true,
+      "highlights": [
+        "SAP S/4HANA on Azure — first production SAP landscape in ANZ region running a native 24 TB SAP HANA VM on Azure (M-series / M896_v3 high-memory VMs). High-visibility production workload requiring close ASW ↔ ACE ↔ Microsoft PG collaboration.",
+        "Active large-VM platform modernization — completed M192idms_v2 → M176ds_4_v3 migration ahead of the M192idms_v2 retirement on 31 March 2027.",
+        "Customer sensitivity — VM Reboot RCA quality: ensure RCAs for repeated VM restart events are clear, detailed, and defensible, covering cause, impact, recovery, and mitigation guidance.",
+        "Customer sensitivity — Performance reporting expectations: all performance findings must be data-driven with clear observations, business-impact assessment, and actionable next steps.",
+        "Ongoing LRS-to-ZRS storage resiliency upgrade — 3 UAT SAs completed; 7 Prod SAs still in planning under PG engagement. New LRS-to-ZRS cases: refer to SR 2604010030007151 and engage Jake Lin (ICM 21000000993868)."
+      ],
+      "last_updated": "2026-05-27",
+      "fetched_at": "2026-07-20T03:38:00Z",
+      "notes": "Author: Francisco Paulos. Primary contributor: Jake Lin. Tags: asw.Sfmc, asw.SAP, asw.Know-Me, asw.Reviewed-06-2024."
+    },
+    "682354": {
+      "customer": "Medline",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1936621/Medline",
+      "has_content": true,
+      "highlights": [
+        "Largest US medical-surgical distributor. Business hours 7:00 AM – 7:00 PM CST; downtime cost is approximately **$2M per hour** — highest per-hour impact in the SAP portfolio.",
+        "**First MCSAW (Mission Critical Services for Azure Workload) customer running SAP on Azure** — evolution of SfMC aimed at elevating enterprise support experience and minimizing time-to-mitigation.",
+        "Architecture — Primary and secondary sit in East US (single region), HA in place via Availability Zone 2; **no cross-region DR is currently in place**.",
+        "SAP ECC (system ID MDP) is the heart of the estate. Grafana Customer Analyzer and DFM Cases dashboards are already stood up on the Medline Grafana tenant.",
+        "Customer hot issue — Connectivity issue between App VM and Oracle DB@Azure (tracked in wiki page 1936619); active investigation."
+      ],
+      "last_updated": "2025-04-17",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Tags: asw.Sfmc, asw.SAP, asw.CustomerName, asw.Know-Me. Microsoft-side contacts include CSAM Jim Boyd, CSA Anuradha Karnam, ASW CaaS Leads Naga Mutya & Frank Gong."
+    },
+    "10545209": {
+      "customer": "Shell",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849084/Shell",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree but is currently 'Under Construction' (no content published yet as of 2026-07-20). Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (from ADO git commit history)."
+    },
+    "523595": {
+      "customer": "Ferrero",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849083/Ferrero",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree but is currently 'Under Construction' (no content published yet as of 2026-07-20). Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (from ADO git commit history)."
+    },
+    "605015": {
+      "customer": "Lego",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2521742/Lego",
+      "has_content": true,
+      "highlights": [
+        "LEGO Group, S500 strategic. All infrastructure hosted in North Europe; DR is designed to go back on-premises. No Production workloads live yet — SAP lift-and-shift migration in progress.",
+        "Milestones roadmap — QA System 1 single-VM (Mar) → QA System 2 single-VM (Jun) → QA System 3 HA multi-zone (Aug) → Pre-Prod HA (late Q3 / Q4) → Production build & migration after summer (around Aug 26).",
+        "Critical VM dependency — 2× Standard_M416ds_8_v3 VMs in North Europe are the largest / most sensitive components; ASW to advise on storage (Azure NetApp Files vs Premium SSD) and Pacemaker-based HA design.",
+        "Customer sensitivity — Networking security review post-lift-shift: all traffic currently routed back on-prem except App Gateway traffic; legacy rules need cleanup.",
+        "Cross-cloud complexity — 4,000+ interfaces spanning on-prem, AWS, and Azure; customer is seeking a single-pane monitoring / log-aggregation solution across all three environments."
+      ],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Tags: asw.Sfmc, asw.SAP, asw.Lego, asw.Know-Me, asw.Reviewed-11-2024. Primary contributor: pedmarqu@microsoft.com. Last-modified 2026-07-14 by Francisco Paulos (from ADO git commit history)."
+    },
+    "1248703": {
+      "customer": "Beiersdorf",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849082/Beiersdorf",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree but is currently 'Under Construction' (no content published yet as of 2026-07-20). Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (from ADO git commit history)."
+    },
+    "640443": {
+      "customer": "Nike",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1710356/Nike",
+      "has_content": true,
+      "highlights": [
+        "Nike — S500 strategic customer; global footwear / apparel. Operating segments span North America, EMEA, Greater China, Asia-Pacific, and Latin America.",
+        "Three named architectures on file — NikeArchDiag (base), NikeArchDiagSAPsecHAdr (SAP secondary HA/DR), and NikeArchDiagOracleSAP (Oracle-fronted SAP topology).",
+        "**Major project in flight — FHP system migration from 24 TB to 32 TB**, generating high case volume; original cut-over of 19 Oct was pushed to an undetermined new date.",
+        "Reference documentation on file — Nike-SUSE Consulting Onsite Status Report (17 Sep 2024), Nike-Milestone1-Documentation, NIKE-Milestone2-Documentation.",
+        "CSA Brownbag session library is flagged 'Under Construction' — knowledge-transfer material for this account is still being built."
+      ],
+      "last_updated": "2025-01-22",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Tags: asw.Sfmc, asw.SAP, asw.CustomerName, asw.Know-Me, asw.Reviewed-06-2024. Primary contributor: alkassap@microsoft.com. ACE Program link still being investigated. Last-modified 2025-01-22 by Alexander Kassap (from ADO git commit history)."
+    },
+    "520706": {
+      "customer": "Bayer AG",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1825766/Bayer",
+      "has_content": true,
+      "highlights": [
+        "Bayer landscape consists of 254 SAP systems, split across Cropscience, Pharma, and Consumer Health / Cross-functional workloads. HANA-based SAP systems are hosted on Azure; Oracle-based SAP systems run in a Capgemini-managed private cloud.",
+        "Customer sensitivity — Outdated Linux OS versions (SUSE and RHEL): in-place upgrade PoC is planned in a test environment, gated on the Capgemini contractual negotiation. Complications include RHEL 7 → 8 with Pacemaker and unclear SAP / 3rd-party software support for in-place upgrades.",
+        "Customer sensitivity — Frequent VirtualMachinePossiblyDegradedDueToHardwareFailure health alerts on M and Mv2 series VMs; tracked via GetHelp #11350566.",
+        "Extended-support conversations for the legacy SUSE / RHEL estate are active — Microsoft has already provided upgrade guidance and extended-support purchase paths across multiple customer sessions.",
+        "Azure subscription footprint spans Germany (SAP-GDA and SAP-ERPCore, Prod + NonProd) and Canada DR1 / DR2 (Prod + Non-Prod) — dual-region DR posture."
+      ],
+      "last_updated": "2025-02-25",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Author: Francisco Paulos. Tags: asw.Sfmc, asw.SAP, asw.Bayer, asw.Know-Me, asw.Reviewed-06-2024. Last-modified 2025-02-25 by Dante Stancato (from ADO git commit history)."
+    },
+    "523272": {
+      "customer": "BHP",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1640779/BHP",
+      "has_content": true,
+      "highlights": [
+        "Mining super-major (iron ore, copper, coal, petroleum). ERP workloads split across two subscriptions — production (mPRD landscape) and non-production (mQAS, mDEV, iQAS, iDEV, Playpen, Reference); each subscription is spread across US-West-2 and US-East-1 regions.",
+        "2025 project pipeline — Ransomware testing (Mar 2025), SAP SPS and Release upgrade (Sep 2025), Payroll Future (Sep–Oct 2025).",
+        "Customer hot issue — Recurring pattern of VM restart / stopped unexpectedly and 'Cannot connect to VM' events.",
+        "Customer hot issue — M832 VM Performance and Latency (ICM 481226321); ongoing engagement with Product Group.",
+        "Latest Plan of Record: BHP PoR JUN 2025 (SharePoint). Support delivery is coordinated via the MWS500BHP SharePoint site and the BHPATUOnly team space."
+      ],
+      "last_updated": "2025-06-27",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Tags: asw.Sfmc, asw.SAP, asw.CustomerName, asw.Know-Me, asw.Reviewed-06-2024. Last-modified date not captured in this fetch. Last-modified 2025-06-27 by Jake Lin (from ADO git commit history)."
+    },
+    "101552": {
+      "customer": "Unilever",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1565133/Unilever",
+      "has_content": true,
+      "highlights": [
+        "Unilever — S500 strategic. Multinational consumer goods company (nutrition, hygiene, personal care). Full CSAM / CSA / ACE / PG / CaaS-Lead focal-point matrix documented on the wiki.",
+        "Part of the ACE Program with a published Unilever Know-Me One-Pager in the Azure ACE Wiki (page 187281).",
+        "Customer hot issue — Platform reboots: majority of reboots are driven by the customer's **Parkmycloud orchestration**, which shuts down VMs every single day.",
+        "Customer hot issue — Disk Detach issue tied to **Commvault backup** operations.",
+        "Grafana observability stack — dedicated Unilever Customer Analyzer plus the shared CaaS Lead dashboard and Azure ACE 360 BI dashboard. Architecture pages (Production environment, Storage layout, Networking) are still flagged 'Working in progress'."
+      ],
+      "last_updated": "2024-10-29",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Tags: asw.Sfmc, asw.SAP, asw.Unilever, asw.Know-Me, asw.Reviewed-10-2024. Named customer contacts: Yogesh Singh, Tinu Jain. Last-modified 2024-10-29 by Ivan Ayala (from ADO git commit history)."
+    },
+    "645076": {
+      "customer": "McKesson",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FSAP%2FSfMC-Customers%2FMcKesson",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-04-10",
+      "fetched_at": "2026-07-20T04:14:29Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree (last edited 2026-04-10 by Katherine Martinez Torres). Content not yet extracted. Last-modified 2026-04-10 by Katherine Martinez Torres."
+    },
+    "643195": {
+      "customer": "Halliburton",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FSAP%2FSfMC-Customers%2FHalliburton",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:14:29Z",
+      "notes": "Know-Me page exists but page touched only by the 2026-07-14 bulk tag-refresh PR (asw.Reviewed-07-2026). Last-modified 2026-07-14 by Francisco Paulos."
+    },
+    "940486": {
+      "customer": "Petrobras",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": null,
+      "has_content": false,
+      "highlights": [],
+      "last_updated": null,
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "No Know-Me page in SAP/SfMC-Customers CaaS Leads Info table (as of 2026-07-20)."
+    },
+    "1283152": {
+      "customer": "Mt. Sinai",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FMount-Sinai",
+      "has_content": true,
+      "highlights": [
+        "Customer Lead — Tanner King (takin@microsoft.com), workload focus: Virtual Machines.",
+        "Existing Know-Me One-Pager published in the Azure ACE Wiki (Advanced Cloud Engineering Support project): 'Know-Me One-pager Mount Sinai Hospital' (page 591611 in msazure/AdvCloudEngSupport wiki).",
+        "Child pages present but not indexed: Ongoing performance and latency Issue CVO, Resource Group Map, Azure Large Instance, Citrix, NetApp CVO, Subscriptions, Network Diagram."
+      ],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "Skeleton Know-Me page — main body only has Customer Lead + ACE link; substantive detail lives in child pages and in the Azure ACE Wiki one-pager. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR)."
+    },
+    "639155": {
+      "customer": "Walgreens",
+      "workload": "SAP",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FSAP%2FSfMC-Customers%2FWBA-Walgreens-Boots-Alliance",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-04-24",
+      "fetched_at": "2026-07-20T04:14:29Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree as WBA-Walgreens-Boots-Alliance (last edited 2026-04-24). Content not yet extracted. Last-modified 2026-04-24 by Francesca Vargas Martinez."
+    },
+    "18982817": {
+      "customer": "TJU",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FThomas-Jefferson-University",
+      "has_content": true,
+      "highlights": [
+        "Thomas Jefferson University — academic institution in Philadelphia, PA, ~200 undergrad/graduate programs (medicine, design, engineering, business). Healthcare arm Jefferson Health is migrating its Epic EHR system to Microsoft Azure — a strategic digital transformation for scalable, secure, patient-centric care.",
+        "Plan of Record — TJU main contacts and PoR maintained by anrod@microsoft.com in the TJU PoR SharePoint deck (see wiki for link).",
+        "ACE Program status — Know-Me One-Pager not yet confirmed; page owner is actively investigating whether TJU has an ACE Program entry.",
+        "Grafana observability — dedicated TJU tenant at asw-tju-ctejekexdehbbmhv.eus.grafana.azure.com.",
+        "Case-trend analysis workflow — cases and updates tracked via the ASW CaaS-Leads ZebraAI project (wiki page 2163318 in AzureStrategicWorkloads).",
+        "Primary contributor: anrod@microsoft.com."
+      ],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "Only EPIC/SfMC-Customers page with substantive content beyond the 'Under Construction' stub. Content sections: Customer Introduction, Contacts and Plan of Record, Know-Me One Page (investigating), Grafana TJU, Zebra AI contribution, Contributors. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR asw.Reviewed-07-2026); original authoring by anrod@microsoft.com."
+    },
+    "1833997": {
+      "customer": "MichMed",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FMichMed",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "'Page is Under Construction' placeholder. Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR — no substantive content authored yet)."
+    },
+    "noTPID-univ-kentucky": {
+      "customer": "Univ. Kentucky",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FUniversity-of-Kentucky",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "'Page is Under Construction' placeholder. Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR — no substantive content authored yet)."
+    },
+    "3841220": {
+      "customer": "Ascension Health",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FAscension-Health",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "'Page is Under Construction' placeholder. Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR — no substantive content authored yet)."
+    },
+    "noTPID-utmb": {
+      "customer": "UTMB",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FUTMB",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "'Page is Under Construction' placeholder. Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR — no substantive content authored yet)."
+    },
+    "noTPID-brown-university": {
+      "customer": "Brown University",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FBrown-University",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "'Page is Under Construction' placeholder. Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR — no substantive content authored yet)."
+    },
+    "noTPID-cone-health": {
+      "customer": "Cone Health",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads?pagePath=%2FEPIC%2FSfMC-Customers%2FCone-Health",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "'Page is Under Construction' placeholder. Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (bulk tag-refresh PR — no substantive content authored yet)."
+    },
+    "noTPID-children-s-hosp-phila": {
+      "customer": "Children's Hosp Phila",
+      "workload": "EPIC",
+      "wiki_parent": "EPIC",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849066/SfMC-Customers",
+      "wiki_url_guess": null,
+      "has_content": false,
+      "highlights": [],
+      "last_updated": null,
+      "fetched_at": "2026-07-20T04:24:00Z",
+      "notes": "No Know-Me page exists in EPIC/SfMC-Customers wiki tree for this customer (verified via ADO git repo listing on 2026-07-20). Only 9 pages exist under /EPIC/SfMC-Customers/: Ascension-Health, Brown-University, Cone-Health, Franciscan-Alliance, MichMed, Mount-Sinai, Thomas-Jefferson-University, UTMB, University-of-Kentucky."
+    },
+    "noTPID-general-motors": {
+      "customer": "General Motors",
+      "workload": "RISE",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849080/General-Motors",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree but is currently 'Under Construction' (no content published yet as of 2026-07-20). Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (from ADO git commit history)."
+    },
+    "noTPID-cvs": {
+      "customer": "CVS",
+      "workload": "RISE",
+      "wiki_parent": "SAP",
+      "wiki_parent_url": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1720255/SfMC-Customers",
+      "wiki_url_guess": "https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/2849079/CVS",
+      "has_content": false,
+      "highlights": [],
+      "last_updated": "2026-07-14",
+      "fetched_at": "2026-07-20T03:58:40Z",
+      "notes": "Know-Me page exists in SAP/SfMC-Customers wiki tree but is currently 'Under Construction' (no content published yet as of 2026-07-20). Tags: asw.asw, asw.Internal.Processes, asw.SMEs, asw.EPIC, asw.DLs, asw.Reviewed-07-2026. Last-modified 2026-07-14 by Francisco Paulos (from ADO git commit history)."
+    }
+  }
+}

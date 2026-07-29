@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "snapshot_month": "Jul FY27 (partial, first 20 days) — Insights+_v3 refresh pending",
+    "fiscal_year": "FY2027",
+    "captured_utc": "2026-07-20T08:15:00Z",
+    "source": "A&I and DTP | Insights+_v3_AIDTP_Fabric (pending month-end refresh); Kusto KPISupportData fallback for interim display",
+    "source_url": "https://cesbihub.microsoft.com/User/groups/10/report/81538463-21f0-45bc-8f08-71d5dc9ccc48/0/0?reportTab=ReportSectiond24dca6cf2e742181ba9",
+    "filter": {
+      "Channel Function Detail": "ASW_SAPEpicEsc",
+      "Time Fiscal Year": "FY2027",
+      "Time LastTwelveMonths": "(All)",
+      "Time LastSixMonths": "(All)"
+    },
+    "notes": "FY27 is 20 days old as of 2026-07-20. Per SKILL v3.0.1 rule, the 7 baseline-strip KPIs MUST source from Insights+_v3 PBI dashboard — but PBI typically refreshes at month-end (typically 3-5 business days into a new month), so real FY27 aggregate values are not yet available on the Insights+_v3 dashboard. Interim displayed values are computed from Kusto (KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext) using the same AgentAlias-based ASW_SAPEpicEsc filter that Insights+_v3 uses upstream. All 7 KPIs are marked `pending_source: 'Insights+_v3'` so the dashboard renders a `K*` pill (asterisk = pending migration from Kusto stopgap to Insights+_v3 authoritative). Refresh recipe: at end of Jul 2026 (early Aug), re-run Skills/asw_caas_lead/scripts/_scrape_insights_v3_fy27.py against the authenticated Insights+_v3 dashboard (external Edge on CDP:9222) with Channel Function Detail=ASW_SAPEpicEsc + Time Fiscal Year=FY2027 only + LastTwelveMonths/LastSixMonths=(All), read the FY27 Total column of the Key Metrics by Date lower grid (Focus Mode + End key technique), then update each KPI's `value` field and switch `source` to `'Insights+_v3'` (drop `pending_source`).",
+    "capture_technique": "See SKILL §7 Step 2b — Playwright + Focus Mode + `End` key trick for the lower Key Metrics grid Total column. Cannot use Playwright MCP's own browser (Conditional Access blocks); must attach to user's authenticated external Edge via `chromium.connect_over_cdp('http://localhost:9222')`."
+  },
+  "kpis": {
+    "case_vol": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "Created Cases",
+      "fallback_kusto_value": 294,
+      "fallback_note": "FY27 YTD Created cases 2026-07-01 → 2026-07-20 from Kusto AllCloudsSupportIncidentWithReferenceModelVNext (ASW_SAPEpicEsc via AgentAlias × 66 engineers). Real Insights+_v3 value pending PBI month-end refresh."
+    },
+    "closed": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "Closed Cases",
+      "fallback_kusto_value": 174,
+      "fallback_note": "FY27 YTD Closed cases from Kusto. Closure rate 59% of Created reflects most Jul cases still in flight. Real Insights+_v3 value pending PBI month-end refresh."
+    },
+    "csat_avg": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "CSAT 5* Avg",
+      "surveys": 7,
+      "response_pct": null,
+      "dsat": 0.0,
+      "target": 4.8,
+      "fallback_kusto_value": 5.0,
+      "fallback_note": "CSAT 5 Star Avg over 7 CPE survey responses in FY27 YTD (all 5-star). Small sample size. Real Insights+_v3 value pending PBI month-end refresh."
+    },
+    "ir_met_pct": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "% IR Met SRs",
+      "unit": "%",
+      "target": 99,
+      "fallback_kusto_value": null,
+      "fallback_note": "IR% is computed by the PBI model from InitialResponseDateTime and cannot be reproduced from Kusto (the IsIrMet column in AllCloudsSupportIncidentWithReferenceModelVNext is empty). Waiting on Insights+_v3 PBI refresh for a real value."
+    },
+    "avg_dtc": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "Avg DTC",
+      "unit": "days",
+      "target": 12,
+      "fallback_kusto_value": 4.8,
+      "fallback_note": "Average Day to Close for 174 closed FY27 YTD cases from Kusto. Low value expected in partial month. Real Insights+_v3 value pending PBI month-end refresh."
+    },
+    "pct_close_7d": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "% SR Closed in less than 7 Days",
+      "unit": "%",
+      "target": 50,
+      "fallback_kusto_value": 81.0,
+      "fallback_note": "Of 174 closed FY27 YTD cases, 81% closed within 7 days from Kusto. Expected to normalize toward FY26 baseline (~44%) as longer-running cases close. Real Insights+_v3 value pending PBI month-end refresh."
+    },
+    "critsit_rate": {
+      "value": null,
+      "source": "KPISupportData",
+      "pending_source": "Insights+_v3",
+      "insights_v3_field": "% CritSit",
+      "unit": "%",
+      "critsit_count": 50,
+      "total": 294,
+      "fallback_kusto_value": 17.0,
+      "fallback_note": "50 CritSit cases out of 294 FY27 YTD from Kusto, similar to FY26 baseline (18.4%). Real Insights+_v3 value pending PBI month-end refresh."
+    }
+  }
+}

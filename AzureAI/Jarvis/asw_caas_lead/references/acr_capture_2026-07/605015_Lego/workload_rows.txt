@@ -1,0 +1,105 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | LG
+LEGO Group
+605015
+971
+
+Denmark
+North Europe
+Denmark
+Unified
+Majors
+Proactive Resilience
+7
+
+View
+
+
+
+[3] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[4] picker=True | LG
+LEGO Group - VLtrader
+Proactive Resilience
+1
+
+Denmark
+Proactive Resilience
+Unified
+Majors
+[5] picker=True | LA
+LEGO Asset Vault
+Proactive Resilience
+1
+
+Denmark
+Proactive Resilience
+Unified
+Majors
+[6] picker=True | LG
+LEGO Group - Asset Portal (LAP+DAV)
+Proactive Resilience
+2
+
+Denmark
+Proactive Resilience
+Unified
+Majors
+[7] picker=True | LA
+LEGO Asset Portal
+Proactive Resilience
+1
+
+Denmark
+Proactive Resilience
+Unified
+Majors
+[8] picker=True | LG
+LEGO Group
+Majors
+971
+
+Denmark
+Proactive Resilience
+Unified
+Majors
+[9] picker=True | LG
+LEGO Group - SAP
+Proactive Resilience
+1
+
+Denmark
+Proactive Resilience
+Unified
+Majors
+[10] picker=True | LS
+LEGO SAP BW
+Proactive Resilience
+1
+
+Denmark
+Proactive Resilience
+Unified
+Majors

@@ -1,0 +1,110 @@
+   3352  603819  SAP SE
+    327  645401  PROCTER & GAMBLE COMPANY
+    116  636846  PepsiCo
+    103  645076  McKesson Corporation
+     73  1719071  Woolworths Group Limited
+     69  101552  Unilever
+     69  641874  COCA COLA COMPANY
+     67  18982817  Thomas Jefferson University and its Affi
+     57  1312245  THE MANUFACTURERS LIFE INSURANCE COMPANY USA
+     31  523272  BHP
+     31  682354  MEDLINE INDUSTRIES INC
+     29  3841220  ASCENSION HEALTH ISD
+     29  1833997  UNIVERSITY OF MICHIGAN
+     28  4508375  GSK
+     25  1283152  MOUNT SINAI HOSPITAL
+     24  639155  Walgreen National Corporation
+     20  643195  HALLIBURTON COMPANY
+     18  523595  FERRERO SPA
+     18  151132045  Haleon US Holding LLC
+     14  10545209  Royal Dutch Shell Global Parent
+     13  0  Microsoft Internal
+     13  24652841  σîùΣ║¼µèûΘƒ│Σ┐íµü»µ£ìσèíµ£ëΘÖÉσà¼σÅ╕
+     13  Unidentified Customers  Unidentified Customers
+     12  18214815  Mondelez Global LLC
+     12  4523085  MAJID AL-FUTTAIM GROUP OF COMPANIES
+     10  638052  MARS INC
+     10  16636187  σîùΣ║¼σ░Åτ▒│τºæµèÇµ£ëΘÖÉΦ┤úΣ╗╗σà¼σÅ╕
+      9  101344005  Σ╕èµ╡╖σ»╗µóªΣ┐íµü»µèÇµ£»µ£ëΘÖÉσà¼σÅ╕
+      9  520706  Bayer AG
+      9  15902931  SAP
+      7  1800644  John Swire & Sons (H.K.) Limited
+      7  521266  E.ON SE
+      6  940486  PETROBRAS - PETR├ôLEO BRASILEIRO SA
+      6  1824185  AIA Company Limited
+      5  50658619  ROADGET BUSINESS PTE. LTD
+      5  640443  NIKE
+      4  9270172  FWD Life Insurance Company (Bermuda) Limited
+      4  1096511  πé╜πâïπâ╝µá¬σ╝ÅΣ╝Üτñ╛
+      4  1741489  STMICROELECTRONICS
+      3  5822063  µá¬σ╝ÅΣ╝Üτñ╛πü┐πüÜπü╗ΘèÇΦíî
+      3  2344871  EMORY UNIVERSITY
+      3  797605  M├╝nchener R├╝ckversicherungs-Gesellschaft AG
+      3  706691  SEALED AIR CORP
+      3  78007983  µ₧üσàöΘÇƒΘÇÆµ£ëΘÖÉσà¼σÅ╕
+      3  13610163  HK BROADBAND NETWORK LTD
+      3  1560860  CLP POWER HONG KONG LTD
+      2  1313597  ESTEE LAUDER
+      2  6273959  Φüöµâ│Θ¢åσ¢óµ£ëΘÖÉσà¼σÅ╕
+      2  641207  EXELON
+      2  2815901  Nutrien
+      2  -1  Unmanaged External Non-Billable Account
+      2  5849740  σ╣┐Σ╕£τ╛ÄτÜäΣ╝üΣ╕ÜΘ¢åσ¢ó
+      2  56491  SIEMENS AG GERMANY
+      2  5978926  µ╡╖Σ┐íΘ¢åσ¢óµÄºΦéíΦéíΣ╗╜µ£ëΘÖÉσà¼σÅ╕
+      2  7524249  Loma Linda University Health
+      2  31956634  µ╖▒σ£│σ╕éµÖ║Σ┐íµû░Σ┐íµü»µèÇµ£»µ£ëΘÖÉσà¼σÅ╕
+      2  7053281  SUPREME COUNCIL OF INFORMATION AND COMMUNICATION TECHNOLOGY
+      2  603819  sap se
+      2  5112285  τ╜æµÿô
+      2  111763108  Shanghai Century|AGENCY|Cyberklick
+      2  7185218  Φà╛Φ«»τºæµèÇ∩╝êµ╖▒σ£│∩╝ëµ£ëΘÖÉσà¼σÅ╕
+      2  90825999  Ant Group Co., Ltd.
+      2  644815  CARGILL INC
+      2  1741830  LVMH
+      2  2555081  Franciscan Alliance
+      2  4486038  W├äRTSIL├ä CORPORATION HQ
+      2  680928  UNIVERSITY OF TEXAS SYSTEM
+      2  1376355  DUKE UNIVERSITY
+      1  603716  Raiffeisen Bank International AG
+      1  4954584  HKSAR- CIVIL SERVICE BUREAU
+      1  90513601  µ╖▒σ£│σ╕éµ¡úµ╡⌐σê¢µû░τºæµèÇΦéíΣ╗╜µ£ëΘÖÉσà¼σÅ╕
+      1  93891765  σîùΣ║¼τë⌐Φ»¡σ£¿µäÅτºæµèÇµ£ëΘÖÉσà¼σÅ╕
+      1  2077706  JOHNSON ELECTRIC IND MFG LTD
+      1  13451122  πéñπé¬πâ│πâ¬πâåπâ╝πâ½µá¬σ╝ÅΣ╝Üτñ╛
+      1  3648203  Birla Management Corporation Ltd
+      1  52196267  µ╖▒σ£│µÖ╢µ│░τºæµèÇµ£ëΘÖÉσà¼σÅ╕
+      1  4222826  TCLΘ¢åσ¢óΦéíΣ╗╜µ£ëΘÖÉσà¼σÅ╕
+      1  1833997  university of michigan
+      1  35281749  SCHENKER AG
+      1  692914  CITADEL INVESTMENT GROUP
+      1  2958107  µ╡╖σ░öΘ¢åσ¢óσà¼σÅ╕
+      1  1535133  NEW WORLD DEVELOPMENT
+      1  637627  CITRIX SYSTEMS INC
+      1  15590035  AZAAS PTE LTD
+      1  2447314  µùÑτöúΦç¬σïòΦ╗èµá¬σ╝ÅΣ╝Üτñ╛
+      1  638048  PENTAIR INC
+      1  19173337  Symphony EYC
+      1  37104574  A2MAC1
+      1  44030997  σåìΘ╝Äσî╗Φì»∩╝êΣ╕èµ╡╖∩╝ëµ£ëΘÖÉσà¼σÅ╕
+      1  830434  ACCENTURE
+      1  646698  RIVERSIDE HEALTHCARE ASSOCIATION INC
+      1  3384767  SAINT LUKES HOSPITAL BETHLEHEM
+      1  784850  COSTCO
+      1  640421  KPMG International Cooperative
+      1  605015  LEGO Group
+      1  521042  KRAFT HEINZ
+      1  637462  Community Medical Centers
+      1  5917450  PERSTORP
+      1  14376185  MMG LTD
+      1  71586817  St├ñdte, Eigenbetriebe und Kommunale Rechenzentren Bayern
+      1  125416413  JSM
+      1  151132201  TCT Mobile (US) Inc.
+      1  104587611  Abu Dhabi Developmental Holding Company PJSC
+      1  2458642  Tvs Group
+      1  21239188  Global Logistics Properties Limited (GLP)
+      1  16384372  Θÿ┐Θçîσ╖┤σ╖┤∩╝êΣ╕¡σ¢╜∩╝ëµ£ëΘÖÉσà¼σÅ╕
+      1  2016178  jardine matheson holdings ltd
+      1  1447673  MICROSTRATEGY
+      1  1382213  HUTCHISON INT'L LTD
+      1  604797  Fidelity Investment Management

@@ -1,0 +1,182 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | MI
+Microsoft Internal
+0
+1595494
+
+Microsoft Internal
+Microsoft Internal
+Microsoft Internal
+Azure ACE / AED
+Azure Priority 0
+Proactive Resilience
+HiPri
+0
+
+View
+
+
+
+[2] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[3] picker=False | MC
+McKesson Corporation
+645076
+581
+
+United States
+United States
+USA - Healthcare
+S500
+EngOps Managed
+Pulse
+ARR
+Unified
+Azure Priority 0
+Proactive Resilience
+21
+
+View
+
+
+
+[4] picker=False | 6I
+6450765992 IW PII Masked
+79885397
+1
+
+South MCC
+South Europe
+Adriatics
+0
+
+View
+
+
+
+[5] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[6] picker=True | M
+McKesson - SAP
+Proactive Resilience
+1
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[7] picker=True | M
+MCK - PTIG Pharma Distribution
+Azure Priority 0
+3
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[8] picker=True | MS
+McKesson SAP on Azure
+Azure Priority 0
+3
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[9] picker=True | M
+McKesson - Connect Evo
+Proactive Resilience
+1
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[10] picker=True | MC
+McKesson Corporation
+S500
+587
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[11] picker=True | M
+McKesson - iKnowMed G2
+Proactive Resilience
+1
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[12] picker=True | M
+McKesson - MacroHelix
+Proactive Resilience
+1
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse
+[13] picker=True | M
+McKesson - Lynx
+Proactive Resilience
+1
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+EngOps Managed
+ARR
+S500
+Unified
+Pulse

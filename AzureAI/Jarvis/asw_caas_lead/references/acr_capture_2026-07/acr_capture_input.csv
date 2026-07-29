@@ -1,0 +1,50 @@
+﻿tpid,customer,workload_hint,scope,chosen_workload,screenshot_acu,screenshot_usd,screenshot_workload_picker,screenshot_workload_acu,screenshot_workload_usd,cur_month_val,prev_month_val,notes
+603819,SAP_SE_RISE1,RISE,org-level,,603819_SAP_SE_RISE1/01a_acu.png,,,,,,,
+15902931,SAP_RISE2,RISE,workload,SAP SE (603819),,,15902931_SAP_RISE2/02_workloads.png,15902931_SAP_RISE2/03a_workload_acu.png,,,,
+2699441,SAP_RISE3,RISE,workload,,,,,,,,,search failed
+636846,PepsiCo,SAP,workload,,,,636846_PepsiCo/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+1719071,Woolworths,SAP,workload,Woolworths Group Limited - Azure Platform for SAP,,,1719071_Woolworths/02_workloads.png,1719071_Woolworths/03a_workload_acu.png,,,,
+682354,Medline,SAP,workload,Medline SAP,,,682354_Medline/02_workloads.png,682354_Medline/03a_workload_acu.png,,,,
+10545209,Shell,SAP,workload,Shell plc - SAP S/4 CFIN,,,10545209_Shell/02_workloads.png,10545209_Shell/03a_workload_acu.png,,,,
+523595,Ferrero,SAP,workload,,,,523595_Ferrero/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+605015,Lego,SAP,workload,LEGO SAP BW,,,605015_Lego/02_workloads.png,605015_Lego/03a_workload_acu.png,,,,
+1248703,Beiersdorf,SAP,workload,Beiersdorf AG - Azure for SAP,,,1248703_Beiersdorf/02_workloads.png,1248703_Beiersdorf/03a_workload_acu.png,,,,
+640443,Nike,SAP,workload,Nike - SAP Prod,,,640443_Nike/02_workloads.png,640443_Nike/03a_workload_acu.png,,,,
+520706,Bayer_AG,SAP,workload,Bayer AG - SAP on Oracle,,,520706_Bayer_AG/02_workloads.png,520706_Bayer_AG/03a_workload_acu.png,,,,
+523272,BHP,SAP,workload,,,,523272_BHP/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+101552,Unilever,SAP,workload,Unilever - SAP,,,101552_Unilever/02_workloads.png,101552_Unilever/03a_workload_acu.png,,,,
+645076,McKesson,SAP,workload,McKesson SAP on Azure,,,645076_McKesson/02_workloads.png,645076_McKesson/03a_workload_acu.png,,,,
+643195,Halliburton,SAP,workload,C-SAP-PROD-01,,,643195_Halliburton/02_workloads.png,643195_Halliburton/03a_workload_acu.png,,,,
+940486,Petrobras,SAP,workload,,,,940486_Petrobras/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+1283152,Mt_Sinai,EPIC,workload,Mount Sinai - Epic on Azure,,,1283152_Mt_Sinai/02_workloads.png,1283152_Mt_Sinai/03a_workload_acu.png,,,,
+639155,Walgreens,SAP,workload,,,,639155_Walgreens/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+18982817,TJU,EPIC,workload,Thomas Jefferson University and Hospitals (EPIC),,,18982817_TJU/02_workloads.png,18982817_TJU/03a_workload_acu.png,,,,
+1833997,MichMed,EPIC,workload,MichMed - Epic on Azure: SfMC,,,1833997_MichMed/02_workloads.png,1833997_MichMed/03a_workload_acu.png,,,,
+3841220,Ascension_Health,EPIC,workload,Ascension Health Epic and Citrix,,,3841220_Ascension_Health/02_workloads.png,3841220_Ascension_Health/03a_workload_acu.png,,,,
+2699441,SAP_RISE3,RISE,workload,,,,,,,,,search failed
+523595,Ferrero,SAP,workload,,,,523595_Ferrero/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+523272,BHP,SAP,workload,,,,,,,,,search failed
+639155,Walgreens,SAP,workload,,,,639155_Walgreens/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+523272,BHP,SAP,workload,BHP - SAP environment,,,523272_BHP/02_workloads.png,523272_BHP/03a_workload_acu.png,,,,
+639155,Walgreens,SAP,workload,Walgreens - SAP Platform,,,639155_Walgreens/02_workloads.png,639155_Walgreens/03a_workload_acu.png,,,,
+636846,PepsiCo,SAP,workload,,,,636846_PepsiCo/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+940486,Petrobras,SAP,workload,,,,940486_Petrobras/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+940486,Petrobras,SAP,workload,[Transpetro] - SAP_PROD_QA,,,940486_Petrobras/02_workloads.png,940486_Petrobras/03a_workload_acu.png,,,,
+523272,BHP,SAP,workload,BHP - SAP environment PRD; BHP - SAP environment,,,523272_BHP/02_workloads.png,523272_BHP/03a_workload_acu.png,,,,
+1719071,Woolworths,SAP,workload,Woolworths Group Limited - Azure Platform for SAP; Woolworths - SAP S4 HANA Database resources,,,1719071_Woolworths/02_workloads.png,1719071_Woolworths/03a_workload_acu.png,,,,
+682354,Medline,SAP,workload,Medline SAP Y2 SfMC; Medline SAP,,,682354_Medline/02_workloads.png,682354_Medline/03a_workload_acu.png,,,,
+10545209,Shell,SAP,workload,Shell plc - SAP S/4 CFIN; Shell Plc - SEQ01468-SAP-GF-CFIN-PROD,,,10545209_Shell/02_workloads.png,10545209_Shell/03a_workload_acu.png,,,,
+523595,Ferrero,SAP,workload,,,,523595_Ferrero/02_workloads.png,,,,,no SAP/SAP/Epic workload row found → ACR = N/A
+605015,Lego,SAP,workload,LEGO Group - SAP; LEGO SAP BW,,,605015_Lego/02_workloads.png,605015_Lego/03a_workload_acu.png,,,,
+1248703,Beiersdorf,SAP,workload,Beiersdorf AG - Azure for SAP; SfMC Beiersdorf SAP on Azure,,,1248703_Beiersdorf/02_workloads.png,1248703_Beiersdorf/03a_workload_acu.png,,,,
+640443,Nike,SAP,workload,NIKE-SAP; Nike - SAP Prod,,,640443_Nike/02_workloads.png,640443_Nike/03a_workload_acu.png,,,,
+520706,Bayer_AG,SAP,workload,Bayer AG - WARA & WARR SAP on Azure; Bayer AG - SAP on Oracle; Bayer AG - WARA SAP on Azure GDA,,,520706_Bayer_AG/02_workloads.png,520706_Bayer_AG/03a_workload_acu.png,,,,
+101552,Unilever,SAP,workload,Unilever - SAP; Unilever - SAP,,,101552_Unilever/02_workloads.png,101552_Unilever/03a_workload_acu.png,,,,
+645076,McKesson,SAP,workload,McKesson - SAP; McKesson SAP on Azure,,,645076_McKesson/02_workloads.png,645076_McKesson/03a_workload_acu.png,,,,
+643195,Halliburton,SAP,workload,C-SAP-PROD-01,,,643195_Halliburton/02_workloads.png,643195_Halliburton/03a_workload_acu.png,,,,
+940486,Petrobras,SAP,workload,PETROBRAS - PETRÓLEO BRASILEIRO SA - SAP (SAP on Azure); [Transpetro] - SAP_PROD_QA,,,940486_Petrobras/02_workloads.png,940486_Petrobras/03a_workload_acu.png,,,,
+1283152,Mt_Sinai,EPIC,workload,Mount Sinai - Epic on Azure; Mount Sinai Epic on Azure,,,1283152_Mt_Sinai/02_workloads.png,1283152_Mt_Sinai/03a_workload_acu.png,,,,
+639155,Walgreens,SAP,workload,Walgreens - SAP Platform,,,639155_Walgreens/02_workloads.png,639155_Walgreens/03a_workload_acu.png,,,,
+18982817,TJU,EPIC,workload,TJU - EPIC on Azure WARA; Thomas Jefferson University and Hospitals (EPIC),,,18982817_TJU/02_workloads.png,18982817_TJU/03a_workload_acu.png,,,,
+1833997,MichMed,EPIC,workload,MichMed - Epic on Azure: SfMC,,,1833997_MichMed/02_workloads.png,1833997_MichMed/03a_workload_acu.png,,,,
+3841220,Ascension_Health,EPIC,workload,Ascension - Epic on Azure; Ascension - Epic on Azure; Ascension Health Epic and Citrix,,,3841220_Ascension_Health/02_workloads.png,3841220_Ascension_Health/03a_workload_acu.png,,,,

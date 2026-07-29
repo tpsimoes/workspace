@@ -1,0 +1,238 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | BA
+Bayer AG
+520706
+3665
+
+Germany & Austria
+Germany & Austria
+Germany
+Unified
+SFMC
+Azure ACE / AED
+S500
+Proactive Resilience
+Azure Priority 0
+15
+
+View
+
+
+
+[3] picker=False | LO
+Learn on Demand Systems
+23530918
+2502978
+
+United States
+United States
+East.SMECC.Corp
+Unified
+2
+
+View
+
+
+
+[4] picker=False | D
+David
+52070619
+4
+
+ANZ
+ANZ
+ANZ
+0
+
+View
+
+
+
+[5] picker=False | B
+Baraja
+52070616
+2
+
+ANZ
+ANZ
+ANZ
+0
+
+View
+
+
+
+[6] picker=False | G
+Gavin
+52070617
+3
+
+ANZ
+ANZ
+ANZ
+0
+
+View
+
+
+
+[7] picker=False | 6I
+6880583870 IW PII Masked
+52070618
+1
+
+ANZ
+ANZ
+ANZ
+0
+
+View
+
+
+
+[8] picker=False | Z
+ZD
+52070607
+1
+
+Philippines
+ASEAN
+Philippines
+0
+
+View
+
+
+
+[9] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[10] picker=True | BA
+Bayer AG - WARA & WARR SAP on Azure
+Proactive Resilience
+1
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[11] picker=True | BA
+Bayer AG
+S500
+3666
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[12] picker=True | BA
+Bayer AG - WARA Digital Accelerator Platform
+Proactive Resilience
+1
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[13] picker=True | BA
+Bayer AG - SAP on Oracle
+Proactive Resilience
+2
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[14] picker=True | BA
+Bayer AG - WARA Smart Azure
+Proactive Resilience
+1
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[15] picker=True | BA
+Bayer AG - WARA SAP on Azure GDA
+Proactive Resilience
+1
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[16] picker=True | BA
+Bayer AG - WARA Data One Platform
+Proactive Resilience
+1
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[17] picker=True | BA
+Bayer AG (520706)
+Azure ACE / AED
+3669
+
+Germany, USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified
+[18] picker=True | BA
+Bayer AG
+Azure Priority 0
+5
+
+Germany
+Proactive Resilience
+Azure Priority 0
+SFMC
+S500
+Azure ACE / AED
+Unified

@@ -1,0 +1,93 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | MI
+MEDLINE INDUSTRIES INC
+682354
+634
+
+United States
+United States
+USA - Manufacturing & Mobility
+Majors
+Unified
+Proactive Resilience
+Azure ACE / AED
+16
+
+View
+
+
+
+[3] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[4] picker=True | MS
+Medline SAP Y2 SfMC
+Proactive Resilience
+1
+
+USA - Manufacturing & Mobility
+Proactive Resilience
+Azure ACE / AED
+Majors
+Unified
+[5] picker=True | HB
+At Home B2C
+Proactive Resilience
+1
+
+USA - Manufacturing & Mobility
+Proactive Resilience
+Azure ACE / AED
+Majors
+Unified
+[6] picker=True | MI
+MEDLINE INDUSTRIES INC
+Majors
+637
+
+USA - Manufacturing & Mobility
+Proactive Resilience
+Azure ACE / AED
+Majors
+Unified
+[7] picker=True | MI
+MEDLINE INDUSTRIES INC (682354)
+Azure ACE / AED
+1
+
+USA - Manufacturing & Mobility
+Proactive Resilience
+Azure ACE / AED
+Majors
+Unified
+[8] picker=True | MS
+Medline SAP
+Proactive Resilience
+1
+
+USA - Manufacturing & Mobility
+Proactive Resilience
+Azure ACE / AED
+Majors
+Unified

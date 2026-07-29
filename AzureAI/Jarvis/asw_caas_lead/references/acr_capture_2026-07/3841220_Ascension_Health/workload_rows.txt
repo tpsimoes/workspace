@@ -1,0 +1,179 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | AH
+ASCENSION HEALTH ISD
+3841220
+149
+
+United States
+United States
+USA - Healthcare
+Azure ACE / AED
+Unified
+Pulse
+S500
+Azure Priority 0
+Proactive Resilience
+20
+
+View
+
+
+
+[2] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[3] picker=True | AC
+Azure Citrix
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[4] picker=True | DC
+Domain Controllers in Azure
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[5] picker=True | A
+Ascension - Epic on Azure
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[6] picker=True | AH
+ASCENSION HEALTH ISD
+S500
+149
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[7] picker=True | S
+SiteCore
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[8] picker=True | A
+Ascension - Epic on Azure
+Proactive Resilience
+3
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[9] picker=True | AB
+Azure B2C
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[10] picker=True | AH
+Ascension Health Epic and Citrix
+Azure Priority 0
+4
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[11] picker=True | DC
+Domain Controllers in Azure
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[12] picker=True | S
+Solarwinds
+Proactive Resilience
+3
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[13] picker=True | AH
+ASCENSION HEALTH ISD (3841220)
+Azure ACE / AED
+149
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED
+[14] picker=True | AC
+Azure Citrix
+Proactive Resilience
+1
+
+USA - Healthcare
+Proactive Resilience
+Azure Priority 0
+Unified
+S500
+Pulse
+Azure ACE / AED

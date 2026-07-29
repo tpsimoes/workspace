@@ -1,0 +1,102 @@
+URL: https://supportability.visualstudio.com/AzureStrategicWorkloads/_wiki/wikis/AzureStrategicWorkloads/1825766/Bayer
+LAST_UPDATED: 2025-02-25
+CUSTOMER_KEY: 520706
+CUSTOMER_NAME: Bayer AG
+==== BODY ====
+Skip to main content
+Azure DevOps
+Supportability
+/
+AzureStrategicWorkloads
+/
+Overview
+/
+Wiki
+/
+SAP
+/
+SfMC Customers
+/
+Bayer
+...
+Bayer
+Follow
+1
+Edit
+Francisco Paulos
+2025年2月25日
+Tags
+
+asw.Sfmc	asw.SAP	asw.Bayer	asw.Know-Me	asw.Reviewed-06-2024
+
+Contents
+Customer Introduction
+Contacts and Plan of Record
+Know-Me One Page - SfMC
+Architectures
+Documentation
+Customer Hot issues
+Outdated Linux OS Versions
+M Series VirtualMachinePossiblyDegradedDueToHardwareFailure Health alerts
+ASW Dashboard for Bayer
+Azure Subscription Detail
+Contributors
+
+Customer Introduction
+
+Bayer AG is an S500 strategic customer with Microsoft.
+Bayer uses SAP as their primary ERP and data System.
+Bayer landscape consists of 254 SAP systems which includes SAP System with HANA and Oracle Database respectively. All SAP systems using HANA DB are hosted in Azure, SAP systems using the Oracle databases are running in a private cloud hosted by CapGemini.
+The SAP on Azure workload is divided in Cropscience, Pharma, and Consumer Health/Cross functional.
+
+
+Contacts and Plan of Record
+
+Contact list:
+
+Role	Name	Alias
+CSAM	Serge Meulmeester	SEMEULME
+Backup CSAM	Benjamin Bering	BBERING
+CSA Customer Lead	Robert Seso	RSESO
+CSA Customer Lead Backup	Gabriele Tansini	GTANSINI
+CSA SfMC	Jens Hoevelmann	JENSMH
+ARR Lead	Kamran Raja	KAMRANRAJA
+CSD CAM	Noam Binyamini	NOAMBI
+IM+	Cinciu Mara	V-CINCIUMARA
+Know-Me One Page - SfMC
+
+Bayer AG is part of the SfMC Program - please check the following links:
+SfMC Know Me 
+If you don't have permission to access the SfMC KnowMe page, confirm you get the right CoreIdentity Entitlement  approved first.
+
+
+Architectures
+Documentation
+
+Customer Architecture documentation can be found in link below:
+Bayer Architecture
+
+Customer Hot issues
+Outdated Linux OS Versions
+
+October 2024: Many of the customer's VMs are running outdated SUSE and RHEL Linux OS versions. The customer is currently negotiating the conditions for upgrade project with the Capgemini team. At the same time - primarily because of the expected long time to start and complete the upgrade - the customer is looking for information to purchase the extended support for both of these OS flavors. Microsoft organized multiple meetings with the customer and provided all the information needed in order to plan and execute the upgrade and also provided the information on how to purchase the extended support. The main focus of the customer was to investigate the supportability of the in-place upgrades, since in-place upgrades would make it possible to upgrade the OS versions without having to reinstall everything from the scratch and provision a full copy of the entire infrastructure during the upgrade process. However, some configuration scenarios do not fully support the in-place upgrade, such as upgrading the RHEL with Pacemaker from 7.x to 8.x. Also, it is unclear whether the SAP and other 3rd party software (antivirus...) fully support the in-place upgrade.
+Because of those unknowns, it was decided to perform the PoC of the upgrade process in a test environment and evaluate all scenarios before implementing it in the production. The start of the PoC will depend on the contractual situation with the Capgemini.
+
+
+M Series VirtualMachinePossiblyDegradedDueToHardwareFailure Health alerts
+
+Customer is receiving very frequently VirtualMachinePossiblyDegradedDueToHardwareFailure health alerts on M and Mv2 series VMs.
+There is a GetHelp opened (#11350566) to tackle down this behavior.
+
+
+ASW Dashboard for Bayer
+
+Bayer Customer Analyzer 
+
+Azure Subscription Detail
+Workload	Subscription	Customer Friendly Name	Is Critical? (Yes/No)	Subscription Type (Prod/Staging/Dev/Testing etc)
+
+| SAP | <See in PoR> | CCP-BAPP-DE-20210812082853 | Yes | SAP-GDA-Protected-Prod workloads Germany | | SAP | <See in PoR> | CCP-BAPP-DE-20210812074946 | Yes | SAP-GDA-Protected-NonProd workloads Germany | | SAP | <See in PoR> | CCP-BAPP-DE-20210812090633 | Yes | SAP-ERPCore-Protected-Prod workloads Germany | | SAP | <See in PoR> | CCP-BAPP-DE-20210813074719 | Yes | SAP-ERPCore-Protected-NonProd workloads Germany | | SAP | <See in PoR> | CCP-BAPP-CA-20221129143851 | Yes | Canada DR1 (Prod and Non-Prod) | | SAP | <See in PoR> | CCP-BAPP-CA-20221129152224 | Yes | Canada DR2 (Prod and Non-Prod) |
+
+Contributors
+@Dante Stancato (HE HIM HIS)

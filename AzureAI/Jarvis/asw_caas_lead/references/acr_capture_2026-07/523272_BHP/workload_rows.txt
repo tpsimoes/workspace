@@ -1,0 +1,175 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | MI
+Microsoft Internal
+0
+1595494
+
+Microsoft Internal
+Microsoft Internal
+Microsoft Internal
+Azure ACE / AED
+Azure Priority 0
+Proactive Resilience
+HiPri
+0
+
+View
+
+
+
+[2] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[3] picker=False | B
+BHP
+523272
+1074
+
+ANZ
+ANZ
+ANZ
+Unified
+S500
+Azure ACE / AED
+Proactive Resilience
+5
+
+View
+
+
+
+[4] picker=False | TM
+TITAN MACHINERY
+41959523
+3
+
+North MCC
+North Europe
+Romania and Moldova
+0
+
+View
+
+
+
+[5] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[6] picker=True | I
+IT-NPE-ERPRTESTFY24
+Proactive Resilience
+1
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[7] picker=True | B
+BHP - Hybrid Cloud Resiliency Program: ContactorWS (RMOT2024040403988727)
+Proactive Resilience
+1
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[8] picker=True | B
+BHP (523272)
+Azure ACE / AED
+1075
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[9] picker=True | BS
+BHP-Cloud Shared Services
+Proactive Resilience
+2
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[10] picker=True | B
+BHP - SAP environment PRD
+Proactive Resilience
+1
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[11] picker=True | B
+BHP - SAP environment
+Proactive Resilience
+2
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[12] picker=True | B
+BHP - Hybrid Cloud Resiliency Program: ADDS Active Directory Domain Services (RMOT2024040403988730)
+Proactive Resilience
+1
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[13] picker=True | B
+BHP
+S500
+1075
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[14] picker=True | B
+BHP - Hybrid Cloud Resiliency Program: Case Management System App (RMOT2024032803976617)
+Proactive Resilience
+2
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified
+[15] picker=True | B
+BHP - Hybrid Cloud Resiliency Program: Hi Rail (RMOT2024040403988724)
+Proactive Resilience
+1
+
+ANZ
+Proactive Resilience
+Azure ACE / AED
+S500
+Unified

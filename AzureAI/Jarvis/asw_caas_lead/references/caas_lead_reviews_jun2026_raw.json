@@ -1,0 +1,348 @@
+{
+  "meta": {
+    "month": "Jun 2026",
+    "month_label": "June 2026",
+    "sharepoint_folder": "https://microsoft.sharepoint.com/teams/AzureStrategicWorkloads-SAP/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FAzureStrategicWorkloads%2DSAP%2FShared%20Documents%2FGeneral%2FCxOutreach%2FFY26June%20%2D%20CaaS%20Lead%20Sync",
+    "customer_count": 14,
+    "stage": "raw"
+  },
+  "by_key": {
+    "940486": {
+      "customer": "Petrobras",
+      "tpid": "940486",
+      "pptx_name": "[Zone 2] Petrobras CaaS Lead Update - June 2026.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "1- Automation implemented using KQL + Power Automate + Teams + Azure DevOps:",
+        "Proactive monitoring established with more features implemented:",
+        "Cases Open",
+        "Outages impacting customer directly .",
+        "Separated chat for VM Operations (Start/Stop/Deallocate) to identify machines that were migrated.",
+        "Cross-team collaboration with Microsoft, SAP, and NetApp for critical issues resolution"
+      ],
+      "service_delivery": [
+        "Continue operating under the current proactive monitoring model, maintaining the same approach and consistency Address additional needs from CSAM as they arise, ensuring alignment with customer expectations and priorities"
+      ],
+      "reminders": [
+        "Maintain proactive communication with CSA / CSAM / Mission Critical teams - Use monitoring dashboards and automation outputs before reacting to cases - Align support model with SAP on Azure ownership (avoid generic routing) - Expect customer constraints regarding data residency in Brazil (LGPD) - Prioritize coordination during critical events / upgrades / migrations",
+        "Keep the Support as is until completely phase out at the end of 2026.",
+        "Live Migration, VM Health, Cases, VM Operations and Outages"
+      ]
+    },
+    "1283152": {
+      "customer": "Mt. Sinai",
+      "tpid": "1283152",
+      "pptx_name": "[Zone 2] mtsinai.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "I.E Customer moving off Azure.",
+        "Limited case volume remaining.",
+        "No EPIC specific cases."
+      ],
+      "service_delivery": [
+        "Customer leaving / left EPIC workload off azure.",
+        "Limited case volume remaining.",
+        "All cases routing to PODS currently, they never had rules to route cases."
+      ],
+      "reminders": []
+    },
+    "636846": {
+      "customer": "PepsiCo",
+      "tpid": "636846",
+      "pptx_name": "[Zone 2] PepsiCo 202606.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "Operational Health Review established a formal quarterly cadence and shifted focus toward proactive reliability improvements and monitoring-driven incident prevention.",
+        "Continued work through Gen1?Gen2 migrations through development of heatmap analysis, Kusto dashboards, and validation tooling to assess VM sizing and migration readiness across workloads.",
+        "Still requesting access to some of these.",
+        "Major Sev A storage-related outage was actively managed with cross-team escalation, PG engagement, and partial recovery (2/12 servers restored), with hardware (motherboard) suspected as root cause.",
+        "Cases: SR 2606190030004063, ICM 820517597, PG ICM 51000001075696"
+      ],
+      "service_delivery": [
+        "Drive closure and tracking of the 25 high-impact reliability recommendations identified in the Operational Health Review through follow-up sessions and Azure Advisor alignment.",
+        "Includes storage, VM architecture, backup, and resiliency improvements.",
+        "Continue investigation and mitigation validation for the Sev A storage outage, including confirmation of hardware root cause and broader customer impact assessment.",
+        "Relates to 2606190030004063 above."
+      ],
+      "reminders": [
+        "The PepsiCo team has an internal Teams chat that can be very useful when owning a crit (or any PepsiCo case).",
+        "Ask to be added while you own the case (contact Ivan, Sonale, Hayder, etc.).",
+        "Drop from the chat when the case is closed.",
+        "PepsiCo requests that Sev A cases (and sev Bs that started as sev As) always have an POC working in the US time zone.",
+        "If in EMEA or APAC, please find a co-owner from in the US TZ.",
+        "Ensure that the PepsiCo team know who that person is.",
+        "3 biweekly calls in EMEA/EST TZ"
+      ]
+    },
+    "520706": {
+      "customer": "Bayer AG",
+      "tpid": "520706",
+      "pptx_name": "[Zone 1] Bayer ASW CaaS Lead Status Update - June 26.pptx",
+      "source_format": "linear",
+      "key_updates": [
+        "Discussions with Support Area Path PG are still ongoing with a “by design behavior” impacting case routing for SfMC customers with SAP on Azure Workloads contract.",
+        "From MS Stakeholders side, we’re agreeing in manually routing cases to our queue if needed or if it’s impacting support so far (Specialized team getting delay in taking cases for example).",
+        "Main Findings",
+        "Case deflection is still huge.",
+        "Even with low volume, most of cases are not landing on ASW queues and from 8 cases created on June, only one got assigned by VDM to ASW team.",
+        "This reflects the problem with Support Area Path not allowing SAP on Azure is highly impacting our volumes and that VDM assignment is not being effective enough to assign those cases to ASW engineers.",
+        "Scope for cases was clarified internally in ASW and communicated to MSFT Stakeholders.",
+        "Due to the issue with Support area path routing, discussions about Capgemini following proper routing or not is on hold.",
+        "Low Volume of cases so far.",
+        "Pay close attention to cases being assigned multiple times due to routing rule conflicts, and ensure that SAP customer cases are properly routed and handled by our team.",
+        "Re-Review subscription-based assignment rules to ensure they are aligning cases with ASW engineers.",
+        "Customer Name: Bayer is one of the largest Pharma companies in the world."
+      ],
+      "service_delivery": [
+        "Focus Areas / Action Items",
+        "Reduce the case deflection to our queues by promoting the selection of “SAP on Azure” during case creation.",
+        "Identify if routing for other products outside VM is correct or if it needs to be sent to us as well.",
+        "Double-check the rules used for the subscription-based routing policy to help identify and resolve the case leakage issue.",
+        "Contacts Details",
+        "CSAM for SAP Workload: SEMEULME",
+        "CSA Customer Lead: ALEXSILVA",
+        "A new subid06 will be added soon.",
+        "About tagging waiting for customer to improve this topic",
+        "Needs to be updated with the last occurrences"
+      ],
+      "reminders": [
+        "Customer Name: Bayer is one of the largest Pharma companies in the world.",
+        "For Microsoft, it’s a top customer in the healthcare area.",
+        "Bayer is in plans to move SAP Workloads to SAP RISE in the near future, and because of that, they got a customized SfMC contract which includes SAP on Azure support.",
+        "Support Offering (SFMC/ACED)"
+      ]
+    },
+    "10545209": {
+      "customer": "Shell",
+      "tpid": "10545209",
+      "pptx_name": "[Zone 2] Shell CaaS Lead Update - June  2026.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "1- Automation implemented using KQL + Power Automate + Teams + Azure DevOps:",
+        "Proactive monitoring established with more features implemented:",
+        "Cases Open",
+        "Outages impacting customer directly .",
+        "VM Operations (Start/Stop/Deallocate) to identify machines that were migrated.",
+        "Working at Monitoring and preparing for Shell Cutover programmed to start in July/August."
+      ],
+      "service_delivery": [
+        "Continue operating under the current proactive monitoring model, maintaining the same approach and consistency Monitoring Improvements requested by Shell: 1) Keep only the SubID bd8fa5b3-571e-4dc8-83ca-b42e74c11218 The others are not helpful for our work 2) Add SubID for the individual resources 3) reduce the recurrence for every 5 - 10 minutes",
+        "Working"
+      ],
+      "reminders": [
+        "Maintain proactive communication with CSA / CSAM / Mission Critical teams - Use monitoring dashboards and automation outputs before reacting to cases - Align support model with SAP on Azure ownership (avoid generic routing) - Prioritize coordination during critical events / upgrades / migration",
+        "Waiting date for Shell Cutover event",
+        "Shell expectation to fully integrate with Azure and start production at the middle of FY27",
+        "ETA August 26",
+        "ETA Aug/Sep 26",
+        "Live Migration, VM Health, Cases, VM Operations and Outages"
+      ]
+    },
+    "605015": {
+      "customer": "Lego",
+      "tpid": "605015",
+      "pptx_name": "[Zone 2] Lego_CaaS.pptx",
+      "source_format": "linear",
+      "key_updates": [
+        "The customer is still running some testing and early deployments in Azure. – Froze to some extent due to summer season",
+        "Customer is having some doubts for near future due to deployed zone (Europe north) where they know it is facing a lot of constraints in deployments, both in size and availabilty.",
+        "As workaround, customer is deploying other (higher) skus. – CSAM and ACE have taken this.",
+        "Customer already has reserved space for Prod, but with some concerns about future increases.",
+        "Customer also shared some concern for the retirement of v1 and v2 machines.",
+        "ACE CSA and CSAM really active on engagement with customer for all the deployment and allocation questions",
+        "Only 2 subs migrated to the offering so far (QA and PROD)",
+        "No cases created, besides internal get help to arrange some credits for the increase in SKU to allow for the deployments.",
+        "NEW SINCE LAST UPDATE – 1st July",
+        "Customer has 2 VPN gw, where they are using P2S.",
+        "Due to some changes from Azure, Certificates will be changed and customer will need to redownload and install the new clients on the machines.",
+        "Customer is aware and searching internally for who is “owner” of this internally."
+      ],
+      "service_delivery": [
+        "High used zone and region, causing some possible future incidents"
+      ],
+      "reminders": []
+    },
+    "noTPID-univ_kentucky": {
+      "customer": "Univ. Kentucky",
+      "tpid": null,
+      "pptx_name": "[Zone 2] University of Kentucky CaaS Lead status - 070126.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "Completed:",
+        "May 18, 2026 - Go-Live"
+      ],
+      "service_delivery": [
+        "2606150040002634 - Active",
+        "� Customer is unable to access netapp fileshare jobs are failing � Pending receipt of supportconfig files from the customer, which are required for further analysis.",
+        "2606150040010166 - Active � Add NFS datastore into Azure vCenter cluster 2 � Customer has questions about Azure VMware Solution � Engineering confirmed that mounting an on-premises NFS export as an AVS datastore is unsupported, with no exceptions; the customer is migrating to Azure NetApp Files (ANF) on AVS as the supported solution.",
+        "2606230040005614 - Active � Quota request for Storage: Managed Disks limits Maintenance/Change Schedule None Top Challenges Capacity",
+        "Complete"
+      ],
+      "reminders": []
+    },
+    "643195": {
+      "customer": "Halliburton",
+      "tpid": "643195",
+      "pptx_name": "[Zone 2] Halliburton June.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "Re-engaged CSAM: sent email to Nick to re-establish CaaS Lead ownership for FY27 2.",
+        "Analyzed 13 cases (May�Jun) � confirmed 100% case leakage (0 reached ASW) despite all subscriptions correctly tagged ? routing/path issue, not tagging."
+      ],
+      "service_delivery": [
+        "Bring our SR back: Promote choosing �SAP on Azure� during case creation Align with Nick (CSAM) on correcting customer's case-filing behavior",
+        "Hot issue: Wrong SAP path � 5 of 13 cases filed under \"Azure Spot / VM Linux\" instead of SAP on Azure � Status: confirmed; main driver of leakage � Actions: re-engaging CSAM to guide correct path selection Maintenance/Change Schedule No major changes tracked Top Challenges Recurring VM: AZEU1DCHLAP01 (2 cases) Routing visibility: Cases not reaching ASW despite ASW engineers handling them",
+        "Not Started",
+        "Pending"
+      ],
+      "reminders": [
+        "69% of cases (9 of 13) were VM-restart related, spread across multiple SAP categories but sharing the same root issue.� check VM Analyzer / Grafana reboot history early Watch for the \"Azure Spot\" mislabel �If these are production VMs, not Spot; treat as standard SAP on Azure",
+        "� Routing investigation support (owned by Tiago) why correctly-tagged cases bypass ASW",
+        "Both subs tagged",
+        "V1 complete,",
+        "Planned",
+        "Reviewing Grafana",
+        "Pending CSAM"
+      ]
+    },
+    "1719071": {
+      "customer": "Woolworths",
+      "tpid": "1719071",
+      "pptx_name": "[Zone 1] Woolworths CaaS Lead update July 2026.pptx",
+      "source_format": "linear",
+      "key_updates": [
+        "Weekly Checkpoint meeting with Woolworths, MSFT CSA and ACE.",
+        "Woolworths’ LRS-to-ZRS resiliency upgrade is progressing with close PG engagement.",
+        "This month, we successfully helped the customer complete the conversion of 4 production storage accounts.",
+        "3 production storage accounts remain and are planned for conversion after the customer’s change freeze is lifted in July.",
+        "I will continue working closely with the PG team to support the remaining conversions and ensure the process progresses smoothly.",
+        "Woolworths recently completed an upgrade of the AzAcSnap tool to version 11b.",
+        "The ASW team provided 24x7 standby support throughout the activity, while the CaaS lead shared key precautions and a troubleshooting guide in advance to help the team prepare for any potential issues.",
+        "We received confirmation yesterday that the AzAcSnap upgrade was completed successfully."
+      ],
+      "service_delivery": [
+        "The LRS-to-ZRS resiliency upgrade continues under close PG engagement.",
+        "Three production storage accounts remain and are planned for conversion once the customer’s change freeze is lifted in July.",
+        "Since June 22, the UAT M896 VM azlss4dbus001 has experienced intermittent instability and hangs, requiring the customer to restart the VM to restore service.",
+        "The issue occurred six times between June 22 and June 30.",
+        "Multiple PG teams have been engaged by the PM, and the detailed root cause is still under investigation.",
+        "On June 30, another production M896 VM experienced a significant performance degradation.",
+        "I worked closely with the ACE team to help identify the issue, and the relevant PG team applied a fix.",
+        "To improve early detection for these M896-related issues, I also developed an AI-assisted proactive alerting mechanism and shared it with the ACE and TPM teams.",
+        "For follow-the-sun cases, it would be beneficial to have dedicated engineers aligned to both EMEA and US time zones to ensure consistent coverage and continuity"
+      ],
+      "reminders": [
+        "VM Reboot RCA Quality",
+        "Ensure VM reboot RCAs are clear, detailed, and defensible, especially for customers experiencing repeated restart events.",
+        "RCA communication should clearly cover cause, impact, recovery, and mitigation guidance.",
+        "Performance Reporting Expectations",
+        "Given Woolworths’ high performance expectations, ensure performance-related findings are supported by data-driven analysis, clear observations, business impact assessment, and actionable next steps."
+      ]
+    },
+    "18982817": {
+      "customer": "TJU",
+      "tpid": "18982817",
+      "pptx_name": "[Zone 2] TJU CaaS Lead Update - June 2026.pptx",
+      "source_format": "linear",
+      "key_updates": [
+        "2606190040004794 The lease between availability group 'ZLECLRPRD-AG1' and the Windows Server Failover Cluster has expired, causing connectivity issues between the SQL Server instance and the cluster.",
+        "TJU 2606270040000185 :- Azure Migrate replication is experiencing significant slowdowns",
+        "2606260040007315 - The SailPoint connector is failing to add and modify entitlements in Entra ID",
+        "2606300040009491 A quota increase request for the Ddsv6 VM series in the East US region was made, exceeding the allowed threshold for the StandardDdsv6Family resource type.",
+        "The current quota is 10, and the requested new quota is 50 for the specified VM series in the East US region.",
+        "Follow up all cases",
+        "Support Offering (Unified ARR/SFMC/ACE)",
+        "(Connection/Acceleration/Optimization) Optimization"
+      ],
+      "service_delivery": [
+        "Bring our SR back: na",
+        "Hot issue: na",
+        "Maintenance/Change Schedule na"
+      ],
+      "reminders": [
+        "Support Offering (Unified ARR/SFMC/ACE)",
+        "(Connection/Acceleration/Optimization) Optimization"
+      ]
+    },
+    "1833997": {
+      "customer": "MichMed",
+      "tpid": "1833997",
+      "pptx_name": "[Zone 2] Michmed.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "I.E Transition CaaS lead to myself.",
+        "No case volume noted for last 30 days"
+      ],
+      "service_delivery": [
+        "Engage Customer and CSAM Create WIKI/POR/ETC."
+      ],
+      "reminders": [
+        "Limited customer engagement currently.",
+        "Let's make sure we are good to them, so they engage more going forward."
+      ]
+    },
+    "3841220": {
+      "customer": "Ascension Health",
+      "tpid": "3841220",
+      "pptx_name": "[Zone 2] Ascension Health CaaS Lead status - 070126.pptx",
+      "source_format": "table",
+      "key_updates": [
+        "Completed:",
+        "March 29, 2026 - Go-Live"
+      ],
+      "service_delivery": [
+        "2606230040005614 - Acitve",
+        "� Azure Subscription limit/quota support 2606180040008374 - Active � Quota request for Compute-VM (cores-vCPUs) subscription limit increases Maintenance/Change Schedule None Top Challenges",
+        "Complete"
+      ],
+      "reminders": []
+    },
+    "523272": {
+      "customer": "BHP",
+      "tpid": "523272",
+      "pptx_name": "[Zone 1] BHP presentation July 1st.pptx",
+      "source_format": "linear",
+      "key_updates": [
+        "May month we see 6 cases been raised by BHP, in which 1 Sev 1, 1 Sev A, 4 Sev C.",
+        "But there is a change in June, they had only 3 Sev C cases.",
+        "No critical issues found.",
+        "Storage Optimization:",
+        "Review the orphaned resources and keep track of cost difference",
+        "Storage accounts moved to GPv2",
+        "Cleaning up unattached disks, snapshots (automatic cleanup)",
+        "Might receive more cases on performance issues."
+      ],
+      "service_delivery": [
+        "Lock down lateral movement paths in NSGs: implement “deny outbound management connections from non‑management hosts” and remove risky NSG patterns (east‑west / management egress).",
+        "Enable Managed Identity where flagged (Event Grid system topics, Storage Accounts) to eliminate credential handling and tighten authentication.",
+        "Enable High availability and address Resiliency gaps: Recovery Service Vault, Storage Account",
+        "Top Challenges",
+        "Ongoing challenges with Performance issues.",
+        "We might receive more support request.",
+        "Any performance cases found for BHP, please do reach out to me.",
+        "The customer is experiencing low log write performance on SAP HANA database servers related to one of their SAP components.",
+        "Observation on M832 VMs (musw23spdsh01 & muse13spdsh01) and M416 VMs (musw22sqdsh01 & musw21sqdsh01)"
+      ],
+      "reminders": []
+    },
+    "645076": {
+      "customer": "McKesson",
+      "tpid": "645076",
+      "pptx_name": "[Zone 2] McKesson-CaaS Lead Status July 1st 2026.pptx",
+      "source_format": "linear",
+      "key_updates": [
+        "They had a live migration test scheduled for 6/29.",
+        "They did it, however, it was not done the way they expected.",
+        "So, one of their CSAs (Syed Hussain) is working with PG to check if they can do the live migration the customer expects.",
+        "This is to test a solution PG provided them."
+      ],
+      "service_delivery": [
+        "Contact CSAM and CSA for further updates and if they have encountered any new challenge.",
+        "Top Challenges",
+        "Ongoing challenges with capacity.",
+        "Cases getting created for other teams rather than ours need to check with manager."
+      ],
+      "reminders": []
+    }
+  }
+}

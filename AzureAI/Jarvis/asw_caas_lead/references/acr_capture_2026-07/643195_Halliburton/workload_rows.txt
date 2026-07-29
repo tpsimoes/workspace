@@ -1,0 +1,229 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | HC
+HALLIBURTON COMPANY
+643195
+359
+
+United States
+United States
+USA - Oil, Gas, Energy
+S500
+Unified
+Azure ACE / AED
+Proactive Resilience
+16
+
+View
+
+
+
+[3] picker=False | Z
+Zetica
+98788089
+43
+
+UK & Ireland
+UK & Ireland
+UK
+0
+
+View
+
+
+
+[4] picker=False | 9I
+9d6b8ff9-0133-4d15-b1c2-4a9f7cc04b0e IW PII Masked
+114702842
+1
+
+ANZ
+ANZ
+ANZ
+0
+
+View
+
+
+
+[5] picker=False | DI
+d29f327f-f427-4c21-bb59-9ce6ab3ccab5 IW PII Masked
+102322982
+1
+
+United States
+United States
+UNKNOWN
+0
+
+View
+
+
+
+[6] picker=False | F
+feng
+108790527
+1
+
+China
+Greater China
+China
+0
+
+View
+
+
+
+[7] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[8] picker=True | C
+C-SAP-PROD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[9] picker=True | C
+C-ASG-PROD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[10] picker=True | H
+Halliburton
+Proactive Resilience
+3
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[11] picker=True | HC
+HALLIBURTON COMPANY
+S500
+359
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[12] picker=True | D
+D-AZ-HDS-RTSIC-PRD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[13] picker=True | C
+C-SDS-PROD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[14] picker=True | C
+C-RTS-PROD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[15] picker=True | C
+C-AZ-SDS-RTO-PRD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[16] picker=True | D
+D-AZ-ASG-SHR-PRD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[17] picker=True | C
+C-PE-PROD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[18] picker=True | HC
+HALLIBURTON COMPANY (643195)
+Azure ACE / AED
+359
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[19] picker=True | C
+C-AZ-HAL-IT-VDI-PRD-01
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+[20] picker=True | H
+HALAzops-Connectivity
+Proactive Resilience
+1
+
+USA - Oil, Gas, Energy
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED

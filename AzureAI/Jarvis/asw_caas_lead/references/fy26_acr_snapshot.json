@@ -1,0 +1,606 @@
+{
+  "metric_type": "TTM",
+  "metric_note": "TTM = Trailing Twelve Months",
+  "snapshot_month": null,
+  "prev_month": null,
+  "captured_utc": "2026-07-20T16:32:04+00:00",
+  "source": "Kusto: customerdomrptwus3prod.westus3.kusto.windows.net / customerdomdata / WorkloadSearchSummarized · Consumption (TTM)",
+  "level": "hint_matched (per-customer aggregate across matching workloads)",
+  "unit": "ACU (Azure Consumption Units, TTM)",
+  "notes": "Values are Trailing Twelve Months (TTM) Azure Consumption Units per customer. Month-over-month delta is NOT available from this source; `prev_month` and `delta_pct` are null by design. Skipped customers (null value): PepsiCo (636846) and Ferrero (523595) have no workload with 'SAP' in the entity name — pending CaaS Lead scope confirmation. SAP RISE tenant 3 (2699441) returned no rows from the source table.",
+  "customers": [
+    {
+      "tpid": "603819",
+      "customer": "SAP SE",
+      "alias": "SAP_SE_RISE1",
+      "workload_hint": "RISE",
+      "acu_this_month": 5278752975,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "5.28B",
+      "prev_display": null,
+      "org_entity_name": "SAP SE (EMEA)",
+      "hint_matched_workloads": [
+        {
+          "name": "SAP SE (EMEA)",
+          "type": "QCC",
+          "subs": 9576,
+          "consumption_acu": 1724036601.89963
+        },
+        {
+          "name": "SAP SE",
+          "type": "QCC ME Footprint",
+          "subs": 9576,
+          "consumption_acu": 1724036601.899604
+        },
+        {
+          "name": "SAP SE",
+          "type": "S500",
+          "subs": 9576,
+          "consumption_acu": 1724036601.8996022
+        },
+        {
+          "name": "SAP -SFSF (Critical Suscriptions)",
+          "type": "Proactive Resilience",
+          "subs": 7,
+          "consumption_acu": 42055106.36196598
+        },
+        {
+          "name": "SAP Digital Manufacturing",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 15710600.35061623
+        },
+        {
+          "name": "SAP (15902931) - SFSF DC70",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 15364425.061102465
+        },
+        {
+          "name": "SAP ECS Accenture RISE",
+          "type": "Azure ACE / AED",
+          "subs": 4,
+          "consumption_acu": 12147709.886596344
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 2,
+          "consumption_acu": 8408220.154690782
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 30,
+          "consumption_acu": 4729698.822243522
+        },
+        {
+          "name": "[SAP -CC] -[Critical Subscriptions]",
+          "type": "Proactive Resilience",
+          "subs": 10,
+          "consumption_acu": 4477247.843418997
+        },
+        {
+          "name": "SAP SE - S/4 HANA",
+          "type": "Proactive Resilience",
+          "subs": 4,
+          "consumption_acu": 3308998.4581030235
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 441161.32565176295
+        },
+        {
+          "name": "SAP (15902931)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0.59149409
+        }
+      ]
+    },
+    {
+      "tpid": "15902931",
+      "customer": "SAP",
+      "alias": "SAP_RISE2",
+      "workload_hint": "RISE",
+      "acu_this_month": null,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": null,
+      "prev_display": null,
+      "org_entity_name": "SAP (15902931)",
+      "hint_matched_workloads": [
+        {
+          "name": "SAP (15902931)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0
+        }
+      ]
+    },
+    {
+      "tpid": "2699441",
+      "customer": "SAP RISE tenant 3",
+      "alias": "SAP_RISE3",
+      "workload_hint": "RISE",
+      "acu_this_month": null,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": null,
+      "prev_display": null,
+      "org_entity_name": null,
+      "hint_matched_workloads": []
+    },
+    {
+      "tpid": "636846",
+      "customer": "PepsiCo",
+      "alias": "PepsiCo",
+      "workload_hint": "SAP",
+      "acu_this_month": null,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": null,
+      "prev_display": null,
+      "org_entity_name": "PepsiCo",
+      "hint_matched_workloads": []
+    },
+    {
+      "tpid": "1719071",
+      "customer": "Woolworths Group",
+      "alias": "Woolworths",
+      "workload_hint": "SAP",
+      "acu_this_month": 28570814,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "28.57M",
+      "prev_display": null,
+      "org_entity_name": "Woolworths",
+      "hint_matched_workloads": [
+        {
+          "name": "Woolworths Group Limited - Azure Platform for SAP",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 15232481.537366124
+        },
+        {
+          "name": "Woolworths - SAP S4 HANA Database resources",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 13338332.846780363
+        }
+      ]
+    },
+    {
+      "tpid": "682354",
+      "customer": "Medline Industries",
+      "alias": "Medline",
+      "workload_hint": "SAP",
+      "acu_this_month": 6302365,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "6.30M",
+      "prev_display": null,
+      "org_entity_name": "MEDLINE INDUSTRIES INC",
+      "hint_matched_workloads": [
+        {
+          "name": "Medline SAP Y2 SfMC",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362
+        },
+        {
+          "name": "Medline SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362
+        }
+      ]
+    },
+    {
+      "tpid": "10545209",
+      "customer": "Shell",
+      "alias": "Shell",
+      "workload_hint": "SAP",
+      "acu_this_month": 4908633,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "4.91M",
+      "prev_display": null,
+      "org_entity_name": "Shell Information Technology International B.V. (10545209)",
+      "hint_matched_workloads": [
+        {
+          "name": "Shell plc - SAP S/4 CFIN",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2543516.0963881593
+        },
+        {
+          "name": "Shell Plc - SEQ01468-SAP-GF-CFIN-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2365117.013121491
+        }
+      ]
+    },
+    {
+      "tpid": "523595",
+      "customer": "Ferrero SpA",
+      "alias": "Ferrero",
+      "workload_hint": "SAP",
+      "acu_this_month": null,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": null,
+      "prev_display": null,
+      "org_entity_name": "FERRERO SPA (523595)",
+      "hint_matched_workloads": []
+    },
+    {
+      "tpid": "605015",
+      "customer": "LEGO Group",
+      "alias": "Lego",
+      "workload_hint": "SAP",
+      "acu_this_month": 2198588,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "2.20M",
+      "prev_display": null,
+      "org_entity_name": "LEGO Group",
+      "hint_matched_workloads": [
+        {
+          "name": "LEGO SAP BW",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1099294.0793304702
+        },
+        {
+          "name": "LEGO Group - SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1099294.07933047
+        }
+      ]
+    },
+    {
+      "tpid": "1248703",
+      "customer": "Beiersdorf AG",
+      "alias": "Beiersdorf",
+      "workload_hint": "SAP",
+      "acu_this_month": 12411903,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "12.41M",
+      "prev_display": null,
+      "org_entity_name": "Beiersdorf Shared Services GmbH (1248703)",
+      "hint_matched_workloads": [
+        {
+          "name": "Beiersdorf AG - Azure for SAP",
+          "type": "Proactive Resilience",
+          "subs": 26,
+          "consumption_acu": 7532233.46904394
+        },
+        {
+          "name": "SfMC Beiersdorf SAP on Azure",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 4879669.33331143
+        }
+      ]
+    },
+    {
+      "tpid": "640443",
+      "customer": "Nike",
+      "alias": "Nike",
+      "workload_hint": "SAP",
+      "acu_this_month": 51737972,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "51.74M",
+      "prev_display": null,
+      "org_entity_name": "NIKE",
+      "hint_matched_workloads": [
+        {
+          "name": "NIKE-SAP",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 34604884.76019484
+        },
+        {
+          "name": "Nike - SAP Prod",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 17133087.63588826
+        }
+      ]
+    },
+    {
+      "tpid": "520706",
+      "customer": "Bayer AG",
+      "alias": "Bayer_AG",
+      "workload_hint": "SAP",
+      "acu_this_month": 17656473,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "17.66M",
+      "prev_display": null,
+      "org_entity_name": "Bayer AG",
+      "hint_matched_workloads": [
+        {
+          "name": "Bayer AG - WARA SAP on Azure GDA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 8226646.272744459
+        },
+        {
+          "name": "Bayer AG - WARA & WARR SAP on Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7005872.58238486
+        },
+        {
+          "name": "Bayer AG - SAP on Oracle",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2423953.8321757405
+        }
+      ]
+    },
+    {
+      "tpid": "523272",
+      "customer": "BHP",
+      "alias": "BHP",
+      "workload_hint": "SAP",
+      "acu_this_month": 16548776,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "16.55M",
+      "prev_display": null,
+      "org_entity_name": "BHP (523272)",
+      "hint_matched_workloads": [
+        {
+          "name": "BHP - SAP environment",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 10240998.243496642
+        },
+        {
+          "name": "BHP - SAP environment PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 6307777.800052848
+        }
+      ]
+    },
+    {
+      "tpid": "101552",
+      "customer": "Unilever",
+      "alias": "Unilever",
+      "workload_hint": "SAP",
+      "acu_this_month": 20349362,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "20.35M",
+      "prev_display": null,
+      "org_entity_name": "Unilever",
+      "hint_matched_workloads": [
+        {
+          "name": "Unilever - SAP",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 10197153.830703035
+        },
+        {
+          "name": "Unilever - SAP",
+          "type": "Proactive Resilience",
+          "subs": 5,
+          "consumption_acu": 10152207.674514767
+        }
+      ]
+    },
+    {
+      "tpid": "645076",
+      "customer": "McKesson",
+      "alias": "McKesson",
+      "workload_hint": "SAP",
+      "acu_this_month": 15209520,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "15.21M",
+      "prev_display": null,
+      "org_entity_name": "McKesson Corporation",
+      "hint_matched_workloads": [
+        {
+          "name": "McKesson SAP on Azure",
+          "type": "Azure Priority 0",
+          "subs": 3,
+          "consumption_acu": 7903066.510888096
+        },
+        {
+          "name": "McKesson - SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7306453.144487608
+        }
+      ]
+    },
+    {
+      "tpid": "643195",
+      "customer": "Halliburton",
+      "alias": "Halliburton",
+      "workload_hint": "SAP",
+      "acu_this_month": 4330654,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "4.33M",
+      "prev_display": null,
+      "org_entity_name": "HALLIBURTON COMPANY (643195)",
+      "hint_matched_workloads": [
+        {
+          "name": "C-SAP-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4330654.36428206
+        }
+      ]
+    },
+    {
+      "tpid": "940486",
+      "customer": "Petrobras",
+      "alias": "Petrobras",
+      "workload_hint": "SAP",
+      "acu_this_month": 7878557,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "7.88M",
+      "prev_display": null,
+      "org_entity_name": "PETROBRAS - PETRÓLEO BRASILEIRO SA",
+      "hint_matched_workloads": [
+        {
+          "name": "PETROBRAS - PETRÓLEO BRASILEIRO SA - SAP (SAP on Azure)",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 7546055.394443264
+        },
+        {
+          "name": "[Transpetro] - SAP_PROD_QA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 332501.1149463402
+        }
+      ]
+    },
+    {
+      "tpid": "1283152",
+      "customer": "Mount Sinai",
+      "alias": "Mt_Sinai",
+      "workload_hint": "EPIC",
+      "acu_this_month": 18536099,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "18.54M",
+      "prev_display": null,
+      "org_entity_name": "MOUNT SINAI HOSPITAL (1283152)",
+      "hint_matched_workloads": [
+        {
+          "name": "Mount Sinai Epic on Azure",
+          "type": "Azure Priority 0",
+          "subs": 7,
+          "consumption_acu": 9268049.426475208
+        },
+        {
+          "name": "Mount Sinai - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 7,
+          "consumption_acu": 9268049.426475205
+        }
+      ]
+    },
+    {
+      "tpid": "639155",
+      "customer": "Walgreens",
+      "alias": "Walgreens",
+      "workload_hint": "SAP",
+      "acu_this_month": 17994048,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "17.99M",
+      "prev_display": null,
+      "org_entity_name": "Walgreen National Corporation (639155)",
+      "hint_matched_workloads": [
+        {
+          "name": "Walgreens - SAP Platform",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 17994047.91330935
+        }
+      ]
+    },
+    {
+      "tpid": "18982817",
+      "customer": "Thomas Jefferson University",
+      "alias": "TJU",
+      "workload_hint": "EPIC",
+      "acu_this_month": 59408941,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "59.41M",
+      "prev_display": null,
+      "org_entity_name": "Thomas Jefferson University and its Affi (18982817)",
+      "hint_matched_workloads": [
+        {
+          "name": "Thomas Jefferson University and Hospitals (EPIC)",
+          "type": "Azure Priority 0",
+          "subs": 28,
+          "consumption_acu": 30681528.76348956
+        },
+        {
+          "name": "TJU - EPIC on Azure WARA",
+          "type": "Proactive Resilience",
+          "subs": 10,
+          "consumption_acu": 28727412.508678943
+        }
+      ]
+    },
+    {
+      "tpid": "1833997",
+      "customer": "University of Michigan",
+      "alias": "MichMed",
+      "workload_hint": "EPIC",
+      "acu_this_month": 8136661,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "8.14M",
+      "prev_display": null,
+      "org_entity_name": "UNIVERSITY OF MICHIGAN (1833997)",
+      "hint_matched_workloads": [
+        {
+          "name": "MichMed - Epic on Azure: SfMC",
+          "type": "Proactive Resilience",
+          "subs": 467,
+          "consumption_acu": 8136660.911041761
+        }
+      ]
+    },
+    {
+      "tpid": "3841220",
+      "customer": "Ascension Health",
+      "alias": "Ascension_Health",
+      "workload_hint": "EPIC",
+      "acu_this_month": 9032125,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": "9.03M",
+      "prev_display": null,
+      "org_entity_name": "ASCENSION HEALTH ISD (3841220)",
+      "hint_matched_workloads": [
+        {
+          "name": "Ascension - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 4593502.276955381
+        },
+        {
+          "name": "Ascension Health Epic and Citrix",
+          "type": "Azure Priority 0",
+          "subs": 4,
+          "consumption_acu": 4400500.047705349
+        },
+        {
+          "name": "Ascension - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 38123.03996768999
+        }
+      ]
+    }
+  ]
+}

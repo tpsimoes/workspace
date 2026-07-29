@@ -1,0 +1,233 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | WG
+Woolworths Group Limited
+1719071
+294
+
+ANZ
+ANZ
+ANZ
+Pulse
+HotDL
+Azure ACE / AED
+QCC
+S500
+Unified
+Azure Priority 0
+Proactive Resilience
+15
+
+View
+
+
+
+[2] picker=False | KS
+Knowledge Systems
+41007968
+1
+
+United States
+United States
+UNKNOWN
+0
+
+View
+
+
+
+[3] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[4] picker=True | WG
+Woolworths Group Limited - Kronos
+Proactive Resilience
+2
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[5] picker=True | WG
+Woolworths Group Limited - Woolworths Online
+Proactive Resilience
+2
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[6] picker=True | W
+Woolworths - eCommerce Supermarket
+Azure Priority 0
+9
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[7] picker=True | W
+Woolworths - eCommerce workload
+Proactive Resilience
+1
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[8] picker=True | WG
+Woolworths Group Limited - Azure Platform for SAP
+Proactive Resilience
+2
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[9] picker=True | W
+Woolworths - Shared Network Infrastructure
+Proactive Resilience
+1
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[10] picker=True | WG
+Woolworths Group Limited (Asia)
+QCC
+294
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[11] picker=True | W
+Woolworths - SAP S4 HANA Database resources
+Proactive Resilience
+1
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[12] picker=True | W
+Woolworths
+Azure ACE / AED
+294
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[13] picker=True | WG
+Woolworths Group Limited
+S500
+294
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[14] picker=True | WG
+Woolworths Group Limited - ERC
+Proactive Resilience
+2
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[15] picker=True | WG
+Woolworths Group Limited - WMS
+Proactive Resilience
+3
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse
+[16] picker=True | WG
+Woolworths Group Limited - Shared Services
+Proactive Resilience
+1
+
+ANZ
+Azure Priority 0
+Proactive Resilience
+Unified
+S500
+HotDL
+QCC
+Azure ACE / AED
+Pulse

@@ -1,0 +1,125 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | MI
+Microsoft Internal
+0
+1595494
+
+Microsoft Internal
+Microsoft Internal
+Microsoft Internal
+Azure ACE / AED
+Azure Priority 0
+Proactive Resilience
+HiPri
+0
+
+View
+
+
+
+[2] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[3] picker=False | FS
+FERRERO SPA
+523595
+92
+
+Italy
+South Europe
+Italy
+Unified
+Majors
+Azure ACE / AED
+Proactive Resilience
+5
+
+View
+
+
+
+[4] picker=False | T
+Topaze
+13022399
+1
+
+Netherlands
+Netherlands
+Netherlands
+0
+
+View
+
+
+
+[5] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[6] picker=True | AP
+Azure Platform 2026-2027
+Proactive Resilience
+34
+
+Italy
+Proactive Resilience
+Unified
+Majors
+Azure ACE / AED
+[7] picker=True | F2
+Ferrero 2025 March - WARA
+Proactive Resilience
+3
+
+Italy
+Proactive Resilience
+Unified
+Majors
+Azure ACE / AED
+[8] picker=True | FS
+FERRERO SPA
+Majors
+92
+
+Italy
+Proactive Resilience
+Unified
+Majors
+Azure ACE / AED
+[9] picker=True | FS
+Ferrero SfMC 2026-2027
+Proactive Resilience
+3
+
+Italy
+Proactive Resilience
+Unified
+Majors
+Azure ACE / AED
+[10] picker=True | FS
+FERRERO SPA (523595)
+Azure ACE / AED
+92
+
+Italy
+Proactive Resilience
+Unified
+Majors
+Azure ACE / AED

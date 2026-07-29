@@ -1,0 +1,2694 @@
+{
+  "captured_utc": "2026-07-20T16:32:04+00:00",
+  "source": {
+    "cluster": "https://customerdomrptwus3prod.westus3.kusto.windows.net",
+    "database": "customerdomdata",
+    "table": "WorkloadSearchSummarized",
+    "metric": "Consumption (TTM Azure Consumption Units per workload)"
+  },
+  "notes": "Consumption is the annualized (TTM) ACU value per workload — the same value CX Observe shows in the Consumption tile. This replaces the DOM-hover monthly value collection. Monthly MoM data is NOT available from this table; ACR_Prod_Staging has monthly ACR per TPID but as of 2026-07 only extends through 2025-07.",
+  "roster_size": 22,
+  "resolved_count": 21,
+  "customers": [
+    {
+      "tpid": "603819",
+      "alias": "SAP_SE_RISE1",
+      "customer": "SAP SE",
+      "workload_hint": "RISE",
+      "org_consumption_acu": 1724036601.89963,
+      "org_entity_name": "SAP SE (EMEA)",
+      "org_entity_type": "QCC",
+      "hint_matched_consumption_acu": 5278752974.55472,
+      "hint_matched_workloads": [
+        {
+          "name": "SAP SE (EMEA)",
+          "type": "QCC",
+          "subs": 9576,
+          "consumption_acu": 1724036601.89963
+        },
+        {
+          "name": "SAP SE",
+          "type": "QCC ME Footprint",
+          "subs": 9576,
+          "consumption_acu": 1724036601.899604
+        },
+        {
+          "name": "SAP SE",
+          "type": "S500",
+          "subs": 9576,
+          "consumption_acu": 1724036601.8996022
+        },
+        {
+          "name": "SAP -SFSF (Critical Suscriptions)",
+          "type": "Proactive Resilience",
+          "subs": 7,
+          "consumption_acu": 42055106.36196598
+        },
+        {
+          "name": "SAP Digital Manufacturing",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 15710600.35061623
+        },
+        {
+          "name": "SAP (15902931) - SFSF DC70",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 15364425.061102465
+        },
+        {
+          "name": "SAP ECS Accenture RISE",
+          "type": "Azure ACE / AED",
+          "subs": 4,
+          "consumption_acu": 12147709.886596344
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 2,
+          "consumption_acu": 8408220.154690782
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 30,
+          "consumption_acu": 4729698.822243522
+        },
+        {
+          "name": "[SAP -CC] -[Critical Subscriptions]",
+          "type": "Proactive Resilience",
+          "subs": 10,
+          "consumption_acu": 4477247.843418997
+        },
+        {
+          "name": "SAP SE - S/4 HANA",
+          "type": "Proactive Resilience",
+          "subs": 4,
+          "consumption_acu": 3308998.4581030235
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 441161.32565176295
+        },
+        {
+          "name": "SAP (15902931)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0.59149409
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "SAP SE (EMEA)",
+          "type": "QCC",
+          "subs": 9576,
+          "consumption_acu": 1724036601.89963,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP SE",
+          "type": "QCC ME Footprint",
+          "subs": 9576,
+          "consumption_acu": 1724036601.899604,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP SE",
+          "type": "S500",
+          "subs": 9576,
+          "consumption_acu": 1724036601.8996022,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP -SFSF (Critical Suscriptions)",
+          "type": "Proactive Resilience",
+          "subs": 7,
+          "consumption_acu": 42055106.36196598,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP Digital Manufacturing",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 15710600.35061623,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP (15902931) - SFSF DC70",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 15364425.061102465,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP ECS Accenture RISE",
+          "type": "Azure ACE / AED",
+          "subs": 4,
+          "consumption_acu": 12147709.886596344,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 2,
+          "consumption_acu": 8408220.154690782,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 30,
+          "consumption_acu": 4729698.822243522,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "[SAP -CC] -[Critical Subscriptions]",
+          "type": "Proactive Resilience",
+          "subs": 10,
+          "consumption_acu": 4477247.843418997,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP SE - S/4 HANA",
+          "type": "Proactive Resilience",
+          "subs": 4,
+          "consumption_acu": 3308998.4581030235,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 441161.32565176295,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SAP (15902931)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0.59149409,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "Germany & Austria"
+        }
+      ]
+    },
+    {
+      "tpid": "15902931",
+      "alias": "SAP_RISE2",
+      "customer": "SAP",
+      "workload_hint": "RISE",
+      "org_consumption_acu": 0,
+      "org_entity_name": "SAP (15902931)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 0,
+      "hint_matched_workloads": [
+        {
+          "name": "SAP (15902931)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "SAP (15902931)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "United States"
+        },
+        {
+          "name": "SAP SE (603819)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 0,
+          "industry": "Software, Data & Platforms",
+          "vertical": "At scale SW, data & platforms",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "2699441",
+      "alias": "SAP_RISE3",
+      "customer": "SAP RISE tenant 3",
+      "workload_hint": "RISE",
+      "org_consumption_acu": null,
+      "org_entity_name": null,
+      "org_entity_type": null,
+      "hint_matched_consumption_acu": null,
+      "hint_matched_workloads": [],
+      "all_workloads": []
+    },
+    {
+      "tpid": "636846",
+      "alias": "PepsiCo",
+      "customer": "PepsiCo",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 278336422.5795731,
+      "org_entity_name": "PepsiCo",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": null,
+      "hint_matched_workloads": [],
+      "all_workloads": [
+        {
+          "name": "PepsiCo",
+          "type": "Azure ACE / AED",
+          "subs": 194,
+          "consumption_acu": 278336422.5795731,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo",
+          "type": "S500",
+          "subs": 194,
+          "consumption_acu": 159557363.4248957,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo - PGT",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 46704922.002278574,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo - EDF",
+          "type": "Proactive Resilience",
+          "subs": 4,
+          "consumption_acu": 15348302.024914278,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "CAVO",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7548688.585481175,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo - SH+",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 6456097.273126657,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo - PepsiConnect",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 6306450.598799463,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo - Shared Services",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4419956.45483609,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "PepsiCo - TM1 - CSP - IBM Managed",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2055976.0843158592,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "MDIP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 747325.4155229703,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "MDIP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 606714.6907070084,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "1719071",
+      "alias": "Woolworths",
+      "customer": "Woolworths Group",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 93112420.59632921,
+      "org_entity_name": "Woolworths",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 28570814.38414649,
+      "hint_matched_workloads": [
+        {
+          "name": "Woolworths Group Limited - Azure Platform for SAP",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 15232481.537366124
+        },
+        {
+          "name": "Woolworths - SAP S4 HANA Database resources",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 13338332.846780363
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Woolworths",
+          "type": "Azure ACE / AED",
+          "subs": 294,
+          "consumption_acu": 93112420.59632921,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited (Asia)",
+          "type": "QCC",
+          "subs": 294,
+          "consumption_acu": 47045846.28147785,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited",
+          "type": "S500",
+          "subs": 294,
+          "consumption_acu": 47045846.28147781,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths - eCommerce Supermarket",
+          "type": "Azure Priority 0",
+          "subs": 9,
+          "consumption_acu": 30525151.946891047,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited - Azure Platform for SAP",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 15232481.537366124,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths - SAP S4 HANA Database resources",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 13338332.846780363,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited - Kronos",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 8898961.041654784,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited - ERC",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 8898961.041654782,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited - Woolworths Online",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 5784175.698888638,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited - WMS",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 4634690.73566652,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths - eCommerce workload",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3890027.008302885,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths Group Limited - Shared Services",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1894148.6905857604,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        },
+        {
+          "name": "Woolworths - Shared Network Infrastructure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1894148.6905857604,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "ANZ"
+        }
+      ]
+    },
+    {
+      "tpid": "682354",
+      "alias": "Medline",
+      "customer": "Medline Industries",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 27146687.204200953,
+      "org_entity_name": "MEDLINE INDUSTRIES INC",
+      "org_entity_type": "Majors",
+      "hint_matched_consumption_acu": 6302365.46058724,
+      "hint_matched_workloads": [
+        {
+          "name": "Medline SAP Y2 SfMC",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362
+        },
+        {
+          "name": "Medline SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "MEDLINE INDUSTRIES INC",
+          "type": "Majors",
+          "subs": 637,
+          "consumption_acu": 27146687.204200953,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Discrete Manufacturing",
+          "region": "United States"
+        },
+        {
+          "name": "Medline SAP Y2 SfMC",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Discrete Manufacturing",
+          "region": "United States"
+        },
+        {
+          "name": "MEDLINE INDUSTRIES INC (682354)",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Discrete Manufacturing",
+          "region": "United States"
+        },
+        {
+          "name": "Medline SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3151182.73029362,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Discrete Manufacturing",
+          "region": "United States"
+        },
+        {
+          "name": "At Home B2C",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 122437.96606608006,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Discrete Manufacturing",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "10545209",
+      "alias": "Shell",
+      "customer": "Shell",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 110285560.17104709,
+      "org_entity_name": "Shell Information Technology International B.V. (10545209)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 4908633.109509651,
+      "hint_matched_workloads": [
+        {
+          "name": "Shell plc - SAP S/4 CFIN",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2543516.0963881593
+        },
+        {
+          "name": "Shell Plc - SEQ01468-SAP-GF-CFIN-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2365117.013121491
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Shell Information Technology International B.V. (10545209)",
+          "type": "Azure ACE / AED",
+          "subs": 6311,
+          "consumption_acu": 110285560.17104709,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Royal Dutch Shell Global Parent",
+          "type": "S500",
+          "subs": 6311,
+          "consumption_acu": 110285560.1710442,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - ERP-Nucleus",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 6237284.987285712,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell",
+          "type": "Azure ACE / AED",
+          "subs": 1,
+          "consumption_acu": 6237284.987285712,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - COMO",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3039998.666495279,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell plc - SAP S/4 CFIN",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2543516.0963881593,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - SEQ01132-PRD-PUB-MKTA-MKT",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2516267.409588214,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - SEQ01468-SAP-GF-CFIN-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2365117.013121491,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - Emerald",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 1223812.5772328784,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell PLC - Mobility",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1070791.655143155,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "DS",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1038199.3218148887,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell PLC - ONEFPS",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 953648.2355670856,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - SEQ01324-RTL-ONEFPS",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 953648.2355670856,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "ADA",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 456559.1631390797,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "SEDP-MGMT-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 202150.31605905018,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell - OneFPS – USA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 194394.12235883303,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell Plc - SEQ02729-US-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 194394.12235883303,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "STRATOS-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 122768.87885500994,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "ST-GMAS",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 115538.76772173,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "Shell plc - SparkFDA",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 60688.150548749974,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        },
+        {
+          "name": "PDS-PROD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 53415.21755633,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Netherlands"
+        }
+      ]
+    },
+    {
+      "tpid": "523595",
+      "alias": "Ferrero",
+      "customer": "Ferrero SpA",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 38262837.70335973,
+      "org_entity_name": "FERRERO SPA (523595)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": null,
+      "hint_matched_workloads": [],
+      "all_workloads": [
+        {
+          "name": "FERRERO SPA (523595)",
+          "type": "Azure ACE / AED",
+          "subs": 92,
+          "consumption_acu": 38262837.70335973,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Italy"
+        },
+        {
+          "name": "FERRERO SPA",
+          "type": "Majors",
+          "subs": 92,
+          "consumption_acu": 19290468.90703238,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Italy"
+        },
+        {
+          "name": "Ferrero SfMC 2026-2027",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 10175975.206196517,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Italy"
+        },
+        {
+          "name": "Azure Platform 2026-2027",
+          "type": "Proactive Resilience",
+          "subs": 34,
+          "consumption_acu": 8065694.166478494,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Italy"
+        },
+        {
+          "name": "Ferrero 2025 March - WARA",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 1994618.3901877939,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Italy"
+        }
+      ]
+    },
+    {
+      "tpid": "605015",
+      "alias": "Lego",
+      "customer": "LEGO Group",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 7918271.077545739,
+      "org_entity_name": "LEGO Group",
+      "org_entity_type": "Majors",
+      "hint_matched_consumption_acu": 2198588.15866094,
+      "hint_matched_workloads": [
+        {
+          "name": "LEGO SAP BW",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1099294.0793304702
+        },
+        {
+          "name": "LEGO Group - SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1099294.07933047
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "LEGO Group",
+          "type": "Majors",
+          "subs": 971,
+          "consumption_acu": 7918271.077545739,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        },
+        {
+          "name": "LEGO SAP BW",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1099294.0793304702,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        },
+        {
+          "name": "LEGO Group - SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1099294.07933047,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        },
+        {
+          "name": "LEGO Group - Asset Portal (LAP+DAV)",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 492305.56985789,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        },
+        {
+          "name": "LEGO Asset Vault",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 285022.44235840003,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        },
+        {
+          "name": "LEGO Asset Portal",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 207283.12749949007,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        },
+        {
+          "name": "LEGO Group - VLtrader",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 8459.038959730002,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Denmark"
+        }
+      ]
+    },
+    {
+      "tpid": "1248703",
+      "alias": "Beiersdorf",
+      "customer": "Beiersdorf AG",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 18578224.80307727,
+      "org_entity_name": "Beiersdorf Shared Services GmbH (1248703)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 12411902.802355371,
+      "hint_matched_workloads": [
+        {
+          "name": "Beiersdorf AG - Azure for SAP",
+          "type": "Proactive Resilience",
+          "subs": 26,
+          "consumption_acu": 7532233.46904394
+        },
+        {
+          "name": "SfMC Beiersdorf SAP on Azure",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 4879669.33331143
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Beiersdorf Shared Services GmbH (1248703)",
+          "type": "Azure ACE / AED",
+          "subs": 340,
+          "consumption_acu": 18578224.80307727,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Beiersdorf AG - Azure for SAP",
+          "type": "Proactive Resilience",
+          "subs": 26,
+          "consumption_acu": 7532233.46904394,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "SfMC Beiersdorf SAP on Azure",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 4879669.33331143,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Beiersdorf AG - bdf-brands-websites",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 27866.02806565999,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "Germany & Austria"
+        }
+      ]
+    },
+    {
+      "tpid": "640443",
+      "alias": "Nike",
+      "customer": "Nike",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 43161589.31979864,
+      "org_entity_name": "NIKE",
+      "org_entity_type": "S500",
+      "hint_matched_consumption_acu": 51737972.3960831,
+      "hint_matched_workloads": [
+        {
+          "name": "NIKE-SAP",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 34604884.76019484
+        },
+        {
+          "name": "Nike - SAP Prod",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 17133087.63588826
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "NIKE",
+          "type": "S500",
+          "subs": 261,
+          "consumption_acu": 43161589.31979864,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "NIKE-SAP",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 34604884.76019484,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "Nike - SAP Prod",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 17133087.63588826,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "Nike-PassPlay",
+          "type": "Proactive Resilience",
+          "subs": 4,
+          "consumption_acu": 3359445.6791395103,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        },
+        {
+          "name": "NIKE-DPOM",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 412424.0647780101,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "520706",
+      "alias": "Bayer_AG",
+      "customer": "Bayer AG",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 83159680.26033704,
+      "org_entity_name": "Bayer AG",
+      "org_entity_type": "S500",
+      "hint_matched_consumption_acu": 17656472.68730506,
+      "hint_matched_workloads": [
+        {
+          "name": "Bayer AG - WARA SAP on Azure GDA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 8226646.272744459
+        },
+        {
+          "name": "Bayer AG - WARA & WARR SAP on Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7005872.58238486
+        },
+        {
+          "name": "Bayer AG - SAP on Oracle",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2423953.8321757405
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Bayer AG",
+          "type": "S500",
+          "subs": 3666,
+          "consumption_acu": 83159680.26033704,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG",
+          "type": "Azure Priority 0",
+          "subs": 5,
+          "consumption_acu": 18532346.42514445,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG - WARA SAP on Azure GDA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 8226646.272744459,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG - WARA Data One Platform",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 8226646.272744458,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG - WARA Digital Accelerator Platform",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7005872.58238486,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG - WARA & WARR SAP on Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7005872.58238486,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG - SAP on Oracle",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2423953.8321757405,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        },
+        {
+          "name": "Bayer AG - WARA Smart Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 27010.275359440006,
+          "industry": "Industrials & Manufacturing",
+          "vertical": "Process Manufacturing",
+          "region": "Germany & Austria"
+        }
+      ]
+    },
+    {
+      "tpid": "523272",
+      "alias": "BHP",
+      "customer": "BHP",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 47501426.70006767,
+      "org_entity_name": "BHP (523272)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 16548776.04354949,
+      "hint_matched_workloads": [
+        {
+          "name": "BHP - SAP environment",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 10240998.243496642
+        },
+        {
+          "name": "BHP - SAP environment PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 6307777.800052848
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "BHP (523272)",
+          "type": "Azure ACE / AED",
+          "subs": 1075,
+          "consumption_acu": 47501426.70006767,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP",
+          "type": "S500",
+          "subs": 1075,
+          "consumption_acu": 27891014.995140295,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP - SAP environment",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 10240998.243496642,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP - SAP environment PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 6307777.800052848,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP-Cloud Shared Services",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 1965186.8007176297,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP - Hybrid Cloud Resiliency Program: Hi Rail (RMOT2024040403988724)",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 293366.10850951006,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP - Hybrid Cloud Resiliency Program: ADDS Active Directory Domain Services (RMOT2024040403988730)",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 96798.78063749992,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "IT-NPE-ERPRTESTFY24",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 22775.138733249998,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP - Hybrid Cloud Resiliency Program: Case Management System App (RMOT2024032803976617)",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 7091.797103259999,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        },
+        {
+          "name": "BHP - Hybrid Cloud Resiliency Program: ContactorWS (RMOT2024040403988727)",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3747.2612027799996,
+          "industry": "Energy & Resources",
+          "vertical": "Mining",
+          "region": "ANZ"
+        }
+      ]
+    },
+    {
+      "tpid": "101552",
+      "alias": "Unilever",
+      "customer": "Unilever",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 92875684.68214284,
+      "org_entity_name": "Unilever",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 20349361.5052178,
+      "hint_matched_workloads": [
+        {
+          "name": "Unilever - SAP",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 10197153.830703035
+        },
+        {
+          "name": "Unilever - SAP",
+          "type": "Proactive Resilience",
+          "subs": 5,
+          "consumption_acu": 10152207.674514767
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Unilever",
+          "type": "Azure ACE / AED",
+          "subs": 428,
+          "consumption_acu": 92875684.68214284,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever",
+          "type": "S500",
+          "subs": 428,
+          "consumption_acu": 58499161.305925615,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - SAP",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 10197153.830703035,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - SAP",
+          "type": "Proactive Resilience",
+          "subs": 5,
+          "consumption_acu": 10152207.674514767,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Foundation Services",
+          "type": "Proactive Resilience",
+          "subs": 5,
+          "consumption_acu": 8176788.03017467,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Livewire",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 5297848.111152876,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Core Data Ecosystem - Datalakes",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 4818552.738285586,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Hyper Automation Platform",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 4609508.846568012,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "[Unilever] Workload TWS",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4430353.595603198,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Hyper Automation - Customer Operations O2C",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4403853.577543908,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - SCNC",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4403853.577543908,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - LeverEdge",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 2913550.051796022,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever_Leverage_Decode",
+          "type": "Azure ACE / AED",
+          "subs": 3,
+          "consumption_acu": 2913550.051796022,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Lever Edge",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 2913550.051796022,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - R&D Datalab",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 2342125.3884120514,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - Digital Factories",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2319906.125219909,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        },
+        {
+          "name": "Unilever - AI Foundations",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 447962.68250782095,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Consumer Goods",
+          "region": "UK & Ireland"
+        }
+      ]
+    },
+    {
+      "tpid": "645076",
+      "alias": "McKesson",
+      "customer": "McKesson",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 64125424.354692824,
+      "org_entity_name": "McKesson Corporation",
+      "org_entity_type": "S500",
+      "hint_matched_consumption_acu": 15209519.655375704,
+      "hint_matched_workloads": [
+        {
+          "name": "McKesson SAP on Azure",
+          "type": "Azure Priority 0",
+          "subs": 3,
+          "consumption_acu": 7903066.510888096
+        },
+        {
+          "name": "McKesson - SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7306453.144487608
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "McKesson Corporation",
+          "type": "S500",
+          "subs": 587,
+          "consumption_acu": 64125424.354692824,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "McKesson SAP on Azure",
+          "type": "Azure Priority 0",
+          "subs": 3,
+          "consumption_acu": 7903066.510888096,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "McKesson - SAP",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7306453.144487608,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "MCK - PTIG Pharma Distribution",
+          "type": "Azure Priority 0",
+          "subs": 3,
+          "consumption_acu": 3289393.600958934,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "McKesson - MacroHelix",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1895078.173824049,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "McKesson - Connect Evo",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1369230.68248676,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "McKesson - iKnowMed G2",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1273642.6035549345,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        },
+        {
+          "name": "McKesson - Lynx",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 938934.6359783704,
+          "industry": "Healthcare",
+          "vertical": "MedTech",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "643195",
+      "alias": "Halliburton",
+      "customer": "Halliburton",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 48320045.67117105,
+      "org_entity_name": "HALLIBURTON COMPANY (643195)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 4330654.36428206,
+      "hint_matched_workloads": [
+        {
+          "name": "C-SAP-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4330654.36428206
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "HALLIBURTON COMPANY (643195)",
+          "type": "Azure ACE / AED",
+          "subs": 359,
+          "consumption_acu": 48320045.67117105,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "HALLIBURTON COMPANY",
+          "type": "S500",
+          "subs": 359,
+          "consumption_acu": 35249227.52058868,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-SAP-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4330654.36428206,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-ASG-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2036576.6036053314,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "HALAzops-Connectivity",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1487732.6933415697,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-RTS-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1370078.4743686605,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-PE-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1136212.2961644437,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-SDS-PROD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1001541.9114269897,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-AZ-HAL-IT-VDI-PRD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 883452.5144870564,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "C-AZ-SDS-RTO-PRD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 371749.14687619015,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "D-AZ-HDS-RTSIC-PRD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 308345.49985772005,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "Halliburton",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 240769.71308439024,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        },
+        {
+          "name": "D-AZ-ASG-SHR-PRD-01",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 144474.64617294006,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "940486",
+      "alias": "Petrobras",
+      "customer": "Petrobras",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 27062391.35204454,
+      "org_entity_name": "PETROBRAS - PETRÓLEO BRASILEIRO SA",
+      "org_entity_type": "S500",
+      "hint_matched_consumption_acu": 7878556.509389604,
+      "hint_matched_workloads": [
+        {
+          "name": "PETROBRAS - PETRÓLEO BRASILEIRO SA - SAP (SAP on Azure)",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 7546055.394443264
+        },
+        {
+          "name": "[Transpetro] - SAP_PROD_QA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 332501.1149463402
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "PETROBRAS - PETRÓLEO BRASILEIRO SA",
+          "type": "S500",
+          "subs": 184,
+          "consumption_acu": 27062391.35204454,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "PETROBRAS - PETRÓLEO BRASILEIRO SA - SAP (SAP on Azure)",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 7546055.394443264,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00004-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 6839443.099831822,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "PETROBRAS - AIDA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3139386.23080774,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "PETROBRAS - ADX SI",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3139386.23080774,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00011-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3139386.23080774,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00004-NPRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2983053.4475420597,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00075-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2629654.609807629,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-HZN01-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1905084.18283448,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-HZN02-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1047495.3132255593,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-OPERATIONS-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 933412.9475807892,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-HUB-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 706612.2946114403,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "[Transpetro] - Prod",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 684752.8918886599,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00079-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 535641.4615062093,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00045-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 482329.09412081,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00090-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 458017.26005852,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "[Transpetro] - SAP_PROD_QA",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 332501.1149463402,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00085-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 312056.89158323,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00074-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 276635.64819348,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "PETROBRAS - APIM",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 218886.78724860004,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00020-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 218886.78724859998,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00001-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 204721.76487022015,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00082-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 195138.77442599676,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00072-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 160124.1096519671,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00018-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 100138.1947689679,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00065-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 89814.34159249,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "[Transpetro] - VDI",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 89744.93493007998,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00008-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 68476.3165721697,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00080-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 44054.826592549995,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00014-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 40606.85558181,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00070-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 35415.59562492001,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00069-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 34853.95093628,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00000-DEV",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 31362.443079297635,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00049-SBX",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 25875.174867842336,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00077-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 25711.794496870003,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00088-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 24707.862615500002,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00035-SBX",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 22733.3879800698,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-FSW-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 18374.671212860005,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00076-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 17723.151371630007,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00087-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 16350.682489449913,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00076-NPRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 16181.51863392,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00048-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 12832.048078870032,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00092-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 8952.902471309997,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00053-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7294.741419660002,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00028-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 7108.049362899781,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00059-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 5092.688045840001,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00052-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4464.742204869999,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00083-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 3116.2053058700003,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00073-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2997.566272000071,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00049-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 2030.5701992800002,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00040-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1868.1733571800046,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00091-SHD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1650.933601379999,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00089-DEV",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1452.8737732400002,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00000-TST",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1170.2246779,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00000-TST",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1170.2246779,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00078-PRD",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 293.69929992,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        },
+        {
+          "name": "AZR-00004-SBX",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 42.53830408999999,
+          "industry": "Energy & Resources",
+          "vertical": "Oil & Gas",
+          "region": "Brazil"
+        }
+      ]
+    },
+    {
+      "tpid": "1283152",
+      "alias": "Mt_Sinai",
+      "customer": "Mount Sinai",
+      "workload_hint": "EPIC",
+      "org_consumption_acu": 22356077.396447964,
+      "org_entity_name": "MOUNT SINAI HOSPITAL (1283152)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 18536098.852950413,
+      "hint_matched_workloads": [
+        {
+          "name": "Mount Sinai Epic on Azure",
+          "type": "Azure Priority 0",
+          "subs": 7,
+          "consumption_acu": 9268049.426475208
+        },
+        {
+          "name": "Mount Sinai - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 7,
+          "consumption_acu": 9268049.426475205
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "MOUNT SINAI HOSPITAL (1283152)",
+          "type": "Azure ACE / AED",
+          "subs": 69,
+          "consumption_acu": 22356077.396447964,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Mount Sinai (Americas)",
+          "type": "QCC",
+          "subs": 69,
+          "consumption_acu": 13036067.59828251,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "MOUNT SINAI HOSPITAL",
+          "type": "Majors",
+          "subs": 69,
+          "consumption_acu": 13036067.598282505,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Mount Sinai Epic on Azure",
+          "type": "Azure Priority 0",
+          "subs": 7,
+          "consumption_acu": 9268049.426475208,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Mount Sinai - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 7,
+          "consumption_acu": 9268049.426475205,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "639155",
+      "alias": "Walgreens",
+      "customer": "Walgreens",
+      "workload_hint": "SAP",
+      "org_consumption_acu": 234833930.3753162,
+      "org_entity_name": "Walgreen National Corporation (639155)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 17994047.91330935,
+      "hint_matched_workloads": [
+        {
+          "name": "Walgreens - SAP Platform",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 17994047.91330935
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Walgreen National Corporation (639155)",
+          "type": "Azure ACE / AED",
+          "subs": 384,
+          "consumption_acu": 234833930.3753162,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreen National Corporation",
+          "type": "S500",
+          "subs": 384,
+          "consumption_acu": 137527864.75480303,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "OneNation",
+          "type": "Microsoft for Startups 2.0",
+          "subs": 265,
+          "consumption_acu": 106485402.44813041,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens - covid and vaccine app",
+          "type": "Azure Priority 0",
+          "subs": 10,
+          "consumption_acu": 32494150.64851839,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens - RxR Platform",
+          "type": "Proactive Resilience",
+          "subs": 8,
+          "consumption_acu": 24890059.06102412,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens | RxI Platform - WARA Dec 2025",
+          "type": "Proactive Resilience",
+          "subs": 4,
+          "consumption_acu": 20471532.481586978,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens - SAP Platform",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 17994047.91330935,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens - Digital Platform",
+          "type": "Proactive Resilience",
+          "subs": 6,
+          "consumption_acu": 17691085.09331206,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens DataLynx Data Platform",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 14031562.58063702,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        },
+        {
+          "name": "Walgreens - Labor Scheduling Optimization",
+          "type": "Proactive Resilience",
+          "subs": 2,
+          "consumption_acu": 398408.1148485298,
+          "industry": "Retail & Consumer Goods",
+          "vertical": "Retailers",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "18982817",
+      "alias": "TJU",
+      "customer": "Thomas Jefferson University",
+      "workload_hint": "EPIC",
+      "org_consumption_acu": 63042424.50374961,
+      "org_entity_name": "Thomas Jefferson University and its Affi (18982817)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 59408941.2721685,
+      "hint_matched_workloads": [
+        {
+          "name": "Thomas Jefferson University and Hospitals (EPIC)",
+          "type": "Azure Priority 0",
+          "subs": 28,
+          "consumption_acu": 30681528.76348956
+        },
+        {
+          "name": "TJU - EPIC on Azure WARA",
+          "type": "Proactive Resilience",
+          "subs": 10,
+          "consumption_acu": 28727412.508678943
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "Thomas Jefferson University and its Affi (18982817)",
+          "type": "Azure ACE / AED",
+          "subs": 151,
+          "consumption_acu": 63042424.50374961,
+          "industry": "Education",
+          "vertical": "Higher Education",
+          "region": "United States"
+        },
+        {
+          "name": "Thomas Jefferson University and its Affi",
+          "type": "Majors",
+          "subs": 151,
+          "consumption_acu": 32615232.235274043,
+          "industry": "Education",
+          "vertical": "Higher Education",
+          "region": "United States"
+        },
+        {
+          "name": "Thomas Jefferson University and Hospitals (EPIC)",
+          "type": "Azure Priority 0",
+          "subs": 28,
+          "consumption_acu": 30681528.76348956,
+          "industry": "Education",
+          "vertical": "Higher Education",
+          "region": "United States"
+        },
+        {
+          "name": "TJU - EPIC on Azure WARA",
+          "type": "Proactive Resilience",
+          "subs": 10,
+          "consumption_acu": 28727412.508678943,
+          "industry": "Education",
+          "vertical": "Higher Education",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "1833997",
+      "alias": "MichMed",
+      "customer": "University of Michigan",
+      "workload_hint": "EPIC",
+      "org_consumption_acu": 8387398.206028006,
+      "org_entity_name": "UNIVERSITY OF MICHIGAN (1833997)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 8136660.911041761,
+      "hint_matched_workloads": [
+        {
+          "name": "MichMed - Epic on Azure: SfMC",
+          "type": "Proactive Resilience",
+          "subs": 467,
+          "consumption_acu": 8136660.911041761
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "UNIVERSITY OF MICHIGAN (1833997)",
+          "type": "Azure ACE / AED",
+          "subs": 467,
+          "consumption_acu": 8387398.206028006,
+          "industry": "Education",
+          "vertical": "Higher Education",
+          "region": "United States"
+        },
+        {
+          "name": "MichMed - Epic on Azure: SfMC",
+          "type": "Proactive Resilience",
+          "subs": 467,
+          "consumption_acu": 8136660.911041761,
+          "industry": "Education",
+          "vertical": "Higher Education",
+          "region": "United States"
+        }
+      ]
+    },
+    {
+      "tpid": "3841220",
+      "alias": "Ascension_Health",
+      "customer": "Ascension Health",
+      "workload_hint": "EPIC",
+      "org_consumption_acu": 13576364.58876739,
+      "org_entity_name": "ASCENSION HEALTH ISD (3841220)",
+      "org_entity_type": "Azure ACE / AED",
+      "hint_matched_consumption_acu": 9032125.36462842,
+      "hint_matched_workloads": [
+        {
+          "name": "Ascension - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 4593502.276955381
+        },
+        {
+          "name": "Ascension Health Epic and Citrix",
+          "type": "Azure Priority 0",
+          "subs": 4,
+          "consumption_acu": 4400500.047705349
+        },
+        {
+          "name": "Ascension - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 38123.03996768999
+        }
+      ],
+      "all_workloads": [
+        {
+          "name": "ASCENSION HEALTH ISD (3841220)",
+          "type": "Azure ACE / AED",
+          "subs": 149,
+          "consumption_acu": 13576364.58876739,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "ASCENSION HEALTH ISD",
+          "type": "S500",
+          "subs": 149,
+          "consumption_acu": 7044033.407283771,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Ascension - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 4593502.276955381,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Ascension Health Epic and Citrix",
+          "type": "Azure Priority 0",
+          "subs": 4,
+          "consumption_acu": 4400500.047705349,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Domain Controllers in Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 1135080.7420646101,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Azure Citrix",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 903955.4728468942,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "SiteCore",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 529109.5951770698,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Solarwinds",
+          "type": "Proactive Resilience",
+          "subs": 3,
+          "consumption_acu": 363605.6490782499,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Azure B2C",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 77990.84158857,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Ascension - Epic on Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 38123.03996768999,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Domain Controllers in Azure",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 26044.305869800002,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        },
+        {
+          "name": "Azure Citrix",
+          "type": "Proactive Resilience",
+          "subs": 1,
+          "consumption_acu": 4795.65087563,
+          "industry": "Healthcare",
+          "vertical": "Health Provider",
+          "region": "United States"
+        }
+      ]
+    }
+  ]
+}

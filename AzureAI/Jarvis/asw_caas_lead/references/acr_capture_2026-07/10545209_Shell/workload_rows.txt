@@ -1,0 +1,265 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | RD
+Royal Dutch Shell Global Parent
+10545209
+6311
+
+Netherlands
+Netherlands
+Netherlands
+Unified
+Pulse
+Azure ACE / AED
+S500
+Proactive Resilience
+18
+
+View
+
+
+
+[2] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[3] picker=True | SP
+Shell PLC - Mobility
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[4] picker=True | SP
+Shell PLC - ONEFPS
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[5] picker=True | SP
+Shell plc - SparkFDA
+Proactive Resilience
+2
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[6] picker=True | S
+SEDP-MGMT-PROD
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[7] picker=True | SP
+Shell Plc - SEQ02729-US-PROD
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[8] picker=True | P
+PDS-PROD
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[9] picker=True | D
+DS
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[10] picker=True | S
+Shell - OneFPS – USA
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[11] picker=True | A
+ADA
+Proactive Resilience
+3
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[12] picker=True | SP
+Shell Plc - SEQ01324-RTL-ONEFPS
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[13] picker=True | SP
+Shell Plc - COMO
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[14] picker=True | SP
+Shell Plc - ERP-Nucleus
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[15] picker=True | S
+Shell
+Azure ACE / AED
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[16] picker=True | SP
+Shell Plc - SEQ01132-PRD-PUB-MKTA-MKT
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[17] picker=True | S
+ST-GMAS
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[18] picker=True | SI
+Shell Information Technology International B.V. (10545209)
+Azure ACE / AED
+6311
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[19] picker=True | S
+STRATOS-PROD
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[20] picker=True | SP
+Shell plc - SAP S/4 CFIN
+Proactive Resilience
+2
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[21] picker=True | SP
+Shell Plc - SEQ01468-SAP-GF-CFIN-PROD
+Proactive Resilience
+1
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[22] picker=True | RD
+Royal Dutch Shell Global Parent
+S500
+6311
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse
+[23] picker=True | SP
+Shell Plc - Emerald
+Proactive Resilience
+3
+
+Netherlands
+Proactive Resilience
+S500
+Unified
+Azure ACE / AED
+Pulse

@@ -1,0 +1,205 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | P
+PepsiCo
+636846
+194
+
+United States
+United States
+USA - Retail & CPG Enterprise
+Unified
+S500
+Azure ACE / AED
+Pulse
+ARR
+Proactive Resilience
+20
+
+View
+
+
+
+[3] picker=False | J
+James
+36193607
+3
+
+United States
+United States
+UNKNOWN
+0
+
+View
+
+
+
+[4] picker=False | O
+Orhan
+114910727
+1
+
+South MCC
+South Europe
+Turkey
+0
+
+View
+
+
+
+[5] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[6] picker=True | P
+PepsiCo
+S500
+194
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[7] picker=True | P
+PepsiCo - Shared Services
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[8] picker=True | M
+MDIP
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[9] picker=True | M
+MDIP
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[10] picker=True | P
+PepsiCo - SH+
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[11] picker=True | P
+PepsiCo - EDF
+Proactive Resilience
+4
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[12] picker=True | P
+PepsiCo - TM1 - CSP - IBM Managed
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[13] picker=True | P
+PepsiCo - PGT
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[14] picker=True | P
+PepsiCo
+Azure ACE / AED
+194
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[15] picker=True | P
+PepsiCo - PepsiConnect
+Proactive Resilience
+3
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse
+[16] picker=True | C
+CAVO
+Proactive Resilience
+1
+
+USA - Retail & CPG Enterprise
+ARR
+Proactive Resilience
+Unified
+Azure ACE / AED
+S500
+Pulse

@@ -1,0 +1,211 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | S
+SAP
+15902931
+1641
+
+United States
+United States
+USA - Software and Digital Platforms
+Azure ACE / AED
+Azure Priority 0
+Proactive Resilience
+6
+
+View
+
+
+
+[2] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[3] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+1375
+
+Germany, UNKNOWN, USA - Software and Digital Platforms, Unmanaged External Non-Billable Account
+Azure ACE / AED
+Azure Priority 0
+Proactive Resilience
+Microsof
+[4] picker=True | SE
+SAP ECS - Nestle
+Azure ACE / AED
+6
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[5] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+20
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[6] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+1
+
+USA - Software and Digital Platforms
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+[7] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+48
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[8] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+1780
+
+USA - Software and Digital Platforms, China, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+Majors
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[9] picker=True | S
+SAP (15902931)
+Azure ACE / AED
+1
+
+USA - Software and Digital Platforms
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+[10] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+403
+
+USA - Software and Digital Platforms, Germany, China
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+Majors
+[11] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+266
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[12] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+53
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[13] picker=True | SS
+SAP SE- ECS (Critical Suscriptions)
+Proactive Resilience
+25
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S5
+[14] picker=True | SS
+SAP SE (603819)
+Azure ACE / AED
+35
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse
+[15] picker=True | SS
+SAP SE
+Azure Priority 0
+899
+
+USA - Software and Digital Platforms, Germany
+Azure Priority 0
+Proactive Resilience
+Azure ACE / AED
+HotDL
+EngOps Managed
+QCC
+Unified
+S500
+Pulse

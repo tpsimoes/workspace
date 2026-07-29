@@ -1,0 +1,76 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | TJ
+Thomas Jefferson University and its Affi
+18982817
+151
+
+United States
+United States
+USA - State, Local and Education
+Azure ACE / AED
+Majors
+Unified
+Azure Priority 0
+Proactive Resilience
+17
+
+View
+
+[2] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[3] picker=True | TJ
+Thomas Jefferson University and its Affi (18982817)
+Azure ACE / AED
+151
+
+USA - State, Local and Education
+Azure Priority 0
+Proactive Resilience
+Unified
+Azure ACE / AED
+Majors
+[4] picker=True | T
+TJU - EPIC on Azure WARA
+Proactive Resilience
+10
+
+USA - State, Local and Education
+Azure Priority 0
+Proactive Resilience
+Unified
+Azure ACE / AED
+Majors
+[5] picker=True | TJ
+Thomas Jefferson University and its Affi
+Majors
+151
+
+USA - State, Local and Education
+Azure Priority 0
+Proactive Resilience
+Unified
+Azure ACE / AED
+Majors
+[6] picker=True | TJ
+Thomas Jefferson University and Hospitals (EPIC)
+Azure Priority 0
+28
+
+USA - State, Local and Education
+Azure Priority 0
+Proactive Resilience
+Unified
+Azure ACE / AED
+Majors

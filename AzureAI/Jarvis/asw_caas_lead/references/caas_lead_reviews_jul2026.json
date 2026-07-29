@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "month": "Jul FY27",
+    "month_tag": "jul2026",
+    "fiscal_year": "FY2027",
+    "stage": "curated",
+    "curation_note": "PLACEHOLDER - No CaaS Lead Sync review has occurred for Jul 2026 yet (typically happens end of month). Populate by running _parse_caas_reviews.py + _curate_caas_reviews.py after the FY26July - CaaS Lead Sync SharePoint folder is populated at end of Jul 2026.",
+    "curated_at": "2026-07-20T07:11:59.402810Z",
+    "curated_customer_count": 0,
+    "sharepoint_folder": "FY26July - CaaS Lead Sync (pending)"
+  },
+  "customers": {}
+}

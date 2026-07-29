@@ -1,0 +1,215 @@
+{
+  "snapshot_month": "2026-06",
+  "prev_month": "2026-05",
+  "captured_utc": "2026-07-18T09:38:00Z",
+  "source": "CX Observe Customer Summary → Top KPIs · Consumption tile (Azure Consumption, USD)",
+  "level": "org-level",
+  "unit": "USD",
+  "notes": "First-pass FY26 Jun snapshot. Values represent customer-level total Azure Consumption in USD (not workload-specific) unless a `workload` field is set on the entry. Shell (TPID 10545209) is workload-scoped to 'Shell plc - SAP S/4 CFIN' per CaaS Lead direction (parent-level Shell consumption is 24.87M USD which spans non-SAP scope). TPID 2699441 (SAP RISE tenant 3) did not resolve — marked null. Legacy JSON field names `acu_this_month` / `acu_display` are retained for loader compatibility; their values hold USD amounts.",
+  "customers": [
+    {
+      "tpid": "603819",
+      "customer": "SAP SE (SAP RISE tenant)",
+      "acu_this_month": 337760000,
+      "prev_month": 344680000,
+      "delta_pct": -2.01,
+      "acu_display": "337.76M",
+      "prev_display": "344.68M"
+    },
+    {
+      "tpid": "15902931",
+      "customer": "SAP (SAP RISE tenant)",
+      "acu_this_month": 1450000,
+      "prev_month": 1370000,
+      "delta_pct": 6.01,
+      "acu_display": "1.45M",
+      "prev_display": "1.37M"
+    },
+    {
+      "tpid": "2699441",
+      "customer": "SAP RISE tenant 3",
+      "acu_this_month": null,
+      "prev_month": null,
+      "delta_pct": null,
+      "acu_display": null,
+      "prev_display": null
+    },
+    {
+      "tpid": "636846",
+      "customer": "PepsiCo",
+      "acu_this_month": 40110000,
+      "prev_month": 39780000,
+      "delta_pct": 0.84,
+      "acu_display": "40.11M",
+      "prev_display": "39.78M"
+    },
+    {
+      "tpid": "1719071",
+      "customer": "Woolworths Group",
+      "acu_this_month": 9980000,
+      "prev_month": 10060000,
+      "delta_pct": -0.8,
+      "acu_display": "9.98M",
+      "prev_display": "10.06M"
+    },
+    {
+      "tpid": "682354",
+      "customer": "Medline Industries",
+      "acu_this_month": 6050000,
+      "prev_month": 6480000,
+      "delta_pct": -6.63,
+      "acu_display": "6.05M",
+      "prev_display": "6.48M"
+    },
+    {
+      "tpid": "10545209",
+      "customer": "Shell",
+      "workload": "Shell plc - SAP S/4 CFIN",
+      "acu_this_month": 536590,
+      "prev_month": 550050,
+      "delta_pct": -2.45,
+      "acu_display": "536.59K",
+      "prev_display": "550.05K"
+    },
+    {
+      "tpid": "523595",
+      "customer": "Ferrero SpA",
+      "acu_this_month": 3780000,
+      "prev_month": 4100000,
+      "delta_pct": -7.85,
+      "acu_display": "3.78M",
+      "prev_display": "4.10M"
+    },
+    {
+      "tpid": "605015",
+      "customer": "LEGO Group",
+      "acu_this_month": 2030000,
+      "prev_month": 1960000,
+      "delta_pct": 3.43,
+      "acu_display": "2.03M",
+      "prev_display": "1.96M"
+    },
+    {
+      "tpid": "1248703",
+      "customer": "Beiersdorf AG",
+      "acu_this_month": 1970000,
+      "prev_month": 2120000,
+      "delta_pct": -7.29,
+      "acu_display": "1.97M",
+      "prev_display": "2.12M"
+    },
+    {
+      "tpid": "18982817",
+      "customer": "Thomas Jefferson University",
+      "acu_this_month": 7730000,
+      "prev_month": 7470000,
+      "delta_pct": 3.46,
+      "acu_display": "7.73M",
+      "prev_display": "7.47M"
+    },
+    {
+      "tpid": "1833997",
+      "customer": "University of Michigan",
+      "acu_this_month": 1150000,
+      "prev_month": 1150000,
+      "delta_pct": -0.04,
+      "acu_display": "1.15M",
+      "prev_display": "1.15M"
+    },
+    {
+      "tpid": "3841220",
+      "customer": "Ascension Health",
+      "acu_this_month": 1450000,
+      "prev_month": 1570000,
+      "delta_pct": -7.71,
+      "acu_display": "1.45M",
+      "prev_display": "1.57M"
+    },
+    {
+      "tpid": "640443",
+      "customer": "Nike",
+      "acu_this_month": 9510000,
+      "prev_month": 9800000,
+      "delta_pct": -2.96,
+      "acu_display": "9.51M",
+      "prev_display": "9.80M"
+    },
+    {
+      "tpid": "520706",
+      "customer": "Bayer AG",
+      "acu_this_month": 15680000,
+      "prev_month": 16730000,
+      "delta_pct": -6.28,
+      "acu_display": "15.68M",
+      "prev_display": "16.73M"
+    },
+    {
+      "tpid": "523272",
+      "customer": "BHP",
+      "acu_this_month": 5090000,
+      "prev_month": 5430000,
+      "delta_pct": -6.15,
+      "acu_display": "5.09M",
+      "prev_display": "5.43M"
+    },
+    {
+      "tpid": "101552",
+      "customer": "Unilever",
+      "acu_this_month": 12210000,
+      "prev_month": 12460000,
+      "delta_pct": -2.01,
+      "acu_display": "12.21M",
+      "prev_display": "12.46M"
+    },
+    {
+      "tpid": "645076",
+      "customer": "McKesson Corporation",
+      "acu_this_month": 13680000,
+      "prev_month": 14500000,
+      "delta_pct": -5.62,
+      "acu_display": "13.68M",
+      "prev_display": "14.50M"
+    },
+    {
+      "tpid": "643195",
+      "customer": "Halliburton Company",
+      "acu_this_month": 8730000,
+      "prev_month": 8950000,
+      "delta_pct": -2.43,
+      "acu_display": "8.73M",
+      "prev_display": "8.95M"
+    },
+    {
+      "tpid": "940486",
+      "customer": "Petrobras",
+      "acu_this_month": 5850000,
+      "prev_month": 5960000,
+      "delta_pct": -1.96,
+      "acu_display": "5.85M",
+      "prev_display": "5.96M"
+    },
+    {
+      "tpid": "1283152",
+      "customer": "Mount Sinai Hospital",
+      "acu_this_month": 2770000,
+      "prev_month": 2800000,
+      "delta_pct": -1.07,
+      "acu_display": "2.77M",
+      "prev_display": "2.80M"
+    },
+    {
+      "tpid": "639155",
+      "customer": "Walgreens",
+      "acu_this_month": 56310000,
+      "prev_month": 58350000,
+      "delta_pct": -3.5,
+      "acu_display": "56.31M",
+      "prev_display": "58.35M"
+    }
+  ],
+  "meta": {
+    "carry_over_note": "Carried over from FY26 Jun snapshot; CX Observe Consumption tile refreshes at month-end. Refresh at end of Jul 2026 for first FY27 data point.",
+    "carried_over_at": "2026-07-20T07:11:59.396208Z",
+    "original_source_file": "fy26_acr_snapshot.json"
+  }
+}

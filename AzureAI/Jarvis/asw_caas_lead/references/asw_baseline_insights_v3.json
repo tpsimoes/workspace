@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "snapshot_month": "Jun FY26",
+    "fiscal_year": "FY2026",
+    "captured_utc": "2026-07-20T02:22:00Z",
+    "source": "A&I and DTP | Insights+_v3_AIDTP_Fabric",
+    "source_url": "https://cesbihub.microsoft.com/User/groups/10/report/81538463-21f0-45bc-8f08-71d5dc9ccc48/0/0?reportTab=ReportSectiond24dca6cf2e742181ba9",
+    "filter": {
+      "Channel Function Detail": "ASW_SAPEpicEsc",
+      "Time Fiscal Year": "FY2026",
+      "Time LastTwelveMonths": "(All)",
+      "Time LastSixMonths": "(All)"
+    },
+    "notes": "Full FY26 (Jul 2025 - Jun 2026, 12 months) captured 2026-07-20 via Playwright MCP + external Edge (CDP 9222). Focus mode of the 'Key Metrics by Date' lower grid + End-key scroll revealed the 總計 (Total) column. All 7 baseline KPIs now sourced from Insights+_v3. Top-card scorecards (csat_avg=4.92, ir_met_pct=98.9, critsit_rate=18.4) and table-Total values (case_vol=4666, closed=4650, avg_dtc=12.2, pct_close_7d=43.9) verified against .playwright-mcp/grid2-total-visible.yml and screenshots grid2-focus.png, grid2-scrolled-end.png. Refresh procedure: see Skills/asw_caas_lead/SKILL.md §8 Step 2b."
+  },
+  "kpis": {
+    "case_vol": {
+      "value": 4666,
+      "source": "Insights+_v3",
+      "insights_v3_field": "Created Cases",
+      "note": "FY26 Total (12 months) from Insights+_v3 → 'Created Cases' row on Key Metrics by Date table (Total column). Monthly breakdown FM Jul 2026 - FM Jun 2026: 354, 372, 474, 463, 398, 296, 295, 343, 366, 418, 421, 466 (sum = 4666)."
+    },
+    "closed": {
+      "value": 4650,
+      "source": "Insights+_v3",
+      "insights_v3_field": "Closed Cases",
+      "note": "FY26 Total (12 months) from Insights+_v3 → 'Closed Cases' row on Key Metrics by Date table (Total column). Monthly breakdown FM Jul 2026 - FM Jun 2026: 385, 341, 458, 472, 443, 300, 290, 312, 363, 406, 429, 451 (sum = 4650)."
+    },
+    "csat_avg": {
+      "value": 4.92,
+      "source": "Insights+_v3",
+      "surveys": null,
+      "response_pct": null,
+      "dsat": 0.6,
+      "note": "CSAT 5 Star Avg scorecard on the Insights+_v3 dashboard, FY2026 aggregate (Range 4.80 - 4.95 typical). DSAT % also captured (0.6%)."
+    },
+    "ir_met_pct": {
+      "value": 98.9,
+      "source": "Insights+_v3",
+      "unit": "%",
+      "target": 95,
+      "note": "% IR Met SRs scorecard on the Insights+_v3 dashboard, FY2026 aggregate. Target >= 95%."
+    },
+    "avg_dtc": {
+      "value": 12.2,
+      "source": "Insights+_v3",
+      "insights_v3_field": "Avg DTC",
+      "unit": "days",
+      "target": 12,
+      "note": "FY26 weighted average from Insights+_v3 → 'Avg DTC' row on Key Metrics by Date table (Total column). Target <= 12 days. Monthly breakdown FM Jul 2026 - FM Jun 2026: 11.7, 13.1, 11.6, 12.8, 10.9, 11.5, 12.7, 12.0, 11.8, 10.6, 13.9, 13.3."
+    },
+    "pct_close_7d": {
+      "value": 43.9,
+      "source": "Insights+_v3",
+      "insights_v3_field": "% SR Closed in less than 7 Days",
+      "unit": "%",
+      "target": 50,
+      "note": "FY26 aggregate from Insights+_v3 → '% SR Closed in less than 7 Days' row on Key Metrics by Date table (Total column). Target >= 50%. Monthly breakdown FM Jul 2026 - FM Jun 2026: 38.2%, 44.6%, 42.4%, 38.8%, 52.4%, 44.7%, 43.8%, 50.6%, 44.9%, 45.8%, 41.3%, 41.7%."
+    },
+    "critsit_rate": {
+      "value": 18.4,
+      "source": "Insights+_v3",
+      "unit": "%",
+      "critsit_count": null,
+      "total": null,
+      "note": "% CritSit scorecard on the Insights+_v3 dashboard, FY2026 aggregate."
+    }
+  }
+}

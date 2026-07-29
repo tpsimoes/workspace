@@ -1,0 +1,135 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | MS
+MOUNT SINAI HOSPITAL
+1283152
+69
+
+United States
+United States
+USA - Healthcare
+Azure ACE / AED
+QCC
+ARR
+Unified
+HotDL
+Majors
+Azure Priority 0
+Proactive Resilience
+19
+
+View
+
+
+
+[2] picker=False | AP
+AddVita Pte. Ltd.
+128315267
+1
+
+Singapore Cluster
+ASEAN
+Singapore
+0
+
+View
+
+
+
+[3] picker=False | AI
+ae5804f5-5168-409a-8206-949606a1d2bc IW PII Masked
+128315268
+1
+
+Singapore Cluster
+ASEAN
+Singapore
+0
+
+View
+
+
+
+[4] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[5] picker=True | MS
+Mount Sinai - Epic on Azure
+Proactive Resilience
+7
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+Unified
+Majors
+QCC
+Azure ACE / AED
+HotDL
+ARR
+[6] picker=True | MS
+MOUNT SINAI HOSPITAL (1283152)
+Azure ACE / AED
+69
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+Unified
+Majors
+QCC
+Azure ACE / AED
+HotDL
+ARR
+[7] picker=True | MS
+Mount Sinai Epic on Azure
+Azure Priority 0
+7
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+Unified
+Majors
+QCC
+Azure ACE / AED
+HotDL
+ARR
+[8] picker=True | MS
+Mount Sinai (Americas)
+QCC
+69
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+Unified
+Majors
+QCC
+Azure ACE / AED
+HotDL
+ARR
+[9] picker=True | MS
+MOUNT SINAI HOSPITAL
+Majors
+69
+
+USA - Healthcare
+Azure Priority 0
+Proactive Resilience
+Unified
+Majors
+QCC
+Azure ACE / AED
+HotDL
+ARR

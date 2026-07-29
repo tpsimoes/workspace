@@ -1,0 +1,65 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UM
+UNIVERSITY OF MICHIGAN
+1833997
+467
+
+United States
+United States
+USA - State, Local and Education
+Unified
+Azure ACE / AED
+Proactive Resilience
+13
+
+View
+
+
+
+[2] picker=False | J
+james
+118972493
+2
+
+UK & Ireland
+UK & Ireland
+UK
+Microsoft for Startups 2.0
+0
+
+View
+
+
+
+[3] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[4] picker=True | UM
+UNIVERSITY OF MICHIGAN (1833997)
+Azure ACE / AED
+467
+
+USA - State, Local and Education
+Unified
+Proactive Resilience
+Azure ACE / AED
+[5] picker=True | M
+MichMed - Epic on Azure: SfMC
+Proactive Resilience
+467
+
+USA - State, Local and Education
+Unified
+Proactive Resilience
+Azure ACE / AED

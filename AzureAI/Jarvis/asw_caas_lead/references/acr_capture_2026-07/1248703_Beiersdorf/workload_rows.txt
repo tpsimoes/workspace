@@ -1,0 +1,68 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | BA
+Beiersdorf AG
+1248703
+340
+
+Germany & Austria
+Germany & Austria
+Germany
+Unified
+Azure ACE / AED
+Proactive Resilience
+6
+
+View
+
+
+
+[2] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[3] picker=True | BA
+Beiersdorf AG - Azure for SAP
+Proactive Resilience
+26
+
+Germany
+Proactive Resilience
+Unified
+Azure ACE / AED
+[4] picker=True | BS
+Beiersdorf Shared Services GmbH (1248703)
+Azure ACE / AED
+340
+
+Germany
+Proactive Resilience
+Unified
+Azure ACE / AED
+[5] picker=True | BA
+Beiersdorf AG - bdf-brands-websites
+Proactive Resilience
+1
+
+Germany
+Proactive Resilience
+Unified
+Azure ACE / AED
+[6] picker=True | SB
+SfMC Beiersdorf SAP on Azure
+Proactive Resilience
+2
+
+Germany
+Proactive Resilience
+Unified
+Azure ACE / AED

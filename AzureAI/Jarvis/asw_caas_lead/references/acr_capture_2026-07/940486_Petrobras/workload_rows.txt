@@ -1,0 +1,364 @@
+[0] picker=False | Customer
+TPID
+#Subscriptions
+Country
+Area
+Enterprise Operating Unit (EOU)
+Programs
+Contacts
+Related workloads
+Actions
+[1] picker=False | UE
+Unmanaged External Non-Billable Account
+-1
+7037269
+
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Unmanaged External Non-Billable Account
+Azure ACE / AED
+Microso
+[2] picker=False | P
+PETROBRAS - PETRÓLEO BRASILEIRO SA
+940486
+184
+
+Brazil
+Latam
+Brazil
+SFMC
+Unified
+Pulse
+S500
+Proactive Resilience
+7
+
+View
+
+
+
+[3] picker=False | LO
+Learn on Demand Systems
+23530918
+2502978
+
+United States
+United States
+East.SMECC.Corp
+Unified
+2
+
+View
+
+
+
+[4] picker=False | 1I
+157348f8-0fd4-4082-a453-d22e68db9414 IW PII Masked
+149767319
+1
+
+North MCC
+North Europe
+Ukraine
+0
+
+View
+
+
+
+[5] picker=False | CS
+Conbus Shop
+96353763
+1
+
+India
+India
+India
+0
+
+View
+
+
+
+[6] picker=False | CI
+c13f2de8-16fe-4ebe-8c17-1934166f3f79 IW PII Masked
+119735388
+1
+
+India
+India
+India
+0
+
+View
+
+
+
+[7] picker=False | Customer
+Workload Type
+#Subscriptions
+Enterprise Operating Unit (EOU)
+Programs
+[8] picker=True | A
+AZR-00001-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[9] picker=True | P
+PETROBRAS - APIM
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[10] picker=True | P
+PETROBRAS - PETRÓLEO BRASILEIRO SA
+S500
+184
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[11] picker=True | A
+AZR-00053-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[12] picker=True | A
+AZR-00048-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[13] picker=True | A
+AZR-00040-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[14] picker=True | A
+AZR-00069-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[15] picker=True | P
+PETROBRAS - PETRÓLEO BRASILEIRO SA - SAP (SAP on Azure)
+Proactive Resilience
+2
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[16] picker=True | A
+AZR-00088-PRD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[17] picker=True | A
+AZR-00059-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[18] picker=True | A
+AZR-00004-PRD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[19] picker=True | A
+AZR-OPERATIONS-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[20] picker=True | A
+AZR-00065-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[21] picker=True | A
+AZR-00083-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[22] picker=True | P
+PETROBRAS - ADX SI
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[23] picker=True | [Transpetro] - SAP_PROD_QA
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[24] picker=True | A
+AZR-00000-DEV
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[25] picker=True | A
+AZR-00077-PRD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[26] picker=True | A
+AZR-00076-NPRD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[27] picker=True | A
+AZR-00049-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[28] picker=True | A
+AZR-00004-SBX
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[29] picker=True | A
+AZR-00052-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[30] picker=True | A
+AZR-00000-TST
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse
+[31] picker=True | A
+AZR-HUB-SHD
+Proactive Resilience
+1
+
+Brazil
+Proactive Resilience
+SFMC
+S500
+Unified
+Pulse

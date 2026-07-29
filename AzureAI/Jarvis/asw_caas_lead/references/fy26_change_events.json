@@ -1,0 +1,27 @@
+{
+  "source": {
+    "workbook": "FY26_ASW_Cx_Changing_Activities_Annual_Results_2026-06-30.xlsx",
+    "sharepoint_url": "https://microsoft.sharepoint.com/:x:/t/AzureStrategicWorkloads-SAP/cQq8BQ68wj2SRIsPSYUuhuM6EgUCeu633SA-bLTnZRE0eKi3wg",
+    "local_copy": "Skills/asw_caas_lead/references/fy26_asw_cx_changing_activities.xlsx",
+    "extracted_at": "2026-07-18",
+    "sheet": "Summary by Customer (TOTAL row)"
+  },
+  "totals": {
+    "total_tracked": 29,
+    "completed": 28,
+    "cancelled": 1,
+    "customers_with_event": 10
+  },
+  "by_customer": [
+    {"customer": "Woolworths",                    "total": 5, "completed": 5, "cancelled": 0},
+    {"customer": "BHP",                           "total": 4, "completed": 4, "cancelled": 0},
+    {"customer": "Procter & Gamble",              "total": 4, "completed": 4, "cancelled": 0},
+    {"customer": "Thomas Jefferson University",   "total": 4, "completed": 4, "cancelled": 0},
+    {"customer": "Duke Healthcare",               "total": 3, "completed": 2, "cancelled": 0},
+    {"customer": "Franciscan Alliance",           "total": 3, "completed": 3, "cancelled": 0},
+    {"customer": "Ascension Health Alliance",     "total": 2, "completed": 2, "cancelled": 0},
+    {"customer": "Emory University",              "total": 2, "completed": 2, "cancelled": 0},
+    {"customer": "Ferrero",                       "total": 1, "completed": 1, "cancelled": 0},
+    {"customer": "Petrobras",                     "total": 1, "completed": 1, "cancelled": 0}
+  ]
+}

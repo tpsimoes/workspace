@@ -1,0 +1,68 @@
+{
+  "Beiersdorf": {
+    "key": "1248703",
+    "pageId": 2849082,
+    "path": "/SAP/SfMC Customers/Beiersdorf",
+    "contentLen": 317
+  },
+  "BHP": {
+    "key": "523272",
+    "pageId": 1640779,
+    "path": "/SAP/SfMC Customers/BHP",
+    "contentLen": 7792
+  },
+  "CVS": {
+    "key": "noTPID-cvs",
+    "pageId": 2849079,
+    "path": "/SAP/SfMC Customers/CVS",
+    "contentLen": 319
+  },
+  "Ferrero": {
+    "key": "523595",
+    "pageId": 2849083,
+    "path": "/SAP/SfMC Customers/Ferrero",
+    "contentLen": 319
+  },
+  "General Motors": {
+    "key": "noTPID-general-motors",
+    "pageId": 2849080,
+    "path": "/SAP/SfMC Customers/General Motors",
+    "contentLen": 285
+  },
+  "Lego": {
+    "key": "605015",
+    "pageId": 2521742,
+    "path": "/SAP/SfMC Customers/Lego",
+    "contentLen": 4498
+  },
+  "Medline": {
+    "key": "682354",
+    "pageId": 1936621,
+    "path": "/SAP/SfMC Customers/Medline",
+    "contentLen": 3528
+  },
+  "Nike": {
+    "key": "640443",
+    "pageId": 1710356,
+    "path": "/SAP/SfMC Customers/Nike",
+    "contentLen": 2177
+  },
+  "PepsiCo": {
+    "key": "636846",
+    "pageId": 1256067,
+    "path": "/SAP/SfMC Customers/PepsiCo",
+    "contentLen": 3724
+  },
+  "Shell": {
+    "key": "10545209",
+    "pageId": 2849084,
+    "path": "/SAP/SfMC Customers/Shell",
+    "contentLen": 319
+  },
+  "Unilever": {
+    "key": "101552",
+    "pageId": 1565133,
+    "path": "/SAP/SfMC Customers/Unilever",
+    "contentLen": 4470
+  }
+}
