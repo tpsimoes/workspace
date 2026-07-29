@@ -74,6 +74,27 @@
 
     .footer { background: #2d3748; color: #a0aec0; padding: 14px 32px; font-size: 11px; line-height: 1.8; }
     .footer p { margin-bottom: 2px; } .footer strong { color: #e2e8f0; }
+
+    /* ── Case Detail Modal ── */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:1000; align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto; }
+    .modal-overlay.open { display:flex; }
+    .modal-box { background:#fff; border-radius:12px; box-shadow:0 8px 40px rgba(0,0,0,.28); width:96vw; max-width:1300px; max-height:82vh; display:flex; flex-direction:column; overflow:hidden; margin-bottom:40px; }
+    .modal-header { display:flex; align-items:center; justify-content:space-between; padding:13px 20px; border-bottom:1px solid var(--border); background:#f8fafd; flex-shrink:0; }
+    .modal-title { font-size:0.92rem; font-weight:700; color:var(--dark); }
+    .modal-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#64748b; padding:2px 7px; line-height:1; border-radius:4px; }
+    .modal-close:hover { color:var(--red); background:#fdf0f0; }
+    .modal-body { overflow:auto; padding:12px 16px; flex:1; }
+    .modal-body .empty-note { text-align:center; color:#94a3b8; padding:36px; font-style:italic; }
+    .modal-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .modal-table thead th { background:#f1f5fb; color:#374151; font-weight:600; padding:7px 10px; border-bottom:2px solid var(--border); white-space:nowrap; text-align:left; position:sticky; top:0; z-index:1; }
+    .modal-table tbody td { padding:6px 10px; border-bottom:1px solid #f0f0f0; white-space:nowrap; vertical-align:middle; }
+    .modal-table tbody tr:last-child td { border-bottom:none; }
+    .modal-table tbody tr:hover td { background:#f7faff; }
+    .cell-clickable { cursor:pointer; }
+    .cell-clickable:hover { background:#edf4ff !important; }
+    .sev-a { color:#dc3545; font-weight:700; }
+    .sev-b { color:#e6a817; font-weight:600; }
+    .cs-yes { color:#dc3545; font-weight:600; }
   </style>
 </head>
 <body>
@@ -150,6 +171,17 @@
   <p>• <strong>⚠ Metrics shown are representative placeholders</strong> — replace DATA array with actual Kusto output before distribution.</p>
 </div>
 
+<!-- Case Detail Modal -->
+<div class="modal-overlay" id="caseModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle"></span>
+      <button class="modal-close" onclick="closeModal()" title="Close">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <script>
 // ──────────────────────────────────────────────────────────────────────────
 // DATA — [alias, displayName, managerAlias, cases, avgDTS, avgDTC, pct7d, country, csatAvg|null, surveys, irMissed]
@@ -157,38 +189,38 @@
 //   Created: 4,666 | Avg DTC: 12.2d | %≤7d: 43.9% | CSAT: 4.92 | IR Met: 98.9%
 // ──────────────────────────────────────────────────────────────────────────
 const DATA = [
-  ["alkassap",      "Alex Kassap",           "noambi",   82,  1.1, 11.8, 46.3, "Bulgaria",    4.80, 14,  1],
+  ["alkassap",      "Alex Kassap",           "noambi",   82,  1.1, 11.8, 46.3, "USA",    4.80, 14,  1],
   ["alveleri",      "Alock Mendoza",         "nasaggu", 104,  0.8, 10.4, 51.9, "India",       4.95, 28,  0],
   ["andreikovacs",  "Andrei Kovacs",         "jacobw",   88,  1.4, 13.1, 40.9, "Romania",     4.88, 18,  1],
   ["aneculae",      "Alexandra Neculae",     "jacobw",   76,  1.6, 12.6, 43.4, "Romania",     4.83, 15,  0],
-  ["anrod",         "Angelica Rodriguez",    "kbeller",  91,  0.9,  9.7, 55.0, "Spain",       4.91, 22,  0],
+  ["anrod",         "Angelica Rodriguez",    "kbeller",  91,  0.9,  9.7, 55.0, "Costa Rica",       4.91, 22,  0],
   ["ayonbanerjee",  "Ayon Banerjee",         "dhanat",   95,  1.0, 11.3, 48.4, "India",       4.78, 24,  1],
   ["brwurz",        "Brian Wurzbacher",      "kbeller",  63,  1.7, 14.2, 38.1, "USA",         4.60, 10,  2],
   ["chmarri",       "Chandra Marribona",     "nasaggu",  87,  1.2, 10.8, 52.9, "India",       4.97, 20,  0],
-  ["clash",         "Clas Hortien",          "dhanat",   72,  1.3, 12.9, 44.4, "UK",          4.72, 13,  1],
-  ["cschriever",    "Curtis Schriever",      "noambi",   68,  1.5, 13.5, 41.2, "Germany",     4.65, 11,  2],
-  ["dantes",        "Dante Stancato",        "noambi",   79,  1.0, 11.4, 49.4, "Israel",      4.86, 16,  0],
-  ["diambroi",      "Didier Ambroise",       "kbeller",  58,  1.8, 15.0, 36.2, "France",      4.50,  8,  3],
+  ["clash",         "Clas Hortien",          "dhanat",   72,  1.3, 12.9, 44.4, "Germany",          4.72, 13,  1],
+  ["cschriever",    "Curtis Schriever",      "noambi",   68,  1.5, 13.5, 41.2, "USA",     4.65, 11,  2],
+  ["dantes",        "Dante Stancato",        "noambi",   79,  1.0, 11.4, 49.4, "Spain",      4.86, 16,  0],
+  ["diambroi",      "Didier Ambroise",       "kbeller",  58,  1.8, 15.0, 36.2, "USA",      4.50,  8,  3],
   ["ejohnston",     "Elliott Johnston",      "kbeller",  64,  1.6, 13.7, 39.1, "USA",         4.62, 11,  2],
   ["fmirdhe",       "Farhana Mirdhe",        "nasaggu",  99,  0.7, 10.1, 54.5, "India",       4.94, 26,  0],
-  ["francescav",    "Francesca Martinez",    "dhanat",   74,  1.4, 12.2, 45.9, "Italy",       4.75, 14,  1],
+  ["francescav",    "Francesca Martinez",    "dhanat",   74,  1.4, 12.2, 45.9, "Costa Rica",       4.75, 14,  1],
   ["frcardos",      "Francisco Cardoso",     "nasaggu",  83,  1.1, 11.0, 50.6, "Portugal",    4.88, 17,  0],
   ["gapetres",      "Gabriel Petrescu",        "noambi",   70,  1.3, 12.8, 43.6, "Romania",     4.71, 12,  1],
-  ["ivayala",       "Ivan Ayala",             "dhanat",   88,  1.0, 10.9, 50.0, "Spain",       4.82, 19,  0],
+  ["ivayala",       "Ivan Ayala",             "dhanat",   88,  1.0, 10.9, 50.0, "USA",       4.82, 19,  0],
   ["jakelin",       "Jake Lin",              "jacobw",  112,  0.6,  9.3, 58.9, "Australia",   5.00, 35,  0],
   ["joacarva",      "João Carvalho",         "nasaggu",  96,  0.9, 10.6, 52.1, "India",       4.96, 25,  0],
   ["joaguas",       "Jorge Águas",            "kbeller",  81,  1.1, 11.7, 47.2, "Portugal",    4.85, 16,  0],
-  ["jodieckm",      "Josiah Dieckmann",    "kbeller",  69,  1.4, 13.3, 40.6, "Germany",     4.67, 12,  1],
+  ["jodieckm",      "Josiah Dieckmann",    "kbeller",  69,  1.4, 13.3, 40.6, "USA",     4.67, 12,  1],
   ["jogoncal",      "João Gonçalves",        "noambi",   77,  1.2, 11.9, 46.8, "Portugal",    4.79, 15,  1],
-  ["kamarti",       "Katherine Martinez",    "kbeller",  86,  0.8, 10.3, 53.5, "USA",         4.92, 21,  0],
+  ["kamarti",       "Katherine Martinez",    "kbeller",  86,  0.8, 10.3, 53.5, "Costa Rica",         4.92, 21,  0],
   ["kiranchinta",   "Kiran Chinta",          "dhanat",   90,  1.0, 11.1, 49.7, "India",       4.89, 22,  0],
-  ["landreazzi",    "Lucas Andreazzi",       "noambi",   73,  1.5, 13.2, 41.1, "Italy",       4.68, 13,  2],
+  ["landreazzi",    "Lucas Andreazzi",       "noambi",   73,  1.5, 13.2, 41.1, "Brazil",       4.68, 13,  2],
   ["ldondeti",      "Lakshmareddy Dondeti",  "dhanat",   93,  0.9, 10.7, 51.6, "India",       4.91, 23,  0],
   ["niljain",       "Nilakshi Jain",         "nasaggu",  98,  0.8, 10.3, 53.1, "India",       4.93, 25,  0],
-  ["nmutya",        "Naga Mutya",            "kbeller",  80,  1.2, 12.0, 46.3, "Philippines", 4.81, 16,  1],
+  ["nmutya",        "Naga Mutya",            "kbeller",  80,  1.2, 12.0, 46.3, "USA", 4.81, 16,  1],
   ["npericherla",   "Krishnam Raj",          "dhanat",   86,  1.1, 11.4, 48.8, "India",       4.84, 19,  0],
-  ["oldoll",        "Olivier Doll",          "dhanat",   65,  1.7, 14.4, 37.5, "France",      4.55,  9,  3],
-  ["padias",        "Paulo Dias",            "kbeller",  79,  1.2, 11.6, 47.5, "Bulgaria",    4.80, 15,  1],
+  ["oldoll",        "Olivier Doll",          "dhanat",   65,  1.7, 14.4, 37.5, "Germany",      4.55,  9,  3],
+  ["padias",        "Paulo Dias",            "kbeller",  79,  1.2, 11.6, 47.5, "Portugal",    4.80, 15,  1],
   ["pedmarqu",      "Pedro Marques",         "noambi",   72,  1.3, 12.7, 43.8, "Portugal",    4.72, 13,  1],
   ["priyakumar",    "Priya Kumar",           "nasaggu", 108,  0.7,  9.8, 56.5, "India",       4.98, 31,  0],
   ["ricardova",     "Ricardo Molina",        "dhanat",   78,  1.3, 12.3, 45.1, "Brazil",      4.76, 15,  1],
@@ -198,7 +230,7 @@ const DATA = [
   ["shcunni",       "Shairon Cunningham",    "dhanat",   74,  1.4, 12.5, 44.6, "UK",          4.74, 14,  1],
   ["sherrera",      "Steven Herrera",        "dhanat",   76,  1.3, 12.1, 46.1, "Spain",       4.77, 15,  1],
   ["shjoyce",       "Sheetal Joyce",         "dhanat",   70,  1.5, 13.4, 40.0, "India",       4.64, 11,  2],
-  ["shussein",      "Shrouq Hussein",        "jacobw",   83,  1.1, 11.5, 48.2, "UAE",         4.83, 17,  0],
+  ["shussein",      "Shrouq Hussein",        "jacobw",   83,  1.1, 11.5, 48.2, "Jordan",         4.83, 17,  0],
   ["sish",          "Siddharth Sharma",      "dhanat",   85,  1.0, 11.0, 50.6, "India",       4.86, 19,  0],
   ["takin",         "Tanner King",           "kbeller",  91,  0.9, 10.8, 51.1, "India",       4.90, 22,  0],
   ["tholliday",     "Taylor Holliday",       "noambi",   66,  1.6, 14.1, 38.4, "USA",         4.57, 10,  2],
@@ -286,9 +318,9 @@ function renderRows(rows) {
       <td class="num">${fmtN(dtc)}</td>
       <td class="num">${tlP7d(p7d)}</td>
       <td>${country}</td>
-      <td class="num">${tlCSAT(csat)}</td>
+      <td class="num${csat !== null && surv > 0 ? ' cell-clickable' : ''}"${csat !== null && surv > 0 ? ` onclick="openCSATModal('${alias}')" title="Click to view CSAT cases"` : ''}>${tlCSAT(csat)}</td>
       <td class="num">${surv}</td>
-      <td class="num">${tlIR(ir)}</td>
+      <td class="num${ir > 0 ? ' cell-clickable' : ''}"${ir > 0 ? ` onclick="openIRModal('${alias}')" title="Click to view IR SLA missed cases"` : ''}>${tlIR(ir)}</td>
     </tr>`;
   }).join('');
 }
@@ -346,6 +378,134 @@ function applyFilters() {
   });
   document.getElementById('rowCount').textContent = `Showing ${visible} of 68 engineers`;
 }
+
+// ──────────────────────────────────────────────────────────────────────────
+// CASE DETAIL MODAL — placeholder data pools + generators
+// ──────────────────────────────────────────────────────────────────────────
+const POOL_CUSTOMERS = ["Accenture","BHP","Bayer","Cargill","Ferrero","Coca-Cola","Cencora","EON Digital Tech","Emory Healthcare","Iberdrola","Ascension Health","Franciscan Health","CHP","Caresource","Bridgewater","Ecolab","Otis","GKN","Volvo","Sanofi"];
+const POOL_TPIDS     = ["100045678","100023456","100067890","100012345","100089012","100034567","100056789","100078901","100091234","100005678","100019876","100032145","100062537","100071482","100038291"];
+const POOL_QUEUES    = ["CSS-ASW-SAP-EpicEsc","CSS-ASW-SAP-Std","CSS-ASW-Epic-Std"];
+const POOL_PRODUCTS  = ["SAP HANA","SAP S/4HANA","SAP NetWeaver","SAP Basis","Epic on Azure","SAP on AKS","SAP BTP","SAP LT Replication Server"];
+const POOL_SCENARIOS = ["HA & Pacemaker","DB Performance","OS Integration","Storage Configuration","Network Configuration","Migration & Upgrade","Backup & Recovery","Security & Compliance","Monitoring & Alerting","Scale-out Architecture","Installation & Setup","Data Replication","Kernel Patching","System Copy"];
+const POOL_SERVICES  = ["Azure Virtual Machines","Azure Storage","Azure Virtual Network","Azure ExpressRoute","Azure Load Balancer","Azure Backup","Azure Monitor","Azure NetApp Files","Azure Site Recovery","Azure Disk Storage","Azure Private Link","Azure Firewall"];
+const POOL_REGIONS   = ["EMEA","Americas","APJ","India"];
+
+function _seededRng(seed) {
+  let s = (seed ^ 0x9E3779B9) >>> 0;
+  return function() { s = Math.imul(1664525, s) + 1013904223 >>> 0; return s / 0x100000000; };
+}
+function _strSeed(str) { return str.split('').reduce((h, c) => Math.imul(31, h) + c.charCodeAt(0) | 0, 0); }
+function _pick(arr, rng) { return arr[Math.floor(rng() * arr.length)]; }
+function _randDate(rng) {
+  const s = new Date('2025-07-01').getTime(), e = new Date('2026-06-30').getTime();
+  return new Date(s + rng() * (e - s)).toISOString().slice(0, 10);
+}
+function _sevHtml(sev) {
+  return sev === 'A' ? '<span class="sev-a">A</span>' : sev === 'B' ? '<span class="sev-b">B</span>' : sev;
+}
+function _csatStarHtml(score) {
+  const c = score >= 5 ? 'cb-g' : score >= 4 ? 'cb-y' : 'cb-r';
+  return `<span class="csat-badge ${c}">${score} ★</span>`;
+}
+function _critHtml(v) { return v === 'Yes' ? '<span class="cs-yes">Yes</span>' : v; }
+
+function generateCSATCases(alias, count, csatAvg) {
+  const rng = _seededRng(_strSeed(alias + ':csat'));
+  return Array.from({length: count}, () => {
+    const score = Math.max(1, Math.min(5, Math.round(csatAvg + (rng() - 0.5) * 2.5)));
+    return {
+      incidentId: `SR-${2000000 + Math.floor(rng() * 8000000)}`,
+      customer:   _pick(POOL_CUSTOMERS, rng),
+      tpid:       _pick(POOL_TPIDS, rng),
+      sev:        _pick(['A','B','B','C','C','C'], rng),
+      critSit:    _pick(['No','No','No','No','Yes'], rng),
+      created:    _randDate(rng),
+      csatScore:  score,
+      queue:      _pick(POOL_QUEUES, rng),
+      product:    _pick(POOL_PRODUCTS, rng),
+      scenario:   _pick(POOL_SCENARIOS, rng),
+      region:     _pick(POOL_REGIONS, rng),
+      service:    _pick(POOL_SERVICES, rng),
+    };
+  });
+}
+
+function generateIRCases(alias, count) {
+  const rng = _seededRng(_strSeed(alias + ':ir'));
+  return Array.from({length: count}, () => ({
+    incidentId: `SR-${2000000 + Math.floor(rng() * 8000000)}`,
+    customer:   _pick(POOL_CUSTOMERS, rng),
+    tpid:       _pick(POOL_TPIDS, rng),
+    sev:        _pick(['A','A','B','B','B','C'], rng),
+    critSit:    _pick(['No','No','Yes','Yes','Yes'], rng),
+    created:    _randDate(rng),
+    queue:      _pick(POOL_QUEUES, rng),
+    product:    _pick(POOL_PRODUCTS, rng),
+    scenario:   _pick(POOL_SCENARIOS, rng),
+    region:     _pick(POOL_REGIONS, rng),
+    service:    _pick(POOL_SERVICES, rng),
+  }));
+}
+
+function openCSATModal(alias) {
+  const row = DATA.find(r => r[0] === alias);
+  if (!row) return;
+  const [, name, , , , , , , csat, surv] = row;
+  if (csat === null || surv === 0) return;
+  const cases = generateCSATCases(alias, surv, csat);
+  const cols = ["IncidentId","Customer","TPID","Sev","CritSit","Created","CSAT Score","Queue","Product (L2)","Scenario (L3)","Engineer","Region","ServiceName"];
+  const rows = cases.map(c => `<tr>
+    <td>${c.incidentId}</td>
+    <td>${c.customer}</td>
+    <td style="font-size:11px;color:#64748b">${c.tpid}</td>
+    <td>${_sevHtml(c.sev)}</td>
+    <td>${_critHtml(c.critSit)}</td>
+    <td>${c.created}</td>
+    <td>${_csatStarHtml(c.csatScore)}</td>
+    <td style="font-size:11px">${c.queue}</td>
+    <td>${c.product}</td>
+    <td style="font-size:11px">${c.scenario}</td>
+    <td>${name}</td>
+    <td>${c.region}</td>
+    <td style="font-size:11px">${c.service}</td>
+  </tr>`).join('');
+  document.getElementById('modalTitle').textContent = `CSAT Cases — ${name}  (${surv} surveys · avg ${csat.toFixed(2)} ★)`;
+  document.getElementById('modalBody').innerHTML = `<table class="modal-table"><thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+  document.getElementById('caseModal').classList.add('open');
+}
+
+function openIRModal(alias) {
+  const row = DATA.find(r => r[0] === alias);
+  if (!row) return;
+  const [, name, , , , , , , , , ir] = row;
+  if (ir === 0) return;
+  const cases = generateIRCases(alias, ir);
+  const cols = ["IncidentId","Customer","TPID","Sev","CritSit","Created","Queue","Product (L2)","Scenario (L3)","Engineer","Region","ServiceName"];
+  const rows = cases.map(c => `<tr>
+    <td>${c.incidentId}</td>
+    <td>${c.customer}</td>
+    <td style="font-size:11px;color:#64748b">${c.tpid}</td>
+    <td>${_sevHtml(c.sev)}</td>
+    <td>${_critHtml(c.critSit)}</td>
+    <td>${c.created}</td>
+    <td style="font-size:11px">${c.queue}</td>
+    <td>${c.product}</td>
+    <td style="font-size:11px">${c.scenario}</td>
+    <td>${name}</td>
+    <td>${c.region}</td>
+    <td style="font-size:11px">${c.service}</td>
+  </tr>`).join('');
+  document.getElementById('modalTitle').textContent = `IR SLA Missed Cases — ${name}  (${ir} missed)`;
+  document.getElementById('modalBody').innerHTML = `<table class="modal-table"><thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+  document.getElementById('caseModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('caseModal').classList.remove('open');
+  document.getElementById('modalBody').innerHTML = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
 </html>
