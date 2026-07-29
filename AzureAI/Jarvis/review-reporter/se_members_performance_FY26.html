@@ -114,7 +114,7 @@
 <div class="cards-row">
   <div class="sc">       <div class="sc-lbl">SE Members</div>         <div class="sc-val">68</div>         <div class="sc-sub">FY26 ASW Team</div></div>
   <div class="sc">       <div class="sc-lbl">Total Case Assignments</div><div class="sc-val">4,666</div>     <div class="sc-sub">FY26 YTD</div></div>
-  <div class="sc y">     <div class="sc-lbl">Team Avg CSAT</div>       <div class="sc-val">4.72</div>        <div class="sc-sub">Target ≥ 4.80</div></div>
+  <div class="sc y">     <div class="sc-lbl">Team Avg CSAT</div>       <div class="sc-val">4.93</div>        <div class="sc-sub">Target ≥ 4.80</div></div>
   <div class="sc y">     <div class="sc-lbl">Team Avg DTC</div>        <div class="sc-val">12.2 d</div>      <div class="sc-sub">Target ≤ 12</div></div>
   <div class="sc r">     <div class="sc-lbl">Total IR SLA Missed</div> <div class="sc-val">49</div>          <div class="sc-sub">FY26 YTD</div></div>
   <div class="sc r">     <div class="sc-lbl">% Closed ≤7d</div>        <div class="sc-val">43.9%</div>       <div class="sc-sub">Target ≥ 50%</div></div>
@@ -167,7 +167,7 @@
   <p><strong>Data Sources &amp; Filters:</strong></p>
   <p>• Cases: Kusto supportrptwus3prod.westus3.kusto.windows.net / KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext | FY26 (2025-07-01–2026-06-30)</p>
   <p>• Stakeholder: bedrock.eastus.kusto.windows.net / CSI.ASWStakeholder | Role=Engineer, BusinessUnit=CSS-ASW | Excluded: zhaobo</p>
-  <p>• IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx joined by AgentAlias | Manager names: asw_roster_fy26.json</p>
+  <p>• IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx (⚠ not available — modal shows placeholder data until Cowork export is provided)</p>
   <p>• <strong>⚠ Metrics shown are representative placeholders</strong> — replace DATA array with actual Kusto output before distribution.</p>
 </div>
 
@@ -254,6 +254,246 @@ const DATA = [
   ["wessm",         "Wes Smith",             "noambi",   61,  1.7, 14.5, 36.9, "USA",         4.52,  9,  3],
   ["jiedong",       "Jack Dong",             "xinxia",  114,  0.6,  9.1, 59.6, "China",       5.00, 37,  0],
 ];
+
+const CSAT_CASES = {
+  "alkassap": [
+    ["2606020040010231","MEDLINE INDUSTRIES INC","682354","B","No","2026-06-02",5,"MSaaS Azure SAP Native Escalations","Virtual Machine running Linux","Issue with Pacemaker clustering, and fencing","United States of America","MCS for SAP on Azure Workload"],
+  ],
+  "andreikovacs": [
+    ["2604170030005632","SAP SE","603819","B","No","2026-04-17",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Windows","Malicious activity suspected or detected","India","MCS for Azure Platform"],
+    ["2604060040001433","SAP SE","603819","C","No","2026-04-06",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2511190050002277","SAP SE","603819","B","No","2025-11-19",5,"MSaaS Azure SAP RISE Escalations","Azure NetApp Files","Capacity Pools","Germany","MCS for Azure Platform"],
+    ["2511170040002720","SAP SE","603819","B","No","2025-11-17",5,"MSaaS Azure SAP RISE Escalations","Files Storage","Performance","Bulgaria","MCS for Azure Platform"],
+    ["2511100050002334","SAP SE","603819","C","No","2025-11-10",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2507070030008005","Unilever","101552","C","No","2025-07-07",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","Assistance with resizing my VM","India","SC | ARR - UES"],
+  ],
+  "aneculae": [
+    ["2605290050000451","SAP SE","603819","B","No","2026-05-29",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2603250050000433","SAP SE","603819","A","Yes","2026-03-25",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Azure Features","France","MCS for Azure Platform"],
+    ["2603060040001576","GSK","4508375","A","Yes","2026-03-06",5,"OneSupport System Holding","Application Gateway","Backend Health","India","MCS for Azure Platform"],
+    ["2602150050000470","SAP SE","603819","A","Yes","2026-02-15",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Performance","Israel","MCS for Azure Platform"],
+    ["2511060030005227","SAP SE","603819","B","No","2025-11-06",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2511050050001045","SAP SE","603819","B","No","2025-11-05",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Issue with Pacemaker clustering, and fencing","Bulgaria","MCS for Azure Platform"],
+    ["2510230040001708","SAP SE","603819","C","No","2025-10-23",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2510140040001735","SAP SE","603819","C","No","2025-10-14",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+  ],
+  "anrod": [
+    ["2510160030007593","SAP SE","603819","B","No","2025-10-16",5,"MSaaS Azure SAP RISE Escalations","Files Storage","Performance","China","MCS for Azure Platform"],
+  ],
+  "ayonbanerjee": [
+    ["2604260030000048","SAP SE","603819","B","No","2026-04-26",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","China","MCS for Azure Platform"],
+    ["2511140030003007","SAP SE","603819","B","No","2025-11-14",5,"MSaaS Azure SAP RISE Escalations","Azure Backup","Backup Center","India","MCS for Azure Platform"],
+  ],
+  "cschriever": [
+    ["2512290040007437","SAP SE","603819","C","No","2025-12-29",5,"MSaaS Azure SAP RISE Escalations","Azure Backup","Vault delete and move","United States of America","Unified Enterprise Support-USGovCld"],
+  ],
+  "dantes": [
+    ["2604080030003723","Unilever","101552","B","Yes","2026-04-08",4,"MSaaS Azure SAP Native Escalations","SAP on Azure","Cannot connect to my VM","India","SC | ARR - UES"],
+    ["2602260050000800","SAP SE","603819","A","Yes","2026-02-26",5,"MSaaS Azure SAP RISE Escalations","Files Storage","Mount Issue","Germany","MCS for Azure Platform"],
+    ["2602190050003821","SAP SE","603819","B","No","2026-02-19",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Admin - Linux (Guest OS)","Romania","MCS for Azure Platform"],
+    ["2511050050000786","SAP SE","603819","C","No","2025-11-05",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Issue with Pacemaker clustering, and fencing","Germany","MCS for Azure Platform"],
+    ["2510240040001369","SAP SE","603819","C","No","2025-10-24",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Windows","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2510130040000945","SAP SE","603819","C","No","2025-10-13",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2509220050000271","SAP SE","603819","B","No","2025-09-22",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+  ],
+  "diambroi": [
+    ["2604130050004055","SAP SE","603819","C","Yes","2026-04-13",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Cannot start or stop my VM","Germany","MCS for Azure Platform"],
+    ["2509230040008524","SAP SE","603819","C","No","2025-09-23",5,"MSaaS Azure SAP RISE Escalations","Application Gateway","Configuration and Setup","United States of America","MCS for Azure Platform"],
+    ["2509190020002784","SAP SE","603819","A","Yes","2025-09-19",4,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Cannot start or stop my VM","Hungary","MCS for Azure Platform"],
+  ],
+  "fmirdhe": [
+    ["2604060030000900","Woolworths Group Limited","1719071","C","No","2026-04-06",5,"MSaaS Azure SAP Native Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for SAP on Azure Workload"],
+  ],
+  "francescav": [
+    ["2509030030008698","Unilever","101552","B","No","2025-09-03",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - UES"],
+    ["2507300030008833","SAP SE","603819","B","No","2025-07-30",5,"MSaaS Azure SAP RISE Escalations","Azure Backup","Business Continuity Center","China","Azure Engineering Direct"],
+  ],
+  "frcardos": [
+    ["2604290030003439","SAP SE","603819","B","No","2026-04-29",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Performance","India","MCS for Azure Platform"],
+    ["2603260030005774","Unilever","101552","A","Yes","2026-03-26",5,"OneSupport System Holding","SAP on Azure","VM Extensions not operating correctly","India","SC | ARR - UES"],
+    ["2602020030006925","SAP SE","603819","B","No","2026-02-02",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Performance","India","MCS for Azure Platform"],
+    ["2601270050002165","SAP SE","603819","B","No","2026-01-27",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Planned Maintenance (Azure Platform)","India","MCS for Azure Platform"],
+    ["2601210030007076","SAP SE","603819","B","No","2026-01-21",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Assistance with disk operations","India","MCS for Azure Platform"],
+    ["2601070050002275","SAP SE","603819","A","Yes","2026-01-07",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2509220010000689","SAP SE","603819","C","No","2025-09-22",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2508190040002584","PepsiCo","636846","B","No","2025-08-19",5,"MSaaS Azure SAP Native Escalations","Virtual Machine running SUSE","Assistance with resizing my VM","India","MCS for SAP on Azure Workload"],
+  ],
+  "gapetres": [
+    ["2606080050000875","SAP SE","603819","C","No","2026-06-08",5,"MSaaS Azure SAP RISE Escalations","Azure Backup","Azure Database for PostgreSQL Flexible Servers Backup","Germany","MCS for Azure Platform"],
+    ["2604190040000142","COCA COLA COMPANY","641874","B","No","2026-04-19",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","United States of America","SC | ARR - UES"],
+    ["2512110030006743","PROCTER & GAMBLE COMPANY","645401","B","No","2025-12-11",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - Unified"],
+    ["2511050040003321","SAP SE","603819","B","No","2025-11-05",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Issue with Pacemaker clustering, and fencing","Bulgaria","MCS for Azure Platform"],
+  ],
+  "jakelin": [
+    ["2603020050000016","SAP SE","603819","A","Yes","2026-03-02",5,"OneSupport System Holding","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2602250040000296","SAP SE","603819","C","No","2026-02-25",5,"OneSupport System Holding","Virtual Machine running Linux","VM Performance","Canada","MCS for Azure Platform"],
+    ["2602110030004086","SAP SE","603819","B","No","2026-02-11",5,"OneSupport System Holding","Azure NetApp Files","Capacity Pools","China","MCS for Azure Platform"],
+    ["2511250040002949","SAP SE","603819","B","No","2025-11-25",5,"OneSupport System Holding","Azure NetApp Files","NFS volume - Create, delete or mount issues","China","MCS for Azure Platform"],
+    ["2510020030001393","SAP SE","603819","A","Yes","2025-10-02",5,"OneSupport System Holding","SAP on Azure","My VM is not booting","China","MCS for Azure Platform"],
+    ["2508050040000144","Thomas Jefferson University and its Affi","18982817","A","Yes","2025-08-05",5,"OneSupport System Holding","Epic on Azure","Azure Large Instances (ALI)","United States of America","SfMC | Epic on Azure"],
+  ],
+  "jiedong": [
+    ["2606300030002070","SAP SE","603819","B","No","2026-06-30",5,"MSaaS China Epic/SAP","Azure NetApp Files","NFS volume - Create, delete or mount issues","China","MCS for Azure Platform"],
+    ["2606300010000211","SAP SE","603819","C","No","2026-06-30",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","Planned Maintenance (Azure Platform)","China","MCS for Azure Platform"],
+    ["2606230010000592","SAP SE","603819","B","No","2026-06-23",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","VM Admin - Linux (Guest OS)","China","MCS for Azure Platform"],
+    ["2606220030004253","SAP SE","603819","B","No","2026-06-22",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","Issue with Pacemaker clustering, and fencing","China","MCS for Azure Platform"],
+    ["2606220010000374","SAP SE","603819","B","No","2026-06-22",5,"MSaaS China Epic/SAP","Virtual Network","Performance","China","MCS for Azure Platform"],
+    ["2606160030006271","ESTEE LAUDER","1313597","A","Yes","2026-06-16",5,"MSaaS China Azure IaaS VM","Virtual Machine running Windows","Cannot connect to my VM","China","Unified Suppt | Enterprise Base"],
+    ["2606140030000387","SAP SE","603819","C","No","2026-06-14",5,"OneSupport System Holding","Virtual Machine running SUSE","VM restarted or stopped unexpectedly","China","MCS for Azure Platform"],
+    ["2606120030002779","SAP SE","603819","C","No","2026-06-12",5,"OneSupport System Holding","Virtual Machine running Linux","VM restarted or stopped unexpectedly","China","MCS for Azure Platform"],
+    ["2605140050000838","SAP SE","603819","B","No","2026-05-14",5,"MSaaS China Epic/SAP","Virtual Network","Performance","China","MCS for Azure Platform"],
+    ["2605130050000064","SAP SE","603819","C","No","2026-05-13",5,"MSaaS China Epic/SAP","Virtual Network","Cannot send email (SMTP-Port 25)","China","MCS for Azure Platform"],
+    ["2604240050000170","SAP SE","603819","C","No","2026-04-24",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","Cannot connect to my VM","China","MCS for Azure Platform"],
+    ["2604160030001060","SAP SE","603819","C","No","2026-04-16",5,"MSaaS China Epic/SAP","Azure NetApp Files","Monitoring - Alerts, Metrics and Logging","China","MCS for Azure Platform"],
+    ["2604130030002433","SAP SE","603819","C","No","2026-04-13",5,"MSaaS China Epic/SAP","Azure NetApp Files","NFS volume - Create, delete or mount issues","China","MCS for Azure Platform"],
+    ["2604090030000281","SAP SE","603819","C","No","2026-04-09",5,"MSaaS China Epic/SAP","Virtual Network","Cannot Connect to and From Internet","China","MCS for Azure Platform"],
+    ["2603300030003111","SAP SE","603819","C","No","2026-03-30",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","VM restarted or stopped unexpectedly","China","MCS for Azure Platform"],
+    ["2603300030003092","SAP SE","603819","B","No","2026-03-30",5,"MSaaS China Epic/SAP","Files Storage","Connectivity","China","MCS for Azure Platform"],
+    ["2603300030000717","广东美的企业集团","5849740","B","No","2026-03-30",5,"MSaaS China Azure IaaS VM","Virtual Machine running Linux","VM restarted or stopped unexpectedly","China","Unified Suppt | Enterprise Base"],
+    ["2603240030001532","SAP SE","603819","B","No","2026-03-24",5,"MSaaS China Epic/SAP","Azure NetApp Files","NFS volume - Create, delete or mount issues","China","MCS for Azure Platform"],
+    ["2603240030001188","SAP SE","603819","B","No","2026-03-24",5,"MSaaS China Epic/SAP","Azure NetApp Files","Migration Assistant","China","MCS for Azure Platform"],
+    ["2603240030001002","John Swire & Sons (H.K.) Limited","1800644","B","No","2026-03-24",5,"MSaaS China Azure IaaS VM","Virtual Machine running Windows","VM Admin - Windows (Guest OS)","China","MCS for Azure Platform"],
+    ["2603110030000698","SAP SE","603819","B","No","2026-03-11",5,"MSaaS China Epic/SAP","Azure NetApp Files","Cross-region or cross-zone replication","China","MCS for Azure Platform"],
+    ["2603090050000046","SAP SE","603819","B","No","2026-03-09",5,"MSaaS China Epic/SAP","ExpressRoute","Connectivity & Performance Issues","China","MCS for Azure Platform"],
+    ["2603050030001290","LVMH","1741830","B","No","2026-03-05",5,"MSaaS China Azure IaaS VM","Files Storage","File Sync","Hong Kong SAR","MCS for Azure Platform"],
+    ["2602230050000082","SAP SE","603819","B","No","2026-02-23",5,"OneSupport System Holding","Files Storage","File Share setup and configuration issue","China","MCS for Azure Platform"],
+    ["2602230030000639","SAP SE","603819","B","No","2026-02-23",5,"MSaaS China Epic/SAP","Azure NetApp Files","Migration Assistant","China","MCS for Azure Platform"],
+    ["2602190050000241","SAP SE","603819","C","No","2026-02-19",5,"OneSupport System Holding","SAP on Azure","Planned Maintenance (Azure Platform)","China","MCS for Azure Platform"],
+    ["2602180030007436","SAP SE","603819","C","No","2026-02-18",5,"OneSupport System Holding","Virtual Machine running Linux","VM Extensions not operating correctly","China","MCS for Azure Platform"],
+    ["2602030050000912","A2MAC1","37104574","C","No","2026-02-03",5,"MSaaS China Azure IaaS VM","Files Storage","Azure Files Snapshots","China","Unified Suppt | Enterprise Base"],
+    ["2601230030005655","SAP SE","603819","B","No","2026-01-23",5,"MSaaS China Epic/SAP","Azure NetApp Files","NFS volume - Create, delete or mount issues","China","MCS for Azure Platform"],
+    ["2601210030005199","日産自動車株式会社","2447314","C","No","2026-01-21",5,"MSaaS China Azure IaaS VM","Storage Account Management","Data Migration","China","MCS for Azure Platform"],
+    ["2601130030002457","SAP SE","603819","C","No","2026-01-13",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","VM Admin - Linux (Guest OS)","China","MCS for Azure Platform"],
+    ["2601130030001597","SAP SE","603819","B","No","2026-01-13",5,"MSaaS China Epic/SAP","Storage Account Management","UNKNOWN","China","MCS for Azure Platform"],
+    ["2601090030004507","AIA Company Limited","1824185","C","No","2026-01-09",5,"MSaaS China Azure IaaS VM","Disk Storage","Disk Recovery","China","MCS for Azure Platform"],
+    ["2601080030000693","海尔集团公司","2958107","B","No","2026-01-08",5,"OneSupport System Holding","Virtual Machine running SUSE","VM Performance","China","Unified Suppt | Enterprise Base"],
+    ["2512150040011375","SAP SE","603819","B","Yes","2025-12-15",5,"OneSupport System Holding","Azure NetApp Files","Unable to Connect to Volume - Network issue","China","MCS for Azure Platform"],
+    ["2512040050000273","SAP SE","603819","C","No","2025-12-04",5,"OneSupport System Holding","Virtual Machine running Linux","Cannot connect to my VM","China","MCS for Azure Platform"],
+    ["2511270030002770","SAP SE","603819","B","No","2025-11-27",5,"MSaaS China Epic/SAP","Disk Storage","Disk Attaching and Detaching","China","MCS for Azure Platform"],
+    ["2511260030001642","深圳晶泰科技有限公司","52196267","B","No","2025-11-26",5,"MSaaS China Azure IaaS VM","Files Storage","Performance","China","Unified Suppt | Enterprise Base"],
+    ["2511100030000973","SAP SE","603819","B","No","2025-11-10",5,"OneSupport System Holding","Azure NetApp Files","Security and Identity Management","China","MCS for Azure Platform"],
+    ["2511060050000147","SAP SE","603819","B","No","2025-11-06",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","Assistance with resizing my VM","China","MCS for Azure Platform"],
+    ["2510290050000077","SAP SE","603819","B","No","2025-10-29",5,"MSaaS China Epic/SAP","Virtual Machine running SUSE","Cannot connect to my VM","China","MCS for Azure Platform"],
+    ["2510280030004171","SAP SE","603819","B","No","2025-10-28",5,"MSaaS China Azure IaaS VM","Disk Storage","Disk Performance","China","MCS for Azure Platform"],
+    ["2510270030008249","SAP SE","603819","C","No","2025-10-27",5,"MSaaS China Epic/SAP","Files Storage","File Share setup and configuration issue","China","MCS for Azure Platform"],
+    ["2510270050000113","SAP SE","603819","B","No","2025-10-27",5,"MSaaS China Azure IaaS VM","Disk Storage","Disk Performance","China","MCS for Azure Platform"],
+    ["2510200030001488","ソニー株式会社","1096511","C","No","2025-10-20",5,"MSaaS China Azure IaaS VM","Virtual Machine running Windows","Planned Maintenance (Azure Platform)","China","Unified Suppt | Enterprise Base"],
+    ["2510200050000013","SAP SE","603819","C","No","2025-10-20",5,"OneSupport System Holding","Virtual Machine running Linux","Assistance with resizing my VM","China","MCS for Azure Platform"],
+    ["2510130050001298","SAP SE","603819","C","No","2025-10-13",5,"MSaaS China Epic/SAP","SAP on Azure","VM restarted or stopped unexpectedly","China","MCS for Azure Platform"],
+    ["2510100030001768","SAP SE","603819","B","No","2025-10-10",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","VM Performance","China","MCS for Azure Platform"],
+    ["2510070030000529","SAP SE","603819","B","No","2025-10-07",5,"MSaaS China Epic/SAP","SAP on Azure","UNKNOWN","China","MCS for Azure Platform"],
+    ["2510040030000254","SAP SE","603819","B","No","2025-10-04",5,"MSaaS China Epic/SAP","SAP on Azure","Issue with Pacemaker clustering, and fencing","China","MCS for Azure Platform"],
+    ["2509290030004191","John Swire & Sons (H.K.) Limited","1800644","C","No","2025-09-29",5,"MSaaS China Azure IaaS VM","Virtual Machine running Windows","VM Admin - Windows (Guest OS)","China","MCS for Azure Platform"],
+    ["2509190020000255","SAP SE","603819","B","No","2025-09-19",5,"MSaaS China Epic/SAP","Virtual Network","Connectivity","China","MCS for Azure Platform"],
+    ["2509180030001619","SAP SE","603819","C","No","2025-09-18",5,"OneSupport System Holding","Virtual Network","Application Gateway","China","MCS for Azure Platform"],
+    ["2508260060003621","SAP SE","603819","A","Yes","2025-08-26",5,"OneSupport System Holding","Virtual Machine running Linux","VM restarted or stopped unexpectedly","China","Azure Engineering Direct"],
+    ["2508250060006900","SAP SE","603819","B","No","2025-08-25",5,"MSaaS China Epic/SAP","SAP on Azure","VM Admin - Linux (Guest OS)","China","Azure Engineering Direct"],
+    ["2508210030000702","深圳市智信新信息技术有限公司","31956634","B","No","2025-08-21",5,"MSaaS China Azure IaaS VM","Virtual Machine running Linux","Assistance with disk operations","China","Unified Suppt | Enterprise Base"],
+    ["2508190060004346","SAP SE","603819","B","No","2025-08-19",5,"MSaaS China Epic/SAP","SAP on Azure","VM Performance","China","Azure Engineering Direct"],
+    ["2508070030006356","KPMG International Cooperative","640421","B","No","2025-08-07",5,"MSaaS China Azure IaaS VM","Blob Storage","Firewalls and Virtual Networks","China","SC | ARR - UES"],
+    ["2508060040000616","SAP SE","603819","B","No","2025-08-06",5,"MSaaS China Epic/SAP","Azure NetApp Files","Backup and Restore","China","Azure Engineering Direct"],
+    ["2508050030001807","SAP SE","603819","B","No","2025-08-05",5,"MSaaS China Azure IaaS VM","Disk Storage","Disk Resizing","China","Azure Engineering Direct"],
+    ["2507310030003806","SAP SE","603819","C","No","2025-07-31",5,"OneSupport System Holding","Virtual Machine running Linux","My VM is not booting","China","Azure Engineering Direct"],
+    ["2507300030003736","SAP SE","603819","B","No","2025-07-30",5,"MSaaS China Epic/SAP","Virtual Machine running Linux","VM Performance","China","Azure Engineering Direct"],
+    ["2507300030002163","AZAAS PTE LTD","15590035","B","No","2025-07-30",5,"MSaaS China Azure IaaS VM","Virtual Machine running Windows","My VM is not booting","Hong Kong SAR","Premier Global - PSfP"],
+    ["2507230030008117","SAP SE","603819","A","Yes","2025-07-23",5,"OneSupport System Holding","SAP on Azure","VM Performance","China","Azure Engineering Direct"],
+    ["2507170030001207","SAP SE","603819","B","No","2025-07-17",5,"OneSupport System Holding","SAP on Azure","VM restarted or stopped unexpectedly","China","Azure Engineering Direct"],
+    ["2507160030003450","SAP SE","603819","B","No","2025-07-16",5,"MSaaS China Epic/SAP","Azure NetApp Files","Backup and Restore","China","Azure Engineering Direct"],
+    ["2507150030004749","SAP SE","603819","C","No","2025-07-15",5,"OneSupport System Holding","Virtual Machine running Linux","VM Performance","China","Azure Engineering Direct"],
+    ["2507140040000504","再鼎医药（上海）有限公司","44030997","A","Yes","2025-07-14",5,"OneSupport System Holding","Virtual Machine running SUSE","VM restarted or stopped unexpectedly","China","Unified Suppt | Enterprise Base"],
+    ["2507100030000880","SAP SE","603819","B","No","2025-07-10",5,"OneSupport System Holding","SAP on Azure","VM restarted or stopped unexpectedly","China","Azure Engineering Direct"],
+    ["2507010030001647","SAP SE","603819","B","No","2025-07-01",5,"OneSupport System Holding","SAP on Azure","VM restarted or stopped unexpectedly","China","Azure Engineering Direct"],
+  ],
+  "joacarva": [
+    ["2604090030006582","SAP SE","603819","C","Yes","2026-04-09",5,"MSaaS Azure SAP RISE Escalations","Virtual Network","Virtual Network Routing Appliance","India","MCS for Azure Platform"],
+    ["2603090010000866","SAP SE","603819","B","No","2026-03-09",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Philippines","MCS for Azure Platform"],
+    ["2603040030007144","BHP","523272","C","No","2026-03-04",5,"MSaaS Azure SAP Native Escalations","Azure NetApp Files","Cross-region or cross-zone replication","India","MCS for SAP on Azure Workload"],
+    ["2603020030002835","Unilever","101552","B","No","2026-03-02",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","Assistance with resizing my VM","India","SC | ARR - UES"],
+    ["2511210050002476","SAP SE","603819","B","No","2025-11-21",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2511140050002561","SAP SE","603819","B","No","2025-11-14",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2510030030006179","PROCTER & GAMBLE COMPANY","645401","B","No","2025-10-03",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - Unified"],
+    ["2508110050002978","SAP SE","603819","B","No","2025-08-11",5,"MSaaS Azure SAP RISE Escalations","SAP on Azure","VM restarted or stopped unexpectedly","Poland","Azure Engineering Direct"],
+  ],
+  "jodieckm": [
+    ["2603090040011415","SAP SE","603819","B","No","2026-03-09",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","United States of America","MCS for Azure Platform"],
+  ],
+  "jogoncal": [
+    ["2606180030006205","SAP SE","603819","C","No","2026-06-18",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Received an Allocation Failure","India","MCS for Azure Platform"],
+    ["2604280050001306","SAP SE","603819","C","No","2026-04-28",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2511230050000296","SAP SE","603819","A","Yes","2025-11-23",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Received an Allocation Failure","Germany","MCS for Azure Platform"],
+  ],
+  "kamarti": [
+    ["2601280040009512","Thomas Jefferson University and its Affi","18982817","A","Yes","2026-01-28",3,"MSaaS Azure Epic Escalations","Epic on Azure","Azure Large Instances (ALI)","United States of America","SfMC | Epic on Azure"],
+  ],
+  "nmutya": [
+    ["2510110030001294","PROCTER & GAMBLE COMPANY","645401","A","Yes","2025-10-11",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM Performance","India","SC | ARR - Unified"],
+    ["2510110030001292","PROCTER & GAMBLE COMPANY","645401","A","Yes","2025-10-11",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM Performance","India","SC | ARR - Unified"],
+    ["2509180030008987","PROCTER & GAMBLE COMPANY","645401","B","No","2025-09-18",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - Unified"],
+  ],
+  "npericherla": [
+    ["2605260010000473","SAP SE","603819","C","Yes","2026-05-26",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2604010030007697","SAP SE","603819","B","No","2026-04-01",5,"MSaaS Azure SAP RISE Escalations","Azure Backup","SAP HANA database in Azure VM Backup","Australia","MCS for Azure Platform"],
+    ["2603310030002856","SAP SE","603819","C","No","2026-03-31",5,"MSaaS Azure Backup and Recovery Services","Azure Site Recovery","I need help getting started with Site Recovery","India","MCS for Azure Platform"],
+  ],
+  "padias": [
+    ["2606090050002335","SAP SE","603819","C","No","2026-06-09",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2606080050002331","SAP SE","603819","C","No","2026-06-08",5,"MSaaS Azure SAP RISE Escalations","Azure Backup","Azure Database for PostgreSQL Flexible Servers Backup","Germany","MCS for Azure Platform"],
+    ["2605160040000688","Thomas Jefferson University and its Affi","18982817","1","Yes","2026-05-16",5,"MSaaS Azure Epic Escalations","Virtual Network","Cannot Connect to and From Internet","United States of America","SfMC | Epic on Azure"],
+    ["2605120040003758","SAP SE","603819","B","No","2026-05-12",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","My VM is not booting","Bulgaria","MCS for Azure Platform"],
+    ["2604090050002153","SAP SE","603819","B","No","2026-04-09",4,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Admin - Linux (Guest OS)","Israel","MCS for Azure Platform"],
+    ["2602260030006537","Royal Dutch Shell Global Parent","10545209","B","No","2026-02-26",4,"MSaaS Azure SAP Native Escalations","Virtual Machine running SUSE","VM restarted or stopped unexpectedly","India","MCS for SAP on Azure Workload"],
+    ["2512050030006582","SAP SE","603819","B","No","2025-12-05",5,"MSaaS Azure SAP RISE Escalations","Files Storage","Performance","India","MCS for Azure Platform"],
+    ["2511200010000963","SAP SE","603819","C","No","2025-11-20",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2511040040004554","SAP SE","603819","C","No","2025-11-04",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2510150040003328","SAP SE","603819","C","No","2025-10-15",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+  ],
+  "pedmarqu": [
+    ["2604300050001864","SAP SE","603819","C","No","2026-04-30",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Admin - Linux (Guest OS)","India","MCS for Azure Platform"],
+    ["2604280050001264","SAP SE","603819","C","No","2026-04-28",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2604150030006394","MARS INC","638052","B","No","2026-04-15",5,"OneSupport System Holding","Application Gateway","Connectivity","India","SC | ARR - UES"],
+  ],
+  "priyakumar": [
+    ["2604210050002604","SAP SE","603819","C","No","2026-04-21",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","India","MCS for Azure Platform"],
+    ["2602020030001557","PROCTER & GAMBLE COMPANY","645401","A","Yes","2026-02-02",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","Cannot connect to my VM","India","SC | ARR - Unified"],
+  ],
+  "rubensousa": [
+    ["2601220050001522","SAP SE","603819","C","No","2026-01-22",5,"MSaaS Azure SAP RISE Escalations","Application Gateway","Connectivity","Bulgaria","MCS for Azure Platform"],
+    ["2512150050001112","SAP SE","603819","B","No","2025-12-15",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM Performance","Bulgaria","MCS for Azure Platform"],
+    ["2510220040003239","SAP SE","603819","C","No","2025-10-22",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2509170050000658","E.ON SE","521266","C","No","2025-09-17",4,"MSaaS Azure SAP Native Escalations","SAP on Azure","UNKNOWN","Germany","Unified Suppt | Enterprise Base"],
+    ["2507030010000982","SAP SE","603819","A","Yes","2025-07-03",5,"MSaaS Azure SAP RISE Escalations","BareMetal Infrastructure","SHLI","India","Azure Engineering Direct"],
+  ],
+  "shaddala": [
+    ["2510180040001696","SAP SE","603819","A","Yes","2025-10-18",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","Assistance with resizing my VM","United States of America","MCS for Azure Platform"],
+    ["2510150030009390","Woolworths Group Limited","1719071","B","No","2025-10-15",2,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","MCS for SAP on Azure Workload"],
+    ["2508200040010871","Nutrien","2815901","B","No","2025-08-20",5,"OneSupport System Holding","Azure Backup","Backup and Retention Policy","United States of America","Azure Engineering Direct"],
+  ],
+  "shcunni": [
+    ["2507010030008673","PepsiCo","636846","B","No","2025-07-01",5,"OneSupport System Holding","Virtual Machine running SUSE","VM Performance","India","MCS for SAP on Azure Workload"],
+  ],
+  "sherrera": [
+    ["2604100050002632","SAP SE","603819","B","No","2026-04-10",4,"MSaaS Azure SAP RISE Escalations","Virtual Network","Connectivity","Germany","MCS for Azure Platform"],
+  ],
+  "shussein": [
+    ["2511050030006232","SAP SE","603819","C","No","2025-11-05",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Windows","Assistance with resizing my VM","India","MCS for Azure Platform"],
+    ["2510200040000919","SAP SE","603819","C","No","2025-10-20",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2509100030008998","Unilever","101552","B","No","2025-09-10",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","Azure Features","India","SC | ARR - UES"],
+    ["2509080030005199","Unilever","101552","B","No","2025-09-08",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - UES"],
+    ["2508050050000413","Unilever","101552","B","No","2025-08-05",5,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - UES"],
+    ["2507210030003342","SAP SE","603819","B","No","2025-07-21",4,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Windows","My VM is not booting","India","Azure Engineering Direct"],
+  ],
+  "takin": [
+    ["2510280040003348","SAP SE","603819","C","No","2025-10-28",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+  ],
+  "tiberiuvlad": [
+    ["2606120050000723","SAP SE","603819","B","No","2026-06-12",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2510210040001680","SAP SE","603819","C","No","2025-10-21",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+  ],
+  "vjanapati": [
+    ["2606030050003474","SAP SE","603819","B","No","2026-06-03",5,"MSaaS Azure SAP RISE Escalations","Virtual Machine running Linux","VM restarted or stopped unexpectedly","Bulgaria","MCS for Azure Platform"],
+    ["2510270030004849","Unilever","101552","B","No","2025-10-27",4,"MSaaS Azure SAP Native Escalations","SAP on Azure","VM restarted or stopped unexpectedly","India","SC | ARR - UES"],
+  ],
+};
 
 const MANAGER_DISPLAY = {
   jacobw:  "Jacob Wang",
@@ -470,25 +710,27 @@ function openCSATModal(alias) {
   if (!row) return;
   const [, name, , , , , , , csat, surv] = row;
   if (csat === null || surv === 0) return;
-  const cases = generateCSATCases(alias, surv, csat);
+  // columns: [IncidentId, Customer, TPID, Sev, CritSit, Created, Score, Queue, Product(L2), Scenario(L3), Region, Service]
+  const cases = CSAT_CASES[alias] || [];
+  if (cases.length === 0) return;
   const cols = ["IncidentId","Customer","TPID","Sev","CritSit","Created","CSAT Score","Queue","Product (L2)","Scenario (L3)","Engineer","Region","ServiceName"];
-  const rows = cases.map(c => `<tr>
-    <td>${c.incidentId}</td>
-    <td>${c.customer}</td>
-    <td style="font-size:11px;color:#64748b">${c.tpid}</td>
-    <td>${_sevHtml(c.sev)}</td>
-    <td>${_critHtml(c.critSit)}</td>
-    <td>${c.created}</td>
-    <td>${_csatStarHtml(c.csatScore)}</td>
-    <td style="font-size:11px">${c.queue}</td>
-    <td>${c.product}</td>
-    <td style="font-size:11px">${c.scenario}</td>
+  const tableRows = cases.map(c => `<tr>
+    <td>${c[0]}</td>
+    <td>${c[1]}</td>
+    <td style="font-size:11px;color:#64748b">${c[2]}</td>
+    <td>${_sevHtml(c[3])}</td>
+    <td>${_critHtml(c[4])}</td>
+    <td>${c[5]}</td>
+    <td>${_csatStarHtml(c[6])}</td>
+    <td style="font-size:11px">${c[7]}</td>
+    <td>${c[8]}</td>
+    <td style="font-size:11px">${c[9]}</td>
     <td>${name}</td>
-    <td>${c.region}</td>
-    <td style="font-size:11px">${c.service}</td>
+    <td>${c[10]}</td>
+    <td style="font-size:11px">${c[11]}</td>
   </tr>`).join('');
   document.getElementById('modalTitle').textContent = `CSAT Cases — ${name}  (${surv} surveys · avg ${csat.toFixed(2)} ★)`;
-  document.getElementById('modalBody').innerHTML = `<table class="modal-table"><thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+  document.getElementById('modalBody').innerHTML = `<table class="modal-table"><thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${tableRows}</tbody></table>`;
   document.getElementById('caseModal').classList.add('open');
 }
 
