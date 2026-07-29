@@ -116,7 +116,7 @@
   <div class="sc">       <div class="sc-lbl">Total Case Assignments</div><div class="sc-val">4,666</div>     <div class="sc-sub">FY26 YTD</div></div>
   <div class="sc y">     <div class="sc-lbl">Team Avg CSAT</div>       <div class="sc-val">4.93</div>        <div class="sc-sub">Target ≥ 4.80</div></div>
   <div class="sc y">     <div class="sc-lbl">Team Avg DTC</div>        <div class="sc-val">12.2 d</div>      <div class="sc-sub">Target ≤ 12</div></div>
-  <div class="sc r">     <div class="sc-lbl">Total IR SLA Missed</div> <div class="sc-val">49</div>          <div class="sc-sub">FY26 YTD</div></div>
+  <div class="sc r">     <div class="sc-lbl">Total IR SLA Missed</div> <div class="sc-val">49</div>          <div class="sc-sub" id="ir-pct-sub">FY26 YTD</div></div>
   <div class="sc r">     <div class="sc-lbl">% Closed ≤7d</div>        <div class="sc-val">43.9%</div>       <div class="sc-sub">Target ≥ 50%</div></div>
 </div>
 
@@ -578,6 +578,14 @@ function renderRows(rows) {
   }).join('');
 }
 renderRows(currentData);
+
+// Compute IR SLA missed % of total cases from DATA
+(function() {
+  const totalCases = DATA.reduce((s, r) => s + r[3], 0);
+  const totalIR    = DATA.reduce((s, r) => s + r[10], 0);
+  const pct = (totalIR / totalCases * 100).toFixed(1);
+  document.getElementById('ir-pct-sub').textContent = `FY26 YTD \u00b7 ${pct}% of cases`;
+})();
 
 // sort
 let sortCol = 0, sortAsc = true;
