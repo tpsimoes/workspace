@@ -189,7 +189,7 @@
 //   Created: 4,666 | Avg DTC: 12.2d | %≤7d: 43.9% | CSAT: 4.92 | IR Met: 98.9%
 // ──────────────────────────────────────────────────────────────────────────
 const DATA = [
-  ["alkassap",      "Alex Kassap",           "noambi",   82,  1.1, 11.8, 46.3, "USA",    4.80, 14,  1],
+  ["alkassap",      "Alex Kassap",           "noambi",   82,  1.1, 11.8, 46.3, "USA",    5.00,  1,  1],
   ["alveleri",      "Alock Mendoza",         "nasaggu", 104,  0.8, 10.4, 51.9, "India",       4.95, 28,  0],
   ["andreikovacs",  "Andrei Kovacs",         "jacobw",   88,  1.4, 13.1, 40.9, "Romania",     4.88, 18,  1],
   ["aneculae",      "Alexandra Neculae",     "jacobw",   76,  1.6, 12.6, 43.4, "Romania",     4.83, 15,  0],
@@ -495,6 +495,7 @@ const CSAT_CASES = {
   ],
 };
 
+
 const MANAGER_DISPLAY = {
   jacobw:  "Jacob Wang",
   kbeller: "Kirk Beller",
@@ -545,9 +546,21 @@ function mgrBadge(m) {
 // render
 let currentData = [...DATA];
 
+// Derive CSAT avg and survey count from real Kusto data in CSAT_CASES
+const CSAT_STATS = {};
+for (const [alias, cases] of Object.entries(CSAT_CASES)) {
+  if (cases.length > 0) {
+    const avg = cases.reduce((s, c) => s + c[6], 0) / cases.length;
+    CSAT_STATS[alias] = { avg: Math.round(avg * 100) / 100, count: cases.length };
+  }
+}
+
 function renderRows(rows) {
   document.getElementById('se-tbody').innerHTML = rows.map(r => {
-    const [alias, name, mgr, cases, dts, dtc, p7d, country, csat, surv, ir] = r;
+    const [alias, name, mgr, cases, dts, dtc, p7d, country, , , ir] = r;
+    const sc   = CSAT_STATS[alias] || null;  // use CSAT_CASES as source of truth
+    const realCsat = sc?.avg ?? null;
+    const realSurv = sc?.count ?? 0;
     const vtag = alias.startsWith('v-') ? '<span class="vtag">V</span>' : '';
     return `<tr data-alias="${alias}" data-mgr="${mgr}">
       <td>${name}${vtag}</td>
@@ -558,8 +571,8 @@ function renderRows(rows) {
       <td class="num">${fmtN(dtc)}</td>
       <td class="num">${tlP7d(p7d)}</td>
       <td>${country}</td>
-      <td class="num${csat !== null && surv > 0 ? ' cell-clickable' : ''}"${csat !== null && surv > 0 ? ` onclick="openCSATModal('${alias}')" title="Click to view CSAT cases"` : ''}>${tlCSAT(csat)}</td>
-      <td class="num">${surv}</td>
+      <td class="num${realCsat !== null ? ' cell-clickable' : ''}"${realCsat !== null ? ` onclick="openCSATModal('${alias}')" title="Click to view CSAT cases"` : ''}>${tlCSAT(realCsat)}</td>
+      <td class="num">${realSurv}</td>
       <td class="num${ir > 0 ? ' cell-clickable' : ''}"${ir > 0 ? ` onclick="openIRModal('${alias}')" title="Click to view IR SLA missed cases"` : ''}>${tlIR(ir)}</td>
     </tr>`;
   }).join('');
@@ -729,7 +742,7 @@ function openCSATModal(alias) {
     <td>${c[10]}</td>
     <td style="font-size:11px">${c[11]}</td>
   </tr>`).join('');
-  document.getElementById('modalTitle').textContent = `CSAT Cases — ${name}  (${surv} surveys · avg ${csat.toFixed(2)} ★)`;
+  document.getElementById('modalTitle').textContent = `CSAT Cases — ${name}  (${cases.length} surveys · avg ${csat.toFixed(2)} ★)`;
   document.getElementById('modalBody').innerHTML = `<table class="modal-table"><thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${tableRows}</tbody></table>`;
   document.getElementById('caseModal').classList.add('open');
 }
