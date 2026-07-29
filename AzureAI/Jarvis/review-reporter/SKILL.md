@@ -263,6 +263,7 @@ MOR 各資料源採用不同的取得方式，職責明確劃分：
 | 主頁 | MOR Summary Report | KPI Dashboard 摘要、趨勢表格、MoM Summary、Business Analysis |
 | 分頁 1 | CPE Insight | 所有 Survey Case 明細，依 AgentAlias 分組（來源：Kusto Query） |
 | 分頁 2 | IR Missing Insight | 當前財年 IR Missing 案件明細（來源：Dashboard IR Missed Reasons + Kusto Query） |
+| 分頁 3 | SE Members Performance | FY26 各 SE 成員案件績效彙總表（來源：Kusto Query） |
 
 #### MOR Summary Report 頁面結構
   1. Executive Summary Cards（關鍵 KPI 快照，數值顯示該 KPI 的**年度累計 Total**，並顯示 MoM 變化箭頭）
@@ -519,6 +520,84 @@ database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
 - **排序**：依 `CreatedDateTime` 降序排列（最新日期在最上方）
 - **版面佈局**：頁面上方為 flex 橫向排列（左欄 320px + 右欄 flex:1），左欄含 Summary Cards（2×2 grid）+ Avg TTMS by Severity 統計面板，右欄為 SVG 趨勢圖；下方為全寬資料表格
 
+#### SE Members Performance 頁面結構
+
+- **資料來源**：Kusto Query（整合案件指標 + CPE Survey + IR Missing + ASWStakeholder）
+- **Cluster / Database**：`supportrptwus3prod.westus3.kusto.windows.net` / `KPISupportData`（案件指標 + CSAT）；`bedrock.eastus.kusto.windows.net` / `CSI`（Stakeholder 中繼資料）
+- **財年範圍**：**FY26**（`2025-07-01` ~ `2026-06-30`），由 `CreatedDateTime` 篩選
+- **成員篩選**：`bedrock.CSI.ASWStakeholder | where Role == "Engineer" and BusinessUnit == "CSS-ASW"`
+- **排除名單**：已離開 ASW 的成員排除（同 CPE Insight）
+
+##### 欄位規範（10 欄）
+
+| # | 欄位名稱 | 說明 | 來源 |
+|---|----------|------|------|
+| 1 | SE Name | 工程師全名 | `ASWStakeholder.AgentName` |
+| 2 | SE Manager Name | 所屬 Manager 名稱 | `ASWStakeholder.Manager` |
+| 3 | Case Assignments | 該 FY 被 assign 的案件總數 | `count()` per AgentAlias |
+| 4 | Avg DTS | 平均 Day to Start（案件 assign → SE 首次接觸，天數） | `avg(DayToSchedule)` |
+| 5 | Avg DTC | 平均 Day to Close（結案天數） | `avg(DayToClose)` |
+| 6 | % Closed ≤7d | 7 天內結案比例 | `countif(DayToClose <= 7) / count()` |
+| 7 | SE Country | SE 所在國家 | `ASWStakeholder.Country` |
+| 8 | CSAT Avg | 收到 Survey 的平均 CSAT 分數（1–5） | `avg(TotalCustomerSATScore)` |
+| 9 | Surveys Count | 收到的 CSAT Survey 筆數 | `countif(isnotempty(TotalCustomerSATScore))` |
+| 10 | IR SLA Missed | 未達 Initial Response SLA 的案件數 | 來自 IR Missing 資料（Cowork xlsx 或 Dashboard）；以 AgentAlias join |
+
+##### Kusto Query
+
+```kql
+// FY26: 2025-07-01 ~ 2026-06-30
+let fy_start = datetime(2025-07-01);
+let fy_end   = datetime(2026-07-01);
+let ASWMembers = cluster('bedrock.eastus.kusto.windows.net').database("CSI").ASWStakeholder
+| where Role == "Engineer" and BusinessUnit == "CSS-ASW"
+| where AgentAlias !in ('zhaobo') // 已離開 ASW 的成員排除
+| project AgentAlias, AgentName, Manager, Country;
+let CaseSummary =
+    AllCloudsSupportIncidentWithReferenceModelVNext
+    | where CreatedDateTime >= fy_start and CreatedDateTime < fy_end
+    | where AgentAlias in (ASWMembers | project AgentAlias)
+    | summarize
+        CaseAssignments   = count(),
+        AvgDTS            = round(avg(todouble(DayToSchedule)), 1),
+        AvgDTC            = round(avg(todouble(DayToClose)), 1),
+        PctClosedIn7d     = round(countif(DayToClose <= 7) * 100.0 / count(), 1),
+        CSATAvg           = round(avg(iff(isnotempty(TotalCustomerSATScore), todouble(TotalCustomerSATScore), real(null))), 2),
+        SurveysCount      = countif(isnotempty(TotalCustomerSATScore))
+      by AgentAlias;
+CaseSummary
+| lookup ASWMembers on AgentAlias
+| project AgentAlias, AgentName, Manager, CaseAssignments,
+          AvgDTS, AvgDTC, PctClosedIn7d, Country, CSATAvg, SurveysCount
+| order by AgentName asc
+```
+
+> **IR SLA Missed** 欄位：從 Cowork xlsx（`asw_ir_missed_FY26.xlsx`）的 `FY26 IR Missed` sheet，依 `SR Owner`（AgentAlias）統計 `count()`，再 join 至上述查詢結果。若 Cowork 檔案不可用，改以 Dashboard IR Missed Reasons 擷取的 Case ID 清單，透過 `AgentAlias` 聚合取得件數。
+
+##### 頁面呈現規則
+
+- **表格方式**：單一彙總表（每位 SE 一列，按 SE Name 升序排列）
+- **預設排序**：SE Name 升序
+- **可排序欄位**：所有欄位均支援點擊標頭排序
+- **數值格式**：
+  - Avg DTS / Avg DTC：小數一位（例：`8.3`）
+  - % Closed ≤7d：百分比一位小數（例：`62.5%`）
+  - CSAT Avg：小數兩位（例：`4.75`）
+  - IR SLA Missed：整數
+- **色彩標示（CSAT Avg）**：5★=🟢 / 4★=🟡 / ≤3★=🔴（同 CPE Insight badge 規則，以四捨五入至整數判定）
+- **色彩標示（% Closed ≤7d）**：≥50%=🟢 / 40–49%=🟡 / <40%=🔴
+- **色彩標示（IR SLA Missed）**：0=🟢 / 1=🟡 / ≥2=🔴
+- **無資料顯示**：CSAT Avg 無 Survey 時顯示灰色 `-`；AvgDTS / AvgDTC 無數值時顯示灰色 `-`
+- **Summary Cards（頁面頂部）**：
+  - Total SE Members（成員總數）
+  - Total Case Assignments（全團隊案件總數）
+  - Team Avg CSAT（團隊平均 CSAT）
+  - Team Avg DTC（團隊平均 DTC）
+  - Total IR SLA Missed（全團隊未達 IR SLA 件數）
+  - Team % Closed ≤7d（全團隊 7 天內結案率）
+
+---
+
 - **KPI Target 色彩標示規則**（適用於 Dashboard 1 有 Target 的 KPI）：
   - 🟢 = 達標（At or above Target）
   - 🟡 = 接近目標（Below Target but within 5% gap）
@@ -568,10 +647,11 @@ database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
 </head>
 <body>
   <div class="header">（報告標頭）</div>
-  <div class="tab-nav">（分頁導航按鈕 × 3）</div>
+  <div class="tab-nav">（分頁導航按鈕 × 4）</div>
   <div id="tab-mor" class="tab-panel active">（Tab 1: MOR Summary Report）</div>
   <div id="tab-cpe" class="tab-panel">（Tab 2: CPE Insight）</div>
   <div id="tab-irmissing" class="tab-panel">（Tab 3: IR Missing Insight）</div>
+  <div id="tab-sembers" class="tab-panel">（Tab 4: SE Members Performance）</div>
   <script>/* switchTab 函數 */</script>
 </body>
 </html>
@@ -634,6 +714,7 @@ database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
     <button class="tab-btn active" onclick="switchTab('mor')">MOR Summary Report</button>
     <button class="tab-btn" onclick="switchTab('cpe')">CPE Insight</button>
     <button class="tab-btn" onclick="switchTab('irmissing')">IR Missing Insight</button>
+    <button class="tab-btn" onclick="switchTab('sembers')">SE Members Performance</button>
 </div>
 ```
 
@@ -771,6 +852,7 @@ database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
     <p>• Dashboard 1: CES BI Hub — CSS A&amp;I and DTP | Filter: Channel Function Detail = ASW_SAPEpicEsc | Time Fiscal Year = FY {YYYY} | LastSixMonths = (All)</p>
     <p>• Dashboard 2: Power BI (msit) — OpEx Overall PCY Level A&amp;I+DTP | Filter: Staff Group = A&amp;I-Azure-ASW Epic and SAP</p>
     <p>• CPE Survey: Kusto — supportrptwus3prod / KPISupportData | FY{YYYY} (Jul {YYYY-1} – {Month} {Year}) | ASW Engineers only</p>
+    <p>• SE Members: Kusto — supportrptwus3prod / KPISupportData + bedrock.eastus / CSI.ASWStakeholder | IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx (or Dashboard fallback) | FY26 (Jul 2025 – Jun 2026)</p>
     <p>• Data as of: {YYYY-MM-DD} (Dashboard 1 &amp; 2)</p>
     <p>• Report generated: {YYYY-MM-DD HH:MM} (UTC+8)</p>
 </div>
@@ -938,6 +1020,83 @@ database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
 - TTMS 異常值（> 480 mins / 8 hours）：`style="color:#e74c3c; font-weight:600;"`
 - SE Name 為空：灰色 `-`
 - 排序：`CreatedDateTime` 降序
+
+### Tab 4: SE Members Performance 結構
+
+```html
+<div id="tab-sembers" class="tab-panel">
+    <div class="section">
+        <h2 class="section-title">SE Members Performance — FY26 (Jul 2025 – Jun 2026)</h2>
+        <p style="font-size:13px; color:#666; margin-bottom:16px;">
+            FY26 case performance summary per ASW engineer.
+            Source: Kusto <code>KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext</code> + <code>bedrock.CSI.ASWStakeholder</code> + IR Missing data.
+        </p>
+        <!-- Summary Cards (6 cards) -->
+        <div class="cpe-summary-cards">
+            <div class="cpe-card"><div class="cpe-label">Total SE Members</div><div class="cpe-value">{N}</div></div>
+            <div class="cpe-card"><div class="cpe-label">Total Case Assignments</div><div class="cpe-value">{N}</div></div>
+            <div class="cpe-card"><div class="cpe-label">Team Avg CSAT</div><div class="cpe-value">{X.XX}</div></div>
+            <div class="cpe-card"><div class="cpe-label">Team Avg DTC</div><div class="cpe-value">{X.X} days</div></div>
+            <div class="cpe-card"><div class="cpe-label">Total IR SLA Missed</div><div class="cpe-value">{N}</div></div>
+            <div class="cpe-card"><div class="cpe-label">Team % Closed ≤7d</div><div class="cpe-value">{X.X}%</div></div>
+        </div>
+        <!-- Data Table -->
+        <div class="table-wrapper"><table>
+            <colgroup>
+                <col style="width:auto"><!-- SE Name -->
+                <col style="width:auto"><!-- SE Manager Name -->
+                <col style="width:90px"><!-- Case Assignments -->
+                <col style="width:70px"><!-- Avg DTS -->
+                <col style="width:70px"><!-- Avg DTC -->
+                <col style="width:100px"><!-- % Closed ≤7d -->
+                <col style="width:80px"><!-- SE Country -->
+                <col style="width:80px"><!-- CSAT Avg -->
+                <col style="width:90px"><!-- Surveys Count -->
+                <col style="width:100px"><!-- IR SLA Missed -->
+            </colgroup>
+            <thead><tr>
+                <th class="sortable asc" data-col="0">SE Name</th>
+                <th class="sortable" data-col="1">SE Manager Name</th>
+                <th class="sortable" data-col="2">Case Assignments</th>
+                <th class="sortable" data-col="3">Avg DTS</th>
+                <th class="sortable" data-col="4">Avg DTC</th>
+                <th class="sortable" data-col="5">% Closed ≤7d</th>
+                <th class="sortable" data-col="6">SE Country</th>
+                <th class="sortable" data-col="7">CSAT Avg</th>
+                <th class="sortable" data-col="8">Surveys Count</th>
+                <th class="sortable" data-col="9">IR SLA Missed</th>
+            </tr></thead>
+            <tbody>
+                <!-- 每位 SE 一列，依 SE Name 升序排列 -->
+                <tr>
+                    <td>{AgentName}</td>
+                    <td>{Manager}</td>
+                    <td style="text-align:right;">{CaseAssignments}</td>
+                    <td style="text-align:right;">{AvgDTS 或 <span style="color:#ccc;">-</span>}</td>
+                    <td style="text-align:right;">{AvgDTC 或 <span style="color:#ccc;">-</span>}</td>
+                    <td style="text-align:right;">{PctClosedIn7d}% {🟢|🟡|🔴}</td>
+                    <td>{Country}</td>
+                    <td style="text-align:right;">{CSATAvg} {🟢|🟡|🔴} 或 <span style="color:#ccc;">-</span></td>
+                    <td style="text-align:right;">{SurveysCount}</td>
+                    <td style="text-align:right;">{IRSLAMissed} {🟢|🟡|🔴}</td>
+                </tr>
+            </tbody>
+        </table></div>
+    </div>
+</div>
+```
+
+**SE Members Performance 表格規則**：
+- **預設排序**：SE Name 升序（`th.sortable.asc` 標示在 SE Name 欄標頭）
+- **可排序欄位**：所有 10 欄均支援點擊標頭排序
+- **數值格式**：Avg DTS / Avg DTC 小數一位；% Closed ≤7d 小數一位（附 %）；CSAT Avg 小數兩位；IR SLA Missed 整數
+- **色彩燈號規則**：
+  - CSAT Avg：avg 四捨五入至整數 → 5=🟢 / 4=🟡 / ≤3=🔴；無 Survey 時顯示灰色 `-`
+  - % Closed ≤7d：≥50%=🟢 / 40–49%=🟡 / <40%=🔴
+  - IR SLA Missed：0=🟢 / 1=🟡 / ≥2=🔴
+- **無資料顯示**：Avg DTS / Avg DTC / CSAT Avg 無數值時顯示 `<span style="color:#ccc;">-</span>`
+- **數值對齊**：數字欄位（Case Assignments、Avg DTS、Avg DTC、% Closed ≤7d、CSAT Avg、Surveys Count、IR SLA Missed）均靠右對齊（`text-align:right`）
+- **資料來源標注**：Footer 需加入 `• SE Members: Kusto KPISupportData + bedrock.CSI.ASWStakeholder | IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx (or Dashboard fallback) | FY26 (Jul 2025 – Jun 2026)`
 
 **Average TTMS by Severity 統計規則**：
 - 位置：左欄 Summary Cards 下方（同一 flex column），填滿左側剩餘垂直空間

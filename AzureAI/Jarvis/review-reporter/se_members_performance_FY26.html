@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SE Members Performance — FY26 | ASW Azure Strategic Workloads</title>
+  <style>
+    :root {
+      --green:   #28a745;
+      --yellow:  #e6a817;
+      --red:     #dc3545;
+      --blue:    #0078d4;
+      --dark:    #1a1a2e;
+      --bg:      #f4f6f9;
+      --text:    #333333;
+      --border:  #e0e0e0;
+      --m-jacobw:  #0078d4;
+      --m-kbeller: #28a745;
+      --m-nasaggu: #9b59b6;
+      --m-noambi:  #e67e22;
+      --m-dhanat:  #e74c3c;
+      --m-xinxia:  #1abc9c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+
+    .header { background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%); color: #fff; padding: 22px 32px; }
+    .header h1 { font-size: 1.55rem; font-weight: 700; }
+    .header .subtitle { font-size: 0.88rem; color: #a0aec0; margin-top: 4px; }
+    .header .meta { font-size: 0.78rem; color: #718096; margin-top: 8px; }
+    .header .meta span + span::before { content: ' │ '; }
+
+    .cards-row { display: flex; flex-wrap: wrap; gap: 12px; padding: 20px 32px 0; }
+    .sc { background: #fff; border-radius: 10px; padding: 14px 18px; flex: 1; min-width: 130px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 3px solid var(--blue); text-align: center; }
+    .sc.g { border-top-color: var(--green); } .sc.y { border-top-color: var(--yellow); } .sc.r { border-top-color: var(--red); }
+    .sc-lbl { font-size: 0.68rem; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .sc-val { font-size: 1.45rem; font-weight: 700; color: var(--dark); }
+    .sc-sub { font-size: 0.68rem; color: #94a3b8; margin-top: 3px; }
+
+    .mgr-legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 32px 0; }
+    .mgr-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; padding: 4px 11px; border-radius: 12px; font-weight: 600; cursor: pointer; border: 2px solid transparent; user-select: none; transition: opacity .15s; }
+    .mgr-chip:not(.active) { opacity: .35; }
+    .mgr-chip .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .toolbar { display: flex; align-items: center; gap: 12px; padding: 12px 32px; background: #fff; border-bottom: 1px solid var(--border); flex-wrap: wrap; margin-top: 14px; }
+    .toolbar label { font-size: 12px; color: #64748b; font-weight: 600; }
+    .toolbar input[type=text] { border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; font-size: 13px; color: var(--text); background: #fff; }
+    .toolbar input:focus { outline: none; border-color: var(--blue); }
+    .toolbar .sep { flex: 1; }
+    .count-badge { font-size: 12px; color: #64748b; background: #f1f5fb; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+
+    .section { padding: 16px 32px 28px; }
+    .table-wrapper { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    thead th { background: #f1f5fb; color: #374151; font-weight: 600; padding: 9px 11px; border-bottom: 2px solid var(--border); white-space: nowrap; text-align: left; }
+    thead th.num { text-align: right; }
+    tbody td { padding: 8px 11px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; white-space: nowrap; }
+    tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #f7faff; }
+
+    th.sortable { cursor: pointer; user-select: none; padding-right: 20px; position: relative; }
+    th.sortable::after { content: ' ⇅'; font-size: .65rem; color: #bbb; position: absolute; right: 5px; }
+    th.sortable.asc::after  { content: ' ↑'; color: var(--blue); }
+    th.sortable.desc::after { content: ' ↓'; color: var(--blue); }
+    th.sortable:hover { background: #e2eaf5; }
+
+    .mgr-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10.5px; font-weight: 600; white-space: nowrap; }
+    .tl-g { color: var(--green); } .tl-y { color: var(--yellow); } .tl-r { color: var(--red); }
+    .csat-badge { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .cb-g { background:#d4edda;color:#155724; } .cb-y { background:#fff3cd;color:#856404; } .cb-r { background:#f8d7da;color:#721c24; }
+    .na { color: #ccc; font-style: italic; }
+    .vtag { font-size: 9.5px; background: #e9ecef; color: #6c757d; border-radius: 4px; padding: 1px 4px; margin-left: 4px; font-weight: 600; vertical-align: middle; }
+
+    .footer { background: #2d3748; color: #a0aec0; padding: 14px 32px; font-size: 11px; line-height: 1.8; }
+    .footer p { margin-bottom: 2px; } .footer strong { color: #e2e8f0; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SE Members Performance — FY26</h1>
+  <div class="subtitle">Azure Strategic Workloads (ASW) · SAP &amp; Epic Escalation Support</div>
+  <div class="meta">
+    <span>Fiscal Year: FY2026 (Jul 2025 – Jun 2026)</span>
+    <span>Team: 68 Engineers · 6 Managers</span>
+    <span>FY26 Baseline: 4,666 Cases · CSAT 4.92 · Avg DTC 12.2d · %&lt;7d 43.9% · IR Met 98.9%</span>
+    <span>Report: 2026-07-29 (UTC+8)</span>
+  </div>
+</div>
+
+<!-- Summary Cards -->
+<div class="cards-row">
+  <div class="sc">       <div class="sc-lbl">SE Members</div>         <div class="sc-val">68</div>         <div class="sc-sub">FY26 ASW Team</div></div>
+  <div class="sc">       <div class="sc-lbl">Total Case Assignments</div><div class="sc-val">4,666</div>     <div class="sc-sub">FY26 YTD</div></div>
+  <div class="sc y">     <div class="sc-lbl">Team Avg CSAT</div>       <div class="sc-val">4.72</div>        <div class="sc-sub">Target ≥ 4.80</div></div>
+  <div class="sc y">     <div class="sc-lbl">Team Avg DTC</div>        <div class="sc-val">12.2 d</div>      <div class="sc-sub">Target ≤ 12</div></div>
+  <div class="sc r">     <div class="sc-lbl">Total IR SLA Missed</div> <div class="sc-val">51</div>          <div class="sc-sub">FY26 YTD</div></div>
+  <div class="sc r">     <div class="sc-lbl">% Closed ≤7d</div>        <div class="sc-val">43.9%</div>       <div class="sc-sub">Target ≥ 50%</div></div>
+</div>
+
+<!-- Manager filter -->
+<div class="mgr-legend" id="mgrLegend">
+  <span class="mgr-chip active" data-mgr="all"    style="color:#444;background:#f1f5fb">All</span>
+  <span class="mgr-chip active" data-mgr="dhanat"  style="color:var(--m-dhanat);background:#fdf0f0">  <span class="dot" style="background:var(--m-dhanat)"></span>Dhananjay Tripathi (17)</span>
+  <span class="mgr-chip active" data-mgr="nasaggu" style="color:var(--m-nasaggu);background:#f9f0ff"><span class="dot" style="background:var(--m-nasaggu)"></span>Narendra Saggu (13)</span>
+  <span class="mgr-chip active" data-mgr="jacobw"  style="color:var(--m-jacobw);background:#e6f2fc"> <span class="dot" style="background:var(--m-jacobw)"></span>Jacob Wang (13)</span>
+  <span class="mgr-chip active" data-mgr="noambi"  style="color:var(--m-noambi);background:#fef5ec"> <span class="dot" style="background:var(--m-noambi)"></span>Noam Binyamini (12)</span>
+  <span class="mgr-chip active" data-mgr="kbeller" style="color:var(--m-kbeller);background:#edfaf1"><span class="dot" style="background:var(--m-kbeller)"></span>Kirk Beller (12)</span>
+  <span class="mgr-chip active" data-mgr="xinxia"  style="color:var(--m-xinxia);background:#e8faf5"> <span class="dot" style="background:var(--m-xinxia)"></span>Xin Xia (1)</span>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <label>Search</label>
+  <input id="searchBox" type="text" placeholder="name, alias, country…" style="width:210px" oninput="applyFilters()">
+  <span class="sep"></span>
+  <span class="count-badge" id="rowCount">Showing 68 of 68 engineers</span>
+</div>
+
+<!-- Table -->
+<div class="section">
+  <div class="table-wrapper">
+    <table id="se-table">
+      <thead>
+        <tr>
+          <th class="sortable asc" data-col="0" onclick="sortTable(0)">SE Name</th>
+          <th style="color:#94a3b8">Alias</th>
+          <th class="sortable"     data-col="2" onclick="sortTable(2)">SE Manager</th>
+          <th class="sortable num" data-col="3" onclick="sortTable(3)">Case Assign.</th>
+          <th class="sortable num" data-col="4" onclick="sortTable(4)">Avg DTS (d)</th>
+          <th class="sortable num" data-col="5" onclick="sortTable(5)">Avg DTC (d)</th>
+          <th class="sortable num" data-col="6" onclick="sortTable(6)">% Closed ≤7d</th>
+          <th class="sortable"     data-col="7" onclick="sortTable(7)">Country</th>
+          <th class="sortable num" data-col="8" onclick="sortTable(8)">CSAT Avg</th>
+          <th class="sortable num" data-col="9" onclick="sortTable(9)">Surveys</th>
+          <th class="sortable num" data-col="10" onclick="sortTable(10)">IR SLA Missed</th>
+        </tr>
+      </thead>
+      <tbody id="se-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <p><strong>Data Sources &amp; Filters:</strong></p>
+  <p>• Cases: Kusto supportrptwus3prod.westus3.kusto.windows.net / KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext | FY26 (2025-07-01–2026-06-30)</p>
+  <p>• Stakeholder: bedrock.eastus.kusto.windows.net / CSI.ASWStakeholder | Role=Engineer, BusinessUnit=CSS-ASW | Excluded: zhaobo</p>
+  <p>• IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx joined by AgentAlias | Manager names: asw_roster_fy26.json</p>
+  <p>• <strong>⚠ Metrics shown are representative placeholders</strong> — replace DATA array with actual Kusto output before distribution.</p>
+</div>
+
+<script>
+// ──────────────────────────────────────────────────────────────────────────
+// DATA — [alias, displayName, managerAlias, cases, avgDTS, avgDTC, pct7d, country, csatAvg|null, surveys, irMissed]
+// FY26 team baselines (asw_baseline_insights_v3.json):
+//   Created: 4,666 | Avg DTC: 12.2d | %≤7d: 43.9% | CSAT: 4.92 | IR Met: 98.9%
+// ──────────────────────────────────────────────────────────────────────────
+const DATA = [
+  ["alkassap",      "Alex Kassap",           "noambi",   82,  1.1, 11.8, 46.3, "Bulgaria",    4.80, 14,  1],
+  ["alveleri",      "Alexander Veleri",      "nasaggu", 104,  0.8, 10.4, 51.9, "India",       4.95, 28,  0],
+  ["andreikovacs",  "Andrei Kovacs",         "jacobw",   88,  1.4, 13.1, 40.9, "Romania",     4.88, 18,  1],
+  ["aneculae",      "Andrei Neculae",        "jacobw",   76,  1.6, 12.6, 43.4, "Romania",     4.83, 15,  0],
+  ["anrod",         "Ana Rodriguez",         "kbeller",  91,  0.9,  9.7, 55.0, "Spain",       4.91, 22,  0],
+  ["ayonbanerjee",  "Ayon Banerjee",         "dhanat",   95,  1.0, 11.3, 48.4, "India",       4.78, 24,  1],
+  ["brwurz",        "Brian Wurzbacher",      "kbeller",  63,  1.7, 14.2, 38.1, "USA",         4.60, 10,  2],
+  ["chmarri",       "Chandra Marri",         "nasaggu",  87,  1.2, 10.8, 52.9, "India",       4.97, 20,  0],
+  ["clash",         "Christopher Lash",      "dhanat",   72,  1.3, 12.9, 44.4, "UK",          4.72, 13,  1],
+  ["cschriever",    "Christoph Schriever",   "noambi",   68,  1.5, 13.5, 41.2, "Germany",     4.65, 11,  2],
+  ["dantes",        "Dante S.",              "noambi",   79,  1.0, 11.4, 49.4, "Israel",      4.86, 16,  0],
+  ["diambroi",      "Didier Ambroise",       "kbeller",  58,  1.8, 15.0, 36.2, "France",      4.50,  8,  3],
+  ["ejohnston",     "Elliott Johnston",      "kbeller",  64,  1.6, 13.7, 39.1, "USA",         4.62, 11,  2],
+  ["fmirdhe",       "Farhana Mirdhe",        "nasaggu",  99,  0.7, 10.1, 54.5, "India",       4.94, 26,  0],
+  ["francescav",    "Francesca Valentini",   "dhanat",   74,  1.4, 12.2, 45.9, "Italy",       4.75, 14,  1],
+  ["frcardos",      "Francisco Cardoso",     "nasaggu",  83,  1.1, 11.0, 50.6, "Portugal",    4.88, 17,  0],
+  ["gapetres",      "Gabriel Petres",        "noambi",   70,  1.3, 12.8, 43.6, "Romania",     4.71, 12,  1],
+  ["ivayala",       "Ivan Yala",             "dhanat",   88,  1.0, 10.9, 50.0, "Spain",       4.82, 19,  0],
+  ["jakelin",       "Jake Lin",              "jacobw",  112,  0.6,  9.3, 58.9, "Australia",   5.00, 35,  0],
+  ["joacarva",      "João Carvalho",         "nasaggu",  96,  0.9, 10.6, 52.1, "India",       4.96, 25,  0],
+  ["joaguas",       "João Águas",            "kbeller",  81,  1.1, 11.7, 47.2, "Portugal",    4.85, 16,  0],
+  ["jodieckm",      "Johannes Dieckmann",    "kbeller",  69,  1.4, 13.3, 40.6, "Germany",     4.67, 12,  1],
+  ["jogoncal",      "João Gonçalves",        "noambi",   77,  1.2, 11.9, 46.8, "Portugal",    4.79, 15,  1],
+  ["kamarti",       "Katherine Martinez",    "kbeller",  86,  0.8, 10.3, 53.5, "USA",         4.92, 21,  0],
+  ["kiranchinta",   "Kiran Chinta",          "dhanat",   90,  1.0, 11.1, 49.7, "India",       4.89, 22,  0],
+  ["landreazzi",    "Lucas Andreazzi",       "noambi",   73,  1.5, 13.2, 41.1, "Italy",       4.68, 13,  2],
+  ["ldondeti",      "Lakshma Dondeti",       "dhanat",   93,  0.9, 10.7, 51.6, "India",       4.91, 23,  0],
+  ["mareusch",      "Marco Reusch",          "dhanat",   67,  1.6, 13.8, 38.8, "Germany",     4.58, 10,  2],
+  ["markweb",       "Mark Webb",             "dhanat",   75,  1.3, 12.4, 44.7, "UK",          4.73, 14,  1],
+  ["mcirsti",       "Mihai Cirsti",          "dhanat",   71,  1.5, 13.0, 42.3, "Romania",     4.70, 12,  1],
+  ["mevindas",      "Manu Evindas",          "kbeller",  84,  1.0, 10.9, 51.2, "India",       4.87, 18,  0],
+  ["niljain",       "Nil Jain",              "nasaggu",  98,  0.8, 10.3, 53.1, "India",       4.93, 25,  0],
+  ["nmutya",        "Narendra Mutya",        "kbeller",  80,  1.2, 12.0, 46.3, "Philippines", 4.81, 16,  1],
+  ["npericherla",   "Naga Pericherla",       "dhanat",   86,  1.1, 11.4, 48.8, "India",       4.84, 19,  0],
+  ["oldoll",        "Olivier Doll",          "dhanat",   65,  1.7, 14.4, 37.5, "France",      4.55,  9,  3],
+  ["padias",        "Peter Adias",           "kbeller",  79,  1.2, 11.6, 47.5, "Bulgaria",    4.80, 15,  1],
+  ["pedmarqu",      "Pedro Marques",         "noambi",   72,  1.3, 12.7, 43.8, "Portugal",    4.72, 13,  1],
+  ["priyakumar",    "Priya Kumar",           "nasaggu", 108,  0.7,  9.8, 56.5, "India",       4.98, 31,  0],
+  ["ricardova",     "Ricardo Valente",       "dhanat",   78,  1.3, 12.3, 45.1, "Brazil",      4.76, 15,  1],
+  ["rubensousa",    "Ruben Sousa",           "nasaggu",  94,  0.9, 10.5, 52.7, "Portugal",    4.92, 23,  0],
+  ["saadury",       "Saad Ury",              "nasaggu",  89,  1.0, 11.2, 49.2, "India",       4.87, 21,  0],
+  ["shaddala",      "Shiva Addala",          "dhanat",   97,  0.8, 10.4, 53.1, "India",       4.96, 26,  0],
+  ["shcunni",       "Sheila Cunningham",     "dhanat",   74,  1.4, 12.5, 44.6, "UK",          4.74, 14,  1],
+  ["sherrera",      "Steven Herrera",        "dhanat",   76,  1.3, 12.1, 46.1, "Spain",       4.77, 15,  1],
+  ["shjoyce",       "Sheetal Joyce",         "dhanat",   70,  1.5, 13.4, 40.0, "India",       4.64, 11,  2],
+  ["shussein",      "Sara Hussein",          "jacobw",   83,  1.1, 11.5, 48.2, "UAE",         4.83, 17,  0],
+  ["sish",          "Siddharth Sharma",      "dhanat",   85,  1.0, 11.0, 50.6, "India",       4.86, 19,  0],
+  ["takin",         "Takin Khosropur",       "kbeller",  91,  0.9, 10.8, 51.1, "India",       4.90, 22,  0],
+  ["tholliday",     "Tanner Holliday",       "noambi",   66,  1.6, 14.1, 38.4, "USA",         4.57, 10,  2],
+  ["tiagosimoes",   "Tiago Simões",          "kbeller",  88,  1.1, 11.3, 48.9, "Portugal",    4.88, 20,  0],
+  ["tiberiuvlad",   "Tiberiu Vlad",          "jacobw",   79,  1.4, 12.7, 43.0, "Romania",     4.76, 15,  1],
+  ["v-cbashyam",    "C. Bashyam",            "jacobw",   38,  1.3, 12.4, 44.7, "India",       null,  0,  0],
+  ["v-faiahmad",    "Faisal Ahmad",          "jacobw",   42,  1.1, 11.8, 47.6, "India",       4.80,  8,  0],
+  ["v-gurksaini",   "Gurk Saini",            "jacobw",   35,  1.5, 13.1, 41.4, "India",       null,  0,  0],
+  ["v-hiremathka",  "K. Hiremath",           "jacobw",   40,  1.2, 12.0, 45.8, "India",       4.75,  7,  0],
+  ["vjanapati",     "Venkat Janapati",       "nasaggu",  92,  0.9, 10.6, 52.2, "India",       4.91, 22,  0],
+  ["v-jayaswanth",  "Jayaswanth V.",         "nasaggu",  37,  1.4, 12.6, 42.9, "India",       null,  0,  0],
+  ["v-nrohit",      "N. Rohit",              "jacobw",   33,  1.6, 13.4, 39.4, "India",       null,  0,  0],
+  ["v-pbowman",     "P. Bowman",             "noambi",   36,  1.3, 12.2, 44.3, "USA",         null,  0,  0],
+  ["v-pdeshpag",    "P. Deshpande",          "jacobw",   39,  1.1, 11.5, 48.0, "India",       4.78,  7,  0],
+  ["v-pkorlepara",  "P. Korlepara",          "jacobw",   34,  1.5, 13.3, 40.8, "India",       null,  0,  0],
+  ["v-pkotthapal",  "P. Kotthapal",          "nasaggu",  41,  1.2, 12.1, 45.5, "India",       null,  0,  0],
+  ["v-potnkumar",   "P. Kumar",              "nasaggu",  36,  1.4, 12.8, 42.2, "India",       null,  0,  0],
+  ["v-purujiths",   "Purujith S.",           "jacobw",   32,  1.7, 14.0, 37.9, "India",       null,  0,  0],
+  ["v-ragopalakr",  "R. Gopalakrishnan",     "noambi",   38,  1.3, 12.5, 43.6, "India",       null,  0,  0],
+  ["v-vijella",     "V. Ijella",             "noambi",   35,  1.5, 13.2, 41.0, "India",       null,  0,  0],
+  ["wessm",         "Wes Smith",             "noambi",   61,  1.7, 14.5, 36.9, "USA",         4.52,  9,  3],
+  ["jiedong",       "Jie Dong",              "xinxia",  114,  0.6,  9.1, 59.6, "China",       5.00, 37,  0],
+];
+
+const MANAGER_DISPLAY = {
+  jacobw:  "Jacob Wang",
+  kbeller: "Kirk Beller",
+  nasaggu: "Narendra Saggu",
+  noambi:  "Noam Binyamini",
+  dhanat:  "Dhananjay Tripathi",
+  xinxia:  "Xin Xia",
+};
+const MANAGER_COLOR = {
+  jacobw:  "var(--m-jacobw)",
+  kbeller: "var(--m-kbeller)",
+  nasaggu: "var(--m-nasaggu)",
+  noambi:  "var(--m-noambi)",
+  dhanat:  "var(--m-dhanat)",
+  xinxia:  "var(--m-xinxia)",
+};
+const MANAGER_BG = {
+  jacobw:  "#e6f2fc",
+  kbeller: "#edfaf1",
+  nasaggu: "#f9f0ff",
+  noambi:  "#fef5ec",
+  dhanat:  "#fdf0f0",
+  xinxia:  "#e8faf5",
+};
+
+// helpers
+function tlCSAT(v) {
+  if (v === null) return '<span class="na">—</span>';
+  const r = Math.round(v);
+  const c = r >= 5 ? 'cb-g' : r >= 4 ? 'cb-y' : 'cb-r';
+  return `<span class="csat-badge ${c}">${v.toFixed(2)} ★</span>`;
+}
+function tlP7d(v) {
+  const c = v >= 50 ? 'tl-g' : v >= 40 ? 'tl-y' : 'tl-r';
+  const i = v >= 50 ? '🟢' : v >= 40 ? '🟡' : '🔴';
+  return `<span class="${c}">${v.toFixed(1)}%</span> ${i}`;
+}
+function tlIR(v) {
+  const c = v === 0 ? 'tl-g' : v === 1 ? 'tl-y' : 'tl-r';
+  const i = v === 0 ? '🟢' : v === 1 ? '🟡' : '🔴';
+  return `<span class="${c}">${v}</span> ${i}`;
+}
+function fmtN(v, d = 1) { return v === null ? '<span class="na">—</span>' : v.toFixed(d); }
+function mgrBadge(m) {
+  return `<span class="mgr-badge" style="background:${MANAGER_BG[m]};color:${MANAGER_COLOR[m]}">${MANAGER_DISPLAY[m] || m}</span>`;
+}
+
+// render
+let currentData = [...DATA];
+
+function renderRows(rows) {
+  document.getElementById('se-tbody').innerHTML = rows.map(r => {
+    const [alias, name, mgr, cases, dts, dtc, p7d, country, csat, surv, ir] = r;
+    const vtag = alias.startsWith('v-') ? '<span class="vtag">V</span>' : '';
+    return `<tr data-alias="${alias}" data-mgr="${mgr}">
+      <td>${name}${vtag}</td>
+      <td style="color:#94a3b8;font-size:11.5px">${alias}</td>
+      <td>${mgrBadge(mgr)}</td>
+      <td class="num">${cases}</td>
+      <td class="num">${fmtN(dts)}</td>
+      <td class="num">${fmtN(dtc)}</td>
+      <td class="num">${tlP7d(p7d)}</td>
+      <td>${country}</td>
+      <td class="num">${tlCSAT(csat)}</td>
+      <td class="num">${surv}</td>
+      <td class="num">${tlIR(ir)}</td>
+    </tr>`;
+  }).join('');
+}
+renderRows(currentData);
+
+// sort
+let sortCol = 0, sortAsc = true;
+const DI = [0, null, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // header col → DATA index
+
+function sortTable(col) {
+  sortAsc = (sortCol === col) ? !sortAsc : true;
+  sortCol = col;
+  document.querySelectorAll('th.sortable').forEach(th => {
+    th.classList.remove('asc', 'desc');
+    if (parseInt(th.dataset.col) === col) th.classList.add(sortAsc ? 'asc' : 'desc');
+  });
+  const di = DI[col];
+  currentData.sort((a, b) => {
+    const va = a[di] ?? (sortAsc ? '\uFFFF' : '');
+    const vb = b[di] ?? (sortAsc ? '\uFFFF' : '');
+    if (typeof va === 'string') return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return sortAsc ? va - vb : vb - va;
+  });
+  renderRows(currentData);
+  applyFilters();
+}
+
+// filter
+let activeManagers = new Set(['jacobw','kbeller','nasaggu','noambi','dhanat','xinxia']);
+
+document.getElementById('mgrLegend').addEventListener('click', e => {
+  const chip = e.target.closest('.mgr-chip');
+  if (!chip) return;
+  const mgr = chip.dataset.mgr;
+  if (mgr === 'all') {
+    const all = activeManagers.size === 6;
+    activeManagers = all ? new Set() : new Set(['jacobw','kbeller','nasaggu','noambi','dhanat','xinxia']);
+  } else {
+    activeManagers.has(mgr) ? activeManagers.delete(mgr) : activeManagers.add(mgr);
+  }
+  document.querySelectorAll('.mgr-chip').forEach(c => {
+    const m = c.dataset.mgr;
+    c.classList.toggle('active', m === 'all' ? activeManagers.size === 6 : activeManagers.has(m));
+  });
+  applyFilters();
+});
+
+function applyFilters() {
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('#se-tbody tr').forEach(tr => {
+    const show = activeManagers.has(tr.dataset.mgr) && (!q || tr.textContent.toLowerCase().includes(q));
+    tr.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('rowCount').textContent = `Showing ${visible} of 68 engineers`;
+}
+</script>
+</body>
+</html>

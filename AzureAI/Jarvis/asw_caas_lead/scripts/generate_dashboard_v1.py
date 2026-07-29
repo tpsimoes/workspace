@@ -33,7 +33,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(r"c:\GitHubCopilot\IronMan")
+ROOT = Path(__file__).parent.parent  # asw_caas_lead/ folder (script lives in scripts/)
 
 # =============================================================================
 # Fiscal Year switch (v3.0 — FY27 support with month-range awareness)
@@ -78,12 +78,12 @@ _META = _FY_META[FY_TAG]
 
 DATA_JSON   = ROOT / "Output" / _META["cases_json"]
 CSAT_JSON   = ROOT / "Output" / _META["csat_json"]
-ROSTER_JSON = ROOT / "Skills" / "asw_caas_lead" / "references" / "asw_roster_fy26.json"
-CHANGE_EVENTS_JSON = ROOT / "Skills" / "asw_caas_lead" / "references" / _META["change_events"]  # from ASW_Cx_Changing_Activities xlsx (SharePoint, month-end refresh)
-ACR_SNAPSHOT_JSON  = ROOT / "Skills" / "asw_caas_lead" / "references" / _META["acr_snapshot"]    # CX Observe monthly Consumption snapshot
-INSIGHTS_V3_JSON   = ROOT / "Skills" / "asw_caas_lead" / "references" / _META["insights_v3"]     # A&I and DTP | Insights+_v3_AIDTP_Fabric — team-wide baseline
-WIKI_SUMMARIES_JSON = ROOT / "Skills" / "asw_caas_lead" / "references" / "customer_wiki_summaries.json"  # Know-Me wiki (customer-level, time-independent)
-REVIEW_SUMMARIES_JSON = ROOT / "Skills" / "asw_caas_lead" / "references" / _META["review_summaries"]  # CaaS Lead PPT extracts (Key Updates / Service Delivery / Reminders)
+ROSTER_JSON = ROOT / "references" / "asw_roster_fy26.json"
+CHANGE_EVENTS_JSON = ROOT / "references" / _META["change_events"]  # from ASW_Cx_Changing_Activities xlsx (SharePoint, month-end refresh)
+ACR_SNAPSHOT_JSON  = ROOT / "references" / _META["acr_snapshot"]    # Kusto TTM ACR snapshot (§4.7-A)
+INSIGHTS_V3_JSON   = ROOT / "references" / _META["insights_v3"]     # A&I and DTP | Insights+_v3_AIDTP_Fabric — team-wide baseline
+WIKI_SUMMARIES_JSON = ROOT / "references" / "customer_wiki_summaries.json"  # Know-Me wiki (customer-level, time-independent)
+REVIEW_SUMMARIES_JSON = ROOT / "references" / _META["review_summaries"]  # CaaS Lead PPT extracts (Key Updates / Service Delivery / Reminders)
 OUT_HTML    = ROOT / "Output" / _META["out_html"]
 
 # Kusto source (documented in §7 of SKILL.md — shown in header for provenance)
@@ -3146,7 +3146,11 @@ def _render_fy_banner() -> str:
 
 
 def main():
-    cases = json.loads(DATA_JSON.read_text(encoding="utf-8"))
+    if DATA_JSON.exists():
+        cases = json.loads(DATA_JSON.read_text(encoding="utf-8"))
+    else:
+        print(f"WARNING: Case data not found at {DATA_JSON} — rendering with empty dataset.")
+        cases = []
     html = render(cases)
     # Post-process: substitute FY26 → active FY labels + filenames
     html = _apply_fy_substitutions(html)
