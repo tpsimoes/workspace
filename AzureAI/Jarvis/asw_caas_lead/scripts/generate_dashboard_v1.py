@@ -41,9 +41,12 @@ ROOT = Path(__file__).parent.parent  # asw_caas_lead/ folder (script lives in sc
 # All downstream data paths / labels / output filename derive from FY_TAG.
 # =============================================================================
 FY_TAG = "fy27"   # default; override via CLI --fy=fy26
+LITE_MODE = False  # --lite: omit Azure Consumption (TTM) cards/columns; output to *_lite.html
 for _a in sys.argv[1:]:
     if _a.startswith("--fy="):
         FY_TAG = _a.split("=", 1)[1].strip().lower()
+    elif _a == "--lite":
+        LITE_MODE = True
 
 # Fiscal year metadata table: FY26 = 2025-07 → 2026-06, FY27 = 2026-07 → 2027-06
 _FY_META = {
@@ -85,6 +88,8 @@ INSIGHTS_V3_JSON   = ROOT / "references" / _META["insights_v3"]     # A&I and DT
 WIKI_SUMMARIES_JSON = ROOT / "references" / "customer_wiki_summaries.json"  # Know-Me wiki (customer-level, time-independent)
 REVIEW_SUMMARIES_JSON = ROOT / "references" / _META["review_summaries"]  # CaaS Lead PPT extracts (Key Updates / Service Delivery / Reminders)
 OUT_HTML    = ROOT / "Output" / _META["out_html"]
+if LITE_MODE:
+    OUT_HTML = OUT_HTML.with_stem(OUT_HTML.stem + "_lite")
 
 # Kusto source (documented in §7 of SKILL.md — shown in header for provenance)
 KUSTO_CLUSTER = "supportrptwus3prod.westus3.kusto.windows.net"
@@ -1625,37 +1630,40 @@ def render_program_rollup(focus_pas: list[dict], focus: list[dict], csat_summary
     dtc_led = status_led(dtc_val, 12, higher_is_better=False) if dtc_val is not None else LED_BLUE
     pct7_val = r['pct_close_7']
     pct7_led = status_led(pct7_val, 50, higher_is_better=True) if pct7_val is not None else LED_BLUE
-    # Card 11 · Azure Consumption TTM (Trailing Twelve Months, aggregated across SAP/EPIC-scoped workloads)
-    acr_map = acr_snapshot.get("by_tpid", {})
-    acr_meta = acr_snapshot.get("meta", {})
-    acr_total = sum_section_acr(focus, acr_map, acr_meta)
-    is_ttm = (acr_meta.get("metric_type") == "TTM")
-    snap_month = acr_meta.get("snapshot_month", "")
-    snap_label = _fmt_month_label(snap_month) or snap_month
-    if acr_total is not None:
-        acr_arrow = acr_trend_html(acr_total.get("delta_pct"))
-        acr_abs = acr_delta_abs_html(acr_total.get("acu_this_month"), acr_total.get("prev_month"))
-        if is_ttm:
-            acr_card_label = f"11 · Azure Consumption (TTM) {TAG_CX}"
-            acr_sub = f"TTM = Trailing Twelve Months · {acr_total['covered']}/{acr_total['total']} covered · Kusto"
+    # Card 11 · Azure Consumption TTM — omitted in lite mode
+    if not LITE_MODE:
+        acr_map = acr_snapshot.get("by_tpid", {})
+        acr_meta = acr_snapshot.get("meta", {})
+        acr_total = sum_section_acr(focus, acr_map, acr_meta)
+        is_ttm = (acr_meta.get("metric_type") == "TTM")
+        snap_month = acr_meta.get("snapshot_month", "")
+        snap_label = _fmt_month_label(snap_month) or snap_month
+        if acr_total is not None:
+            acr_arrow = acr_trend_html(acr_total.get("delta_pct"))
+            acr_abs = acr_delta_abs_html(acr_total.get("acu_this_month"), acr_total.get("prev_month"))
+            if is_ttm:
+                acr_card_label = f"11 · Azure Consumption (TTM) {TAG_CX}"
+                acr_sub = f"TTM = Trailing Twelve Months · {acr_total['covered']}/{acr_total['total']} covered · Kusto"
+            else:
+                acr_card_label = f"11 · FY26 Jun Sum {TAG_CX}"
+                acr_sub = (f"{acr_total['covered']}/{acr_total['total']} covered · vs prev {acr_total['prev_display']}"
+                           f" ({acr_abs} ACU)" if acr_total.get('delta_pct') is not None
+                           else f"Azure Consumption Units · {snap_label} · CX Observe · {acr_total['covered']}/{acr_total['total']} covered")
+            acr_value_inner = f'<div class="value" title="{"Trailing Twelve Months" if is_ttm else "Monthly Consumption"}">{acr_total["acu_display"]}{acr_arrow}</div>'
+            acr_value_html = drill_span("PROGRAM", "acr", acr_value_inner)
+            acr_card = (
+                f'<div class="card">{LED_BLUE}<div class="label">{acr_card_label}</div>'
+                f'{acr_value_html}'
+                f'<div class="sub">{acr_sub}</div></div>'
+            )
         else:
-            acr_card_label = f"11 · FY26 Jun Sum {TAG_CX}"
-            acr_sub = (f"{acr_total['covered']}/{acr_total['total']} covered · vs prev {acr_total['prev_display']}"
-                       f" ({acr_abs} ACU)" if acr_total.get('delta_pct') is not None
-                       else f"Azure Consumption Units · {snap_label} · CX Observe · {acr_total['covered']}/{acr_total['total']} covered")
-        acr_value_inner = f'<div class="value" title="{"Trailing Twelve Months" if is_ttm else "Monthly Consumption"}">{acr_total["acu_display"]}{acr_arrow}</div>'
-        acr_value_html = drill_span("PROGRAM", "acr", acr_value_inner)
-        acr_card = (
-            f'<div class="card">{LED_BLUE}<div class="label">{acr_card_label}</div>'
-            f'{acr_value_html}'
-            f'<div class="sub">{acr_sub}</div></div>'
-        )
+            acr_card_label = ("11 · Azure Consumption (TTM) " + TAG_CX) if is_ttm else ("11 · FY26 Jun Sum " + TAG_CX)
+            acr_card = (
+                f'<div class="card na">{LED_BLUE}<div class="label">{acr_card_label}</div>'
+                f'<div class="value">NA</div><div class="sub">ACR snapshot not loaded</div></div>'
+            )
     else:
-        acr_card_label = ("11 · Azure Consumption (TTM) " + TAG_CX) if is_ttm else ("11 · FY26 Jun Sum " + TAG_CX)
-        acr_card = (
-            f'<div class="card na">{LED_BLUE}<div class="label">{acr_card_label}</div>'
-            f'<div class="value">NA</div><div class="sub">ACR snapshot not loaded</div></div>'
-        )
+        acr_card = ''
     return f"""
     <div class="kpi-grid">
       <div class="card">{LED_BLUE}<div class="label">1 · Focus Customers {TAG_M}</div><div class="value">{len(focus)}</div><div class="sub">SAP RISE + Mission Critical + Potential MC + RISE Selected</div></div>
@@ -1941,11 +1949,8 @@ def render_customer_card(f: dict, pa: dict, cs: dict, show_acr: bool = False, ac
         csat_html = drill_span(dkey, "csat", csat_inner)
     else:
         csat_html = '<span class="m-value na">no surveys</span>'
-    # ACR metric — only shown when show_acr flag is on.
-    # Value = TTM Consumption (Trailing Twelve Months) sourced from Kusto
-    # WorkloadSearchSummarized.Consumption; monthly MoM is not available so
-    # `prev_month` / `delta_pct` are null and the arrow is suppressed.
-    if show_acr:
+    # ACR metric — only shown when show_acr flag is on and not in lite mode.
+    if show_acr and not LITE_MODE:
         # Determine metric label once (falls back to legacy label when metric_type absent)
         acr_label_text = "Azure Consumption (TTM)"
         if acr_entry:
@@ -2057,7 +2062,7 @@ def render_detail_table(customers: list[dict], pas: list[dict], css: list[dict])
           <td>{f['ce']}</td>
           <td>{f['ee']}</td>
           <td>{fmt_mc(f['mc'])}</td>
-          <td class="na">NA</td>
+          {'' if LITE_MODE else '<td class="na">NA</td>'}
         </tr>""")
     return f"""
     <div class="table-wrapper">
@@ -2070,7 +2075,7 @@ def render_detail_table(customers: list[dict], pas: list[dict], css: list[dict])
             <th colspan="10" style="background:#e7f0fb; color:#1e40af;">Panel A · Support Delivery (FY26)</th>
             <th colspan="6" style="background:#fef3c7; color:#854d0e;">Panel B · Program Indicators</th>
             <th rowspan="2">MC Contract</th>
-            <th rowspan="2">ACR YoY %</th>
+            {'' if LITE_MODE else '<th rowspan="2">ACR YoY %</th>'}
           </tr>
           <tr>
             <th>Case Vol</th><th>Closed</th><th>Avg DTC</th><th>%&lt;7d</th><th>CritSit</th>
@@ -2153,33 +2158,36 @@ def render_section(letter: str, customers: list[dict], cases: list[dict],
     ca_led   = status_led(ca_pct, 100, higher_is_better=True)
     critsit_pct = round(100.0 * sub['critsit'] / sub['vol'], 1) if sub['vol'] else 0.0
 
-    # Section ACR card — TTM Consumption aggregated across SAP/EPIC workloads in this section
-    section_acr = sum_section_acr(customers, acr_map, acr_meta) if acr_map else None
-    is_ttm = (acr_meta.get("metric_type") == "TTM")
-    sec_acr_label = (f"Azure Consumption (TTM) {TAG_CX}" if is_ttm
-                     else f"FY26 Jun Sum {TAG_CX}")
-    if section_acr:
-        s_arrow = acr_trend_html(section_acr.get("delta_pct"))
-        s_abs = acr_delta_abs_html(section_acr.get("acu_this_month"), section_acr.get("prev_month"))
-        if is_ttm:
-            s_sub = f"TTM = Trailing Twelve Months · {section_acr['covered']}/{section_acr['total']} covered"
+    # Section ACR card — omitted in lite mode
+    if not LITE_MODE:
+        section_acr = sum_section_acr(customers, acr_map, acr_meta) if acr_map else None
+        is_ttm = (acr_meta.get("metric_type") == "TTM")
+        sec_acr_label = (f"Azure Consumption (TTM) {TAG_CX}" if is_ttm
+                         else f"FY26 Jun Sum {TAG_CX}")
+        if section_acr:
+            s_arrow = acr_trend_html(section_acr.get("delta_pct"))
+            s_abs = acr_delta_abs_html(section_acr.get("acu_this_month"), section_acr.get("prev_month"))
+            if is_ttm:
+                s_sub = f"TTM = Trailing Twelve Months · {section_acr['covered']}/{section_acr['total']} covered"
+            else:
+                s_sub = (f"Azure Consumption Units · {snap_label} · "
+                         f"{section_acr['covered']}/{section_acr['total']} covered"
+                         f" · vs prev {section_acr['prev_display']} ({s_abs} ACU)"
+                         if section_acr.get('delta_pct') is not None
+                         else f"Azure Consumption Units · {snap_label} · {section_acr['covered']}/{section_acr['total']} covered")
+            s_acr_val_html = drill_span(sec_key, "acr", f'<div class="value" title="{"Trailing Twelve Months" if is_ttm else "Monthly Consumption"}">{section_acr["acu_display"]}{s_arrow}</div>')
+            section_acr_card = (
+                f'<div class="card" style="border-top-color:{meta["color"]}">{LED_BLUE}<div class="label">{sec_acr_label}</div>'
+                f'{s_acr_val_html}'
+                f'<div class="sub">{s_sub}</div></div>'
+            )
         else:
-            s_sub = (f"Azure Consumption Units · {snap_label} · "
-                     f"{section_acr['covered']}/{section_acr['total']} covered"
-                     f" · vs prev {section_acr['prev_display']} ({s_abs} ACU)"
-                     if section_acr.get('delta_pct') is not None
-                     else f"Azure Consumption Units · {snap_label} · {section_acr['covered']}/{section_acr['total']} covered")
-        s_acr_val_html = drill_span(sec_key, "acr", f'<div class="value" title="{"Trailing Twelve Months" if is_ttm else "Monthly Consumption"}">{section_acr["acu_display"]}{s_arrow}</div>')
-        section_acr_card = (
-            f'<div class="card" style="border-top-color:{meta["color"]}">{LED_BLUE}<div class="label">{sec_acr_label}</div>'
-            f'{s_acr_val_html}'
-            f'<div class="sub">{s_sub}</div></div>'
-        )
+            section_acr_card = (
+                f'<div class="card na" style="border-top-color:{meta["color"]}">{LED_BLUE}<div class="label">{sec_acr_label}</div>'
+                f'<div class="value">N/A</div><div class="sub">no ACR data for this section</div></div>'
+            )
     else:
-        section_acr_card = (
-            f'<div class="card na" style="border-top-color:{meta["color"]}">{LED_BLUE}<div class="label">{sec_acr_label}</div>'
-            f'<div class="value">N/A</div><div class="sub">no ACR data for this section</div></div>'
-        )
+        section_acr_card = ''
 
     sub_row = f"""
     <div class="mini-grid">
