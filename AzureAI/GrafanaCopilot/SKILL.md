@@ -34,15 +34,54 @@ https://<stamp>.grafana.azure.com/d/tictrm7/virtual-machine-reboot-analyzer?orgI
 
 ## Workflow
 
-1. **Capture** — scrape the dashboard, waiting for every panel to finish loading
+1. **Prepare and open once** — read the capture/report requirements and check
+   local dependencies before launching a browser. Reuse an existing authorized
+   Grafana session when available; otherwise open one persistent Edge context
+   and one dashboard tab. Complete any required sign-in in that tab.
+2. **Capture** — scrape the dashboard in that same context and tab, waiting for every panel to finish loading
    (up to ~3 min; a panel is loaded when it shows data *or* the text "No Data").
    Expand tall tables, de-stick headers, hide Grafana chrome, autocrop, and write
-   `manifest.json` + `panel-NN-<slug>.png`. See `PROMPT.md` § Capture Engine.
-2. **Analyze & report** — resolve each PNG by title-slug, content-crop to the
+   `manifest.json` + `panel-NN-<slug>.png`. Verify table rows, column extents,
+   headers, and absence of overlapping panels before ending capture. Perform
+   any inspection, retry, or recapture in the existing tab, not a new browser.
+   See `PROMPT.md` § Capture Engine.
+3. **Analyze & report** — resolve each PNG by title-slug, content-crop to the
    data band, and emit **one self-contained HTML report** (dark theme, base64
    images, 1080px content). See `PROMPT.md` § Report Generator for header, panel
    order, relevance rules, tags, summary, timeline, and the two RCA candidates.
-3. **Deliver** — open / return `report_<vm>.html`.
+   Build and validate the report locally from saved evidence; do not reopen
+   Grafana for report generation or validation.
+4. **Deliver** — open / return `report_<vm>.html`. Close only the browser
+   context created for this run, after all evidence checks and recaptures finish;
+   leave a reused user-owned browser session open.
+
+### Single-session policy (mandatory)
+
+This policy applies to every workflow step, helper script, and referenced
+prompt. The target is **one Grafana browser opening and at most one interactive
+sign-in for the entire analysis**, not one per command or panel.
+
+- Use one persistent Edge context with `.pw-profile-msedge` and one dashboard
+  tab. Navigate to the requested Grafana URL once; reuse the live context and
+  page for subsequent work. A cached profile is not a substitute for keeping
+  the same browser session alive.
+- Keep the capture process/session alive until the evidence is complete and
+  verified. Do not launch separate Playwright processes for DOM inspection,
+  table fixes, or recaptures. Those operations must share the original page.
+- Do not repeatedly rerun a capture command that closes its browser on exit.
+  If a helper cannot retain the session, adapt its lifecycle before starting
+  capture rather than relaunching it for each follow-up.
+- Do not start additional Azure CLI, Azure MCP, or other sign-in flows solely
+  as preliminary checks for this dashboard-report workflow. Use dashboard
+  evidence and existing authorized connections; report unavailable optional
+  corroboration without repeatedly prompting for authentication.
+- If authentication is required, ask the user once to complete it in the
+  existing dashboard tab, then continue there. Never create another browser
+  or login tab as an authentication retry.
+- If Conditional Access, session expiry, or a browser failure makes reuse
+  impossible, stop and explain the blocker before requesting another sign-in
+  or opening a replacement browser. Do not bypass authentication controls or
+  enter a repeated login/relaunch loop.
 
 ### Run (local, Playwright + Edge)
 
@@ -151,6 +190,14 @@ ranges** for each so the engineer can correlate with what the customer reports.
 ## Authentication
 
 Azure Managed Grafana is behind Conditional Access. Local runs use Edge with a
-cached authenticated profile (`.pw-profile-msedge`). The container needs
+cached authenticated profile (`.pw-profile-msedge`) and must follow the
+single-session policy above. Reuse cached authentication without prompting
+when valid; otherwise complete sign-in once in the existing dashboard tab.
+Conditional Access may require reauthentication, so a single sign-in is a
+workflow target, not a guarantee that overrides tenant policy.
+
+Do not export, print, or copy browser tokens/cookies to avoid a sign-in prompt.
+The container needs
 `GRAFANA_COOKIES` (JSON cookie array) — without it the scraper only reaches the
-login page.
+login page. Use only an explicitly configured, authorized container credential
+source; do not switch to the container as an authentication workaround.

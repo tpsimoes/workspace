@@ -1,2 +1,3 @@
-2026/07/02-15:02:12.289 6fe8 Creating DB C:\Users\tiagosimoes\vm-analyzer\.pw-profile-msedge\Default\Extension Rules since it was missing.
-2026/07/02-15:02:12.296 6fe8 Reusing MANIFEST C:\Users\tiagosimoes\vm-analyzer\.pw-profile-msedge\Default\Extension Rules/MANIFEST-000001
+2026/10/01-18:45:35.188 80d8 Reusing MANIFEST c:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\Extension Rules/MANIFEST-000001
+2026/10/01-18:45:35.189 80d8 Recovering log #3
+2026/10/01-18:45:35.190 80d8 Reusing old log c:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\Extension Rules/000003.log 
