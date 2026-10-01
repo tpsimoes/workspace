@@ -30,10 +30,19 @@ https://asw-main-c9d6bfgzgnbydnae.eus2.grafana.azure.com/d/tictrm7/virtual-machi
 
 ## Capture Engine (`enumerate_all.py`)
 
+- Follow `SKILL.md`'s **Single-session policy** for authentication and browser
+  lifecycle. Use local files, not GitHub or optional Azure authentication flows.
 - Drive the dashboard with **Playwright + Microsoft Edge** (`channel="msedge"`,
   persistent profile `.pw-profile-msedge`, `no_viewport=True`). Conditional
-  Access requires Edge with a cached, authenticated profile. Retry once on a
-  flaky `TargetClosedError` at launch.
+  Access may require sign-in in that existing tab. Use the stable capture entry
+  point once; it performs capture, validation, and at most one retry per failed
+  panel in the same context, within an approximately three-minute panel budget.
+  Never retry a browser launch, switch browser tools/profiles, or initiate a
+  second sign-in automatically. Stop and explain a lost session or launch failure.
+- If the caller already owns an authorized Playwright context, use
+  `capture_in_context(context, url, out_dir)`; it leaves that context open.
+  Otherwise the entry point owns one context and closes it after validation or
+  explicit failure. Do not create per-run scripts for follow-up inspections.
 - Each panel is a `div.react-grid-item`. **Grafana returns panels in a different
   order on every scrape** — never rely on panel index; always resolve captures
   by title-slug.
@@ -55,7 +64,14 @@ https://asw-main-c9d6bfgzgnbydnae.eus2.grafana.azure.com/d/tictrm7/virtual-machi
   `div.react-grid-item` (`display:none` for out-of-flow, `visibility:hidden` for
   sticky). Restore afterwards in a `finally`.
 - Autocrop each PNG. Write a `manifest.json` (index, title, `no_data`, text,
-  file) alongside `panel-NN-<slug>.png`.
+  file, rows, status, and an error message on failure) alongside the PNGs.
+  Read text only after rendering settles and verify it again after taking the
+  screenshot. For tables, compare row content rather than transient panel-menu
+  text; revalidate row/column bounds after screenshot scrolling settles.
+  Validate table row/column bounds and hide neighboring panels to
+  prevent overlap. No Data and failed panels have no screenshot reference.
+  Treat nonzero exit status or any error entry as incomplete evidence, not a
+  successful report input. Do not automatically rerun capture after failure.
 
 ---
 
@@ -96,7 +112,10 @@ General relevance rules:
 - Graph panels → relevant if values are constantly at/near max, or show
   spikes/blips/abnormal patterns.
 - **A panel reading "No Data" is never relevant — never capture it**, even where
-  a panel is marked "capture always".
+  a panel is marked "capture always". After loading finishes, record `no_data`
+  and skip the panel without retries or a failed run, including when Grafana
+  shows a generic "Panel status" badge. Keep explicit query failures distinct
+  from empty results.
 
 Panels (with capture criteria):
 1. **VM Events** — overall impact counters. Capture when any counter > 0.
@@ -170,6 +189,10 @@ unexpectedly."*
 
 ```powershell
 python enumerate_all.py "<dashboard URL>" "captures\<vm>"
-python build_report_reboot.py          # writes report_<vm>.html
-Start-Process report_<vm>.html
 ```
+
+Use the successful capture's manifest and images to build and validate the
+report locally. `build_report_reboot.py` is a VM-specific example and must not
+be run unchanged for a different VM. Return a link to `report_<vm>.html`; open
+a preview only when requested, without a new Grafana or authentication session.
+Tool-approval prompts are distinct from sign-in and cannot be bypassed.

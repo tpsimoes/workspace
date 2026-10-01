@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
-"""Enumerate and capture EVERY panel on the Grafana VM Analyzer dashboard.
-
-Writes captures/all/panel-NN-<slug>.png plus captures/all/manifest.json with
-{index, title, text, no_data, file} for each panel, for downstream relevance
-classification.
-"""
+"""Capture and validate Grafana evidence in one authenticated Edge session."""
+import argparse
 import json
 import re
 import sys
+import time
 from pathlib import Path
-from playwright.sync_api import sync_playwright
+from urllib.parse import urlparse
+
+from PIL import Image
+from playwright.sync_api import Error as PlaywrightError, sync_playwright
 
 PROFILE_DIR = Path(__file__).parent / ".pw-profile-msedge"
 OUT_DIR = Path(__file__).parent / "captures" / "all2"
+PANEL_HEADER = '[data-testid*="Panel header"]'
+
+
+class CaptureError(RuntimeError):
+    pass
 
 
 def autocrop(path, thresh=24, pad=10):
     """Trim empty near-black margins from a panel screenshot so the image
     hugs the actual content (title + table/graph) instead of leaving large
     black regions with no data/graphs."""
-    try:
-        from PIL import Image
-    except Exception:
-        return
-    try:
-        im = Image.open(path).convert("RGB")
-    except Exception:
-        return
+    with Image.open(path) as source:
+        im = source.convert("RGB")
     gray = im.convert("L")
     mask = gray.point(lambda x: 255 if x > thresh else 0)
     bbox = mask.getbbox()
@@ -93,6 +92,28 @@ def expand_panel(panel):
                 n.style.position = 'static';
             }
         });
+        // Flex ancestors otherwise shrink back and clip the expanded grid.
+        const grid = el.querySelector('[role="grid"], table');
+        if (grid) {
+            const width = Math.ceil(grid.scrollWidth);
+            const height = Math.ceil(grid.scrollHeight);
+            const gridRect = grid.getBoundingClientRect();
+            const sizes = [];
+            for (let n = grid; n && el.contains(n); n = n.parentElement) {
+                const rect = n.getBoundingClientRect();
+                sizes.push([n, width + Math.max(0, gridRect.left - rect.left) + 8,
+                               height + Math.max(0, gridRect.top - rect.top) + 8]);
+            }
+            for (const [n, w, h] of sizes) {
+                save(n);
+                n.style.setProperty('width', Math.ceil(w) + 'px', 'important');
+                n.style.setProperty('height', Math.ceil(h) + 'px', 'important');
+                n.style.setProperty('min-height', height + 'px', 'important');
+                n.style.setProperty('max-height', 'none', 'important');
+                n.style.setProperty('overflow', 'visible', 'important');
+                n.style.setProperty('flex', 'none', 'important');
+            }
+        }
         window.dispatchEvent(new Event('resize'));
     }"""
     panel.evaluate(grow_js)
@@ -116,8 +137,8 @@ def restore_panel(panel):
                 window.dispatchEvent(new Event('resize'));
             }"""
         )
-    except Exception:
-        pass
+    except PlaywrightError as exc:
+        print(f"[warn] Could not restore panel layout: {exc}", file=sys.stderr)
 
 
 def hide_chrome(page):
@@ -149,8 +170,8 @@ def hide_chrome(page):
                 document.querySelectorAll('header, nav, [role="banner"]').forEach((n) => hideEl(n, 'display'));
             }"""
         )
-    except Exception:
-        pass
+    except PlaywrightError as exc:
+        raise CaptureError(f"Could not hide dashboard chrome: {exc}") from exc
 
 
 def restore_chrome(page):
@@ -163,157 +184,230 @@ def restore_chrome(page):
                 window.__hidChrome = [];
             }"""
         )
-    except Exception:
-        pass
+    except PlaywrightError as exc:
+        print(f"[warn] Could not restore dashboard chrome: {exc}", file=sys.stderr)
 
 
-def main():
-    url = sys.argv[1]
-    out_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else OUT_DIR
-    if out_dir.exists():
-        for f in out_dir.glob("*"):
-            f.unlink()
-    out_dir.mkdir(parents=True, exist_ok=True)
-    globals()["OUT_DIR"] = out_dir
+def panel_snapshot(panel):
+    return panel.evaluate("""el => {
+        const visible = n => {
+            const r = n.getBoundingClientRect(), s = getComputedStyle(n);
+            return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none';
+        };
+        const root = el.getBoundingClientRect();
+        const rows = [...el.querySelectorAll('[role="row"],tr')].map(row => {
+            const cells = [...row.children].filter(visible);
+            const boxes = cells.map(c => c.getBoundingClientRect());
+            return {
+                text: row.innerText.trim(),
+                visible: boxes.length > 0,
+                clipped: boxes.some(r => r.top < root.top - 1 || r.bottom > root.bottom + 1 ||
+                                         r.left < root.left - 1 || r.right > root.right + 1)
+            };
+        });
+        const loading = [...el.querySelectorAll('[data-testid*="Panel loading bar"],.panel-loading,[aria-label="Panel loading bar"]')].some(visible);
+        const errors = [...el.querySelectorAll('[aria-label="Panel error"],[data-testid*="Panel status error"],[role="alert"]')]
+            .filter(visible).map(n => n.innerText.trim() || n.getAttribute('title') || n.getAttribute('aria-label') || 'Panel error');
+        return {
+            text: el.innerText.trim(), rows, loading, errors,
+            table: !!el.querySelector('[role="grid"],table'),
+            expected_rows: Number(el.querySelector('[role="grid"]')?.getAttribute('aria-rowcount') || 0),
+            chart: [...el.querySelectorAll('canvas,.uplot,svg')].some(visible)
+        };
+    }""")
 
-    with sync_playwright() as p:
-        ctx = p.chromium.launch_persistent_context(
-            user_data_dir=str(PROFILE_DIR), headless=False, no_viewport=True, channel="msedge")
-        page = ctx.pages[0] if ctx.pages else ctx.new_page()
-        page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        page.wait_for_selector('div.react-grid-item, [data-testid*="Panel header"]', timeout=120000)
-        page.wait_for_timeout(4000)
 
-        # Expand collapsed rows (repeat until none left).
-        for _ in range(6):
-            collapsed = page.locator('.dashboard-row--collapsed [data-testid*="dashboard-row-title"], '
-                                     '[aria-expanded="false"][data-testid*="dashboard-row"]')
-            n = collapsed.count()
-            if n == 0:
-                break
-            for i in range(n):
-                try:
-                    collapsed.nth(i).click()
-                    page.wait_for_timeout(400)
-                except Exception:
-                    pass
+def validate_snapshot(snapshot, title, expanded=False):
+    text = snapshot["text"]
+    body = text.removeprefix(title).strip()
+    no_data = bool(re.search(r"(?im)^\s*no data\s*$", body))
+    # Grafana can attach its generic status badge to an empty result.
+    errors = [
+        error for error in snapshot["errors"]
+        if not (no_data and error.strip().casefold() in ("no data", "panel status"))
+    ]
+    if errors:
+        raise CaptureError(f"{title}: {'; '.join(errors)}")
+    if snapshot["loading"]:
+        return None
+    if no_data:
+        return "no_data"
+    if not body:
+        return None
+    if snapshot["table"]:
+        rows = snapshot["rows"]
+        if len(rows) < 2 or not all(row["visible"] and row["text"] for row in rows[1:]):
+            return None
+        if expanded and any(row["clipped"] for row in rows if row["visible"]):
+            return None
+        if expanded and snapshot["expected_rows"] > len(rows):
+            return None
+    elif not snapshot["chart"] and not re.search(r"(?m)^\s*\d+(?:\.\d+)?\s*$", body):
+        return None
+    return "data"
 
-        # Also click any row title that looks collapsed (fallback).
-        titles = page.locator('[data-testid*="dashboard-row-title"]')
-        for i in range(titles.count()):
+
+def evidence_signature(snapshot):
+    if snapshot["table"]:
+        return tuple(row["text"] for row in snapshot["rows"])
+    return snapshot["text"]
+
+
+def wait_ready(panel, title, deadline, expanded=False):
+    previous = None
+    while time.monotonic() < deadline:
+        snapshot = panel_snapshot(panel)
+        status = validate_snapshot(snapshot, title, expanded)
+        signature = (evidence_signature(snapshot), status)
+        if status and signature == previous:
+            return snapshot, status
+        previous = signature if status else None
+        panel.page.wait_for_timeout(250)
+    raise CaptureError(f"{title}: content did not settle or remained clipped before the capture deadline")
+
+
+def capture_panel(panel, title, index, out_dir, timeout=180):
+    deadline = time.monotonic() + timeout
+    error = None
+    for attempt in range(2):
+        attempt_deadline = min(deadline, time.monotonic() + timeout / 2)
+        try:
+            panel.scroll_into_view_if_needed(timeout=15000)
+            snapshot, status = wait_ready(panel, title, attempt_deadline)
+            if status == "no_data":
+                return {"index": index, "title": title, "text": snapshot["text"],
+                        "rows": [], "no_data": True, "status": status, "file": None}
             try:
-                el = titles.nth(i)
-                if el.get_attribute("aria-expanded") == "false":
-                    el.click(); page.wait_for_timeout(400)
-            except Exception:
-                pass
-
-        def loading_count():
-            sels = ('[data-testid="data-testid Panel loading bar"]',
-                    '.panel-loading', 'div[class*="LoadingBar"]',
-                    '[aria-label="Panel loading bar"]')
-            total = 0
-            for s in sels:
-                try:
-                    total += page.locator(s).count()
-                except Exception:
-                    pass
-            return total
-
-        def wait_loaded(label="", settle=2500, timeout=90000):
-            import time as _t
-            end = _t.time() + timeout / 1000
-            stable = 0
-            while _t.time() < end:
-                lc = loading_count()
-                if lc == 0:
-                    stable += 1
-                    if stable >= 3:
-                        break
-                else:
-                    stable = 0
-                page.wait_for_timeout(700)
-            page.wait_for_timeout(settle)
-
-        # Multiple full scroll passes so every panel enters the viewport and lazy-loads,
-        # waiting for loading bars to clear after each pass.
-        for _pass in range(3):
-            for _ in range(30):
-                page.evaluate("""() => {const el=document.querySelector('[class*=\"scrollbar-view\"]')||document.scrollingElement;el.scrollTop+=el.clientHeight*0.7;}""")
-                page.wait_for_timeout(450)
-                if loading_count() > 0:
-                    page.wait_for_timeout(600)
-            page.evaluate("""() => {const el=document.querySelector('[class*=\"scrollbar-view\"]')||document.scrollingElement;el.scrollTop=0;}""")
-            wait_loaded(f"pass{_pass}")
-        page.wait_for_timeout(1500)
-
-        panels = page.locator('div.react-grid-item')
-        total = panels.count()
-        print(f"Found {total} panels")
-        manifest = []
-        for i in range(total):
-            panel = panels.nth(i)
-            # Title from panel header testid.
-            title = ""
-            hdr = panel.locator('[data-testid^="data-testid Panel header"]')
-            if hdr.count() > 0:
-                dt = hdr.first.get_attribute("data-testid") or ""
-                title = dt.replace("data-testid Panel header", "").strip()
-            if not title:
-                h = panel.locator('h2, h6, [class*="panel-title"]')
-                if h.count() > 0:
-                    try:
-                        title = h.first.inner_text(timeout=1500).strip()
-                    except Exception:
-                        pass
-            try:
-                panel.scroll_into_view_if_needed(timeout=6000)
-            except Exception:
-                pass
-            # Wait for this panel's own loading bar to clear.
-            for _ in range(20):
-                try:
-                    lb = panel.locator('[data-testid="data-testid Panel loading bar"], '
-                                       '.panel-loading, div[class*="LoadingBar"]')
-                    if lb.count() == 0:
-                        break
-                except Exception:
-                    break
-                page.wait_for_timeout(500)
-            page.wait_for_timeout(1200)
-            try:
-                text = panel.inner_text(timeout=4000)
-            except Exception as e:
-                text = f"[inner_text failed: {e}]"
-            no_data = "No data" in text and len(text.strip()) < len(title) + 40
-            fname = f"panel-{i:02d}-{slug(title)}.png"
-            # Expand internal scroll containers (tables) so the screenshot shows
-            # ALL rows/columns instead of just the clipped, scrollable viewport.
-            try:
-                expand_panel(panel)
-                page.wait_for_timeout(900)
-            except Exception:
-                pass
-            try:
-                hide_chrome(page)
-                panel.screenshot(path=str(OUT_DIR / fname), timeout=15000)
-                autocrop(OUT_DIR / fname)
-            except Exception as e:
-                print(f"  [warn] shot {i} failed: {e}")
-                fname = None
+                if snapshot["table"]:
+                    expand_panel(panel)
+                hide_chrome(panel.page)
+                panel.evaluate("""el => {
+                    document.querySelectorAll('div.react-grid-item').forEach(other => {
+                        if (other === el) return;
+                        window.__hidChrome.push([other,other.style.visibility,other.style.display]);
+                        other.style.visibility = 'hidden';
+                    });
+                }""")
+                snapshot, status = wait_ready(panel, title, attempt_deadline, expanded=True)
+                if status != "data":
+                    raise CaptureError(f"{title}: data changed during capture")
+                filename = f"panel-{index:02d}-{slug(title)}.png"
+                path = out_dir / filename
+                panel.page.mouse.move(0, 0)
+                panel.screenshot(path=str(path), timeout=20000, animations="disabled")
+                # Screenshot scrolling can rerender table chrome without changing its data.
+                after, status = wait_ready(panel, title, attempt_deadline, expanded=True)
+                if status != "data" or evidence_signature(after) != evidence_signature(snapshot):
+                    (out_dir / f"panel-{index:02d}-validation.json").write_text(
+                        json.dumps({"title": title, "before": snapshot, "after": after}, indent=2),
+                        encoding="utf-8",
+                    )
+                    raise CaptureError(f"{title}: content changed while taking screenshot")
+                autocrop(path)
+                with Image.open(path) as image:
+                    image.verify()
+                return {"index": index, "title": title, "text": after["text"],
+                        "rows": [row["text"] for row in after["rows"]],
+                        "no_data": False, "status": "data", "file": filename}
             finally:
-                restore_chrome(page)
-            restore_panel(panel)
-            manifest.append({
-                "index": i, "title": title, "no_data": no_data,
-                "text": text.strip(), "file": fname,
-            })
-            print(f"  [{i:02d}] {title!r} no_data={no_data} chars={len(text.strip())}")
+                restore_chrome(panel.page)
+                restore_panel(panel)
+        except (CaptureError, PlaywrightError, OSError) as exc:
+            error = str(exc)
+            print(f"[warn] {title}: capture attempt {attempt + 1} failed: {exc}", file=sys.stderr)
+            if panel.page.is_closed():
+                raise CaptureError("Browser closed; stopping without relaunch or another sign-in") from exc
+            if not panel.page.locator(f"div.react-grid-item {PANEL_HEADER}").count():
+                raise CaptureError("Dashboard session lost; stopping without another sign-in") from exc
+    return {"index": index, "title": title, "text": "", "rows": [],
+            "no_data": False, "status": "error", "error": error, "file": None}
 
-        (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-        print(f"Wrote manifest with {len(manifest)} panels")
-        ctx.close()
+
+def capture_dashboard(page, out_dir):
+    for _ in range(6):
+        collapsed = page.locator(
+            '.dashboard-row--collapsed [data-testid*="dashboard-row-title"], '
+            '[aria-expanded="false"][data-testid*="dashboard-row"]'
+        )
+        if not collapsed.count():
+            break
+        for row in collapsed.all():
+            row.click()
+    # Bring every lazy-loaded panel into view before resolving titles.
+    for panel in page.locator("div.react-grid-item").all():
+        panel.scroll_into_view_if_needed(timeout=15000)
+        page.wait_for_timeout(150)
+    manifest = []
+    titles = set()
+    for index, panel in enumerate(page.locator("div.react-grid-item").all()):
+        panel.scroll_into_view_if_needed(timeout=15000)
+        header = panel.locator(PANEL_HEADER)
+        if not header.count():
+            if panel.locator('[data-testid*="dashboard-row"]').count():
+                continue
+            raise CaptureError(f"Grid item {index} has no loaded panel header")
+        title = (header.first.get_attribute("data-testid") or "").replace(
+            "data-testid Panel header", ""
+        ).strip()
+        if not title or title in titles:
+            raise CaptureError(f"Missing or duplicate panel title: {title!r}")
+        titles.add(title)
+        record = capture_panel(panel, title, index, out_dir)
+        manifest.append(record)
+        (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        print(f"[{index:02d}] {title}: {record['status']}", flush=True)
+    if not manifest:
+        raise CaptureError("No dashboard panels were captured")
+    errors = [record["title"] for record in manifest if record["status"] == "error"]
+    if errors:
+        raise CaptureError(f"Evidence validation failed: {', '.join(errors)}. Inspect manifest.json; do not relaunch automatically.")
+    return manifest
+
+
+def capture_in_context(context, url, out_dir):
+    """Reuse a caller-owned context without launching or closing a browser."""
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    page = next((page for page in context.pages if page.url == url), None)
+    if page is None:
+        page = next((page for page in context.pages if page.url == "about:blank"), None)
+    if page is None:
+        page = context.new_page()
+    if page.url != url:
+        page.goto(url, wait_until="domcontentloaded", timeout=60000)
+    print("Using one Edge session. If sign-in is required, complete it in this tab; no alternative login will be opened.", flush=True)
+    try:
+        page.wait_for_selector(f"div.react-grid-item {PANEL_HEADER}", timeout=120000)
+    except PlaywrightError as exc:
+        raise CaptureError("Dashboard unavailable after waiting for sign-in; stopping without opening another session") from exc
+    return capture_dashboard(page, out_dir)
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("url", help="Grafana dashboard URL")
+    parser.add_argument("out_dir", nargs="?", type=Path, default=OUT_DIR)
+    args = parser.parse_args(argv)
+    parsed = urlparse(args.url)
+    if parsed.scheme != "https" or not parsed.netloc:
+        parser.error("Use an HTTPS Grafana dashboard URL")
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    started = time.monotonic()
+    try:
+        with sync_playwright() as playwright:
+            context = playwright.chromium.launch_persistent_context(
+                user_data_dir=str(PROFILE_DIR), headless=False, no_viewport=True, channel="msedge")
+            try:
+                manifest = capture_in_context(context, args.url, args.out_dir)
+            finally:
+                context.close()
+    except (CaptureError, PlaywrightError, OSError) as exc:
+        print(f"[error] {exc}\nNo browser relaunch or additional authentication was attempted.", file=sys.stderr)
+        return 1
+    print(f"Validated {len(manifest)} panels in {time.monotonic() - started:.1f}s. "
+          f"Build the report offline from {args.out_dir / 'manifest.json'}.", flush=True)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

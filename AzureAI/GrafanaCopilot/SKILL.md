@@ -44,6 +44,13 @@ https://<stamp>.grafana.azure.com/d/tictrm7/virtual-machine-reboot-analyzer?orgI
    `manifest.json` + `panel-NN-<slug>.png`. Verify table rows, column extents,
    headers, and absence of overlapping panels before ending capture. Perform
    any inspection, retry, or recapture in the existing tab, not a new browser.
+   If a loaded panel explicitly shows **No Data**, record `status: no_data`,
+   `no_data: true`, and `file: null`, then continue with the remaining panels.
+   Do not capture, retry, reopen Grafana, or request authentication for that
+   panel. No Data alone must not block report generation; list skipped panels
+   in the global summary instead. A generic "Panel status" badge does not
+   override an explicit No Data result, but actual query errors, timeouts,
+   and unstable captures must still be reported as failures.
    See `PROMPT.md` § Capture Engine.
 3. **Analyze & report** — resolve each PNG by title-slug, content-crop to the
    data band, and emit **one self-contained HTML report** (dark theme, base64
@@ -51,30 +58,44 @@ https://<stamp>.grafana.azure.com/d/tictrm7/virtual-machine-reboot-analyzer?orgI
    order, relevance rules, tags, summary, timeline, and the two RCA candidates.
    Build and validate the report locally from saved evidence; do not reopen
    Grafana for report generation or validation.
-4. **Deliver** — open / return `report_<vm>.html`. Close only the browser
+4. **Deliver** — return a link to `report_<vm>.html`; do not open it unless
+   the user requests a preview. Close only the browser
    context created for this run, after all evidence checks and recaptures finish;
    leave a reused user-owned browser session open.
 
 ### Single-session policy (mandatory)
 
-This policy applies to every workflow step, helper script, and referenced
-prompt. The target is **one Grafana browser opening and at most one interactive
+This section is the authentication/session policy for every workflow step,
+helper script, and referenced prompt. The target is **one Grafana browser opening and at most one interactive
 sign-in for the entire analysis**, not one per command or panel.
 
 - Use one persistent Edge context with `.pw-profile-msedge` and one dashboard
   tab. Navigate to the requested Grafana URL once; reuse the live context and
   page for subsequent work. A cached profile is not a substitute for keeping
   the same browser session alive.
-- Keep the capture process/session alive until the evidence is complete and
-  verified. Do not launch separate Playwright processes for DOM inspection,
-  table fixes, or recaptures. Those operations must share the original page.
-- Do not repeatedly rerun a capture command that closes its browser on exit.
-  If a helper cannot retain the session, adapt its lifecycle before starting
-  capture rather than relaunching it for each follow-up.
+- Use the existing `enumerate_all.py` entry point rather than generating
+  ad-hoc capture or inspection scripts for each analysis. It waits for stable
+  rendered content, expands and validates tables, checks screenshots against
+  extracted text, and retries failed panels once within the same session.
+- Keep capture, validation, and corrective recapture in that one process.
+  The entry point closes its own context only after validation completes or
+  the run stops with an explicit error. A failure is not permission to rerun
+  it automatically. For an already-authorized caller-owned Playwright context,
+  use `capture_in_context(context, url, out_dir)`; it does not launch or close
+  a browser. Do not launch separate processes for inspection or recapture.
 - Do not start additional Azure CLI, Azure MCP, or other sign-in flows solely
   as preliminary checks for this dashboard-report workflow. Use dashboard
   evidence and existing authorized connections; report unavailable optional
   corroboration without repeatedly prompting for authentication.
+- Do not use GitHub tools, GitHub API calls, or remote repository reads for
+  this local Grafana workflow. Read the local skill, helpers, and saved evidence
+  directly; do not request GitHub authentication or probe GitHub access.
+- Do not switch between browser automation tools or browser profiles. Such
+  switches can create separate sessions and new authorization prompts. Keep
+  all Grafana work in the original Edge context and tab.
+- Validate generated HTML and images locally. Do not open a separate browser
+  tool session or request browser authorization just to preview the report;
+  returning the verified local report link is sufficient.
 - If authentication is required, ask the user once to complete it in the
   existing dashboard tab, then continue there. Never create another browser
   or login tab as an authentication retry.
@@ -83,13 +104,33 @@ sign-in for the entire analysis**, not one per command or panel.
   or opening a replacement browser. Do not bypass authentication controls or
   enter a repeated login/relaunch loop.
 
+### Authentication versus tool approvals
+
+GitHub authorization, Grafana/Entra sign-in, and command/browser-tool approval
+prompts are different. This workflow does not need GitHub authorization.
+Grafana sign-in is needed only when the reused session or cached profile is
+not accepted. Tool approvals may still be required by the host application;
+do not promise to suppress them or bypass them. Minimize unnecessary calls by
+using the stable capture entry point and local report generation.
+
 ### Run (local, Playwright + Edge)
 
 ```powershell
 python enumerate_all.py "<dashboard URL>" "captures\<vm>"
-python build_report_reboot.py          # writes report_<vm>.html
-Start-Process report_<vm>.html
 ```
+
+Run once. Exit code 0 means every panel was validated as data or No Data.
+Exit code 1 means capture/session validation failed: inspect the error and any
+partial `manifest.json`, and do not automatically open another session.
+The manifest retains `index`, `title`, `text`, `no_data`, and `file`, and adds
+`rows`, `status` (`data`, `no_data`, or `error`), and an error message on failure.
+No Data/error entries have no screenshot. Existing unrelated output files are
+not deleted; use only files referenced by the successful run's manifest.
+
+Generate and validate the HTML locally from that manifest and its images, then
+return the report link. `build_report_reboot.py` is a VM-specific example, not a
+generic command: do not execute it unchanged for another VM. Report generation
+must not launch Grafana, request GitHub access, or initiate another login.
 
 ### Run (container service, HTTPS on 443)
 
@@ -109,7 +150,10 @@ curl -k -X POST https://localhost/ -d '<dashboard URL>'
 - **Never rely on panel index** — Grafana returns panels in a different order on
   every scrape. Always resolve by title-slug.
 - **"No Data" is never relevant** — never capture it, even for panels marked
-  "capture always".
+  "capture always". Once loading finishes, record it as `no_data` and continue
+  without a screenshot or retry; it must not fail the run. A generic
+  "Panel status" badge alongside "No Data" is not a query failure. Explicit
+  query errors and panels that have not finished loading are not No Data.
 - **Full GUIDs everywhere** — whenever a VM / Node / Container ID is mentioned,
   use the complete GUID, never the 8-char prefix. Source full GUIDs from the
   **VM Placement** panel (e.g. `01ea29c8` → `01ea29c8-4e86-cb82-9ce0-6ed35c673d5b`).
@@ -180,8 +224,8 @@ ranges** for each so the engineer can correlate with what the customer reports.
 
 ## Reference files
 
-- `PROMPT.md` — the full consolidated prompt and **single source of truth**
-  (authoritative spec: Capture Engine + Report Generator sections).
+- `PROMPT.md` — capture/report specification. Authentication and browser
+  lifecycle follow the single-session policy in this file.
 - `enumerate_all.py` — Playwright + Edge capture engine.
 - `build_report_reboot.py` — self-contained HTML report generator.
 - `container/` — Dockerfile + HTTPS service (POST URL → async HTML report);
