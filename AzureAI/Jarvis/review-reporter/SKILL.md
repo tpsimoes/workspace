@@ -265,6 +265,23 @@ MOR 各資料源採用不同的取得方式，職責明確劃分：
 | 分頁 2 | IR Missing Insight | 當前財年 IR Missing 案件明細（來源：Dashboard IR Missed Reasons + Kusto Query） |
 | 分頁 3 | SE Members Performance | FY26 各 SE 成員案件績效彙總表（來源：Kusto Query） |
 
+#### US / Costa Rica Engineer KPI Comparison（獨立 HTML 報告）
+
+當用戶要求比較 US / Costa Rica Engineers、按 FY 分頁、逐 Engineer drill-down，或加入 Customer Outreach / CaaS Lead 影響時，產出獨立自包含 HTML：
+
+- **檔名**：`us_cr_engineer_kpi_comparison_FY26_FY27.html`
+- **參考實作**：`review-reporter/us_cr_engineer_kpi_comparison_FY26_FY27.html`
+- **頁籤（固定 4 個）**：
+
+| Tab | 名稱 | 內容 |
+|-----|------|------|
+| 1 | FY26 | FY26 個人 KPI、團隊加權平均、個人期間內相對排名、Engineer drill-down |
+| 2 | FY27 YTD | FY27 YTD 個人 KPI、團隊加權平均、個人期間內相對排名、Engineer drill-down |
+| 3 | FY26 vs FY27 | KPI 並排、DTC/DTS/≤7d 變化、跨 FY 改善排名與結論 |
+| 4 | Customer Outreach / CaaS Lead | CaaS Lead 角色、Customer assignments、Program maturity、FY27 Customer portfolio stats、逐 Engineer / Customer drill-down |
+
+> 此報告是 SE Members Performance 的特定 cohort 深入分析，不取代 MOR 主報告。UI 必須保留搜尋、Country filter、欄位排序、Expand All、鍵盤可操作 drill-down、light/dark theme。
+
 #### MOR Summary Report 頁面結構
   1. Executive Summary Cards（關鍵 KPI 快照，數值顯示該 KPI 的**年度累計 Total**，並顯示 MoM 變化箭頭）
   2. Business Analysis（Highlights / Lowlights / Recommendations）
@@ -595,6 +612,152 @@ CaseSummary
   - Team Avg DTC（團隊平均 DTC）
   - Total IR SLA Missed（全團隊未達 IR SLA 件數）
   - Team % Closed ≤7d（全團隊 7 天內結案率）
+
+#### US / Costa Rica cohort 與 FY 比較規範
+
+##### 權威 cohort
+
+除非用戶提供更新 roster，US / Costa Rica 報告固定使用以下 alias。**不可**以 `ASWStakeholder.Region == "America"` 代替，因 America 亦包含 Brazil、Portugal、Spain、India 等非目標成員。
+
+```kql
+let USEngineers = dynamic([
+  "alkassap","brwurz","cschriever","diambroi","ejohnston","ivayala",
+  "landreazzi","shaddala","shjoyce","sish","takin","tholliday"
+]);
+let CostaRicaEngineers = dynamic(["anrod"]);
+```
+
+| Country | Alias | Display Name |
+|---------|-------|--------------|
+| USA | alkassap | Alex Kassap |
+| USA | brwurz | Brian Wurzbacher |
+| USA | cschriever | Curtis Schriever |
+| USA | diambroi | Didier Ambroise |
+| USA | ejohnston | Elliott Johnston |
+| USA | ivayala | Ivan Ayala |
+| USA | landreazzi | Lucas Andreazzi |
+| USA | shaddala | Shiva Addala |
+| USA | shjoyce | Sheetal Joyce |
+| USA | sish | Siddharth Sharma |
+| USA | takin | Tanner King |
+| USA | tholliday | Taylor Holliday |
+| Costa Rica | anrod | Angelica Rodriguez |
+
+##### Live schema drift（2026-10 查驗）
+
+舊版 `SE Members Performance` Query 的以下假設已失效：
+
+- `bedrock.CSI.ASWStakeholder.Country` **已移除**；目前僅有 `Region` / `Zone`，因此 Country 必須使用上述權威 alias roster。
+- `AllCloudsSupportIncidentWithReferenceModelVNext.AgentAlias` 與 `CoalescedAgentAlias` 在目前 view 內為空，不能直接 join Engineer。
+- `DayToSchedule` / `DayToClose` 已改為 string 欄位 `DTS` / `DTC`，需使用 `todouble(DTS)` / `todouble(DTC)`。
+- `TotalCustomerSATScore` 等 Survey 欄位在目前 Kusto identity 下被遮罩為空；FY27 CSAT 必須顯示 `No data`，不可用 0 代替。
+
+##### Ownership replacement join（權威方式）
+
+1. **FY26 ownership**：`bedrock.CSI.SupportRequestHistory_Snapshot_Table2`
+   - Created：`TicketCreatedDateTime`
+   - Case ID：`SupportTicketId`
+   - Owner：`CaseOwnerAlias`
+   - 每 Case 使用 `summarize arg_max(dataRefreshDateTime, CaseOwnerAlias) by SupportTicketId`
+2. **FY27 ownership**：`bedrock.CSI.SupportRequestHistory_Snapshot_Table3`
+   - Created：`todatetime(CreatedDateTime_UTC)`
+   - Case ID：`IncidentId`
+   - Owner：`CaseOwner`
+   - 每 Case 使用 `summarize arg_max(dataRefreshDateTime, CaseOwner) by IncidentId`
+3. 將兩個 ownership 結果以 `IncidentId` join：
+   `supportrptwus3prod.KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext`
+4. 指標：
+   - `AvgDTS = avg(todouble(DTS))`
+   - `AvgDTC = avg(todouble(DTC))`
+   - `% Closed ≤7d = dcountif(IncidentId, todouble(DTC) <= 7) / dcount(IncidentId)`
+   - DTS / DTC 平均僅使用非 null metric records；顯示時附 `DTSRecords` / `DTCRecords`
+5. Roster 中未匹配 ownership 的 Engineer（例如目前的 `brwurz`）仍需顯示，但所有 metric 顯示 **No data**；不得當作 0，亦不得納入排名。
+
+##### Team rollup 與評分
+
+- Team Avg DTS：以 `DTSRecords` 加權。
+- Team Avg DTC：以 `DTCRecords` 加權。
+- Team % Closed ≤7d：以 `CaseAssignments` 加權。
+- Team CSAT：以 Survey count 加權；FY27 Survey 遮罩時顯示 `No data`。
+- **FY26 排名**：cohort 內 min-max normalized score，Avg DTC / Avg DTS（low good）+ Closed ≤7d / CSAT（high good）等權平均。
+- **FY27 排名**：Avg DTC / Avg DTS（low good）+ Closed ≤7d（high good）等權平均；CSAT 不可用時排除。
+- **FY26 vs FY27 改善排名**：`FY26 DTC - FY27 DTC`、`FY26 DTS - FY27 DTS`、`FY27 ≤7d - FY26 ≤7d` 三項各自 min-max normalize 後等權平均。
+- 排名是**cohort 內相對分數**，不是 target-based performance rating。報告結論必須同時列出 metric evidence，並註明不能取代正式績效評估。
+
+#### Customer Outreach / CaaS Lead Tab 規範
+
+##### 角色與預期影響
+
+CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proactive、insight-driven KnowMe workload experience。Tab 頂部固定顯示 4 項角色：
+
+1. **Know the customer**：維護 workload architecture、customer context、support history、risk、Wiki / Plan of Record。
+2. **Connect stakeholders**：建立 CSAM / CSA / ACE / CSI / Product Engineering / Customer cadence。
+3. **Turn cases into insight**：分析 case pattern、customer pain point，使用 Grafana / Zebra AI 推動 proactive action。
+4. **Improve support readiness**：Change Event readiness、routing / monitoring、降低 critical incident 的 customer effort。
+
+##### Assignment 來源與解析
+
+1. **Current master**：`asw_caas_lead/scripts/generate_dashboard_v1.py` 的 `FOCUS` list（Customer、TPID、Workload、Lead、Stage、Contract、Program indicators）。
+2. **角色 / Deliverable 語意**：
+   - `asw_caas_lead/references/project_charter_digest.md`
+   - `asw_caas_lead/references/stakeholder_deck_digest.md`
+3. **Legacy assignments**（仍需標為 Legacy，不可混成 current focus master）：
+   - Curtis Schriever → Sealed Air（TPID `706691`）
+   - Taylor Holliday → Mondelez（TPID `18214815`）
+4. **Live TPID 補充**（來源為 FY27 Kusto customer name resolution）：
+   - Siddharth Sharma → General Motors（TPID `641658`）
+   - Sheetal Joyce → CVS（TPID `782348`）
+5. `Medline` 同時由 Alex Kassap（co-lead）與 Shiva Addala（primary）負責：
+   - Assignment rollup 可計兩筆。
+   - Program-level unique-customer cases / closed **只能計一次**，不可雙重累加。
+
+##### 目前 13-person cohort assignments
+
+| Engineer | Customer(s) |
+|----------|-------------|
+| Alex Kassap | Nike; Medline (co-lead) |
+| Angelica Rodriguez | TJU |
+| Brian Wurzbacher | Brown University |
+| Curtis Schriever | Sealed Air (Legacy) |
+| Didier Ambroise | University of Kentucky; Ascension Health |
+| Elliott Johnston | UTMB |
+| Ivan Ayala | PepsiCo |
+| Lucas Andreazzi | Shell; Petrobras |
+| Shiva Addala | Medline (primary) |
+| Sheetal Joyce | CVS |
+| Siddharth Sharma | General Motors |
+| Tanner King | MichMed; Mt. Sinai |
+| Taylor Holliday | Mondelez (Legacy) |
+
+##### Customer stats Query 與呈現
+
+- Case source：`AllCloudsSupportIncidentWithReferenceModelVNext`，以 FY27 `CreatedDateTime` + `Customer_TPID` 篩選。
+- Lead-owned case：使用 `SupportRequestHistory_Snapshot_Table3` 最新 ownership，`CaseOwner == LeadAlias`。
+- 每個 Customer 顯示：
+  - Cases / Closed
+  - Avg DTC
+  - % Closed ≤7d
+  - CritSit count
+  - Initial Severity A count
+  - Lead-owned cases
+  - Top `SapSupportPathL2`
+  - Top `SapSupportPathL3`
+  - Workload / TPID / Engagement Stage / MC Contract / current-vs-legacy status
+  - Case Insight / +AI / Wiki-PoR / Success Stories / Change Events / Executive Escalations
+- Engineer row顯示 assignment count、workload mix、assignment-level case exposure、加權 Avg DTC、加權 ≤7d、CritSit / Sev A、Stage。
+- CaaS portfolio 排序可使用 case exposure，但標題必須寫明這不是個人績效排名。
+
+##### 因果與資料品質護欄
+
+- Customer KPIs 描述 CaaS Lead 的 **portfolio environment**，不代表該 Lead 單獨造成 customer outcome。
+- 只有 `Lead-owned cases` 能聲明直接 case ownership；即使為 0，仍可能完成 stakeholder engagement、Wiki、PoR、case analysis 或 change-event work。
+- Current / Legacy / Co-lead / Primary lead 必須明確標示。
+- 無 TPID 或尚未 routing 的 onboarding customer 顯示 0 / No data，不可移除。
+- Program indicator 是 manual / master-list tally；Customer operational KPI 是 Kusto observation。兩者不可混成單一「impact score」。
+- 報告結論需分開描述：
+  1. Customer support exposure / outcome
+  2. Program maturity / deliverable completion
+  3. Next-action opportunity
 
 ---
 
@@ -1181,6 +1344,18 @@ function switchTab(tabId) {
 >
 > 即使上次報告已收集過資料，每次執行仍須**重新拉取**，確保報告反映最新數據。禁止使用任何快取、歷史記錄或先前對話中的資料。
 
+> **US / Costa Rica + CaaS 報告的額外強制來源（僅在請求該獨立報告時）**：
+>
+> | # | 資料來源 | 用途 |
+> |---|----------|------|
+> | 5 | `CSI.SupportRequestHistory_Snapshot_Table2` | FY26 Engineer ownership |
+> | 6 | `CSI.SupportRequestHistory_Snapshot_Table3` | FY27 Engineer ownership + Lead-owned cases |
+> | 7 | `KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext` | DTS / DTC / ≤7d + Customer portfolio KPI |
+> | 8 | `asw_caas_lead/scripts/generate_dashboard_v1.py` → `FOCUS` | Current CaaS assignments / Stage / indicators |
+> | 9 | Customer Outreach charter + stakeholder deck digests | CaaS role / legacy assignment context |
+>
+> 來源 5–9 每次執行須重新查驗。可沿用 assignment master，但必須重新查詢 FY27 Customer stats，並確認 skill 中的 roster / TPID mapping 是否仍與 current master 一致。
+
 **預設執行順序**：
 
 0. **前置（由用戶完成）**：在 Cowork 跑完 `asw-team-kpi-monthly`（KPI + IR Missed），將產出 xlsx／選用 json 複製到 `C:\GitHubCopilot\IronMan\Output\Cowork\`。
@@ -1188,6 +1363,14 @@ function switchTab(tabId) {
 2. 本 Agent 自 `Output/Cowork/` 讀取最新 `asw_ir_missed_FY*.xlsx` → 得 IR Missing 明細（含 Verbatim、SE Manager）。
 3. 開啟 Dashboard 2（使用外部 Edge + Playwright MCP），確認 Staff Group Filter，等待 **2 分鐘** 後擷取 OpEx Metric Trend View 資料。
 4. 呈交 CPE Survey Kusto Query（`mcp_kusto_kusto_query`），查詢**整個當前 FY**（例 FY2027 = `datetime(2026-07-01) ~ datetime(2027-06-01)`）。
+
+**US / Costa Rica + CaaS 獨立報告追加步驟**：
+
+5. 使用固定 13-person roster，分別由 Snapshot Table 2 / 3 產生 FY26 / FY27 latest-owner Case set。
+6. 以 `IncidentId` join KPI table，產生 Engineer metrics；將無 ownership match 的成員保留為 `No data`。
+7. 讀取 CaaS `FOCUS` + legacy assignment，解析所有 Customer TPID；若 RISE Selected TPID 為空，以 Customer name 在 Kusto resolve，但必須將 mapping 標為 live resolution。
+8. 查詢每個 Customer 的 FY27 portfolio stats + Lead-owned cases + Top L2/L3，並對 shared Customer 做 unique-customer de-dup。
+9. 產出 4-tab HTML，Browser 驗證每個 Tab、至少一個 Engineer drill-down，以及 CaaS Customer drill-down。
 
 **Fallback 步驟（僅在 Cowork 檔案遺失時執行，需取得用戶導向后才進行）**：
 1. 開啟 Dashboard 1（Edge），**嚴格依序執行 4 項 Filter 驗證**（① Channel=ASW_SAPEpicEsc → ② LastTwelveMonths=(All) → ③ LastSixMonths=(All) → ④ FY=僅當前財年），確認 restatement 全部正確後等待 **2 分鐘**，再擷取資料。

@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>US &amp; Costa Rica Engineer KPI Comparison — FY26 vs FY27 YTD</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    button, input, select { font: inherit; }
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid var(--cp-accent);
+      outline-offset: 2px;
+    }
+    .shell { max-width: 1500px; margin: 0 auto; padding: 32px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      padding: 28px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--cp-accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; max-width: 900px; font-size: clamp(28px, 4vw, 48px); line-height: 1.08; }
+    .subtitle { margin: 12px 0 0; max-width: 900px; color: var(--cp-text-muted); font-size: 16px; line-height: 1.55; }
+    .period {
+      min-width: 220px;
+      padding: 16px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+    }
+    .period strong { display: block; margin-bottom: 4px; color: var(--cp-accent); }
+    .period span { color: var(--cp-text-muted); font-size: 13px; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .summary-card {
+      padding: 20px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
+    }
+    .summary-label { color: var(--cp-text-muted); font-size: 13px; font-weight: 600; }
+    .summary-values { display: flex; gap: 20px; align-items: baseline; margin-top: 12px; }
+    .summary-period { min-width: 0; }
+    .summary-period small { display: block; color: var(--cp-text-muted); font-size: 11px; text-transform: uppercase; }
+    .summary-period strong { display: block; margin-top: 2px; font-size: 25px; }
+    .delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 12px;
+      padding: 4px 8px;
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+      color: var(--cp-text-muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .delta.good { color: var(--cp-success); }
+    .delta.bad { color: var(--cp-danger); }
+    .delta.neutral { color: var(--cp-text-muted); }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 6px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
+    }
+    .tab {
+      flex: 1;
+      min-height: 44px;
+      border: 1px solid transparent;
+      border-radius: 0.625rem;
+      background: transparent;
+      color: var(--cp-text-muted);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .tab:hover { background: var(--cp-surface-soft); color: var(--cp-text); }
+    .tab[aria-selected="true"] {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+    }
+
+    .section {
+      margin-top: 20px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
+      overflow: hidden;
+    }
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--cp-border);
+    }
+    .section-head h2 { margin: 0; font-size: 20px; }
+    .section-head p { margin: 4px 0 0; color: var(--cp-text-muted); font-size: 13px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; }
+    .control {
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text);
+    }
+    .search { min-width: 230px; }
+    .button {
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .button:hover { background: var(--cp-accent-hover); }
+    .button.secondary {
+      border-color: var(--cp-border);
+      background: var(--cp-surface);
+      color: var(--cp-text);
+    }
+    .button.secondary:hover { border-color: var(--cp-border-strong); background: var(--cp-surface-soft); }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 1180px; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--cp-border); text-align: right; white-space: nowrap; }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--cp-surface-soft);
+      color: var(--cp-text-muted);
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+    th.sortable { cursor: pointer; user-select: none; }
+    th.sortable:hover { color: var(--cp-accent); }
+    tbody tr.engineer-row { cursor: pointer; }
+    tbody tr.engineer-row:hover { background: var(--cp-accent-soft); }
+    tbody tr.engineer-row[aria-expanded="true"] { background: var(--cp-highlight); }
+    .engineer { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .engineer strong { display: block; }
+    .engineer small { display: block; margin-top: 2px; color: var(--cp-text-muted); font-family: Consolas, "Courier New", Courier, monospace; }
+    .country {
+      display: inline-flex;
+      padding: 4px 8px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+      font-size: 12px;
+    }
+    .metric-pair { display: grid; grid-template-columns: repeat(2, minmax(52px, auto)); gap: 4px; }
+    .metric-pair span { padding: 4px 6px; border-radius: 0.625rem; background: var(--cp-surface-soft); }
+    .metric-pair .fy27 { background: var(--cp-accent-soft); font-weight: 700; }
+    .missing { color: var(--cp-text-muted); font-style: italic; }
+    .trend { display: inline-flex; min-width: 64px; justify-content: flex-end; font-size: 12px; font-weight: 700; }
+    .trend.good { color: var(--cp-success); }
+    .trend.bad { color: var(--cp-danger); }
+    .trend.neutral { color: var(--cp-text-muted); }
+    .chevron { color: var(--cp-accent); font-size: 18px; transition: transform .2s ease; }
+    tr[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+
+    .detail-row[hidden] { display: none; }
+    .detail-row td { padding: 0; text-align: left; white-space: normal; background: var(--cp-bg-elevated); }
+    .detail {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+    .detail h3 { margin: 0 0 4px; font-size: 18px; }
+    .detail-note { margin: 0 0 16px; color: var(--cp-text-muted); font-size: 13px; }
+    .detail-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .detail-card { padding: 14px; border: 1px solid var(--cp-border); border-radius: 0.625rem; background: var(--cp-surface); }
+    .detail-card-label { color: var(--cp-text-muted); font-size: 12px; }
+    .detail-card-values { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
+    .detail-card-values div:last-child { text-align: right; }
+    .detail-card-values small { display: block; color: var(--cp-text-muted); font-size: 10px; text-transform: uppercase; }
+    .detail-card-values strong { font-size: 20px; }
+    .bar-list { display: grid; gap: 16px; }
+    .bar-group { display: grid; gap: 6px; }
+    .bar-title { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; }
+    .bar-track { height: 10px; overflow: hidden; border-radius: 0.625rem; background: var(--cp-surface-soft); }
+    .bar { height: 100%; border-radius: 0.625rem; background: var(--cp-border-strong); }
+    .bar.fy27 { background: var(--cp-accent); }
+    .legend { display: flex; gap: 16px; margin-bottom: 16px; color: var(--cp-text-muted); font-size: 12px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--cp-border-strong); }
+    .dot.fy27 { background: var(--cp-accent); }
+    .empty-state { padding: 40px; text-align: center; color: var(--cp-text-muted); }
+    .evaluation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      padding: 20px 24px 24px;
+    }
+    .evaluation-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-bg-elevated);
+    }
+    .rank {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-weight: 800;
+    }
+    .evaluation-card h3 { margin: 0; font-size: 15px; }
+    .evaluation-card p { margin: 4px 0 0; color: var(--cp-text-muted); font-size: 12px; line-height: 1.4; }
+    .score { text-align: right; }
+    .score strong { display: block; font-size: 22px; }
+    .score span { color: var(--cp-text-muted); font-size: 11px; }
+    .evaluation-summary {
+      margin: 0 24px 24px;
+      padding: 16px;
+      border-left: 4px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      background: var(--cp-accent-soft);
+      color: var(--cp-text);
+      line-height: 1.6;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 20px 24px 24px;
+    }
+    .role-card {
+      padding: 16px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-bg-elevated);
+    }
+    .role-card strong { display: block; margin-bottom: 6px; color: var(--cp-accent); }
+    .role-card span { color: var(--cp-text-muted); font-size: 13px; line-height: 1.5; }
+    .customer-list { display: grid; gap: 12px; }
+    .customer-card {
+      padding: 14px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+    }
+    .customer-card-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+    .customer-card h4 { margin: 0; font-size: 15px; }
+    .customer-meta { margin: 5px 0 10px; color: var(--cp-text-muted); font-size: 12px; }
+    .customer-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    .customer-stat { padding: 8px; border-radius: 0.625rem; background: var(--cp-surface-soft); }
+    .customer-stat small { display: block; color: var(--cp-text-muted); font-size: 10px; text-transform: uppercase; }
+    .customer-stat strong { display: block; margin-top: 3px; font-size: 15px; }
+    .topic { margin: 10px 0 0; color: var(--cp-text-muted); font-size: 12px; line-height: 1.45; }
+
+    .methodology { padding: 22px 24px; }
+    .methodology h2 { margin: 0 0 12px; font-size: 18px; }
+    .methodology ul { margin: 0; padding-left: 20px; color: var(--cp-text-muted); line-height: 1.65; }
+    .methodology code { color: var(--cp-accent); font-family: Consolas, "Courier New", Courier, monospace; }
+    .footer { padding: 20px 4px 0; color: var(--cp-text-muted); font-size: 12px; text-align: center; }
+
+    @media (max-width: 1050px) {
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .detail { grid-template-columns: 1fr; }
+      .evaluation-grid { grid-template-columns: 1fr; }
+      .role-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .shell { padding: 16px; }
+      .hero { grid-template-columns: 1fr; padding: 20px; }
+      .period { min-width: 0; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: stretch; }
+      .controls { flex-direction: column; }
+      .control, .search, .button { width: 100%; }
+      .detail-kpis { grid-template-columns: 1fr; }
+      .tabs { flex-direction: column; }
+      .role-grid, .customer-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Engineer performance report</p>
+        <h1>US &amp; Costa Rica KPI comparison</h1>
+        <p class="subtitle">
+          FY26 versus FY27 year-to-date operational performance, with drill-down by engineer.
+          Click any engineer row to inspect metric changes and supporting record counts.
+        </p>
+      </div>
+      <div class="period">
+        <strong>FY27 YTD cutoff</strong>
+        <span>Data queried through October 8, 2026<br>Latest matching case: September 22, 2026</span>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Fiscal year evaluation">
+      <button class="tab" type="button" role="tab" data-tab="fy26" aria-selected="false">FY26</button>
+      <button class="tab" type="button" role="tab" data-tab="fy27" aria-selected="false">FY27 YTD</button>
+      <button class="tab" type="button" role="tab" data-tab="comparison" aria-selected="true">FY26 vs FY27</button>
+      <button class="tab" type="button" role="tab" data-tab="caas" aria-selected="false">Customer Outreach / CaaS Lead</button>
+    </nav>
+
+    <section class="section" id="caasRoleSection" hidden>
+      <div class="section-head">
+        <div>
+          <h2>CaaS Lead role and expected impact</h2>
+          <p>Customer Outreach moves SAP and EPIC support from reactive case handling toward a proactive KnowMe workload experience.</p>
+        </div>
+      </div>
+      <div class="role-grid">
+        <article class="role-card"><strong>Know the customer</strong><span>Maintain workload architecture, customer context, support history, risks, and a current Wiki/Plan of Record.</span></article>
+        <article class="role-card"><strong>Connect stakeholders</strong><span>Build cadence with CSAM, CSA, ACE, CSI, product engineering, and customer stakeholders.</span></article>
+        <article class="role-card"><strong>Turn cases into insight</strong><span>Analyze patterns, surface customer pain points, and use dashboards and Zebra AI to identify proactive actions.</span></article>
+        <article class="role-card"><strong>Improve support readiness</strong><span>Prepare for change events, strengthen routing and monitoring, and reduce customer effort during critical incidents.</span></article>
+      </div>
+    </section>
+
+    <section class="summary-grid" id="summaryGrid" aria-label="Team KPI summary"></section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 id="tableTitle">Engineer comparison</h2>
+          <p id="resultCount">Loading engineer metrics…</p>
+        </div>
+        <div class="controls">
+          <input class="control search" id="searchInput" type="search" placeholder="Search engineer or alias" aria-label="Search engineer or alias">
+          <select class="control" id="countryFilter" aria-label="Filter by country">
+            <option value="all">All countries</option>
+            <option value="USA">USA</option>
+            <option value="Costa Rica">Costa Rica</option>
+          </select>
+          <button class="button secondary" id="expandAll" type="button">Expand all</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead id="tableHead"></thead>
+          <tbody id="engineerBody"></tbody>
+        </table>
+        <div class="empty-state" id="emptyState" hidden>No engineers match the current filters.</div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="evaluationTitle">
+      <div class="section-head">
+        <div>
+          <h2 id="evaluationTitle">Engineer evaluation</h2>
+          <p id="evaluationSubtitle"></p>
+        </div>
+      </div>
+      <div class="evaluation-grid" id="evaluationGrid"></div>
+      <p class="evaluation-summary" id="evaluationSummary"></p>
+    </section>
+
+    <section class="section methodology">
+      <h2>Data notes</h2>
+      <ul>
+        <li>Operational KPIs use case ownership snapshots joined to <code>AllCloudsSupportIncidentWithReferenceModelVNext</code>.</li>
+        <li>FY26 covers July 1, 2025–June 30, 2026. FY27 YTD covers July 1–October 8, 2026.</li>
+        <li><strong>Avg DTC</strong> and <strong>Avg DTS</strong> exclude records where the corresponding metric is unavailable.</li>
+        <li><strong>Closed ≤7d</strong> follows the reporting definition: cases with DTC ≤7 divided by all matched case assignments.</li>
+        <li>FY26 CSAT comes from the prior engineer-performance export. FY27 CSAT is unavailable because survey fields are masked in the current Kusto view.</li>
+        <li>The final evaluation uses within-cohort normalized scores. FY26 combines DTC, DTS, ≤7-day closure, and CSAT; FY27 combines DTC, DTS, and ≤7-day closure; the comparison score measures improvement across the three operational KPIs.</li>
+        <li>The CaaS Lead tab combines the FY27 focus-customer master, the Customer Outreach role/charter, legacy Sealed Air and Mondelez assignments, and live FY27 customer case statistics. Medline is shared by two leads but counted once in program-level customer totals.</li>
+        <li>Customer outcomes describe each lead’s portfolio environment. Only “lead-owned cases” indicates direct case ownership; broader customer KPI changes must not be attributed solely to the CaaS Lead.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      Generated October 8, 2026 · US &amp; Costa Rica CSS-ASW engineer cohort
+    </footer>
+  </main>
+
+  <script>
+    const engineers = [
+      { alias: "alkassap", name: "Alex Kassap", country: "USA", fy26: { cases: 127, dtsRecords: 127, dtcRecords: 127, dts: 11.2, dtc: 18.3, pct7: 24.4, csat: 5.00, surveys: 1 }, fy27: { cases: 60, dtsRecords: 60, dtcRecords: 54, dts: 2.6, dtc: 10.8, pct7: 33.3, csat: null, surveys: null } },
+      { alias: "anrod", name: "Angelica Rodriguez", country: "Costa Rica", fy26: { cases: 47, dtsRecords: 47, dtcRecords: 47, dts: 7.1, dtc: 8.9, pct7: 63.8, csat: 4.91, surveys: 22 }, fy27: { cases: 40, dtsRecords: 39, dtcRecords: 38, dts: 7.8, dtc: 7.6, pct7: 60.0, csat: null, surveys: null } },
+      { alias: "brwurz", name: "Brian Wurzbacher", country: "USA", fy26: null, fy27: null },
+      { alias: "cschriever", name: "Curtis Schriever", country: "USA", fy26: { cases: 96, dtsRecords: 96, dtcRecords: 96, dts: 13.7, dtc: 16.9, pct7: 38.5, csat: 4.65, surveys: 11 }, fy27: { cases: 31, dtsRecords: 29, dtcRecords: 27, dts: 11.7, dtc: 15.2, pct7: 29.0, csat: null, surveys: null } },
+      { alias: "diambroi", name: "Didier Ambroise", country: "USA", fy26: { cases: 38, dtsRecords: 38, dtcRecords: 38, dts: 3.5, dtc: 5.6, pct7: 78.9, csat: 4.50, surveys: 8 }, fy27: { cases: 34, dtsRecords: 34, dtcRecords: 34, dts: 6.0, dtc: 6.9, pct7: 55.9, csat: null, surveys: null } },
+      { alias: "ejohnston", name: "Elliott Johnston", country: "USA", fy26: { cases: 27, dtsRecords: 27, dtcRecords: 27, dts: 15.8, dtc: 21.0, pct7: 18.5, csat: 4.62, surveys: 11 }, fy27: { cases: 23, dtsRecords: 23, dtcRecords: 23, dts: 7.1, dtc: 7.6, pct7: 60.9, csat: null, surveys: null } },
+      { alias: "ivayala", name: "Ivan Ayala", country: "USA", fy26: { cases: 68, dtsRecords: 67, dtcRecords: 67, dts: 13.4, dtc: 14.7, pct7: 33.8, csat: 4.82, surveys: 19 }, fy27: { cases: 27, dtsRecords: 25, dtcRecords: 25, dts: 11.2, dtc: 12.1, pct7: 22.2, csat: null, surveys: null } },
+      { alias: "landreazzi", name: "Lucas Andreazzi", country: "USA", fy26: { cases: 92, dtsRecords: 92, dtcRecords: 92, dts: 9.3, dtc: 12.6, pct7: 31.5, csat: 4.68, surveys: 13 }, fy27: { cases: 31, dtsRecords: 31, dtcRecords: 31, dts: 9.0, dtc: 9.2, pct7: 48.4, csat: null, surveys: null } },
+      { alias: "shaddala", name: "Shiva Addala", country: "USA", fy26: { cases: 85, dtsRecords: 85, dtcRecords: 85, dts: 14.9, dtc: 16.6, pct7: 29.4, csat: 4.96, surveys: 26 }, fy27: { cases: 20, dtsRecords: 19, dtcRecords: 18, dts: 11.2, dtc: 13.3, pct7: 15.0, csat: null, surveys: null } },
+      { alias: "shjoyce", name: "Sheetal Joyce", country: "USA", fy26: { cases: 43, dtsRecords: 43, dtcRecords: 43, dts: 18.2, dtc: 18.7, pct7: 25.6, csat: 4.64, surveys: 11 }, fy27: { cases: 26, dtsRecords: 24, dtcRecords: 24, dts: 11.5, dtc: 11.7, pct7: 23.1, csat: null, surveys: null } },
+      { alias: "sish", name: "Siddharth Sharma", country: "USA", fy26: { cases: 32, dtsRecords: 32, dtcRecords: 32, dts: 14.5, dtc: 14.8, pct7: 31.3, csat: 4.86, surveys: 19 }, fy27: { cases: 23, dtsRecords: 20, dtcRecords: 19, dts: 10.5, dtc: 12.8, pct7: 17.4, csat: null, surveys: null } },
+      { alias: "takin", name: "Tanner King", country: "USA", fy26: { cases: 57, dtsRecords: 57, dtcRecords: 57, dts: 6.4, dtc: 13.1, pct7: 24.6, csat: 4.90, surveys: 22 }, fy27: { cases: 36, dtsRecords: 34, dtcRecords: 33, dts: 6.5, dtc: 11.3, pct7: 50.0, csat: null, surveys: null } },
+      { alias: "tholliday", name: "Taylor Holliday", country: "USA", fy26: { cases: 49, dtsRecords: 49, dtcRecords: 49, dts: 11.1, dtc: 15.3, pct7: 18.4, csat: 4.57, surveys: 10 }, fy27: { cases: 28, dtsRecords: 26, dtcRecords: 26, dts: 7.9, dtc: 7.9, pct7: 57.1, csat: null, surveys: null } }
+    ];
+    const caasAssignments = [
+      { alias: "alkassap", customer: "Nike", workload: "SAP", tpid: "640443", stage: "Phase 4", contract: "Non-SFMC", status: "Current", cases: 59, closed: 53, dtc: 10.5, pct7: 42.4, crit: 22, sevA: 17, owned: 1, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Azure Local", scenario: "Desktop flows" },
+      { alias: "alkassap", customer: "Medline", workload: "SAP", tpid: "682354", stage: "Phase 4", contract: "Mission Critical (Renew)", status: "Co-lead", cases: 288, closed: 249, dtc: 11.0, pct7: 41.0, crit: 52, sevA: 48, owned: 1, insight: true, ai: false, wiki: false, stories: 1, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Function or Web App (Windows and Linux)" },
+      { alias: "anrod", customer: "TJU", workload: "EPIC", tpid: "18982817", stage: "Phase 4", contract: "Mission Critical", status: "Current", cases: 114, closed: 98, dtc: 7.9, pct7: 50.9, crit: 25, sevA: 13, owned: 1, insight: true, ai: false, wiki: false, stories: 0, events: 4, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Cancel or switch my subscription" },
+      { alias: "brwurz", customer: "Brown University", workload: "EPIC", tpid: "1137436", stage: "Phase 1", contract: "Mission Critical", status: "Current", cases: 19, closed: 13, dtc: 11.8, pct7: 36.8, crit: 4, sevA: 3, owned: 0, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Unknown / not classified" },
+      { alias: "cschriever", customer: "Sealed Air", workload: "SAP", tpid: "706691", stage: "Legacy Active", contract: "Mission Critical", status: "Legacy charter", cases: 21, closed: 17, dtc: 12.6, pct7: 28.6, crit: 3, sevA: 2, owned: 0, insight: null, ai: null, wiki: null, stories: null, events: null, escalations: null, topic: "Logic App (Standard)", scenario: "EDI and AS2" },
+      { alias: "diambroi", customer: "Ascension Health", workload: "EPIC", tpid: "3841220", stage: "Phase 4", contract: "Mission Critical", status: "Current", cases: 31, closed: 29, dtc: 7.9, pct7: 58.1, crit: 2, sevA: 2, owned: 0, insight: true, ai: true, wiki: false, stories: 0, events: 2, escalations: 0, topic: "Virtual Machine running Windows", scenario: "Cannot connect to my VM" },
+      { alias: "diambroi", customer: "Univ. Kentucky", workload: "EPIC", tpid: "1733740", stage: "Phase 4", contract: "Mission Critical", status: "Current", cases: 20, closed: 13, dtc: 4.9, pct7: 45.0, crit: 3, sevA: 3, owned: 1, insight: true, ai: true, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Compute-VM subscription limit increases" },
+      { alias: "ejohnston", customer: "UTMB", workload: "EPIC", tpid: "680928", stage: "Phase 1", contract: "Mission Critical", status: "Current", cases: 75, closed: 67, dtc: 9.1, pct7: 46.7, crit: 15, sevA: 11, owned: 1, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Conditional Access" },
+      { alias: "ivayala", customer: "PepsiCo", workload: "SAP", tpid: "636846", stage: "Phase 4", contract: "Mission Critical (Renew)", status: "Current", cases: 466, closed: 419, dtc: 9.0, pct7: 49.1, crit: 101, sevA: 89, owned: 5, insight: true, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Compute-VM subscription limit increases" },
+      { alias: "landreazzi", customer: "Petrobras", workload: "SAP", tpid: "940486", stage: "Phase 4 (dropping)", contract: "Non-SFMC (exiting Azure)", status: "Current", cases: 76, closed: 61, dtc: 11.7, pct7: 27.6, crit: 7, sevA: 6, owned: 0, insight: true, ai: false, wiki: false, stories: 1, events: 1, escalations: 0, topic: "Azure Data Manager for Energy", scenario: "Microsoft Defender for Endpoint" },
+      { alias: "landreazzi", customer: "Shell", workload: "SAP", tpid: "10545209", stage: "Phase 2", contract: "Mission Critical", status: "Current", cases: 701, closed: 570, dtc: 10.8, pct7: 40.4, crit: 129, sevA: 97, owned: 0, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Virtual Machine running Windows", scenario: "Compute-VM subscription limit increases" },
+      { alias: "shaddala", customer: "Medline", workload: "SAP", tpid: "682354", stage: "Phase 4", contract: "Mission Critical (Renew)", status: "Primary lead", cases: 288, closed: 249, dtc: 11.0, pct7: 41.0, crit: 52, sevA: 48, owned: 2, insight: true, ai: false, wiki: false, stories: 1, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Function or Web App (Windows and Linux)" },
+      { alias: "shjoyce", customer: "CVS", workload: "RISE", tpid: "782348", stage: "Phase 2", contract: "Non-SFMC", status: "Current · live TPID mapping", cases: 320, closed: 283, dtc: 11.7, pct7: 40.6, crit: 83, sevA: 59, owned: 0, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Compute-VM subscription limit increases" },
+      { alias: "sish", customer: "General Motors", workload: "RISE", tpid: "641658", stage: "Phase 2", contract: "Non-SFMC", status: "Current · live TPID mapping", cases: 597, closed: 523, dtc: 8.7, pct7: 53.8, crit: 76, sevA: 54, owned: 0, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Service and subscription limits (quotas)", scenario: "Compute-VM subscription limit increases" },
+      { alias: "takin", customer: "MichMed", workload: "EPIC", tpid: "1833997", stage: "Phase 2", contract: "Mission Critical", status: "Current", cases: 24, closed: 19, dtc: 10.2, pct7: 41.7, crit: 2, sevA: 2, owned: 0, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Microsoft Entra Sign-in and MFA", scenario: "Conditional Access" },
+      { alias: "takin", customer: "Mt. Sinai", workload: "EPIC", tpid: "1283152", stage: "Phase 3", contract: "Non-SFMC (exiting Azure)", status: "Current", cases: 137, closed: 119, dtc: 9.1, pct7: 51.8, crit: 36, sevA: 26, owned: 0, insight: false, ai: false, wiki: false, stories: 0, events: 0, escalations: 0, topic: "Virtual Machine running Windows", scenario: "VM restarted or stopped unexpectedly" },
+      { alias: "tholliday", customer: "Mondelez", workload: "SAP", tpid: "18214815", stage: "Legacy Active", contract: "Non-SFMC", status: "Legacy charter", cases: 52, closed: 42, dtc: 12.3, pct7: 30.8, crit: 9, sevA: 9, owned: 0, insight: null, ai: null, wiki: null, stories: null, events: null, escalations: null, topic: "Power Apps", scenario: "Compute-VM subscription limit increases" }
+    ];
+
+    let activeTab = "comparison";
+    let sortKey = "name";
+    let sortDirection = "asc";
+    let allExpanded = false;
+    const expanded = new Set();
+
+    const format = (value, digits = 1, suffix = "") =>
+      value === null || value === undefined || Number.isNaN(value)
+        ? '<span class="missing">No data</span>'
+        : `${Number(value).toFixed(digits)}${suffix}`;
+    const initials = name => name.split(/\s+/).map(part => part[0]).join("").slice(0, 2).toUpperCase();
+
+    function weightedAverage(rows, year, metric, weightMetric) {
+      let weighted = 0;
+      let weight = 0;
+      rows.forEach(engineer => {
+        const record = engineer[year];
+        if (!record || record[metric] === null || record[metric] === undefined) return;
+        const itemWeight = record[weightMetric] ?? 0;
+        weighted += record[metric] * itemWeight;
+        weight += itemWeight;
+      });
+      return weight ? weighted / weight : null;
+    }
+
+    function aggregate(rows, year) {
+      return {
+        cases: rows.reduce((sum, engineer) => sum + (engineer[year]?.cases ?? 0), 0),
+        dts: weightedAverage(rows, year, "dts", "dtsRecords"),
+        dtc: weightedAverage(rows, year, "dtc", "dtcRecords"),
+        pct7: weightedAverage(rows, year, "pct7", "cases"),
+        csat: weightedAverage(rows, year, "csat", "surveys"),
+        surveys: rows.reduce((sum, engineer) => sum + (engineer[year]?.surveys ?? 0), 0)
+      };
+    }
+
+    function deltaMeta(fy26, fy27, lowGood, unit = "") {
+      if (fy26 === null || fy27 === null || fy26 === undefined || fy27 === undefined) {
+        return { text: "Unavailable", cls: "neutral" };
+      }
+      const delta = fy27 - fy26;
+      const improved = lowGood ? delta < 0 : delta > 0;
+      const equal = Math.abs(delta) < 0.05;
+      return {
+        text: `${delta > 0 ? "+" : ""}${delta.toFixed(1)}${unit}`,
+        cls: equal ? "neutral" : improved ? "good" : "bad"
+      };
+    }
+
+    function renderSummary(rows) {
+      if (activeTab === "caas") {
+        const assignments = caasAssignments.filter(item => rows.some(engineer => engineer.alias === item.alias));
+        const uniqueAssignments = [...new Map(assignments.map(item => [item.customer, item])).values()];
+        const uniqueCustomers = new Set(assignments.map(item => item.customer)).size;
+        const cases = uniqueAssignments.reduce((sum, item) => sum + item.cases, 0);
+        const events = assignments.reduce((sum, item) => sum + (item.events ?? 0), 0);
+        const phase4 = assignments.filter(item => item.stage.startsWith("Phase 4")).length;
+        document.getElementById("summaryGrid").innerHTML = [
+          ["Lead assignments", assignments.length, `${uniqueCustomers} unique customers`],
+          ["FY27 unique-customer cases", cases, `${uniqueAssignments.reduce((sum, item) => sum + item.closed, 0)} closed`],
+          ["Mature engagements", phase4, "Phase 4 assignments"],
+          ["Documented change events", events, "Program indicator tally"]
+        ].map(([label, value, note]) => `<article class="summary-card"><div class="summary-label">${label}</div><div class="summary-values"><div class="summary-period"><strong>${value}</strong></div></div><span class="delta neutral">${note}</span></article>`).join("");
+        return;
+      }
+      const fy26 = aggregate(rows, "fy26");
+      const fy27 = aggregate(rows, "fy27");
+      const cards = [
+        { label: "Avg DTC", key: "dtc", digits: 1, suffix: "d", lowGood: true, unit: "d" },
+        { label: "Avg DTS", key: "dts", digits: 1, suffix: "d", lowGood: true, unit: "d" },
+        { label: "CSAT", key: "csat", digits: 2, suffix: "", lowGood: false, unit: "" },
+        { label: "Closed ≤7d", key: "pct7", digits: 1, suffix: "%", lowGood: false, unit: " pp" }
+      ];
+      document.getElementById("summaryGrid").innerHTML = cards.map(card => {
+        if (activeTab !== "comparison") {
+          const year = activeTab;
+          const label = year === "fy26" ? "FY26" : "FY27 YTD";
+          return `<article class="summary-card">
+            <div class="summary-label">${card.label}</div>
+            <div class="summary-values"><div class="summary-period"><small>${label}</small><strong>${format((year === "fy26" ? fy26 : fy27)[card.key], card.digits, card.suffix)}</strong></div></div>
+            <span class="delta neutral">${(year === "fy26" ? fy26 : fy27).cases} matched cases</span>
+          </article>`;
+        }
+        const delta = deltaMeta(fy26[card.key], fy27[card.key], card.lowGood, card.unit);
+        return `<article class="summary-card">
+          <div class="summary-label">${card.label}</div>
+          <div class="summary-values">
+            <div class="summary-period"><small>FY26</small><strong>${format(fy26[card.key], card.digits, card.suffix)}</strong></div>
+            <div class="summary-period"><small>FY27 YTD</small><strong>${format(fy27[card.key], card.digits, card.suffix)}</strong></div>
+          </div>
+          <span class="delta ${delta.cls}">${delta.text}</span>
+        </article>`;
+      }).join("");
+    }
+
+    function pair(fy26, fy27, key, digits, suffix = "") {
+      return `<div class="metric-pair"><span>${format(fy26?.[key], digits, suffix)}</span><span class="fy27">${format(fy27?.[key], digits, suffix)}</span></div>`;
+    }
+
+    function metricCell(engineer, key, digits, suffix = "") {
+      if (activeTab === "comparison") return pair(engineer.fy26, engineer.fy27, key, digits, suffix);
+      return format(engineer[activeTab]?.[key], digits, suffix);
+    }
+
+    function tableHeader() {
+      if (activeTab === "caas") {
+        return `<tr><th>Engineer</th><th>Customers</th><th>Workload</th><th>FY27 cases</th><th>Avg DTC</th><th>Closed ≤7d</th><th>CritSit / Sev A</th><th>Maturity</th><th aria-label="Expand detail"></th></tr>`;
+      }
+      const period = activeTab === "fy26" ? "FY26" : activeTab === "fy27" ? "FY27 YTD" : "FY26 / FY27";
+      const comparisonColumn = activeTab === "comparison" ? "<th>DTC Δ</th>" : "<th>Evaluation</th>";
+      return `<tr>
+        <th class="sortable" data-sort="name">Engineer</th>
+        <th class="sortable" data-sort="country">Country</th>
+        <th class="sortable" data-sort="cases">Cases<br><span>${period}</span></th>
+        <th class="sortable" data-sort="dts">Avg DTS<br><span>${period}</span></th>
+        <th class="sortable" data-sort="dtc">Avg DTC<br><span>${period}</span></th>
+        <th class="sortable" data-sort="csat">CSAT<br><span>${period}</span></th>
+        <th class="sortable" data-sort="pct7">Closed ≤7d<br><span>${period}</span></th>
+        ${comparisonColumn}<th aria-label="Expand detail"></th>
+      </tr>`;
+    }
+
+    function detailCard(label, fy26Value, fy27Value, digits, suffix) {
+      if (activeTab !== "comparison") {
+        const labelYear = activeTab === "fy26" ? "FY26" : "FY27 YTD";
+        const value = activeTab === "fy26" ? fy26Value : fy27Value;
+        return `<div class="detail-card"><div class="detail-card-label">${label}</div><div class="detail-card-values"><div><small>${labelYear}</small><strong>${format(value, digits, suffix)}</strong></div></div></div>`;
+      }
+      return `<div class="detail-card"><div class="detail-card-label">${label}</div><div class="detail-card-values">
+        <div><small>FY26</small><strong>${format(fy26Value, digits, suffix)}</strong></div>
+        <div><small>FY27 YTD</small><strong>${format(fy27Value, digits, suffix)}</strong></div>
+      </div></div>`;
+    }
+
+    function barGroup(label, fy26Value, fy27Value, suffix, maxValue) {
+      const periods = activeTab === "comparison"
+        ? [["FY26", fy26Value, ""], ["FY27 YTD", fy27Value, "fy27"]]
+        : [[activeTab === "fy26" ? "FY26" : "FY27 YTD", activeTab === "fy26" ? fy26Value : fy27Value, activeTab === "fy27" ? "fy27" : ""]];
+      return `<div class="bar-group"><div class="bar-title"><span>${label}</span></div>${periods.map(([period, value, cls]) => `
+        <div class="bar-title"><span>${period}</span><span>${format(value, 1, suffix)}</span></div>
+        <div class="bar-track" aria-label="${label} ${period}"><div class="bar ${cls}" style="width:${value == null ? 0 : Math.min(100, value / maxValue * 100)}%"></div></div>`).join("")}</div>`;
+    }
+
+    function detailMarkup(engineer) {
+      const fy26 = engineer.fy26;
+      const fy27 = engineer.fy27;
+      return `<div class="detail">
+        <div>
+          <h3>${engineer.name} KPI detail</h3>
+          <p class="detail-note">${engineer.alias} · ${engineer.country} · ${activeTab === "comparison" ? "Fiscal-year comparison" : activeTab === "fy26" ? "FY26 evaluation" : "FY27 YTD evaluation"}</p>
+          <div class="detail-kpis">
+            ${detailCard("Case assignments", fy26?.cases, fy27?.cases, 0, "")}
+            ${detailCard("Avg DTS", fy26?.dts, fy27?.dts, 1, " days")}
+            ${detailCard("Avg DTC", fy26?.dtc, fy27?.dtc, 1, " days")}
+            ${detailCard("Closed ≤7d", fy26?.pct7, fy27?.pct7, 1, "%")}
+            ${detailCard("CSAT", fy26?.csat, fy27?.csat, 2, "")}
+            ${detailCard("Survey responses", fy26?.surveys, fy27?.surveys, 0, "")}
+          </div>
+        </div>
+        <div class="bar-list">
+          ${barGroup("Avg DTS", fy26?.dts, fy27?.dts, "d", 24)}
+          ${barGroup("Avg DTC", fy26?.dtc, fy27?.dtc, "d", 24)}
+          ${barGroup("Closed ≤7d", fy26?.pct7, fy27?.pct7, "%", 100)}
+          ${barGroup("CSAT", fy26?.csat, fy27?.csat, "", 5)}
+        </div>
+      </div>`;
+    }
+
+    function normalize(value, values, lowGood = false) {
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      if (max === min) return 100;
+      const score = (value - min) / (max - min) * 100;
+      return lowGood ? 100 - score : score;
+    }
+
+    function evaluations(rows) {
+      const complete = rows.filter(engineer => activeTab === "comparison"
+        ? engineer.fy26 && engineer.fy27
+        : engineer[activeTab]);
+      const definitions = activeTab === "comparison"
+        ? [
+            { value: e => e.fy26.dts - e.fy27.dts },
+            { value: e => e.fy26.dtc - e.fy27.dtc },
+            { value: e => e.fy27.pct7 - e.fy26.pct7 }
+          ]
+        : [
+            { value: e => e[activeTab].dts, lowGood: true },
+            { value: e => e[activeTab].dtc, lowGood: true },
+            { value: e => e[activeTab].pct7 },
+            ...(activeTab === "fy26" ? [{ value: e => e.fy26.csat }] : [])
+          ];
+      return complete.map(engineer => {
+        const scores = definitions.map(definition => {
+          const values = complete.map(definition.value).filter(value => value != null);
+          const value = definition.value(engineer);
+          return value == null ? null : normalize(value, values, definition.lowGood);
+        }).filter(score => score !== null);
+        return { engineer, score: scores.reduce((sum, score) => sum + score, 0) / scores.length };
+      }).sort((a, b) => b.score - a.score);
+    }
+
+    function evaluationNarrative(engineer) {
+      if (activeTab === "fy26") {
+        return `DTC ${engineer.fy26.dtc.toFixed(1)}d · DTS ${engineer.fy26.dts.toFixed(1)}d · ${engineer.fy26.pct7.toFixed(1)}% ≤7d · CSAT ${engineer.fy26.csat.toFixed(2)}`;
+      }
+      if (activeTab === "fy27") {
+        return `DTC ${engineer.fy27.dtc.toFixed(1)}d · DTS ${engineer.fy27.dts.toFixed(1)}d · ${engineer.fy27.pct7.toFixed(1)}% ≤7d`;
+      }
+      const dtc = engineer.fy26.dtc - engineer.fy27.dtc;
+      const dts = engineer.fy26.dts - engineer.fy27.dts;
+      const pct = engineer.fy27.pct7 - engineer.fy26.pct7;
+      return `DTC ${dtc >= 0 ? "improved" : "increased"} ${Math.abs(dtc).toFixed(1)}d · DTS ${dts >= 0 ? "improved" : "increased"} ${Math.abs(dts).toFixed(1)}d · ≤7d ${pct >= 0 ? "+" : ""}${pct.toFixed(1)} pp`;
+    }
+
+    function renderEvaluation(rows) {
+      if (activeTab === "caas") {
+        const rollups = rows.map(engineer => {
+          const assignments = caasAssignments.filter(item => item.alias === engineer.alias);
+          const cases = assignments.reduce((sum, item) => sum + item.cases, 0);
+          const events = assignments.reduce((sum, item) => sum + (item.events ?? 0), 0);
+          const stories = assignments.reduce((sum, item) => sum + (item.stories ?? 0), 0);
+          const mature = assignments.filter(item => item.stage.startsWith("Phase 4")).length;
+          const insight = assignments.filter(item => item.insight === true).length;
+          return { engineer, assignments, cases, events, stories, mature, insight };
+        }).sort((a, b) => b.cases - a.cases);
+        document.getElementById("evaluationTitle").textContent = "CaaS Lead outreach portfolio";
+        document.getElementById("evaluationSubtitle").textContent = "Ordered by customer case exposure; maturity and deliverables are shown separately from support outcomes.";
+        document.getElementById("evaluationGrid").innerHTML = rollups.map((item, index) => `
+          <article class="evaluation-card"><span class="rank">${index + 1}</span><div><h3>${item.engineer.name}</h3><p>${item.assignments.length} assignment${item.assignments.length === 1 ? "" : "s"} · ${item.mature} Phase 4 · ${item.insight} with case insight · ${item.events} events · ${item.stories} stories</p></div><div class="score"><strong>${item.cases}</strong><span>customer cases</span></div></article>`).join("");
+        document.getElementById("evaluationSummary").innerHTML = `<strong>Program evaluation:</strong> Case exposure is concentrated in large SAP/RISE portfolios led by Lucas Andreazzi, Siddharth Sharma, Ivan Ayala, Sheetal Joyce, and the Medline co-leads. Phase 1–2 portfolios—Brown, UTMB, Shell, CVS, General Motors, and MichMed—represent the clearest opportunity to complete foundational assets, stakeholder cadence, Wiki/PoR, and case-insight delivery. Customer KPI outcomes provide context, not proof of individual CaaS Lead causality.`;
+        return;
+      }
+      const ranked = evaluations(rows);
+      const label = activeTab === "fy26" ? "FY26 performance" : activeTab === "fy27" ? "FY27 YTD performance" : "FY26-to-FY27 improvement";
+      document.getElementById("evaluationTitle").textContent = `Engineer evaluation — ${label}`;
+      document.getElementById("evaluationSubtitle").textContent =
+        activeTab === "comparison"
+          ? "Ranked by normalized improvement in DTC, DTS, and ≤7-day closure."
+          : `Ranked within the engineers with available data using ${activeTab === "fy26" ? "DTC, DTS, ≤7-day closure, and CSAT" : "DTC, DTS, and ≤7-day closure"}.`;
+      document.getElementById("evaluationGrid").innerHTML = ranked.map((item, index) => `
+        <article class="evaluation-card">
+          <span class="rank">${index + 1}</span>
+          <div><h3>${item.engineer.name}</h3><p>${evaluationNarrative(item.engineer)}</p></div>
+          <div class="score"><strong>${item.score.toFixed(0)}</strong><span>score / 100</span></div>
+        </article>`).join("");
+      const leader = ranked[0]?.engineer;
+      const second = ranked[1]?.engineer;
+      const last = ranked[ranked.length - 1]?.engineer;
+      document.getElementById("evaluationSummary").innerHTML = leader
+        ? activeTab === "comparison"
+          ? `<strong>Comparison conclusion:</strong> ${leader.name} shows the strongest overall operational improvement, followed by ${second.name}. ${last.name} has the greatest relative opportunity across the compared KPIs. Scores are comparative within this cohort and do not replace target-based performance assessment.`
+          : `<strong>${label} conclusion:</strong> ${leader.name} leads the cohort, followed by ${second.name}. ${last.name} ranks lowest on the combined relative score and represents the clearest coaching opportunity for this period.`
+        : "No complete data is available for this evaluation.";
+    }
+
+    function scoreFor(engineer) {
+      return evaluations(engineers).find(item => item.engineer.alias === engineer.alias)?.score ?? -1;
+    }
+
+    function sortValue(engineer, key) {
+      if (key === "name") return engineer.name;
+      if (key === "country") return engineer.country;
+      const record = activeTab === "fy26" ? engineer.fy26 : activeTab === "fy27" ? engineer.fy27 : engineer.fy27;
+      if (["cases", "dts", "dtc", "csat", "pct7"].includes(key)) return record?.[key] ?? -1;
+      return engineer.name;
+    }
+
+    function filteredEngineers() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const country = document.getElementById("countryFilter").value;
+      return engineers.filter(engineer =>
+        (!query || `${engineer.name} ${engineer.alias}`.toLowerCase().includes(query)) &&
+        (country === "all" || engineer.country === country)
+      ).sort((a, b) => {
+        const av = sortValue(a, sortKey);
+        const bv = sortValue(b, sortKey);
+        const comparison = typeof av === "string" ? av.localeCompare(bv) : av - bv;
+        return sortDirection === "asc" ? comparison : -comparison;
+      });
+    }
+
+    function bindTableEvents() {
+      document.querySelectorAll("th.sortable").forEach(header => {
+        header.addEventListener("click", () => {
+          const nextKey = header.dataset.sort;
+          if (sortKey === nextKey) sortDirection = sortDirection === "asc" ? "desc" : "asc";
+          else { sortKey = nextKey; sortDirection = "asc"; }
+          render();
+        });
+      });
+      document.querySelectorAll(".engineer-row").forEach(row => {
+        const toggle = () => {
+          expanded.has(row.dataset.alias) ? expanded.delete(row.dataset.alias) : expanded.add(row.dataset.alias);
+          render();
+          document.querySelector(`[data-alias="${row.dataset.alias}"]`)?.focus();
+        };
+        row.addEventListener("click", toggle);
+        row.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") { event.preventDefault(); toggle(); }
+        });
+      });
+    }
+
+    function render() {
+      const rows = filteredEngineers();
+      renderSummary(rows);
+      renderEvaluation(rows);
+      document.getElementById("tableHead").innerHTML = tableHeader();
+      document.getElementById("caasRoleSection").hidden = activeTab !== "caas";
+      document.getElementById("tableTitle").textContent =
+        activeTab === "fy26" ? "FY26 engineer metrics" : activeTab === "fy27" ? "FY27 YTD engineer metrics" : activeTab === "caas" ? "Customer Outreach assignments and impact" : "FY26 vs FY27 engineer comparison";
+      if (activeTab === "caas") {
+        const visibleAssignments = caasAssignments.filter(item => rows.some(engineer => engineer.alias === item.alias));
+        document.getElementById("resultCount").textContent = `${rows.length} engineers · ${visibleAssignments.length} assignments · ${new Set(visibleAssignments.map(item => item.customer)).size} unique customers`;
+        document.getElementById("engineerBody").innerHTML = rows.map(engineer => {
+          const assignments = caasAssignments.filter(item => item.alias === engineer.alias);
+          const isOpen = expanded.has(engineer.alias);
+          const cases = assignments.reduce((sum, item) => sum + item.cases, 0);
+          const weightedDtc = cases ? assignments.reduce((sum, item) => sum + item.dtc * item.cases, 0) / cases : null;
+          const weightedPct = cases ? assignments.reduce((sum, item) => sum + item.pct7 * item.cases, 0) / cases : null;
+          return `<tr class="engineer-row" data-alias="${engineer.alias}" tabindex="0" role="button" aria-expanded="${isOpen}" aria-controls="detail-${engineer.alias}">
+            <td><div class="engineer"><span class="avatar">${initials(engineer.name)}</span><span><strong>${engineer.name}</strong><small>${engineer.alias}</small></span></div></td>
+            <td>${assignments.length}</td><td>${[...new Set(assignments.map(item => item.workload))].join(" / ") || format(null)}</td><td>${cases}</td><td>${format(weightedDtc,1,"d")}</td><td>${format(weightedPct,1,"%")}</td>
+            <td>${assignments.reduce((sum,item)=>sum+item.crit,0)} / ${assignments.reduce((sum,item)=>sum+item.sevA,0)}</td>
+            <td>${assignments.length ? assignments.map(item => item.stage).join(" · ") : format(null)}</td><td><span class="chevron" aria-hidden="true">›</span></td>
+          </tr><tr class="detail-row" id="detail-${engineer.alias}" ${isOpen ? "" : "hidden"}><td colspan="9"><div class="detail"><div><h3>${engineer.name} CaaS Lead portfolio</h3><p class="detail-note">${assignments.length ? `${assignments.length} customer assignment${assignments.length===1?"":"s"}` : "No assignment found in the current or legacy program masters."}</p><div class="customer-list">${assignments.map(customerCard).join("") || '<span class="missing">No CaaS Lead customer assignment found.</span>'}</div></div><div><h3>Impact interpretation</h3><p class="detail-note">Lead-owned cases show direct case ownership in the snapshot. Broader customer metrics describe the portfolio environment and should not be attributed solely to the CaaS Lead.</p>${assignments.map(item => `<div class="customer-card"><h4>${item.customer}</h4><p class="topic"><strong>Program delivery:</strong> Case insight ${indicator(item.insight)} · AI ${indicator(item.ai)} · Wiki/PoR ${indicator(item.wiki)} · Stories ${item.stories ?? "NA"} · Events ${item.events ?? "NA"} · Executive escalations ${item.escalations ?? "NA"}</p></div>`).join("")}</div></div></td></tr>`;
+        }).join("");
+        document.getElementById("emptyState").hidden = rows.length > 0;
+        bindTableEvents();
+        return;
+      }
+      const totals = activeTab === "fy26"
+        ? `${aggregate(rows, "fy26").cases} FY26 cases`
+        : activeTab === "fy27"
+          ? `${aggregate(rows, "fy27").cases} FY27 YTD cases`
+          : `${aggregate(rows, "fy26").cases} FY26 cases · ${aggregate(rows, "fy27").cases} FY27 YTD cases`;
+      document.getElementById("resultCount").textContent = `${rows.length} engineers shown · ${totals}`;
+      document.getElementById("engineerBody").innerHTML = rows.map(engineer => {
+        const isOpen = expanded.has(engineer.alias);
+        const periodRecord = activeTab === "fy26" ? engineer.fy26 : engineer.fy27;
+        const evaluation = activeTab === "comparison"
+          ? `<span class="trend ${deltaMeta(engineer.fy26?.dtc, engineer.fy27?.dtc, true).cls}">${deltaMeta(engineer.fy26?.dtc, engineer.fy27?.dtc, true, "d").text}</span>`
+          : `<span class="trend neutral">${scoreFor(engineer) < 0 ? "Unavailable" : `${scoreFor(engineer).toFixed(0)}/100`}</span>`;
+        return `<tr class="engineer-row" data-alias="${engineer.alias}" tabindex="0" role="button" aria-expanded="${isOpen}" aria-controls="detail-${engineer.alias}">
+          <td><div class="engineer"><span class="avatar">${initials(engineer.name)}</span><span><strong>${engineer.name}</strong><small>${engineer.alias}</small></span></div></td>
+          <td><span class="country">${engineer.country}</span></td>
+          <td>${metricCell(engineer, "cases", 0)}</td>
+          <td>${metricCell(engineer, "dts", 1, "d")}</td>
+          <td>${metricCell(engineer, "dtc", 1, "d")}</td>
+          <td>${metricCell(engineer, "csat", 2)}</td>
+          <td>${metricCell(engineer, "pct7", 1, "%")}</td>
+          <td>${evaluation}</td><td><span class="chevron" aria-hidden="true">›</span></td>
+        </tr>
+        <tr class="detail-row" id="detail-${engineer.alias}" ${isOpen ? "" : "hidden"}><td colspan="9">${detailMarkup(engineer)}</td></tr>`;
+      }).join("");
+      document.getElementById("emptyState").hidden = rows.length > 0;
+      bindTableEvents();
+    }
+
+    function indicator(value) {
+      return value === true ? "Yes" : value === false ? "No" : "NA";
+    }
+
+    function customerCard(item) {
+      return `<article class="customer-card"><div class="customer-card-head"><h4>${item.customer}</h4><span class="country">${item.workload} · ${item.stage}</span></div>
+        <p class="customer-meta">TPID ${item.tpid} · ${item.contract} · ${item.status}</p>
+        <div class="customer-stats">
+          <div class="customer-stat"><small>Cases / closed</small><strong>${item.cases} / ${item.closed}</strong></div>
+          <div class="customer-stat"><small>Avg DTC</small><strong>${item.dtc.toFixed(1)}d</strong></div>
+          <div class="customer-stat"><small>Closed ≤7d</small><strong>${item.pct7.toFixed(1)}%</strong></div>
+          <div class="customer-stat"><small>CritSit / Sev A</small><strong>${item.crit} / ${item.sevA}</strong></div>
+          <div class="customer-stat"><small>Lead-owned cases</small><strong>${item.owned}</strong></div>
+        </div><p class="topic"><strong>Top product:</strong> ${item.topic}<br><strong>Top scenario:</strong> ${item.scenario}</p></article>`;
+    }
+
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        activeTab = tab.dataset.tab;
+        sortKey = "name";
+        sortDirection = "asc";
+        expanded.clear();
+        document.querySelectorAll(".tab").forEach(item => item.setAttribute("aria-selected", String(item === tab)));
+        render();
+      });
+    });
+    ["searchInput", "countryFilter"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "searchInput" ? "input" : "change", render);
+    });
+    document.getElementById("expandAll").addEventListener("click", event => {
+      const visible = filteredEngineers();
+      allExpanded = !allExpanded;
+      visible.forEach(engineer => allExpanded ? expanded.add(engineer.alias) : expanded.delete(engineer.alias));
+      event.currentTarget.textContent = allExpanded ? "Collapse all" : "Expand all";
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>
