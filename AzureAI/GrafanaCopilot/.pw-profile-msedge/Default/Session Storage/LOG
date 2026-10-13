@@ -1,2 +1,5 @@
-2026/10/02-12:12:16.974 5114 Creating DB c:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\Session Storage since it was missing.
-2026/10/02-12:12:17.008 5114 Reusing MANIFEST c:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\Session Storage/MANIFEST-000001
+2026/10/13-09:35:28.127 ebec Creating DB C:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\Session Storage since it was missing.
+2026/10/13-09:35:28.158 ebec Reusing MANIFEST C:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\Session Storage/MANIFEST-000001
+2026/10/13-09:45:49.980 ebec Level-0 table #5: started
+2026/10/13-09:45:49.991 ebec Level-0 table #5: 9597 bytes OK
+2026/10/13-09:45:49.995 ebec Delete type=0 #3

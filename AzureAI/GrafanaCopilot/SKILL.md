@@ -51,6 +51,14 @@ https://<stamp>.grafana.azure.com/d/tictrm7/virtual-machine-reboot-analyzer?orgI
    in the global summary instead. A generic "Panel status" badge does not
    override an explicit No Data result, but actual query errors, timeouts,
    and unstable captures must still be reported as failures.
+   **Complete-evidence gate:** do not generate or replace the RCA report until
+   every dashboard panel has finished loading and validates as `data` or
+   `no_data`. In particular, populated **RCA Helper: Node Events and Errors**
+   and **Reboot Detail** tables must include their headers and all rows.
+   A capture failure is not permission to omit those panels and deliver a
+   supposedly complete RCA. Leave any existing preliminary report unchanged
+   and state the blocker if this gate cannot be met, unless the user explicitly
+   approves the text-only fallback below.
    See `PROMPT.md` § Capture Engine.
 3. **Analyze & report** — resolve each PNG by title-slug, content-crop to the
    data band, and emit **one self-contained HTML report** (dark theme, base64
@@ -113,6 +121,19 @@ not accepted. Tool approvals may still be required by the host application;
 do not promise to suppress them or bypass them. Minimize unnecessary calls by
 using the stable capture entry point and local report generation.
 
+**Avoid unnecessary GitHub authentication (user preference):**
+- Do not invoke GitHub MCP, GitHub CLI, remote repository discovery, or GitHub
+  access checks when analyzing a VM, reading this skill, or generating a report.
+  This workflow uses local files and Grafana evidence, not GitHub.
+- Keep tool discovery scoped to capabilities actually required for the task.
+  An unrelated GitHub tool returned by discovery is not a reason to invoke it.
+- If an optional integration requests GitHub authorization, stop using that
+  integration and continue with the local workflow where possible. Do not
+  repeatedly request authorization or claim that tool approvals can be disabled.
+- Only use GitHub when the user explicitly requests a GitHub operation. Reuse
+  existing authorized access; if sign-in is required, explain why before
+  proceeding and do not enter an automatic authentication retry loop.
+
 ### Run (local, Playwright + Edge)
 
 ```powershell
@@ -124,8 +145,28 @@ Exit code 1 means capture/session validation failed: inspect the error and any
 partial `manifest.json`, and do not automatically open another session.
 The manifest retains `index`, `title`, `text`, `no_data`, and `file`, and adds
 `rows`, `status` (`data`, `no_data`, or `error`), and an error message on failure.
+Table readiness counts visible logical cells, including nested headers and
+`display:contents` wrappers, rather than relying on wrapper dimensions.
+Panel locators prefer Grafana grid keys over element IDs, which can change
+on remount. They do not use positional `nth()` locators that can change when
+React reorders panels during capture.
+Expansion rechecks cell bounds after AutoSizer renders. On readiness timeout,
+`panel-NN-attempt-N.json` records the failed snapshot and the error states the
+loading flag, captured/expected row counts, and clipped-row count. Use those
+local diagnostics to distinguish unfinished queries from table-layout failures;
+do not substitute longer waits or another sign-in for a geometry fix.
 No Data/error entries have no screenshot. Existing unrelated output files are
 not deleted; use only files referenced by the successful run's manifest.
+
+**User-approved text-only fallback:** when the queries have finished but table
+screenshot geometry fails, ask before replacing the report with extracted
+text. Compare the saved snapshots from both attempts: no loading indicator,
+no query errors, identical row text, and expected row counts including headers
+for RCA Helper and Reboot Detail. Include every extracted event, not only the
+summary. Keep the manifest errors unchanged and label each text-only panel's
+capture failure. Disclose any other panel's unresolved row-count discrepancy;
+do not describe the overall capture as successful or all screenshots validated.
+Do not use this fallback for unfinished queries or unstable text.
 
 Generate and validate the HTML locally from that manifest and its images, then
 return the report link. `build_report_reboot.py` is a VM-specific example, not a

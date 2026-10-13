@@ -121,6 +121,22 @@ def expand_panel(panel):
     # rows after the height grew, then expand again to fit them.
     panel.page.wait_for_timeout(700)
     panel.evaluate(grow_js)
+    # AutoSizer can change row geometry after resize. Fit the resulting cells,
+    # not just the scroll extents measured before that render.
+    for _ in range(3):
+        panel.page.wait_for_timeout(300)
+        panel.evaluate("""el => {
+            const root = el.getBoundingClientRect();
+            const cells = [...el.querySelectorAll('[role="gridcell"],[role="columnheader"],td,th')]
+                .filter(n => getComputedStyle(n).display !== 'none' &&
+                             getComputedStyle(n).visibility !== 'hidden')
+                .map(n => n.getBoundingClientRect()).filter(r => r.width && r.height);
+            if (!cells.length) return;
+            const width = Math.ceil(Math.max(root.right, ...cells.map(r => r.right)) - root.left + 8);
+            const height = Math.ceil(Math.max(root.bottom, ...cells.map(r => r.bottom)) - root.top + 8);
+            el.style.setProperty('width', width + 'px', 'important');
+            el.style.setProperty('height', height + 'px', 'important');
+        }""")
 
 
 def restore_panel(panel):
@@ -196,15 +212,24 @@ def panel_snapshot(panel):
         };
         const root = el.getBoundingClientRect();
         const rows = [...el.querySelectorAll('[role="row"],tr')].map(row => {
-            const cells = [...row.children].filter(visible);
-            const boxes = cells.map(c => c.getBoundingClientRect());
+            const logicalCells = [...row.querySelectorAll(
+                '[role="gridcell"],[role="cell"],[role="columnheader"],td,th'
+            )];
+            const cells = logicalCells.length ? logicalCells : [...row.children];
+            const boxes = cells.flatMap(cell => {
+                if (visible(cell)) return [cell.getBoundingClientRect()];
+                const style = getComputedStyle(cell);
+                if (style.display !== 'contents' || style.visibility === 'hidden') return [];
+                return [...cell.querySelectorAll('*')].filter(visible)
+                    .map(n => n.getBoundingClientRect());
+            });
             return {
                 text: row.innerText.trim(),
                 visible: boxes.length > 0,
                 clipped: boxes.some(r => r.top < root.top - 1 || r.bottom > root.bottom + 1 ||
                                          r.left < root.left - 1 || r.right > root.right + 1)
             };
-        });
+        }).filter(row => row.visible);
         const loading = [...el.querySelectorAll('[data-testid*="Panel loading bar"],.panel-loading,[aria-label="Panel loading bar"]')].some(visible);
         const errors = [...el.querySelectorAll('[aria-label="Panel error"],[data-testid*="Panel status error"],[role="alert"]')]
             .filter(visible).map(n => n.innerText.trim() || n.getAttribute('title') || n.getAttribute('aria-label') || 'Panel error');
@@ -255,6 +280,7 @@ def evidence_signature(snapshot):
 
 def wait_ready(panel, title, deadline, expanded=False):
     previous = None
+    snapshot = None
     while time.monotonic() < deadline:
         snapshot = panel_snapshot(panel)
         status = validate_snapshot(snapshot, title, expanded)
@@ -263,7 +289,16 @@ def wait_ready(panel, title, deadline, expanded=False):
             return snapshot, status
         previous = signature if status else None
         panel.page.wait_for_timeout(250)
-    raise CaptureError(f"{title}: content did not settle or remained clipped before the capture deadline")
+    if snapshot is None:
+        raise CaptureError(f"{title}: capture deadline expired before validation")
+    clipped = sum(row["clipped"] for row in snapshot["rows"])
+    error = CaptureError(
+        f"{title}: content did not settle or remained clipped before the capture deadline "
+        f"(loading={snapshot['loading']}, rows={len(snapshot['rows'])}, "
+        f"expected_rows={snapshot['expected_rows']}, clipped_rows={clipped})"
+    )
+    error.snapshot = snapshot
+    raise error
 
 
 def capture_panel(panel, title, index, out_dir, timeout=180):
@@ -319,6 +354,11 @@ def capture_panel(panel, title, index, out_dir, timeout=180):
                 raise CaptureError("Browser closed; stopping without relaunch or another sign-in") from exc
             if not panel.page.locator(f"div.react-grid-item {PANEL_HEADER}").count():
                 raise CaptureError("Dashboard session lost; stopping without another sign-in") from exc
+            failed_snapshot = getattr(exc, "snapshot", None)
+            if failed_snapshot is not None:
+                (out_dir / f"panel-{index:02d}-attempt-{attempt + 1}.json").write_text(
+                    json.dumps(failed_snapshot, indent=2), encoding="utf-8"
+                )
     return {"index": index, "title": title, "text": "", "rows": [],
             "no_data": False, "status": "error", "error": error, "file": None}
 
@@ -333,13 +373,26 @@ def capture_dashboard(page, out_dir):
             break
         for row in collapsed.all():
             row.click()
-    # Bring every lazy-loaded panel into view before resolving titles.
-    for panel in page.locator("div.react-grid-item").all():
+    identities = page.locator("div.react-grid-item").evaluate_all("""elements => elements.map((el, index) => {
+        const key = el.getAttribute('data-griditem-key');
+        if (key) return ['data-griditem-key', key];
+        if (el.id) return ['id', el.id];
+        el.setAttribute('data-capture-panel', String(index));
+        return ['data-capture-panel', String(index)];
+    })""")
+    panels = [
+        page.locator(f"div.react-grid-item[{attribute}={json.dumps(value)}]")
+        for attribute, value in identities
+    ]
+    if any(panel.count() != 1 for panel in panels):
+        raise CaptureError("Dashboard panel identities are missing or duplicated")
+    # Stable identities survive React reordering during expansion and capture.
+    for panel in panels:
         panel.scroll_into_view_if_needed(timeout=15000)
         page.wait_for_timeout(150)
     manifest = []
     titles = set()
-    for index, panel in enumerate(page.locator("div.react-grid-item").all()):
+    for index, panel in enumerate(panels):
         panel.scroll_into_view_if_needed(timeout=15000)
         header = panel.locator(PANEL_HEADER)
         if not header.count():

@@ -1,0 +1,15 @@
+{
+  "text": "Installed Extensions\nRunCommandLinux",
+  "rows": [
+    {
+      "text": "RunCommandLinux",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 2,
+  "chart": false
+}

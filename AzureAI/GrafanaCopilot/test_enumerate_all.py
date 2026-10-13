@@ -309,6 +309,91 @@ class LocalRenderingTests(unittest.TestCase):
         self.assertEqual(result["status"], "data")
         self.assertIn("Reboots\n11", result["text"])
 
+    def test_dashboard_panel_reordering_keeps_original_identity(self):
+        self.page.set_content("""
+            <div class="react-grid-item" id="first">
+              <h2 data-testid="data-testid Panel header First">First</h2>42
+            </div>
+            <div class="react-grid-item" id="second">
+              <h2 data-testid="data-testid Panel header Second">Second</h2>24
+            </div>
+        """)
+        def fake_capture(panel, title, index, out_dir):
+            if title == "First":
+                panel.evaluate("el => el.parentElement.appendChild(el)")
+            return {"index": index, "title": title, "status": "data", "file": None}
+        with patch.object(capture, "capture_panel", side_effect=fake_capture):
+            result = capture.capture_dashboard(self.page, self.out)
+        self.assertEqual([item["title"] for item in result], ["First", "Second"])
+
+    def test_grid_keys_survive_element_id_changes(self):
+        self.page.set_content("""
+            <div class="react-grid-item" id="first" data-griditem-key="grid-first">
+              <h2 data-testid="data-testid Panel header First">First</h2>42
+            </div>
+            <div class="react-grid-item" id="second" data-griditem-key="grid-second">
+              <h2 data-testid="data-testid Panel header Second">Second</h2>24
+            </div>
+        """)
+        def fake_capture(panel, title, index, out_dir):
+            if title == "First":
+                panel.page.evaluate("""() => {
+                    document.querySelectorAll('.react-grid-item').forEach(el => {
+                        el.id += '-remounted';
+                    });
+                }""")
+            return {"index": index, "title": title, "status": "data", "file": None}
+        with patch.object(capture, "capture_panel", side_effect=fake_capture):
+            result = capture.capture_dashboard(self.page, self.out)
+        self.assertEqual([item["title"] for item in result], ["First", "Second"])
+
+    def test_hidden_table_rows_do_not_block_loaded_data(self):
+        panel = self.table_fixture(row_count=3)
+        panel.evaluate("""el => {
+            const hidden = document.createElement('div');
+            hidden.setAttribute('role', 'row');
+            hidden.style.display = 'none';
+            el.querySelector('[role="grid"]').appendChild(hidden);
+        }""")
+        result = capture.capture_panel(panel, "Table", 1, self.out, timeout=15)
+        self.assertEqual(result["status"], "data", result.get("error"))
+        self.assertEqual(len(result["rows"]), 4)
+
+    def test_cells_overflowing_row_width_are_fitted(self):
+        panel = self.table_fixture(row_count=3)
+        self.page.add_style_tag(content="[role=row]{width:400px;overflow:visible}")
+        with patch.object(capture, "autocrop"):
+            result = capture.capture_panel(panel, "Table", 1, self.out, timeout=15)
+        self.assertEqual(result["status"], "data", result.get("error"))
+        with Image.open(self.out / result["file"]) as image:
+            self.assertGreaterEqual(image.width, 600)
+
+    def test_display_contents_rows_use_visible_cells(self):
+        panel = self.table_fixture(row_count=3)
+        self.page.add_style_tag(content="""
+            [role=grid] { display:grid; grid-template-columns:300px 300px; }
+            [role=row] { display:contents; }
+            [role=gridcell],[role=columnheader] { height:30px; }
+        """)
+        result = capture.capture_panel(panel, "Table", 1, self.out, timeout=15)
+        self.assertEqual(result["status"], "data", result.get("error"))
+        self.assertEqual(len(result["rows"]), 4)
+
+    def test_nested_display_contents_header_is_counted_and_captured(self):
+        panel = self.table_fixture(row_count=3)
+        panel.evaluate("""el => {
+            const header = el.querySelector('[role="row"]');
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'contents';
+            while (header.firstChild) wrapper.appendChild(header.firstChild);
+            header.appendChild(wrapper);
+        }""")
+        result = capture.capture_panel(panel, "Table", 1, self.out, timeout=15)
+        self.assertEqual(result["status"], "data", result.get("error"))
+        self.assertEqual(len(result["rows"]), 4)
+        self.assertIn("Time", result["rows"][0])
+        self.assertIn("Value", result["rows"][0])
+
     def test_no_data_does_not_produce_an_image(self):
         self.page.set_content('<div class="react-grid-item"><h2>Outages</h2>No Data</div>')
         result = capture.capture_panel(self.page.locator(".react-grid-item"), "Outages", 1, self.out)

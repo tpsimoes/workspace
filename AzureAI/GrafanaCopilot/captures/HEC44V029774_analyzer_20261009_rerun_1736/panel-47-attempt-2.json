@@ -1,0 +1,45 @@
+{
+  "text": "Details\nVM ARM ID\nIPv4 Address\nVirtual Network\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourceGroups/HEC44-NEE-westeurope-1/providers/Microsoft.Network/virtualNetworks/vnet-HEC44-NEE\nSubnet\nMAC Address\nLoadbalancer\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourcegroups/hec44-nee-westeurope-1/providers/microsoft.network/loadbalancers/lb-pm-hec44-nee-f9a\nLoadbalancer\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourcegroups/hec44-nee-westeurope-1/providers/microsoft.network/loadbalancers/lb-hec44-nee-ext-ob-prod",
+  "rows": [
+    {
+      "text": "VM ARM ID",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "IPv4 Address",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Virtual Network\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourceGroups/HEC44-NEE-westeurope-1/providers/Microsoft.Network/virtualNetworks/vnet-HEC44-NEE",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Subnet",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "MAC Address",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Loadbalancer\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourcegroups/hec44-nee-westeurope-1/providers/microsoft.network/loadbalancers/lb-pm-hec44-nee-f9a",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Loadbalancer\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourcegroups/hec44-nee-westeurope-1/providers/microsoft.network/loadbalancers/lb-hec44-nee-ext-ob-prod",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 8,
+  "chart": false
+}

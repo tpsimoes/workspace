@@ -1,0 +1,201 @@
+[
+  {
+    "index": 1,
+    "title": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links): content did not settle or remained clipped before the capture deadline (loading=False, rows=10, expected_rows=11, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 2,
+    "title": "VM Details (Features)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "VM Details (Features): content did not settle or remained clipped before the capture deadline (loading=False, rows=7, expected_rows=8, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 3,
+    "title": "Installed Extensions",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Installed Extensions: content did not settle or remained clipped before the capture deadline (loading=False, rows=1, expected_rows=2, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 4,
+    "title": "VM Tags",
+    "text": "VM Tags\nName\nValue\nbkp_fs_schedule\nmo:111111111111111111111111,tu:111111111111111111111111,we:111111111111111111111111,th:111111111111111111111111,fr:111111111111111111111111,sa:111111111111111111111111,su:111111111111111111111111,min:1d,max:3d\nbkp_storage_account\nsahec44neebackup0001\ncomment\nREDACTED\nInfrastructureProvider\nGMPTIC\nmc-ripurchased\n3yri-s\nName\nhec44v029774\npacemakercluster\nf9adb\npurchase-ri\n3yri-s\nSerial\nf0a617c8-8b37-11ec-bb8e-dc68cd98a66d\nstatus\nLive",
+    "rows": [
+      "Name\nValue",
+      "bkp_fs_schedule\nmo:111111111111111111111111,tu:111111111111111111111111,we:111111111111111111111111,th:111111111111111111111111,fr:111111111111111111111111,sa:111111111111111111111111,su:111111111111111111111111,min:1d,max:3d",
+      "bkp_storage_account\nsahec44neebackup0001",
+      "comment\nREDACTED",
+      "InfrastructureProvider\nGMPTIC",
+      "mc-ripurchased\n3yri-s",
+      "Name\nhec44v029774",
+      "pacemakercluster\nf9adb",
+      "purchase-ri\n3yri-s",
+      "Serial\nf0a617c8-8b37-11ec-bb8e-dc68cd98a66d",
+      "status\nLive"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-04-vm-tags.png"
+  },
+  {
+    "index": 5,
+    "title": "VM Events:",
+    "text": "VM Events:\nPlacements\n1\nNodes Degraded\n1\nReboots\n1\nVM CRUD\n0",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-05-vm-events.png"
+  },
+  {
+    "index": 6,
+    "title": "Microsoft App Links",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Microsoft App Links: content did not settle or remained clipped before the capture deadline (loading=False, rows=13, expected_rows=14, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 7,
+    "title": "OS Image Details",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "OS Image Details: content did not settle or remained clipped before the capture deadline (loading=False, rows=5, expected_rows=6, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 9,
+    "title": "historical data (ignores selected time range) - recent SRs (less than 2d) might not be displayed",
+    "text": "historical data (ignores selected time range) - recent SRs (less than 2d) might not be displayed\nIncidentId\nCreatedDateTime\nState\nTitle\nRootCause\nICMs\n2610090060002676\n2026-10-09 10:08:20\nActive\nwhy server rebooted\n882852611\n2408270050004827\n2024-08-27 16:33:33\nResolved\nperformance issue {ALPHANUMERICPII}\nOthers\n2302220030003090\n2023-02-22 20:47:55\nResolved\nServer {ALPHANUMERICPII} not accessible\n_Storage\n2301160050002496\n2023-01-16 17:02:34\nResolved\nconnection reset by peer - {PHONEPII}\nApp Code causing Exceptions and Errors\n2204230050000238\n2022-04-23 12:01:57\nResolved\nIncreased latency on attached disks\nHigh Client Latency Or Client errors",
+    "rows": [
+      "IncidentId\nCreatedDateTime\nState\nTitle\nRootCause\nICMs",
+      "2610090060002676\n2026-10-09 10:08:20\nActive\nwhy server rebooted\n882852611",
+      "2408270050004827\n2024-08-27 16:33:33\nResolved\nperformance issue {ALPHANUMERICPII}\nOthers",
+      "2302220030003090\n2023-02-22 20:47:55\nResolved\nServer {ALPHANUMERICPII} not accessible\n_Storage",
+      "2301160050002496\n2023-01-16 17:02:34\nResolved\nconnection reset by peer - {PHONEPII}\nApp Code causing Exceptions and Errors",
+      "2204230050000238\n2022-04-23 12:01:57\nResolved\nIncreased latency on attached disks\nHigh Client Latency Or Client errors"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-09-historical-data-ignores-selected-time-range-recent.png"
+  },
+  {
+    "index": 11,
+    "title": "ICMs Associated to VM ArmId",
+    "text": "ICMs Associated to VM ArmId\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 13,
+    "title": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###",
+    "text": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 15,
+    "title": "CPU % (Avg)",
+    "text": "CPU % (Avg)\nPercentage CPU Consumed % AVG -b2c28b24-3316-4bc5-be18-d52242382ab9\nPercentage CPU Consumed % MAX -b2c28b24-3316-4bc5-be18-d52242382ab9",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-15-cpu-avg.png"
+  },
+  {
+    "index": 16,
+    "title": "% Memory Pressure (Max)",
+    "text": "% Memory Pressure (Max)\nMemory % _hec44v029774",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-16-memory-pressure-max.png"
+  },
+  {
+    "index": 17,
+    "title": "Ram size and Available ram (Max)",
+    "text": "Ram size and Available ram (Max)\nAvailable Memory Bytes b2c28b24-3316-4bc5-be18-d52242382ab9\nRamSize",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-17-ram-size-and-available-ram-max.png"
+  },
+  {
+    "index": 20,
+    "title": "VM Placement",
+    "text": "VM Placement\nLog timestamp\nContainer creation\nCluster Name\nAvailability Zone\nASI Node\nNetVMA Node\nNetVMA Container\nSKU Size\nContainer Id\nNode Id\nEphemeral\n2026-10-10 00:55:37\n2026-10-09 09:05:18\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3c9942a0-cc64-4f67-992e-54f8f094499a\n476a4402-40f9-2d40-fd93-45f573554684\nfalse\n2026-10-09 08:40:42\n2026-01-28 00:59:29\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3a12a699-c72a-4a7c-8126-914c64799e7e\n549d2dc9-e827-46b0-9a1c-83f81af847a7\nfalse",
+    "rows": [
+      "Log timestamp\nContainer creation\nCluster Name\nAvailability Zone\nASI Node\nNetVMA Node\nNetVMA Container\nSKU Size\nContainer Id\nNode Id\nEphemeral",
+      "2026-10-10 00:55:37\n2026-10-09 09:05:18\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3c9942a0-cc64-4f67-992e-54f8f094499a\n476a4402-40f9-2d40-fd93-45f573554684\nfalse",
+      "2026-10-09 08:40:42\n2026-01-28 00:59:29\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3a12a699-c72a-4a7c-8126-914c64799e7e\n549d2dc9-e827-46b0-9a1c-83f81af847a7\nfalse"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-20-vm-placement.png"
+  },
+  {
+    "index": 21,
+    "title": "VM Sku Capacity",
+    "text": "VM Sku Capacity\nDate\nVM SKU\nRegion\nDeployment Type\nAzure PhysicalZone\nCustomer LogicalZone\nAvailability\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ01\neuropewest-3\n4\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ01\neuropewest-3\n4\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ02\neuropewest-2\n0\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ02\neuropewest-2\n0\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ03\neuropewest-1\n1\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ03\neuropewest-1\n1",
+    "rows": [
+      "Date\nVM SKU\nRegion\nDeployment Type\nAzure PhysicalZone\nCustomer LogicalZone\nAvailability",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ01\neuropewest-3\n4",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ01\neuropewest-3\n4",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ02\neuropewest-2\n0",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ02\neuropewest-2\n0",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ03\neuropewest-1\n1",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ03\neuropewest-1\n1"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-21-vm-sku-capacity.png"
+  },
+  {
+    "index": 23,
+    "title": "Node and TOR Placement (<60 Days)",
+    "text": "Node and TOR Placement (<60 Days)\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 24,
+    "title": "TOR Events",
+    "text": "TOR Events\nTor Health\n0\nTor Events\n0",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-24-tor-events.png"
+  },
+  {
+    "index": 25,
+    "title": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Locator.scroll_into_view_if_needed: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"div.react-grid-item[id=\\\"27\\\"]\")\n",
+    "file": null
+  }
+]

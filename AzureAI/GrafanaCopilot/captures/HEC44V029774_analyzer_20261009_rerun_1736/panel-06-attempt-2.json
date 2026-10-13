@@ -1,0 +1,75 @@
+{
+  "text": "Microsoft App Links\nASI\nClick Here\nASI EEE\nClick Here\nASI Node\nClick Here\nCloudPrice\nClick Here\nCluster Cap\nClick Here\nDridash\nClick Here\nNetVMA Container\nClick Here\nNetVMA Node\nClick Here\nNode Dashboard\nClick Here\nNode Story\nClick Here\nRdmadash\nClick Here\nVM Dash\nClick Here\nVnet Dridash\nClick Here",
+  "rows": [
+    {
+      "text": "ASI\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "ASI EEE\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "ASI Node\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "CloudPrice\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Cluster Cap\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Dridash\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "NetVMA Container\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "NetVMA Node\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Node Dashboard\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Node Story\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Rdmadash\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "VM Dash\nClick Here",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Vnet Dridash\nClick Here",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 14,
+  "chart": false
+}

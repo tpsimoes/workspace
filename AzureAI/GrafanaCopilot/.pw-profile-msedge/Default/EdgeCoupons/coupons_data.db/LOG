@@ -1,6 +1,6 @@
-2026/10/02-12:12:21.125 a764 Reusing MANIFEST c:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2026/10/02-12:12:21.126 a764 Recovering log #166
-2026/10/02-12:12:21.130 a764 Reusing old log c:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\EdgeCoupons/coupons_data.db/000166.log 
-2026/10/02-12:12:21.277 6de4 Level-0 table #170: started
-2026/10/02-12:12:21.281 6de4 Level-0 table #170: 683376 bytes OK
-2026/10/02-12:12:21.283 6de4 Delete type=0 #166
+2026/10/13-09:35:32.662 7fd0 Reusing MANIFEST C:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/10/13-09:35:32.664 7fd0 Recovering log #195
+2026/10/13-09:35:32.665 7fd0 Reusing old log C:\Users\tiagosimoes\OneDrive - Microsoft\Documents\MyGit\workspace\AzureAI\GrafanaCopilot\.pw-profile-msedge\Default\EdgeCoupons/coupons_data.db/000195.log 
+2026/10/13-09:35:32.727 7af4 Level-0 table #199: started
+2026/10/13-09:35:32.730 7af4 Level-0 table #199: 683376 bytes OK
+2026/10/13-09:35:32.732 7af4 Delete type=0 #195

@@ -1,0 +1,117 @@
+[
+  {
+    "index": 1,
+    "title": "Virtual Machine - Current Info",
+    "text": "Virtual Machine - Current Info\nCustomer\nUnidentified Customers\nSubscription Name\nUnidentified Customers",
+    "rows": [
+      "Keyvalue",
+      "Customer\nUnidentified Customers",
+      "Subscription Name\nUnidentified Customers"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-01-virtual-machine-current-info.png"
+  },
+  {
+    "index": 2,
+    "title": "Installed Extensions",
+    "text": "Installed Extensions\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 3,
+    "title": "VM Tags",
+    "text": "VM Tags\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 4,
+    "title": "VM Events:",
+    "text": "VM Events:\n0",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-04-vm-events.png"
+  },
+  {
+    "index": 5,
+    "title": "VM Details (Features)",
+    "text": "VM Details (Features)\nLiveMigration Eligible\nNo Info",
+    "rows": [
+      "Keyvalue",
+      "LiveMigration Eligible\nNo Info"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-05-vm-details-features.png"
+  },
+  {
+    "index": 6,
+    "title": "OS Image Details",
+    "text": "OS Image Details\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 8,
+    "title": "Outages",
+    "text": "Outages\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 10,
+    "title": "CPU % (Avg)",
+    "text": "CPU % (Avg)\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 11,
+    "title": "% Memory Pressure (Max)",
+    "text": "% Memory Pressure (Max)\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 12,
+    "title": "Ram size and Available ram (Max)",
+    "text": "Ram size and Available ram (Max)\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 14,
+    "title": "VM Placement",
+    "text": "VM Placement\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 16,
+    "title": "Node and TOR Placement (<60 Days)",
+    "text": "Node and TOR Placement (<60 Days)\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "text": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)\nARM Id\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourcegroups/hec44-nee-westeurope-1/providers/microsoft.compute/virtualmachines/hec44v029774\nContainer Id\n3c9942a0-cc64-4f67-992e-54f8f094499a\nCustomer\nSAP America, Inc.\nNode Id\n476a4402-40f9-2d40-fd93-45f573554684\nOffer Name\nMicrosoft Azure Enterprise\nRegion\neuropewest\nResource Name\nhec44v029774\nSubscription Name\nSAP-HEC-0153\nTenant Name\n393489f9-fb81-42ee-a15f-aee2e2b2bdf0\nVirtualMachine Id\nb2c28b24-3316-4bc5-be18-d52242382ab9",
+  "rows": [
+    {
+      "text": "ARM Id\n/subscriptions/473ce654-98d1-4c05-963c-fe988c08ee6c/resourcegroups/hec44-nee-westeurope-1/providers/microsoft.compute/virtualmachines/hec44v029774",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Container Id\n3c9942a0-cc64-4f67-992e-54f8f094499a",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Customer\nSAP America, Inc.",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Node Id\n476a4402-40f9-2d40-fd93-45f573554684",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Offer Name\nMicrosoft Azure Enterprise",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Region\neuropewest",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Resource Name\nhec44v029774",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Subscription Name\nSAP-HEC-0153",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Tenant Name\n393489f9-fb81-42ee-a15f-aee2e2b2bdf0",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "VirtualMachine Id\nb2c28b24-3316-4bc5-be18-d52242382ab9",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 11,
+  "chart": false
+}

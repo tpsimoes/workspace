@@ -1,0 +1,20 @@
+{
+  "text": "Reboot Detail\nStartTime\nEndTime\nDuration (mn)\nRCA_CSS\nTM_RCA\nDetail\nASW_Wiki\nIaaS Wiki\nWhyFaulted\nuserAgentType\nPrincipalName\nState\n2026-10-09 08:58:53\n2026-10-09 09:09:48\n10.9\nUnplanned.NodeFault.AgentFault__InitializationFailed_AddDetailedErrorLogsForDiskEncryption_0\nUnplanned.NodeFault.NodeFault Software.NodeFaultCode:70005 AgentEnteredFaultedMode\nFaultType:InitializationFailed FaultCode:0 ExtendedFaultDetails:{\"Pairs\":[{\"Key\":\"Windows OS Error\",\"Value\":\"Preparing host bitlocker volume failed.\"},{\"Key\":\"FailedFunction(s)\",\"Value\":\"AddDetailedErrorLogsForDiskEncryption\"},{\"Key\":\"FailingHr\",\"Value\":\"0x80004005 E_FAIL Unspecified error0x80004005 E_FAIL Unspecified error\"},{\"Key\":\"EscalateTo\",\"Value\":\"RDOS\\\\Azure Host OS DRI - Sev 3-4\"},{\"Key\":\"AgentPackage\",\"Value\":\"Compute.Fabric.HostAgent.r_aug_2026.4638b8c_260911-2227_amd64.151.26.8.91.AgentPackage.PF.zip\"}]}\nClick Here\nDown",
+  "rows": [
+    {
+      "text": "StartTime\nEndTime\nDuration (mn)\nRCA_CSS\nTM_RCA\nDetail\nASW_Wiki\nIaaS Wiki\nWhyFaulted\nuserAgentType\nPrincipalName\nState",
+      "visible": true,
+      "clipped": true
+    },
+    {
+      "text": "2026-10-09 08:58:53\n2026-10-09 09:09:48\n10.9\nUnplanned.NodeFault.AgentFault__InitializationFailed_AddDetailedErrorLogsForDiskEncryption_0\nUnplanned.NodeFault.NodeFault Software.NodeFaultCode:70005 AgentEnteredFaultedMode\nFaultType:InitializationFailed FaultCode:0 ExtendedFaultDetails:{\"Pairs\":[{\"Key\":\"Windows OS Error\",\"Value\":\"Preparing host bitlocker volume failed.\"},{\"Key\":\"FailedFunction(s)\",\"Value\":\"AddDetailedErrorLogsForDiskEncryption\"},{\"Key\":\"FailingHr\",\"Value\":\"0x80004005 E_FAIL Unspecified error0x80004005 E_FAIL Unspecified error\"},{\"Key\":\"EscalateTo\",\"Value\":\"RDOS\\\\Azure Host OS DRI - Sev 3-4\"},{\"Key\":\"AgentPackage\",\"Value\":\"Compute.Fabric.HostAgent.r_aug_2026.4638b8c_260911-2227_amd64.151.26.8.91.AgentPackage.PF.zip\"}]}\nClick Here\nDown",
+      "visible": true,
+      "clipped": true
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 2,
+  "chart": true
+}

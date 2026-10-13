@@ -1,0 +1,399 @@
+[
+  {
+    "index": 1,
+    "title": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links): content did not settle or remained clipped before the capture deadline (loading=False, rows=10, expected_rows=11, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 2,
+    "title": "VM Details (Features)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "VM Details (Features): content did not settle or remained clipped before the capture deadline (loading=False, rows=7, expected_rows=8, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 3,
+    "title": "Installed Extensions",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Installed Extensions: content did not settle or remained clipped before the capture deadline (loading=False, rows=1, expected_rows=2, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 4,
+    "title": "VM Tags",
+    "text": "VM Tags\nName\nValue\nbkp_fs_schedule\nmo:111111111111111111111111,tu:111111111111111111111111,we:111111111111111111111111,th:111111111111111111111111,fr:111111111111111111111111,sa:111111111111111111111111,su:111111111111111111111111,min:1d,max:3d\nbkp_storage_account\nsahec44neebackup0001\ncomment\nREDACTED\nInfrastructureProvider\nGMPTIC\nmc-ripurchased\n3yri-s\nName\nhec44v029774\npacemakercluster\nf9adb\npurchase-ri\n3yri-s\nSerial\nf0a617c8-8b37-11ec-bb8e-dc68cd98a66d\nstatus\nLive",
+    "rows": [
+      "Name\nValue",
+      "bkp_fs_schedule\nmo:111111111111111111111111,tu:111111111111111111111111,we:111111111111111111111111,th:111111111111111111111111,fr:111111111111111111111111,sa:111111111111111111111111,su:111111111111111111111111,min:1d,max:3d",
+      "bkp_storage_account\nsahec44neebackup0001",
+      "comment\nREDACTED",
+      "InfrastructureProvider\nGMPTIC",
+      "mc-ripurchased\n3yri-s",
+      "Name\nhec44v029774",
+      "pacemakercluster\nf9adb",
+      "purchase-ri\n3yri-s",
+      "Serial\nf0a617c8-8b37-11ec-bb8e-dc68cd98a66d",
+      "status\nLive"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-04-vm-tags.png"
+  },
+  {
+    "index": 5,
+    "title": "VM Events:",
+    "text": "VM Events:\nPlacements\n1\nNodes Degraded\n1\nReboots\n1\nVM CRUD\n0",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-05-vm-events.png"
+  },
+  {
+    "index": 6,
+    "title": "Microsoft App Links",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Microsoft App Links: content did not settle or remained clipped before the capture deadline (loading=False, rows=13, expected_rows=14, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 7,
+    "title": "OS Image Details",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "OS Image Details: content did not settle or remained clipped before the capture deadline (loading=False, rows=5, expected_rows=6, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 9,
+    "title": "historical data (ignores selected time range) - recent SRs (less than 2d) might not be displayed",
+    "text": "historical data (ignores selected time range) - recent SRs (less than 2d) might not be displayed\nIncidentId\nCreatedDateTime\nState\nTitle\nRootCause\nICMs\n2610090060002676\n2026-10-09 10:08:20\nActive\nwhy server rebooted\n882852611\n2408270050004827\n2024-08-27 16:33:33\nResolved\nperformance issue {ALPHANUMERICPII}\nOthers\n2302220030003090\n2023-02-22 20:47:55\nResolved\nServer {ALPHANUMERICPII} not accessible\n_Storage\n2301160050002496\n2023-01-16 17:02:34\nResolved\nconnection reset by peer - {PHONEPII}\nApp Code causing Exceptions and Errors\n2204230050000238\n2022-04-23 12:01:57\nResolved\nIncreased latency on attached disks\nHigh Client Latency Or Client errors",
+    "rows": [
+      "IncidentId\nCreatedDateTime\nState\nTitle\nRootCause\nICMs",
+      "2610090060002676\n2026-10-09 10:08:20\nActive\nwhy server rebooted\n882852611",
+      "2408270050004827\n2024-08-27 16:33:33\nResolved\nperformance issue {ALPHANUMERICPII}\nOthers",
+      "2302220030003090\n2023-02-22 20:47:55\nResolved\nServer {ALPHANUMERICPII} not accessible\n_Storage",
+      "2301160050002496\n2023-01-16 17:02:34\nResolved\nconnection reset by peer - {PHONEPII}\nApp Code causing Exceptions and Errors",
+      "2204230050000238\n2022-04-23 12:01:57\nResolved\nIncreased latency on attached disks\nHigh Client Latency Or Client errors"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-09-historical-data-ignores-selected-time-range-recent.png"
+  },
+  {
+    "index": 11,
+    "title": "ICMs Associated to VM ArmId",
+    "text": "ICMs Associated to VM ArmId\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 13,
+    "title": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###",
+    "text": "Outages impacting Virtual Machines in this VM's subscription and region (or globally) potentially affecting it. ### Scroll down to the end of the page to see outages impacting other services this VM or its workload may depend on. ###\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 15,
+    "title": "CPU % (Avg)",
+    "text": "CPU % (Avg)\nPercentage CPU Consumed % AVG -b2c28b24-3316-4bc5-be18-d52242382ab9\nPercentage CPU Consumed % MAX -b2c28b24-3316-4bc5-be18-d52242382ab9",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-15-cpu-avg.png"
+  },
+  {
+    "index": 16,
+    "title": "% Memory Pressure (Max)",
+    "text": "% Memory Pressure (Max)\nMemory % _hec44v029774",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-16-memory-pressure-max.png"
+  },
+  {
+    "index": 17,
+    "title": "Ram size and Available ram (Max)",
+    "text": "Ram size and Available ram (Max)\nAvailable Memory Bytes b2c28b24-3316-4bc5-be18-d52242382ab9\nRamSize",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-17-ram-size-and-available-ram-max.png"
+  },
+  {
+    "index": 20,
+    "title": "VM Placement",
+    "text": "VM Placement\nLog timestamp\nContainer creation\nCluster Name\nAvailability Zone\nASI Node\nNetVMA Node\nNetVMA Container\nSKU Size\nContainer Id\nNode Id\nEphemeral\n2026-10-10 00:55:37\n2026-10-09 09:05:18\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3c9942a0-cc64-4f67-992e-54f8f094499a\n476a4402-40f9-2d40-fd93-45f573554684\nfalse\n2026-10-09 08:40:42\n2026-01-28 00:59:29\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3a12a699-c72a-4a7c-8126-914c64799e7e\n549d2dc9-e827-46b0-9a1c-83f81af847a7\nfalse",
+    "rows": [
+      "Log timestamp\nContainer creation\nCluster Name\nAvailability Zone\nASI Node\nNetVMA Node\nNetVMA Container\nSKU Size\nContainer Id\nNode Id\nEphemeral",
+      "2026-10-10 00:55:37\n2026-10-09 09:05:18\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3c9942a0-cc64-4f67-992e-54f8f094499a\n476a4402-40f9-2d40-fd93-45f573554684\nfalse",
+      "2026-10-09 08:40:42\n2026-01-28 00:59:29\neuropewest-prod-c\neuropewest-AZ02\nClick Here\nClick Here\nClick Here\nStandard_M896ixds_24_v3\n3a12a699-c72a-4a7c-8126-914c64799e7e\n549d2dc9-e827-46b0-9a1c-83f81af847a7\nfalse"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-20-vm-placement.png"
+  },
+  {
+    "index": 21,
+    "title": "VM Sku Capacity",
+    "text": "VM Sku Capacity\nDate\nVM SKU\nRegion\nDeployment Type\nAzure PhysicalZone\nCustomer LogicalZone\nAvailability\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ01\neuropewest-3\n4\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ01\neuropewest-3\n4\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ03\neuropewest-1\n1\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ03\neuropewest-1\n1\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ02\neuropewest-2\n0\n2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ02\neuropewest-2\n0",
+    "rows": [
+      "Date\nVM SKU\nRegion\nDeployment Type\nAzure PhysicalZone\nCustomer LogicalZone\nAvailability",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ01\neuropewest-3\n4",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ01\neuropewest-3\n4",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ03\neuropewest-1\n1",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ03\neuropewest-1\n1",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nUpgrade\neuropewest-AZ02\neuropewest-2\n0",
+      "2026-10-09\nStandard_M896ixds_24_v3\nwesteurope\nNewDeployment\neuropewest-AZ02\neuropewest-2\n0"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-21-vm-sku-capacity.png"
+  },
+  {
+    "index": 23,
+    "title": "Node and TOR Placement (<60 Days)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Node and TOR Placement (<60 Days): content did not settle or remained clipped before the capture deadline (loading=False, rows=3, expected_rows=3, clipped_rows=3)",
+    "file": null
+  },
+  {
+    "index": 24,
+    "title": "TOR Events",
+    "text": "TOR Events\nTor Health\n0\nTor Events\n0",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-24-tor-events.png"
+  },
+  {
+    "index": 25,
+    "title": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages)",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "RCA Helper: Node Events and Errors (Check 'https://supportability.visualstudio.com/AzureIaaSVM/_wiki/wikis/AzureIaaSVM/500161/RCAs' for customer-facing RCA messages): content did not settle or remained clipped before the capture deadline (loading=False, rows=247, expected_rows=247, clipped_rows=247)",
+    "file": null
+  },
+  {
+    "index": 26,
+    "title": "Node Storage Error Events",
+    "text": "Node Storage Error Events\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 28,
+    "title": "Scheduled Events & Reboots",
+    "text": "Scheduled Events & Reboots\nReboot",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-28-scheduled-events-reboots.png"
+  },
+  {
+    "index": 29,
+    "title": "Reboot Detail",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Reboot Detail: content did not settle or remained clipped before the capture deadline (loading=False, rows=2, expected_rows=2, clipped_rows=2)",
+    "file": null
+  },
+  {
+    "index": 30,
+    "title": "Scheduled Events Detail",
+    "text": "Scheduled Events Detail\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 31,
+    "title": "Live Migration Events",
+    "text": "Live Migration Events\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 32,
+    "title": "VM Health Annotations",
+    "text": "VM Health Annotations\nTimestamp\nRegion\nnodeId\ncontainerId\ncontainerType\nannotation\n09-10-2026 09:07\neuropewest\n476a4402-40f9-2d40-fd93-45f573554684\n3c9942a0-cc64-4f67-992e-54f8f094499a\nStandard_M896ixds_24_v3\nVirtualMachineMigrationInitiatedForRepair\n09-10-2026 09:06\neuropewest\n476a4402-40f9-2d40-fd93-45f573554684\n3c9942a0-cc64-4f67-992e-54f8f094499a\nStandard_M896ixds_24_v3\nVirtualMachineMigrationInitiatedForRepair",
+    "rows": [
+      "Timestamp\nRegion\nnodeId\ncontainerId\ncontainerType\nannotation",
+      "09-10-2026 09:07\neuropewest\n476a4402-40f9-2d40-fd93-45f573554684\n3c9942a0-cc64-4f67-992e-54f8f094499a\nStandard_M896ixds_24_v3\nVirtualMachineMigrationInitiatedForRepair",
+      "09-10-2026 09:06\neuropewest\n476a4402-40f9-2d40-fd93-45f573554684\n3c9942a0-cc64-4f67-992e-54f8f094499a\nStandard_M896ixds_24_v3\nVirtualMachineMigrationInitiatedForRepair"
+    ],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-32-vm-health-annotations.png"
+  },
+  {
+    "index": 34,
+    "title": "Attached Disk",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Attached Disk: content did not settle or remained clipped before the capture deadline (loading=False, rows=37, expected_rows=37, clipped_rows=37)",
+    "file": null
+  },
+  {
+    "index": 35,
+    "title": "Disk Detach Operations",
+    "text": "Disk Detach Operations\nNo data",
+    "rows": [],
+    "no_data": true,
+    "status": "no_data",
+    "file": null
+  },
+  {
+    "index": 36,
+    "title": "Storage Errors & Events",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Storage Errors & Events: content did not settle or remained clipped before the capture deadline (loading=False, rows=41, expected_rows=41, clipped_rows=41)",
+    "file": null
+  },
+  {
+    "index": 38,
+    "title": "Data/OS/Temp Disk Queue Length",
+    "text": "Data/OS/Temp Disk Queue Length\nData Disk 0\nData Disk 1\nData Disk 10\nData Disk 11\nData Disk 12\nData Disk 13\nData Disk 14\nData Disk 15\nData Disk 16\nData Disk 17\nData Disk 18\nData Disk 19\nData Disk 2\nData Disk 20\nData Disk 21\nData Disk 22\nData Disk 23\nData Disk 24\nData Disk 25\nData Disk 26\nData Disk 27\nData Disk 28\nData Disk 29\nData Disk 3\nData Disk 30\nData Disk 31\nData Disk 32\nData Disk 33\nData Disk 34\nData Disk 4\nData Disk 5\nData Disk 6\nData Disk 7\nData Disk 8\nData Disk 9\nOS Disk\nTemp Disk",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-38-data-os-temp-disk-queue-length.png"
+  },
+  {
+    "index": 39,
+    "title": "Data/OS/Temp Disk Latency (in milliseconds)",
+    "text": "Data/OS/Temp Disk Latency (in milliseconds)\nData Disk 10\nData Disk 15\nData Disk 17\nData Disk 0\nData Disk 32\nData Disk 21\nData Disk 20\nData Disk 29\nData Disk 33\nData Disk 26\nData Disk 19\nData Disk 25\nData Disk 23\nData Disk 27\nData Disk 30\nData Disk 31\nData Disk 24\nData Disk 22\nData Disk 34\nData Disk 28\nData Disk 11\nData Disk 18\nData Disk 16\nData Disk 13\nData Disk 2\nData Disk 14\nData Disk 9\nData Disk 12\nData Disk 6\nData Disk 5\nData Disk 4\nData Disk 3\nData Disk 8\nData Disk 7\nData Disk 1\nOS Disk\nTEMP Disk",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-39-data-os-temp-disk-latency-in-milliseconds.png"
+  },
+  {
+    "index": 40,
+    "title": "VM Bandwidth Consumed %",
+    "text": "VM Bandwidth Consumed %\nVM cached Bandwidth Consumed Percentage -b2c28b24-3316-4bc5-be18-d52242382ab9\nVM Uncached Bandwidth Consumed Percentage -b2c28b24-3316-4bc5-be18-d52242382ab9\nVM Bandwidth Consumed (Cached & Uncached) Percentage",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-40-vm-bandwidth-consumed.png"
+  },
+  {
+    "index": 41,
+    "title": "VM IOPS Consumed %",
+    "text": "VM IOPS Consumed %\nVM Cached IOPS Consumed Percentage -b2c28b24-3316-4bc5-be18-d52242382ab9\nVM Uncached IOPS Consumed Percentage -b2c28b24-3316-4bc5-be18-d52242382ab9\nVM IOPS Consumed (Cached & Uncached) Percentage",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-41-vm-iops-consumed.png"
+  },
+  {
+    "index": 42,
+    "title": "Data and OS Disk Bandwidth Consumed % (per Lun)",
+    "text": "Data and OS Disk Bandwidth Consumed % (per Lun)\nData Disk 0\nData Disk 1\nData Disk 10\nData Disk 11\nData Disk 12\nData Disk 13\nData Disk 14\nData Disk 15\nData Disk 16\nData Disk 17\nData Disk 18\nData Disk 19\nData Disk 2\nData Disk 20\nData Disk 21\nData Disk 22\nData Disk 23\nData Disk 24\nData Disk 25\nData Disk 26\nData Disk 27\nData Disk 28\nData Disk 29\nData Disk 3\nData Disk 30\nData Disk 31\nData Disk 32\nData Disk 33\nData Disk 34\nData Disk 4\nData Disk 5\nData Disk 6\nData Disk 7\nData Disk 8\nData Disk 9\nOS Disk\nBurst Data Disk LUN 0\nBurst Data Disk LUN 1\nBurst Data Disk LUN 32\nOS Disk Burst",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-42-data-and-os-disk-bandwidth-consumed-per-lun.png"
+  },
+  {
+    "index": 43,
+    "title": "Data and OS Disk IOPS Consumed % (per Lun)",
+    "text": "Data and OS Disk IOPS Consumed % (per Lun)\nData Disk 0\nData Disk 1\nData Disk 10\nData Disk 11\nData Disk 12\nData Disk 13\nData Disk 14\nData Disk 15\nData Disk 16\nData Disk 17\nData Disk 18\nData Disk 19\nData Disk 2\nData Disk 20\nData Disk 21\nData Disk 22\nData Disk 23\nData Disk 24\nData Disk 25\nData Disk 26\nData Disk 27\nData Disk 28\nData Disk 29\nData Disk 3\nData Disk 30\nData Disk 31\nData Disk 32\nData Disk 33\nData Disk 34\nData Disk 4\nData Disk 5\nData Disk 6\nData Disk 7\nData Disk 8\nData Disk 9\nOS Disk\nBurst Data Disk LUN 0\nBurst Data Disk LUN 1\nBurst Data Disk LUN 32\nOS Disk Burst",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-43-data-and-os-disk-iops-consumed-per-lun.png"
+  },
+  {
+    "index": 45,
+    "title": "5s Metric (Container Id: 3c9942a0-cc64-4f67-992e-54f8f094499a)",
+    "text": "5s Metric (Container Id: 3c9942a0-cc64-4f67-992e-54f8f094499a)\nTotalThrottledIOPS |\nTotalThrottledIOPS | bd30524612\nTotalThrottledIOPS | bd30589200\nTotalThrottledIOPS | bd30589202\nTotalThrottledIOPS | bd30589203\nTotalThrottledIOPS | bd33685686\nTotalThrottledIOPS | bd33926923\nTotalThrottledIOPS | bd33926924\nTotalThrottledIOPS | bd33926925\nTotalThrottledIOPS | bd33926927\nTotalThrottledIOPS | bd33926928\nTotalThrottledIOPS | bd33926929\nTotalThrottledIOPS | bd33926930\nTotalThrottledIOPS | bd33926932\nTotalThrottledIOPS | bd34162774\nTotalThrottledIOPS | bd34566285\nTotalThrottledIOPS | bd34706706\nTotalThrottledIOPS | bd34706707\nTotalThrottledIOPS | bd34706708\nTotalThrottledIOPS | bd34706709\nTotalThrottledIOPS | bd34706710\nTotalThrottledIOPS | bd34706711\nTotalThrottledIOPS | bd34706712\nTotalThrottledIOPS | bd34706713\nTotalThrottledIOPS | bd34706714\nTotalThrottledIOPS | bd34706715\nTotalThrottledIOPS | bd34706716\nTotalThrottledIOPS | bd34706717\nTotalThrottledIOPS | bd34706718\nTotalThrottledIOPS | bd34706719\nTotalThrottledIOPS | bd34706720\nTotalThrottledIOPS | bd34706721\nTotalThrottledIOPS | bd34706722\nTotalThrottledIOPS | bd34706723\nTotalThrottledIOPS | bd34706724\nTotalThrottledIOPS | bd34706725\nTotalThrottledIOPS | bd_hec44v029774_osdisk_2\nTotalThrottledReadIOPS |\nTotalThrottledReadIOPS | bd30524612\nTotalThrottledReadIOPS | bd30589200\nTotalThrottledReadIOPS | bd30589202\nTotalThrottledReadIOPS | bd30589203\nTotalThrottledReadIOPS | bd33685686\nTotalThrottledReadIOPS | bd33926923\nTotalThrottledReadIOPS | bd33926924\nTotalThrottledReadIOPS | bd33926925\nTotalThrottledReadIOPS | bd33926927\nTotalThrottledReadIOPS | bd33926928\nTotalThrottledReadIOPS | bd33926929\nTotalThrottledReadIOPS | bd33926930\nTotalThrottledReadIOPS | bd33926932\nTotalThrottledReadIOPS | bd34162774\nTotalThrottledReadIOPS | bd34566285\nTotalThrottledReadIOPS | bd34706706\nTotalThrottledReadIOPS | bd34706707\nTotalThrottledReadIOPS | bd34706708\nTotalThrottledReadIOPS | bd34706709\nTotalThrottledReadIOPS | bd34706710\nTotalThrottledReadIOPS | bd34706711\nTotalThrottledReadIOPS | bd34706712\nTotalThrottledReadIOPS | bd34706713\nTotalThrottledReadIOPS | bd34706714\nTotalThrottledReadIOPS | bd34706715\nTotalThrottledReadIOPS | bd34706716\nTotalThrottledReadIOPS | bd34706717\nTotalThrottledReadIOPS | bd34706718\nTotalThrottledReadIOPS | bd34706719\nTotalThrottledReadIOPS | bd34706720\nTotalThrottledReadIOPS | bd34706721\nTotalThrottledReadIOPS | bd34706722\nTotalThrottledReadIOPS | bd34706723\nTotalThrottledReadIOPS | bd34706724\nTotalThrottledReadIOPS | bd34706725\nTotalThrottledReadIOPS | bd_hec44v029774_osdisk_2\nTotalThrottledWriteIOPS |\nTotalThrottledWriteIOPS | bd30524612\nTotalThrottledWriteIOPS | bd30589200\nTotalThrottledWriteIOPS | bd30589202\nTotalThrottledWriteIOPS | bd30589203\nTotalThrottledWriteIOPS | bd33685686\nTotalThrottledWriteIOPS | bd33926923\nTotalThrottledWriteIOPS | bd33926924\nTotalThrottledWriteIOPS | bd33926925\nTotalThrottledWriteIOPS | bd33926927\nTotalThrottledWriteIOPS | bd33926928\nTotalThrottledWriteIOPS | bd33926929\nTotalThrottledWriteIOPS | bd33926930\nTotalThrottledWriteIOPS | bd33926932\nTotalThrottledWriteIOPS | bd34162774\nTotalThrottledWriteIOPS | bd34566285\nTotalThrottledWriteIOPS | bd34706706\nTotalThrottledWriteIOPS | bd34706707\nTotalThrottledWriteIOPS | bd34706708\nTotalThrottledWriteIOPS | bd34706709\nTotalThrottledWriteIOPS | bd34706710\nTotalThrottledWriteIOPS | bd34706711\nTotalThrottledWriteIOPS | bd34706712\nTotalThrottledWriteIOPS | bd34706713\nTotalThrottledWriteIOPS | bd34706714\nTotalThrottledWriteIOPS | bd34706715\nTotalThrottledWriteIOPS | bd34706716\nTotalThrottledWriteIOPS | bd34706717\nTotalThrottledWriteIOPS | bd34706718\nTotalThrottledWriteIOPS | bd34706719\nTotalThrottledWriteIOPS | bd34706720\nTotalThrottledWriteIOPS | bd34706721\nTotalThrottledWriteIOPS | bd34706722\nTotalThrottledWriteIOPS | bd34706723\nTotalThrottledWriteIOPS | bd34706724\nTotalThrottledWriteIOPS | bd34706725\nTotalThrottledWriteIOPS | bd_hec44v029774_osdisk_2",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-45-5s-metric-container-id-3c9942a0-cc64-4f67-992e-54f.png"
+  },
+  {
+    "index": 47,
+    "title": "Details",
+    "text": "",
+    "rows": [],
+    "no_data": false,
+    "status": "error",
+    "error": "Details: content did not settle or remained clipped before the capture deadline (loading=False, rows=7, expected_rows=8, clipped_rows=0)",
+    "file": null
+  },
+  {
+    "index": 48,
+    "title": "Network in bytes Per Minute (Max)",
+    "text": "Network in bytes Per Minute (Max)\nNetwork IN Total -b2c28b24-3316-4bc5-be18-d52242382ab9",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-48-network-in-bytes-per-minute-max.png"
+  },
+  {
+    "index": 49,
+    "title": "Network out bytes Per Minute (Max)",
+    "text": "Network out bytes Per Minute (Max)\nNetwork Out Total -b2c28b24-3316-4bc5-be18-d52242382ab9",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-49-network-out-bytes-per-minute-max.png"
+  },
+  {
+    "index": 50,
+    "title": "Total Portal Bytes In Rate Per Minute (MAX) | | Per Nic -Container - Node ||",
+    "text": "Total Portal Bytes In Rate Per Minute (MAX) | | Per Nic -Container - Node ||\nNodeId: 549d2dc9-e827-46b0-9a1c-83f81af847a7 | ContainerId: 3a12a699-c72a-4a7c-8126-914c64799e7e | MacAddress: 000D3A498696",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-50-total-portal-bytes-in-rate-per-minute-max-per-nic-.png"
+  },
+  {
+    "index": 51,
+    "title": "Total Portal Bytes Out Rate Per Minute (MAX)  | | Per Nic -Container - Node ||",
+    "text": "Total Portal Bytes Out Rate Per Minute (MAX) | | Per Nic -Container - Node ||\nNodeId: 549d2dc9-e827-46b0-9a1c-83f81af847a7 | ContainerId: 3a12a699-c72a-4a7c-8126-914c64799e7e | MacAddress: 000D3A498696",
+    "rows": [],
+    "no_data": false,
+    "status": "data",
+    "file": "panel-51-total-portal-bytes-out-rate-per-minute-max-per-nic.png"
+  }
+]

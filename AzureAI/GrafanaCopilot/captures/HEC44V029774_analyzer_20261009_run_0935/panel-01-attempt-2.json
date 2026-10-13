@@ -1,0 +1,60 @@
+{
+  "text": "Virtual Machine - Current Info (ignores selected time range. Check placement section for historical container, node IDs and ASI links)",
+  "rows": [
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 11,
+  "chart": false
+}

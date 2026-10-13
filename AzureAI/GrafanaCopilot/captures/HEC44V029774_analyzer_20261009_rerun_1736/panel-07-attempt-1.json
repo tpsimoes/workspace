@@ -1,0 +1,35 @@
+{
+  "text": "OS Image Details\nSAP Image\nNo\nOS Billing Type\nLinux_IaaS\nOS License Type\nNONE\nOS Image License\nBYOS\nOS Azure Supported\nNo",
+  "rows": [
+    {
+      "text": "SAP Image\nNo",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "OS Billing Type\nLinux_IaaS",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "OS License Type\nNONE",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "OS Image License\nBYOS",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "OS Azure Supported\nNo",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 6,
+  "chart": true
+}

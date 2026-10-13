@@ -72,6 +72,18 @@ https://asw-main-c9d6bfgzgnbydnae.eus2.grafana.azure.com/d/tictrm7/virtual-machi
   prevent overlap. No Data and failed panels have no screenshot reference.
   Treat nonzero exit status or any error entry as incomplete evidence, not a
   successful report input. Do not automatically rerun capture after failure.
+- Report generation is gated on **all panels** validating as data or No Data.
+  Do not omit populated RCA Helper or Reboot Detail panels because their table
+  captures failed. Preserve the existing report until the gate passes.
+  Logical table cells and nested headers can be visible even when their
+  `display:contents` wrapper has zero dimensions; validate the cells and fit
+  their post-render bounds. Inspect saved attempt snapshots on a timeout.
+- If the user explicitly approves text-only fallback after the queries load,
+  compare both attempt snapshots for stable row text, no query errors, and no
+  loading indicator. RCA Helper and Reboot Detail must match their full expected
+  row counts. Include the complete extracted tables and disclose screenshot
+  failures and any metadata row-count discrepancies. Preserve manifest errors;
+  do not claim the capture or its screenshots fully validated.
 
 ---
 

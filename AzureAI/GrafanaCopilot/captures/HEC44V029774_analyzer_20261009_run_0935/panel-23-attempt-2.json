@@ -1,0 +1,25 @@
+{
+  "text": "Node and TOR Placement (<60 Days)\nTimestamp\nContainer StartTime\nInstance Name\nDataCenter\nCluesterName\nNode ID\nNode IP\nTOR\nSwithcPort\nPortId\nOS\nOS Version\nFPGA Dashboard\nVM Perf Dashboard\n2026-10-13 07:39:10\n2026-10-09T09:05:18.5307807Z\nhec44v029774\nAMS08AzSet1\nAMS08PrdApp64\n476a4402-40f9-2d40-fd93-45f573554684\n100.113.243.2\nams08-0101-0835-05lt0\nEthernet2/1\nLinux_IaaS\nClick Here\nClick Here\n2026-10-09 08:53:24\n2026-08-14T08:41:22.5741347Z\nhec44v029774\nAMS08AzSet1\nAMS08PrdApp64\n549d2dc9-e827-46b0-9a1c-83f81af847a7\n100.113.243.130\nams08-0101-0835-07lt0\nEthernet2/1\nExternal_000D3A498696\nLinux_IaaS\n5.14.21\nClick Here\nClick Here",
+  "rows": [
+    {
+      "text": "Timestamp\nContainer StartTime\nInstance Name\nDataCenter\nCluesterName\nNode ID\nNode IP\nTOR\nSwithcPort\nPortId\nOS\nOS Version\nFPGA Dashboard\nVM Perf Dashboard",
+      "visible": true,
+      "clipped": true
+    },
+    {
+      "text": "2026-10-13 07:39:10\n2026-10-09T09:05:18.5307807Z\nhec44v029774\nAMS08AzSet1\nAMS08PrdApp64\n476a4402-40f9-2d40-fd93-45f573554684\n100.113.243.2\nams08-0101-0835-05lt0\nEthernet2/1\nLinux_IaaS\nClick Here\nClick Here",
+      "visible": true,
+      "clipped": true
+    },
+    {
+      "text": "2026-10-09 08:53:24\n2026-08-14T08:41:22.5741347Z\nhec44v029774\nAMS08AzSet1\nAMS08PrdApp64\n549d2dc9-e827-46b0-9a1c-83f81af847a7\n100.113.243.130\nams08-0101-0835-07lt0\nEthernet2/1\nExternal_000D3A498696\nLinux_IaaS\n5.14.21\nClick Here\nClick Here",
+      "visible": true,
+      "clipped": true
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 3,
+  "chart": true
+}

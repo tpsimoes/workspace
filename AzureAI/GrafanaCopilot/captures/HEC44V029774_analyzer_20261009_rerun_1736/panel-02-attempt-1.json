@@ -1,0 +1,45 @@
+{
+  "text": "VM Details (Features)\nSKU\nStandard_M896ixds_24_v3\nSAP Certified Sku\nNo\nRuns SAP image\nNo\nVM Pinned\nNo\nVM in PPG\nNo\nAvailability Set\nNo\nAccelerated Networking\nYes",
+  "rows": [
+    {
+      "text": "SKU\nStandard_M896ixds_24_v3",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "SAP Certified Sku\nNo",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Runs SAP image\nNo",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "VM Pinned\nNo",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "VM in PPG\nNo",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Availability Set\nNo",
+      "visible": true,
+      "clipped": false
+    },
+    {
+      "text": "Accelerated Networking\nYes",
+      "visible": true,
+      "clipped": false
+    }
+  ],
+  "loading": false,
+  "errors": [],
+  "table": true,
+  "expected_rows": 8,
+  "chart": true
+}
