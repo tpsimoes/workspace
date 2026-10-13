@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RCA Standardization Report - FY27 YTD</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #f7f4ef; --surface: #fff; --text: #242424; --muted: #5c5c5c; --border: #dedede; --accent: #b11f4b; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #343231; --surface: #292929; --text: #dedede; --muted: #b0b0b0; --border: #474747; --accent: #fd8ea1; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 "Segoe UI", sans-serif; }
+    main { max-width: 1500px; margin: auto; padding: 28px; }
+    header, details, .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    h1 { margin: 0; font-size: clamp(26px, 4vw, 42px); }
+    summary { cursor: pointer; font-size: 22px; font-weight: 600; }
+    details[open] > summary { margin-bottom: 18px; }
+    p { color: var(--muted); }
+    label { display: block; margin-bottom: 6px; font-weight: 600; }
+    select, button { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; max-width: 100%; }
+    select:focus-visible, button:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0; }
+    .card strong { display: block; font-size: 28px; color: var(--accent); }
+    .card span, .small { color: var(--muted); font-size: 13px; }
+    details { margin-top: 20px; }
+    .export { display: inline-block; margin-bottom: 16px; color: var(--accent); }
+    .export[aria-disabled="true"] { color: var(--muted); cursor: wait; }
+    .sort { padding: 0; border: 0; border-radius: 0; background: transparent; color: inherit; font-weight: 600; cursor: pointer; text-align: inherit; }
+    th[aria-sort="ascending"] .sort::after { content: " \2191"; }
+    th[aria-sort="descending"] .sort::after { content: " \2193"; }
+    .case-count { border: 0; padding: 0; border-radius: 0; color: var(--accent); cursor: pointer; text-decoration: underline dotted; }
+    .case-tooltip { position: fixed; z-index: 10; width: min(560px, calc(100vw - 24px)); max-height: min(400px, calc(100vh - 24px)); overflow: auto; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 32px #0004; }
+    .case-tooltip p { margin-top: 0; }
+    .case-tooltip a { color: var(--accent); }
+    .scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; }
+    caption { text-align: left; color: var(--muted); padding-bottom: 12px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { font-size: 13px; color: var(--muted); }
+    .num { text-align: right; white-space: nowrap; }
+    .bar { width: 130px; height: 10px; border-radius: 6px; background: var(--bg); overflow: hidden; margin-top: 5px; }
+    .bar span { display: block; background: var(--accent); height: 100%; }
+    .notice { border-left: 4px solid var(--accent); padding: 12px; background: var(--surface); }
+    .winner { color: var(--accent); font-weight: 700; }
+    [hidden] { display: none !important; }
+    footer { padding: 16px 0; color: var(--muted); font-size: 13px; }
+    @media (max-width: 700px) { main { padding: 12px; } .cards { grid-template-columns: repeat(2, 1fr); } header, details, .card { padding: 16px; } }
+    @media print { .export, .case-tooltip { display: none; } main { padding: 0; } details { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1>RCA Standardization Report</h1><p id="period">FY27 YTD | Created July 1, 2026 - June 30, 2027</p><span class="small">Engineer identities redacted; stable roster identifiers A-AM.</span></div>
+    <div><label for="manager">Manager alias</label><select id="manager" disabled><option>Loading</option></select></div>
+  </header>
+  <p id="status" class="notice" role="status" aria-live="polite">Loading report data...</p>
+  <p id="export-status" class="notice" role="status" aria-live="polite" hidden></p>
+  <div id="report" hidden>
+    <details><summary>KPI summary</summary>
+    <div class="cards" aria-live="polite">
+      <div class="card"><span>Direct engineers</span><strong id="members"></strong></div>
+      <div class="card"><span>Support tickets created</span><strong id="tickets"></strong></div>
+      <div class="card"><span>Avg DTC (days)</span><strong id="dtc"></strong><span id="dtc-count"></span></div>
+      <div class="card"><span>Avg CSAT (1-5)</span><strong id="csat"></strong><span id="csat-count"></span></div>
+    </div></details>
+    <details id="paths-section">
+      <summary>Top 10 distinct support-path pairs</summary>
+      <a class="export" id="export-paths" href="#">Export to Excel (.xlsx)</a>
+      <div class="scroll"><table><caption>The 10 most frequent pairs in this cohort, initially ordered by Avg DTC descending. Click a column to sort; missing metrics stay last.</caption><thead><tr>
+        <th data-sort="Position" aria-sort="none"><button class="sort" type="button">#</button></th>
+        <th data-sort="SapSupportPathL2" aria-sort="none"><button class="sort" type="button">SapSupportPathL2</button></th>
+        <th data-sort="SapSupportPathL3" aria-sort="none"><button class="sort" type="button">SapSupportPathL3</button></th>
+        <th class="num" data-sort="Tickets" aria-sort="none"><button class="sort" type="button">Tickets</button></th>
+        <th class="num" data-sort="AvgDTC" aria-sort="descending"><button class="sort" type="button">Avg DTC (days)</button></th>
+        <th class="num" data-sort="DTCRecords" aria-sort="none"><button class="sort" type="button">DTC records</button></th>
+        <th class="num" data-sort="AvgCSAT" aria-sort="none"><button class="sort" type="button">Avg CSAT</button></th>
+        <th class="num" data-sort="SurveysCount" aria-sort="none"><button class="sort" type="button">Surveys</button></th>
+        <th data-sort="TopEngineer" aria-sort="none"><button class="sort" type="button">Top engineer (lowest DTC)</button></th>
+      </tr></thead><tbody id="paths"></tbody></table></div>
+    </details>
+    <details>
+      <summary>Top 10 customers</summary>
+      <div class="scroll"><table><caption>Ranked by support tickets created and owned by this cohort; customer identity uses TPID and name.</caption><thead><tr><th>#</th><th>Customer</th><th>TPID</th><th class="num">Tickets</th></tr></thead><tbody id="customers"></tbody></table></div>
+    </details>
+    <details id="engineers-section">
+      <summary id="comparison-title">Engineer DTC comparison (Identities Redacted)</summary>
+      <a class="export" id="export-engineers" href="#">Export to Excel (.xlsx)</a>
+      <label id="comparison-label" for="path">Compare engineers for</label><select id="path"></select>
+      <p id="comparison-scope" class="small"></p>
+      <p class="small">Lowest average DTC ranks first. Only closed tickets with a valid, non-negative DTC contribute. Hover, focus, or click a DTC record count to inspect case IDs and DTC values; click a case ID to open its source-provided DFM link in a new tab. Rows with zero tickets are hidden; rows with tickets but no valid DTC remain unranked. No minimum sample threshold is applied; inspect DTC record counts before drawing conclusions.</p>
+      <div class="scroll"><table><thead><tr><th>Rank</th><th id="comparison-identity">Engineer (Identities Redacted)</th><th class="num">Tickets</th><th class="num">Avg DTC (days)</th><th>DTC comparison</th><th class="num">DTC records</th><th class="num">Avg CSAT</th><th class="num">Surveys</th></tr></thead><tbody id="engineers"></tbody></table></div>
+    </details>
+    <details><summary>Source and methodology</summary>
+    <footer id="provenance"></footer>
+    <footer>Support-path categories identify recurring scenarios, not verified root causes. Blank paths and customers are shown as unknown. Metrics use sums and valid-record counts, never an unweighted average of engineer averages. Missing or masked CSAT is No data, not zero. Engineer labels are fixed across manager and path filters; ties in DTC share a rank.</footer>
+    </details>
+  </div>
+</main>
+<div id="dtc-tooltip" class="case-tooltip" role="region" aria-label="DTC cases" tabindex="0" hidden></div>
+<script src="vendor/exceljs.min.js"></script>
+<script src="rca_standardization_FY27.data.js"></script>
+<script src="rca_standardization.js"></script>
+</body>
+</html>

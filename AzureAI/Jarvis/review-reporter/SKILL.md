@@ -1,9 +1,28 @@
 ---
 name: review-reporter
-description: "準備 Monthly Review Meeting 所需的報告內容：KPI 數據收集（CSAT、IR、Case Volume、Day to Close）、Highlight / Lowlight 整理、Customer Support Story、Executive Escalation 摘要。當用戶提到「monthly review」「月報」「KPI」「CSAT」「highlight lowlight」「executive escalation」「向主管報告」時觸發。"
+description: "準備 Monthly Review Meeting 所需的報告內容：KPI 數據收集（CSAT、IR、Case Volume、Day to Close）、Highlight / Lowlight 整理、Customer Support Story、Executive Escalation 摘要。當用戶提到「monthly review」「月報」「KPI」「CSAT」「highlight lowlight」「executive escalation」「向主管報告」時觸發。Also supports RCA Standardization Reports, manager/directs DTC comparisons, anonymized engineer comparisons, top support paths, and top customers."
 ---
 
 # Skill: Review Reporter
+
+## Report options and request routing
+
+Offer these options when the user requests a report without specifying its type:
+
+| Option | Purpose | Workflow |
+|--------|---------|----------|
+| Monthly Review / MOR | Monthly KPI summary, highlights/lowlights, support stories, and escalations | Monthly Review structure and dashboard collection workflow below |
+| CPE Insight | Survey cases, CSAT, and customer verbatim | CPE Insight section |
+| IR Missing Insight | Initial-response missed cases | IR Missing Insight section |
+| SE Members Performance | Engineer case-performance metrics | SE Members Performance section |
+| US / Costa Rica Engineer KPI Comparison | Country/cohort and fiscal-year comparison with engineer drill-down | US / Costa Rica comparison sections |
+| **RCA Standardization Report** | Manager/directs support-path and customer analysis, anonymized engineer DTC comparison, and aggregated manager comparison for `All` | [RCA Standardization Report](#rca-standardization-report) |
+
+- If the user already names a report, select it directly; do not ask them to choose again.
+- Route requests for "RCA report", "RCA standardization", manager/directs DTC comparisons, or redacted engineer support-path comparisons to **RCA Standardization Report**.
+- RCA Standardization is a standalone report option, not a required MOR tab. Use its existing local HTML/JS/KQL refresh workflow; do not collect unrelated MOR dashboard or Cowork data.
+- For RCA requests, use the ASW Engineers roster and manager dropdown, including `All`. Preserve the documented redaction, weighted aggregation, collapsed sections, sorting, source DFM links, and `.xlsx` exports.
+- Confirm the reporting period if it is unspecified. The existing implementation is FY27 YTD; do not relabel that snapshot as another fiscal year without updating the query, date range, and output metadata.
 
 ## 報告結構
 
@@ -334,7 +353,6 @@ MOR 各資料源採用不同的取得方式，職責明確劃分：
 | 9 | Post IR Transfer % | low | 當月 % - 上月 % |
 
 
-
 #### Business Analysis 規則
 
 Business Analysis 區塊位於 **Executive Summary Cards 與 Dashboard 1 表格之間**，以 Business Owner 視角提供 KPI 洞察。
@@ -397,12 +415,12 @@ Business Analysis 區塊位於 **Executive Summary Cards 與 Dashboard 1 表格�
 
 ```kql
 let ASWNames = cluster('bedrock.eastus.kusto.windows.net').database("CSI").ASWStakeholder
-| where Role == "Engineer" | where BusinessUnit == "CSS-ASW"
+| where Role == "Engineer" | where BusinessUnit == "CSS-ASW" | where IsEnable == 'True'
 | project AgentAlias, AgentName;
 AllCloudsSupportIncidentWithReferenceModelVNext
 | where CreatedDateTime >= datetime(_fy_start) and CreatedDateTime < datetime(_fy_end)
 | where AgentAlias in (ASWNames | project AgentAlias)
-| where AgentAlias !in ('zhaobo') // 已離開 ASW 的成員排除
+| where AgentAlias !in ('zhaobo','wessm','priyakumar','nmutya','francescav','joaguas','rtjoanda','','') // 已離開 ASW 的成員排除
 | where isnotempty(TotalCustomerSATScore)
 | lookup ASWNames on AgentAlias
 | project IncidentId, Customer_TPName, ServiceName, ClosedDateTime, TotalCustomerSATScore, SurveyVerbatims, CreatedDateTime, AgentAlias, AgentName, Customer_TPID, RegionName
@@ -612,6 +630,71 @@ CaseSummary
   - Team Avg DTC（團隊平均 DTC）
   - Total IR SLA Missed（全團隊未達 IR SLA 件數）
   - Team % Closed ≤7d（全團隊 7 天內結案率）
+
+#### ASW Engineers
+
+| #  | Engineer Alias | Manager Alias |
+|:--:|:--------------:|:-------------:|
+| A  |     dantes     |     noambi    |
+| B  |    frcardos    |     noambi    |
+| C  |    gapetres    |     noambi    |
+| D  |    joacarva    |     noambi    |
+| E  |    joaguas     |     noambi    |
+| F  |    jogoncal    |     noambi    |
+| G  |   landreazzi   |     noambi    |
+| H  |    pedmarqu    |     noambi    |
+| I  |   rubensousa   |     noambi    |
+| J  |  tiagosimoes   |     noambi    |
+| K  |    alkassap    |     bjames    |
+| L  |     anrod      |     bjames    |
+| M  |     brwurz     |     bjames    |
+| N  |   cschriever   |     bjames    |
+| O  |    diambroi    |     bjames    |
+| P  |   ejohnston    |     bjames    |
+| Q  |    ivayala     |     bjames    |
+| R  |    shaddala    |     bjames    |
+| S  |    shjoyce     |     bjames    |
+| T  |      sish      |     bjames    |
+| U  |   tholliday    |     bjames    |
+| V  |  andreikovacs  |     jacobw    |
+| W  |    aneculae    |     jacobw    |
+| X  |    jakelin     |     jacobw    |
+| Y  |    shussein    |     jacobw    |
+| Z  |     takin      |     jacobw    |
+| AA |  tiberiuvlad   |     jacobw    |
+| AB |    alveleri    |    nasaggu    |
+| AC |  ayonbanerjee  |    nasaggu    |
+| AD |    chmarri     |    nasaggu    |
+| AE |    fmirdhe     |    nasaggu    |
+| AF |    ldondeti    |    nasaggu    |
+| AG |    niljain     |    nasaggu    |
+| AH |  npericherla   |    nasaggu    |
+| AI |     padias     |    nasaggu    |
+| AJ |    saadury     |    nasaggu    |
+| AK |   vjanapati    |    nasaggu    |
+| AL |  kiranchinta   |     dhanat    |
+| AM |    jiedong     |     xinxia    |
+
+#### RCA Standardization Report
+
+- Output: `rca_standardization_FY27.html`, with `rca_standardization.js`, the generated `rca_standardization_FY27.data.js`, and `vendor/exceljs.min.js` in the same report folder. Open locally in a browser; no server or runtime CDN/network dependency is required. ExcelJS 4.4.0 and its MIT license are bundled locally; rebuild the vendor bundle with `npm ci` then `npm run vendor`.
+- Refresh: run `.\refresh_rca_standardization.ps1` after signing in to Azure CLI with access to both source databases. The script runs `rca_standardization_FY27.kql`, rejects partial query failures, and preserves the last successful export on query failure.
+- Period: FY27 created tickets, `2026-07-01 <= CreatedDateTime < 2027-07-01`. This is a point-in-time YTD snapshot, not an automatic live connection.
+- Manager alias dropdown: `All`, `noambi`, `bjames`, `jacobw`, `nasaggu`, `dhanat`, `xinxia`. Default: `noambi`. Every report section is recomputed for the chosen scope; `All` ranks the combined cohort, not a concatenation of each manager's top 10.
+- Cohort: use the ASW Engineers table above, including the explicit user-provided directs. Do not apply unrelated departures/exclusion lists to this report. Ownership uses the current incident owner, with the latest FY27 CSI snapshot as replacement when `AgentAlias` is unavailable. Select the latest snapshot before filtering its owner to the roster.
+- Count each nonempty `IncidentId` once using the latest `ModifiedDateTime` record. Counts describe tickets owned by the cohort, not who submitted the ticket or historical engineer assignments.
+- All report sections (KPI summary, support paths, customers, engineer comparison, and source/methodology) start collapsed. Use native, keyboard-accessible `details` / `summary` controls. Changing filters must preserve the user's expanded/collapsed sections.
+- Top 10 support paths: group by the distinct pair `[SapSupportPathL2, SapSupportPathL3]`, select the 10 highest ticket counts, break count ties by L2 then L3. Display those same 10 pairs by unrounded Avg DTC descending initially; missing values stay last. Every column is sortable in both directions, with an `aria-sort` indicator. The `#` column is the initial DTC-descending position and stays stable when sorting. Manager changes reset the default sort; column sorting must not change the comparison dropdown selection or its path membership. Include ticket count, Avg DTC, valid DTC records, Avg CSAT, survey records, and the top engineer for that pair. Blank paths remain visible as `Unknown / not classified`.
+- Top 10 customers: group by `Customer_TPID` plus `Customer_TPName`, rank by ticket count descending, then name/TPID for deterministic ties. Missing customer names display `Unknown / not available`.
+- DTC: `todouble(DTC)` on closed tickets (`ClosedDateTime` present), excluding missing, nonnumeric, or negative values. Compute averages from sum / valid-record count; display one decimal day.
+- CSAT: follow the requested average of `TotalCustomerSATScore`, including only valid 1-5 scores; display two decimals. Missing or masked survey fields display `No data`, never zero. `SurveysCount` counts valid scored ticket records, not all survey events.
+- Comparison: for a specific manager, title the section `Engineer DTC comparison (Identities Redacted)` and show one row per engineer with tickets. For `All`, title it `Manager DTC comparison (Aggregated)` and show one row per manager, aggregating its directs using sums / valid-record counts. Never average engineer averages. Apply this behavior across all paths and each selected top-10 path pair. Hide zero-ticket rows in the UI and Excel exports; keep rows with tickets but no valid DTC, unranked. Rank by lowest unrounded Avg DTC; exact ties share a rank. No minimum sample threshold is imposed; always show DTC record counts. Zero-ticket engineers still count in roster membership summary cards.
+- Hover, focus, or click a comparison DTC record count to show all contributing case IDs and DTC values. A manager row includes all its directs; an engineer row includes only that engineer. Apply both path levels when a path is selected. Retrieve `CaseUri` alongside the deduplicated incident, never construct a DFM URL from the numeric case ID. Each ID links to its source-provided HTTPS `onesupport.crm.dynamics.com` URL in a new tab with `noopener noreferrer`; missing/invalid links explicitly display `DFM link unavailable`. Zero DTC records explicitly show no cases. Escape dismisses the popup; it remains open while hovered or focused. Case lists use the same closed/valid/non-negative DTC predicate as the averages. Refresh rejects incomplete case-list counts; missing/inconsistent details are an explicit error.
+- Excel export links create genuine `.xlsx` workbooks locally, honoring current manager/path filters and displayed order. Support-path exports include the sorted top 10; comparison exports include positive-ticket engineer rows or aggregated manager rows for `All`, plus a separate `DTC cases` worksheet. Case IDs remain text, with source DFM hyperlinks when available and an explicit cell note when unavailable. Include report period, filter selection, provenance, and definitions. Averages use guarded formulas, valid denominators, and cached results; missing metrics remain `No data`. Display one decimal for DTC, two for CSAT, and use Calibri throughout.
+- Redaction: use the stable `#` labels from the ASW Engineers table (`Engineer A` through `Engineer AM`) in tables, charts, and exports. Never reassign labels by ranking or manager. For Noam (`noambi`), `dantes` always displays as `Engineer A`; if its DTC is lowest for the Linux VM restart/stop pair, show `Engineer A` as the top engineer. All equally lowest engineers are shown for ties.
+- The exported report data must contain only anonymized engineer labels, never engineer aliases or names. DTC drill-down and engineer workbooks now include internal support case IDs; share the report bundle and exports only with authorized recipients. The local KQL roster is a maintenance input, not part of the shareable report bundle.
+- Interpret path categories as recurring support scenarios, not validated root causes. State source, period, refresh timestamp, ownership semantics, missing metrics, and denominator rules in the report.
+- Verification: `npm test`, then check collapsed sections, manager/path filters, all column sorts, hover/focus case lists, and both Excel downloads in a browser. Tests include real-data case-count/sum parity and workbook serialization/reload with cached formula results, no-data rows, zero DTC, filter scope, sort order, and string case IDs.
 
 #### US / Costa Rica cohort 與 FY 比較規範
 
@@ -1310,6 +1393,10 @@ function switchTab(tabId) {
 ---
 
 ## 工作流程
+
+### Step 0 — Select the report option
+
+Use [Report options and request routing](#report-options-and-request-routing) before collecting data. If RCA Standardization is selected, follow [RCA Standardization Report](#rca-standardization-report) and its refresh/verification instructions instead of the MOR-only steps below. For other standalone reports, follow their corresponding sections; apply the full monthly-review workflow only when producing MOR.
 
 ### Step 1 — 數據收集
 

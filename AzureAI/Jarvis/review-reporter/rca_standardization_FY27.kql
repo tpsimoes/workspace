@@ -1,0 +1,122 @@
+let fy_start = datetime(2026-07-01);
+let fy_end = datetime(2027-07-01);
+let Roster = datatable(AgentAlias:string, ManagerAlias:string, Engineer:string)
+[
+    "dantes", "noambi", "Engineer A",
+    "frcardos", "noambi", "Engineer B",
+    "gapetres", "noambi", "Engineer C",
+    "joacarva", "noambi", "Engineer D",
+    "joaguas", "noambi", "Engineer E",
+    "jogoncal", "noambi", "Engineer F",
+    "landreazzi", "noambi", "Engineer G",
+    "pedmarqu", "noambi", "Engineer H",
+    "rubensousa", "noambi", "Engineer I",
+    "tiagosimoes", "noambi", "Engineer J",
+    "alkassap", "bjames", "Engineer K",
+    "anrod", "bjames", "Engineer L",
+    "brwurz", "bjames", "Engineer M",
+    "cschriever", "bjames", "Engineer N",
+    "diambroi", "bjames", "Engineer O",
+    "ejohnston", "bjames", "Engineer P",
+    "ivayala", "bjames", "Engineer Q",
+    "shaddala", "bjames", "Engineer R",
+    "shjoyce", "bjames", "Engineer S",
+    "sish", "bjames", "Engineer T",
+    "tholliday", "bjames", "Engineer U",
+    "andreikovacs", "jacobw", "Engineer V",
+    "aneculae", "jacobw", "Engineer W",
+    "jakelin", "jacobw", "Engineer X",
+    "shussein", "jacobw", "Engineer Y",
+    "takin", "jacobw", "Engineer Z",
+    "tiberiuvlad", "jacobw", "Engineer AA",
+    "alveleri", "nasaggu", "Engineer AB",
+    "ayonbanerjee", "nasaggu", "Engineer AC",
+    "chmarri", "nasaggu", "Engineer AD",
+    "fmirdhe", "nasaggu", "Engineer AE",
+    "ldondeti", "nasaggu", "Engineer AF",
+    "niljain", "nasaggu", "Engineer AG",
+    "npericherla", "nasaggu", "Engineer AH",
+    "padias", "nasaggu", "Engineer AI",
+    "saadury", "nasaggu", "Engineer AJ",
+    "vjanapati", "nasaggu", "Engineer AK",
+    "kiranchinta", "dhanat", "Engineer AL",
+    "jiedong", "xinxia", "Engineer AM"
+];
+let Owners = materialize(
+    cluster("bedrock.eastus.kusto.windows.net").database("CSI").SupportRequestHistory_Snapshot_Table3
+    | where todatetime(CreatedDateTime_UTC) >= fy_start and todatetime(CreatedDateTime_UTC) < fy_end
+    | where isnotempty(IncidentId)
+    | summarize arg_max(dataRefreshDateTime, CaseOwner) by IncidentId
+    | project IncidentId, SnapshotOwner = tolower(CaseOwner)
+    | where SnapshotOwner in (Roster | project AgentAlias)
+);
+let Cases = materialize(
+    cluster("supportrptwus3prod.westus3.kusto.windows.net").database("KPISupportData").AllCloudsSupportIncidentWithReferenceModelVNext
+    | where CreatedDateTime >= fy_start and CreatedDateTime < fy_end
+    | where isnotempty(IncidentId)
+    | where IncidentId in (Owners | project IncidentId) or tolower(AgentAlias) in (Roster | project AgentAlias)
+    | project IncidentId, CaseUri, ModifiedDateTime, AgentAlias, SapSupportPathL2, SapSupportPathL3,
+              Customer_TPID, Customer_TPName, ClosedDateTime, DTC, TotalCustomerSATScore
+    | summarize arg_max(ModifiedDateTime, *) by IncidentId
+    | lookup kind=leftouter Owners on IncidentId
+    | extend AgentAlias = tolower(iff(isnotempty(AgentAlias), AgentAlias, SnapshotOwner))
+    | lookup kind=inner Roster on AgentAlias
+    | extend DTCValue = iff(isnotnull(ClosedDateTime) and todouble(DTC) >= 0, todouble(DTC), real(null)),
+             CSATValue = iff(TotalCustomerSATScore between (1 .. 5), todouble(TotalCustomerSATScore), real(null)),
+             Customer = iff(isempty(Customer_TPName), "Unknown / not available", Customer_TPName)
+    | project IncidentId, CaseUri, ManagerAlias, Engineer, SapSupportPathL2, SapSupportPathL3, Customer_TPID, Customer, DTCValue, CSATValue
+);
+let Scoped = materialize(
+    union (Cases | extend Scope = ManagerAlias), (Cases | extend Scope = "All")
+);
+let Paths = materialize(
+    Scoped
+    | summarize Tickets=count(), DTCSum=sum(DTCValue), DTCRecords=countif(isnotnull(DTCValue)),
+                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue))
+      by Scope, SapSupportPathL2, SapSupportPathL3
+    | partition hint.strategy=native by Scope
+      (sort by Tickets desc, SapSupportPathL2 asc, SapSupportPathL3 asc | take 10)
+    | extend Kind = "Path"
+);
+let Customers =
+    Scoped
+    | summarize Tickets=count() by Scope, Customer_TPID, Customer
+    | partition hint.strategy=native by Scope
+      (sort by Tickets desc, Customer asc, Customer_TPID asc | take 10)
+    | extend Kind = "Customer";
+let Engineers =
+    Scoped
+    | summarize Tickets=count(), DTCSum=sum(DTCValue), DTCRecords=countif(isnotnull(DTCValue)),
+                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue))
+      by Scope, Engineer
+    | extend Kind = "Engineer";
+let PathEngineers =
+    Scoped
+    | join kind=inner (Paths | project Scope, SapSupportPathL2, SapSupportPathL3)
+      on Scope, SapSupportPathL2, SapSupportPathL3
+    | summarize Tickets=count(), DTCSum=sum(DTCValue), DTCRecords=countif(isnotnull(DTCValue)),
+                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue))
+      by Scope, Engineer, SapSupportPathL2, SapSupportPathL3
+    | extend Kind = "PathEngineer";
+let Results = union Paths, Customers, Engineers, PathEngineers;
+let Cohort = toscalar(Roster | project Scope=ManagerAlias, Engineer | summarize Rows=make_list(pack_all()) | project Rows);
+let DTCCases = toscalar(
+    Cases
+    | where isnotnull(DTCValue)
+    | project Scope=ManagerAlias, Engineer, IncidentId, CaseUri, SapSupportPathL2, SapSupportPathL3, DTCValue
+    | summarize Rows=make_list(pack_all())
+    | project Rows
+);
+Results
+| summarize Rows=make_list(pack_all())
+| project Payload=bag_pack(
+    "title", "RCA Standardization Report",
+    "period", "FY27 YTD",
+    "start", fy_start,
+    "endExclusive", fy_end,
+    "generatedAt", now(),
+    "ownership", "Incident owner; FY27 latest ownership snapshot used when the source owner is unavailable",
+    "cohort", Cohort,
+    "rows", Rows,
+    "dtcCases", DTCCases
+)
