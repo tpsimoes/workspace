@@ -1,6 +1,6 @@
 ---
 name: review-reporter
-description: "準備 Monthly Review Meeting 所需的報告內容：KPI 數據收集（CSAT、IR、Case Volume、Day to Close）、Highlight / Lowlight 整理、Customer Support Story、Executive Escalation 摘要。當用戶提到「monthly review」「月報」「KPI」「CSAT」「highlight lowlight」「executive escalation」「向主管報告」時觸發。Also supports RCA Standardization Reports, manager/directs DTC comparisons, anonymized engineer comparisons, top support paths, and top customers."
+description: "Prepare report content for Monthly Review Meetings: collect KPI data (CSAT, IR, Case Volume, Day to Close), organize highlights/lowlights, Customer Support Stories, and Executive Escalation summaries. Trigger when users mention “monthly review,” “monthly report,” “KPI,” “CSAT,” “highlight lowlight,” “executive escalation,” or “reporting to leadership.” Also supports RCA Standardization Reports, manager/directs DTC comparisons, anonymized engineer comparisons, top support paths, and top customers."
 ---
 
 # Skill: Review Reporter
@@ -24,230 +24,230 @@ Offer these options when the user requests a report without specifying its type:
 - For RCA requests, use the ASW Engineers roster and manager dropdown, including `All`. Preserve the documented redaction, weighted aggregation, collapsed sections, sorting, source DFM links, and `.xlsx` exports.
 - Confirm the reporting period if it is unspecified. The existing implementation is FY27 YTD; do not relabel that snapshot as another fiscal year without updating the query, date range, and output metadata.
 
-## 報告結構
+## Report Structure
 
-Monthly Review 報告包含以下區塊：
+The Monthly Review report contains the following sections:
 
 ### 1. KPI Dashboard Summary
 
-> **執行順序**：(1) Filter 驗證 → (2) 等待 Data Refresh → (3) 資料擷取。三步驟必須依序完成，不可跳步。若 Dashboard 無法存取，通知用戶並詢問是否使用上次匯出的資料。
+> **Execution order**: (1) Validate filters → (2) Wait for data refresh → (3) Extract data. Complete all three steps in order; do not skip any. If the dashboard is inaccessible, notify the user and ask whether to use the last exported data.
 
-需收集的指標：
+Metrics to collect:
 
-| KPI | 說明 | 來源 |
+| KPI | Description | Source |
 |-----|------|------|
-| CSAT | 客戶滿意度評分 | Survey Dashboard |
-| IR (Initial Response) | 首次回應時間 | Case Management System |
-| Case Volume | 案件數量（開 / 關 / 進行中） | Case Management System |
-| Day to Close | 平均結案天數 | Case Management System |
-| Backlog | 待處理案件數 | Case Management System |
+| CSAT | Customer satisfaction score | Survey Dashboard |
+| IR (Initial Response) | Initial response time | Case Management System |
+| Case Volume | Case count (open / closed / in progress) | Case Management System |
+| Day to Close | Average number of days to close | Case Management System |
+| Backlog | Number of pending cases | Case Management System |
 
-產出格式：表格 + 月趨勢（與上月對比 ↑↓）
+Output format: table + monthly trend (compared with the previous month ↑↓)
 
 ### 2. Highlight / Lowlight
 
-**Highlight**（本月亮點）：
-- 重大客戶問題成功解決
-- 團隊成員突出表現
-- 流程改善成果
-- 跨團隊協作成功案例
+**Highlights** (this month's achievements):
+- Successful resolution of a major customer issue
+- Outstanding performance by team members
+- Process improvement results
+- Successful cross-team collaboration
 
-**Lowlight**（需關注事項）：
-- KPI 未達標項目及原因分析
-- 人力 / 資源瓶頸
-- 需主管協助排除的障礙
+**Lowlights** (items requiring attention):
+- KPIs that missed their targets and analysis of the reasons
+- Staffing / resource bottlenecks
+- Obstacles that require leadership assistance to remove
 
 ### 3. Customer Support Story
 
-- 挑選本月最具代表性的 1-2 個支援案例
-- 結構：問題背景 → 挑戰 → 行動 → 結果 → 客戶回饋
+- Select 1–2 of the month's most representative support cases
+- Structure: issue context → challenge → action → outcome → customer feedback
 
 ### 4. Executive Escalation
 
-若本月有 Executive Escalation，需特別報告：
-- 案例摘要（客戶、問題、影響範圍）
-- 當前狀態 / 解決方案
+If there was an Executive Escalation this month, report it separately:
+- Case summary (customer, issue, and scope of impact)
+- Current status / resolution
 - Lessons Learned
 
 ---
 
-## Dashboard 資料收集規範
+## Dashboard Data Collection Guidelines
 
-### 資料取得方式（Method Selection）
+### Data Acquisition Methods (Method Selection)
 
-MOR 各資料源採用不同的取得方式，職責明確劃分：
+MOR data sources use different acquisition methods, with clearly defined responsibilities:
 
-| # | 資料源 | 用途 | 取得方式 | 執行者 |
+| # | Data source | Purpose | Acquisition method | Executor |
 |---|--------|------|---------|--------|
-| 1 | **Commercial Insights+ V2 Semantic Model** | 19 KPI（Dashboard 1：Quality + Operational Metrics） | Cowork `asw-team-kpi-monthly` skill 透過 Fabric AI Hub MCP 執行 DAX | **Cowork** |
-| 2 | **Commercial Insights+ V2**（IR Missed subset） | IR Missing 案件明細（含 Time to IR、Verbatim、SE Manager） | Cowork `asw-team-kpi-monthly` skill 的 IR Missed pattern | **Cowork** |
-| 3 | **OpEx Overall PCY Level A&I+DTP**（Power BI msit） | 5 個 OpEx Metrics（Case Assignment / Backlog） | Playwright + 外部 Edge（本 SKILL Step 1B） | **本 Agent** |
-| 4 | **Kusto — CPE Survey** | CPE Insight 資料（CSAT、Verbatim、AgentName） | Kusto MCP（`mcp_kusto_kusto_query`） | **本 Agent** |
+| 1 | **Commercial Insights+ V2 Semantic Model** | 19 KPIs (Dashboard 1: Quality + Operational Metrics) | Cowork `asw-team-kpi-monthly` skill runs DAX through Fabric AI Hub MCP | **Cowork** |
+| 2 | **Commercial Insights+ V2** (IR Missed subset) | IR Missing case details (including Time to IR, Verbatim, SE Manager) | IR Missed pattern in Cowork `asw-team-kpi-monthly` skill | **Cowork** |
+| 3 | **OpEx Overall PCY Level A&I+DTP** (Power BI msit) | 5 OpEx metrics (Case Assignment / Backlog) | Playwright + external Edge (this SKILL, Step 1B) | **This Agent** |
+| 4 | **Kusto — CPE Survey** | CPE Insight data (CSAT, Verbatim, AgentName) | Kusto MCP (`mcp_kusto_kusto_query`) | **This Agent** |
 
-> **為何 Dashboard 1 / IR Missing 交給 Cowork**：`Commercial Insights+ V2 Dataset` 位於 `CESBIDataset_Commercial_PROD` workspace，個人 `az login` identity（`jacobw@microsoft.com`）目前無 Build permission，直接呼叫 Power BI REST API `executeQueries` 會回 `PowerBIEntityNotFound`。Cowork 的 `pbi_fabricaihub` MCP 使用特權服務主體，可跨租戶讀取，執行速度 30–60 秒（相對 Playwright 10–15 分鐘）。若未來個人取得 Build permission、或 VS Code Copilot 接入 Fabric AI Hub MCP，可再考慮把 Cowork 的角色收回本 Agent。
+> **Why Dashboard 1 / IR Missing are assigned to Cowork**: The `Commercial Insights+ V2 Dataset` is in the `CESBIDataset_Commercial_PROD` workspace, where the personal `az login` identity (`jacobw@microsoft.com`) currently lacks Build permission. Direct calls to the Power BI REST API `executeQueries` return `PowerBIEntityNotFound`. Cowork's `pbi_fabricaihub` MCP uses a privileged service principal and can read across tenants; execution takes 30–60 seconds (compared with 10–15 minutes using Playwright). If personal Build permission is granted in the future, or VS Code Copilot gains access to Fabric AI Hub MCP, consider moving Cowork's role back to this Agent.
 
 ---
 
-### 方式 A：Cowork 資料匯入（Dashboard 1 + IR Missing）
+### Method A: Cowork Data Import (Dashboard 1 + IR Missing)
 
-**執行流程**（每次 MOR 前置作業）：
+**Procedure** (preparation before each MOR):
 
-1. 在 Cowork 執行以下兩個指令（由用戶操作）：
+1. In Cowork, run the following two commands (performed by the user):
    ```
-   Cowork > 執行 asw-team-kpi-monthly，FY<current>，輸出 KPI by Month
-   Cowork > 執行 asw-team-kpi-monthly，FY<current>，輸出 IR Missed cases
+   Cowork > Run asw-team-kpi-monthly for FY<current>, export KPI by Month
+   Cowork > Run asw-team-kpi-monthly for FY<current>, export IR Missed cases
    ```
-2. Cowork 產出的 `.xlsx` + 對應 `.json`（若有）**由用戶複製到** `C:\GitHubCopilot\IronMan\Output\Cowork\`
-3. 本 Agent 讀取該資料夾內最新檔案，直接組成報告；**不需再開啟 Dashboard 1 / IR Missed Reasons Dashboard**
+2. The user **copies** the `.xlsx` files produced by Cowork and any corresponding `.json` files **to** `C:\GitHubCopilot\IronMan\Output\Cowork\`
+3. This Agent reads the latest files in that folder and assembles the report; **there is no need to reopen Dashboard 1 / IR Missed Reasons Dashboard**
 
-**檔案落地契約（Cowork Intake Contract）**：
+**File Placement Contract (Cowork Intake Contract)**:
 
-| 檔名（Glob） | 內容 | 讀取方式 |
+| Filename (Glob) | Contents | Read method |
 |--------------|------|---------|
-| `Output/Cowork/asw_kpi_by_month_FY*.xlsx` | 單一 sheet `KPI by Month`，19 個 KPI 欄位 + 每 FM 一列 | `openpyxl` / `pandas.read_excel` |
-| `Output/Cowork/asw_kpi_by_month_FY*.json`（optional） | Cowork DAX runner 原始輸出（`meta` + `rows`） | `json.load` |
-| `Output/Cowork/asw_ir_missed_FY*.xlsx` | 4 sheets：`FY<NN> IR Missed`、`By Customer`、`By Owner`、`By Severity` | `openpyxl` / `pandas.read_excel` |
-| `Output/Cowork/asw_ir_missed_FY*.json`（optional） | 3-query merged JSON（dims + verbatim + owner_manager map） | `json.load` |
+| `Output/Cowork/asw_kpi_by_month_FY*.xlsx` | One sheet, `KPI by Month`, with 19 KPI columns and one row per FM | `openpyxl` / `pandas.read_excel` |
+| `Output/Cowork/asw_kpi_by_month_FY*.json` (optional) | Raw output from the Cowork DAX runner (`meta` + `rows`) | `json.load` |
+| `Output/Cowork/asw_ir_missed_FY*.xlsx` | 4 sheets: `FY<NN> IR Missed`, `By Customer`, `By Owner`, `By Severity` | `openpyxl` / `pandas.read_excel` |
+| `Output/Cowork/asw_ir_missed_FY*.json` (optional) | Three-query merged JSON (dims + verbatim + owner_manager map) | `json.load` |
 
-**選檔規則**：同一 FY 若有多個時間戳版本，**取檔名字典序最大者**（Cowork 檔名慣例通常帶 `_YYYYMMDD`）；若 xlsx 與 json 並存，優先讀 xlsx（欄位語意經 Cowork 標準化）。
+**File selection rule**: If multiple timestamped versions exist for the same FY, **select the filename that sorts last lexicographically** (Cowork filenames typically include `_YYYYMMDD`). If both an xlsx and json exist, prefer the xlsx (Cowork standardizes the column semantics).
 
-**Sheet / 欄位對應**：
+**Sheet / Column Mapping**:
 
-*`KPI by Month` 表* → 直接對到 SKILL 中「Dashboard 1 — Quality Metrics 表格」+「Operational Metrics 表格」，欄位順序與命名已在 Cowork skill 定義完成（見 Cowork `asw-team-kpi-monthly` SKILL 的 19 KPI 表）；本 Agent 不需重新映射，只需依照當前 FY 由 Jul 起讀取直到最新有值的月份。
+*`KPI by Month` sheet* → Maps directly to the “Dashboard 1 — Quality Metrics table” + “Operational Metrics table” in this SKILL. Column order and names are defined in the Cowork skill (see the 19-KPI table in Cowork `asw-team-kpi-monthly` SKILL); this Agent does not need to remap them. Read from Jul in the current FY through the latest month with data.
 
-*`FY<NN> IR Missed` 表*（12 欄）：`SR ID | Customer | Service | SR Owner | SE Manager | Initial Severity | Region | Created Date | Closed Date | Time to IR (mins) | CSAT | Verbatim`
+*`FY<NN> IR Missed` sheet* (12 columns): `SR ID | Customer | Service | SR Owner | SE Manager | Initial Severity | Region | Created Date | Closed Date | Time to IR (mins) | CSAT | Verbatim`
 
-| SKILL 中 HTML 欄位 | Cowork 欄位 | 備註 |
+| HTML field in SKILL | Cowork field | Notes |
 |-------------------|-------------|------|
-| Case ID | `SR ID` | 以 TEXT 保存 16 位數字 |
-| Customer | `Customer` | 已為 Top Parent Organization Name |
+| Case ID | `SR ID` | Store the 16-digit value as TEXT |
+| Customer | `Customer` | Already the Top Parent Organization Name |
 | Service | `Service` | Service Offering Master name |
-| SE Manager | `SE Manager` | Cowork 已完成 owner alias → manager email 查詢 |
-| Created | `Created Date` | 顯示 `yyyy-mm-dd` |
-| Closed | `Closed Date` | 同上 |
-| Initial Severity | `Initial Severity` | `A`/`B`/`C`（Sev A 紅色加粗） |
-| TTMS (mins) | `Time to IR (mins)` | **注意語意**：此為總分鐘數，非 over-SLA；顯示時附註 `data as reported by Power BI` |
+| SE Manager | `SE Manager` | Cowork has resolved the owner alias to the manager email |
+| Created | `Created Date` | Display as `yyyy-mm-dd` |
+| Closed | `Closed Date` | Same as above |
+| Initial Severity | `Initial Severity` | `A`/`B`/`C` (Sev A in bold red) |
+| TTMS (mins) | `Time to IR (mins)` | **Semantic note**: total minutes, not over-SLA; append `data as reported by Power BI` when displaying |
 | Region | `Region` | Customer Region |
 
-> **重要語意提醒**：Cowork 產出的 `Time to IR (mins)` 就是原 SKILL 沿用的 `TTMS` 欄位語意（Time To Meet SLA 分鐘數），但 Semantic Model 沒有 SLA target 資料，因此此值**是原始 IR 分鐘數，非「超過 SLA 的分鐘數」**。IR Missing Insight 頁面 Footer 需附註：`Time to IR reflects total minutes to initial response; SLA overage cannot be computed from the source model.`
+> **Important semantic note**: Cowork's `Time to IR (mins)` has the same meaning as the `TTMS` field used by the original SKILL (Time To Meet SLA in minutes), but the Semantic Model has no SLA target data. Therefore, this value **is the raw IR time in minutes, not the number of minutes over SLA**. Add this note to the IR Missing Insight page footer: `Time to IR reflects total minutes to initial response; SLA overage cannot be computed from the source model.`
 
-**Fallback 觸發條件**：
+**Fallback conditions**:
 
-當任一情況發生時，改走方式 B（Playwright）：
+Switch to Method B (Playwright) if any of the following occurs:
 
-1. `Output/Cowork/asw_kpi_by_month_FY*.xlsx` 不存在或超過 30 天
-2. Cowork 檔案存在但 KPI 欄位缺失（例：新增 KPI 未同步、欄名不符）
-3. 用戶指示「重新從 Dashboard 拉」
+1. `Output/Cowork/asw_kpi_by_month_FY*.xlsx` is missing or more than 30 days old
+2. The Cowork file exists but is missing KPI columns (for example, a new KPI was not synchronized or a column name does not match)
+3. The user requests that data be pulled again from the dashboard
 
 ---
 
-### 方式 B（Fallback）：Playwright + CES BI Hub
+### Method B (Fallback): Playwright + CES BI Hub
 
-> **何時使用**：Cowork 資料不可用時。以下所有 Filter 驗證、Iframe 操作、2 分鐘等待步驟**只有在採用方式 B 時**才需執行；使用方式 A 時可**完全略過**。
+> **When to use**: When Cowork data is unavailable. Perform all filter validation, iframe operations, and two-minute waits below **only when using Method B**; when using Method A, **skip them entirely**.
 
-### Dashboard 1: CSS - A&I and DTP（Playwright）
+### Dashboard 1: CSS - A&I and DTP (Playwright)
 
-| 項目 | 內容 |
+| Item | Details |
 |------|------|
-| **名稱** | CSS - A&I and DTP |
-| **平台** | CES BI Hub |
+| **Name** | CSS - A&I and DTP |
+| **Platform** | CES BI Hub |
 | **URL** | https://cesbihub.microsoft.com/User/groups/10/report/81538463-21f0-45bc-8f08-71d5dc9ccc48/0/0?reportTab=ReportSectiond24dca6cf2e742181ba9 |
-| **必要 Filter** | Channel Function Detail = **ASW_SAPEpicEsc**（見下方 Filter 驗證 Checklist） |
-| **Refresh 等待** | 點選 Filter 後等待 **2 分鐘** 再擷取資料 |
+| **Required filter** | Channel Function Detail = **ASW_SAPEpicEsc** (see the Filter Validation Checklist below) |
+| **Refresh wait** | After selecting the filter, wait **2 minutes** before extracting data |
 
-#### Filter 驗證 Checklist（每次必做，嚴格依照以下順序執行）
+#### Filter Validation Checklist (required each time; follow the order below exactly)
 
-> **📅 當前財年（Current Fiscal Year）**：依報告執行日期動態判定；若日期落在 **7/1（含）之後**，即進入下一個 Microsoft Fiscal Year。以目前 MOR 執行日 2026/7/1 之後為例，當前財年為 **FY2027**（Jul 2026 – Jun 2027）。
+> **📅 Current Fiscal Year**: Determine dynamically based on the report run date. If the date is **on or after July 1**, the next Microsoft Fiscal Year has begun. For example, for MOR runs after 2026/7/1, the current fiscal year is **FY2027** (Jul 2026 – Jun 2027).
 >
-> 微軟財年規則：FY 起始月為每年 **7 月 1 日**，結束於次年 6 月 30 日。財年編號以結束年為準（例：FY2027 = 2026/7/1 – 2027/6/30）。**每年 7/1 起，MOR 的 `Time Fiscal Year` filter 必須切換至新的財年**。因此 2026/7/1 起需選 **FY2027**，不可沿用 FY2026 或同時包含 FY2026。
+> Microsoft fiscal-year rule: The FY starts on **July 1** each year and ends on June 30 of the following year. The fiscal-year number is the ending year (for example, FY2027 = 2026/7/1 – 2027/6/30). **Starting each July 1, switch the MOR `Time Fiscal Year` filter to the new fiscal year**. Therefore, starting 2026/7/1, select **FY2027**; do not keep FY2026 or include both FYs.
 
-進入 Dashboard 1 後，**依序**完成以下 4 項驗證：
+After opening Dashboard 1, complete the following four validations **in order**:
 
-1. ✅ **Channel Function Detail** → 顯示 `is ASW_SAPEpicEsc`
-2. ✅ **Time LastTwelveMonths** → 顯示 `is (All)`（全部 checkbox 不勾選）
-3. ✅ **Time LastSixMonths** → 顯示 `is (All)`（全部 checkbox 不勾選）
-4. ✅ **Time Fiscal Year** → 顯示 `is FY2027`（僅當前財年，不可包含 FY2026）
+1. ✅ **Channel Function Detail** → shows `is ASW_SAPEpicEsc`
+2. ✅ **Time LastTwelveMonths** → shows `is (All)` (no checkboxes selected)
+3. ✅ **Time LastSixMonths** → shows `is (All)` (no checkboxes selected)
+4. ✅ **Time Fiscal Year** → shows `is FY2027` (current FY only; must not include FY2026)
 
-若任一項不符，修正後等待 2 分鐘再擷取資料。
+If any item does not match, correct it and wait 2 minutes before extracting data.
 
-#### 收集 KPI 清單（19 項）
+#### Collect KPI List (19 items)
 
-| # | KPI | 表格位置 | Target | Direction |
+| # | KPI | Table location | Target | Direction |
 |---|-----|---------|--------|----------|
-| 1 | CSAT 5 * Avg | Key Metrics by Date (上方表格) | ≥ 4.8 | High Good |
-| 2 | DSAT | Key Metrics by Date (上方表格) | < 2% | Low Good |
-| 3 | CSAT Surveys | Key Metrics by Date (上方表格) | - | - |
-| 4 | CSAT Response Rate | Key Metrics by Date (上方表格) | - | - |
-| 5 | % CritSit | Key Metrics by Date (上方表格) | - | - |
-| 6 | % IR Met | Key Metrics by Date (上方表格) | ≥ 99% | High Good |
-| 7 | IPD Created | Key Metrics by Date (下方表格) | vs Total | High Good |
-| 8 | IPD Closed | Key Metrics by Date (下方表格) | - | - |
-| 9 | Open Cases | Key Metrics by Date (下方表格) | - | - |
-| 10 | Created Cases | Key Metrics by Date (下方表格) | - | - |
-| 11 | Closed Cases | Key Metrics by Date (下方表格) | - | - |
-| 12 | CSS TMPI | Key Metrics by Date (下方表格) | - | - |
-| 13 | Avg DTC | Key Metrics by Date (下方表格) | ≤ 12 days | Low Good |
-| 14 | Backlog Count | Key Metrics by Date (下方表格) | - | - |
-| 15 | Backlog DtC | Key Metrics by Date (下方表格) | - | - |
-| 16 | Collaboration Tasks | Key Metrics by Date (下方表格) | - | - |
-| 17 | Post IR Transfer % | Key Metrics by Date (下方表格) | - | - |
-| 18 | % Transfer | Key Metrics by Date (下方表格) | - | - |
-| 19 | % SR Closed in less than 7 Days | Key Metrics by Date (下方表格) | ≥ 50% | High Good |
+| 1 | CSAT 5 * Avg | Key Metrics by Date (upper table) | ≥ 4.8 | High Good |
+| 2 | DSAT | Key Metrics by Date (upper table) | < 2% | Low Good |
+| 3 | CSAT Surveys | Key Metrics by Date (upper table) | - | - |
+| 4 | CSAT Response Rate | Key Metrics by Date (upper table) | - | - |
+| 5 | % CritSit | Key Metrics by Date (upper table) | - | - |
+| 6 | % IR Met | Key Metrics by Date (upper table) | ≥ 99% | High Good |
+| 7 | IPD Created | Key Metrics by Date (lower table) | vs Total | High Good |
+| 8 | IPD Closed | Key Metrics by Date (lower table) | - | - |
+| 9 | Open Cases | Key Metrics by Date (lower table) | - | - |
+| 10 | Created Cases | Key Metrics by Date (lower table) | - | - |
+| 11 | Closed Cases | Key Metrics by Date (lower table) | - | - |
+| 12 | CSS TMPI | Key Metrics by Date (lower table) | - | - |
+| 13 | Avg DTC | Key Metrics by Date (lower table) | ≤ 12 days | Low Good |
+| 14 | Backlog Count | Key Metrics by Date (lower table) | - | - |
+| 15 | Backlog DtC | Key Metrics by Date (lower table) | - | - |
+| 16 | Collaboration Tasks | Key Metrics by Date (lower table) | - | - |
+| 17 | Post IR Transfer % | Key Metrics by Date (lower table) | - | - |
+| 18 | % Transfer | Key Metrics by Date (lower table) | - | - |
+| 19 | % SR Closed in less than 7 Days | Key Metrics by Date (lower table) | ≥ 50% | High Good |
 
-#### 操作步驟
+#### Procedure
 
-> **🚨 CRITICAL — Filter 設定為 BLOCKING 步驟，必須在擷取任何資料前完成所有 4 項驗證。**
+> **🚨 CRITICAL — Filter setup is a BLOCKING step: complete all four validations before extracting any data.**
 
-1. 開啟 URL（bookmark 已含部分 Filter 設定）
-2. 等待 PBI iframe 載入完成（`[role="grid"]` 出現）
-3. **【BLOCKING】依序執行 Filter 驗證 Checklist（4 項全部通過才可繼續）：**
+1. Open the URL (the bookmark includes some filter settings)
+2. Wait for the PBI iframe to finish loading (until `[role="grid"]` appears)
+3. **[BLOCKING] Run the Filter Validation Checklist in order; all four checks must pass before continuing:**
 
    **Step 3a — Channel Function Detail**
-   - 確認 restatement 顯示 `is ASW_SAPEpicEsc`
-   - 若不符：點擊 Filter Card restatement 展開 → 選取 `ASW_SAPEpicEsc`
+   - Confirm the restatement shows `is ASW_SAPEpicEsc`
+   - If not, expand the Filter Card restatement and select `ASW_SAPEpicEsc`
 
    **Step 3b — Time LastTwelveMonths**
-   - 確認 restatement 顯示 `is (All)`
-   - 若不符：點擊 Clear filter 按鈕（`[aria-label="Clear filter"]`）清除
+   - Confirm the restatement shows `is (All)`
+   - If not, click the Clear filter button (`[aria-label="Clear filter"]`) to clear it
 
    **Step 3c — Time LastSixMonths**
-   - 確認 restatement 顯示 `is (All)`
-   - 若不符：點擊 Clear filter 按鈕（`[aria-label="Clear filter"]`）清除
+   - Confirm the restatement shows `is (All)`
+   - If not, click the Clear filter button (`[aria-label="Clear filter"]`) to clear it
 
-   **Step 3d — Time Fiscal Year（⚠️ Bookmark 預設可能為 `FY 2027 or FY 2026`，必須手動修正）**
-   - 確認 restatement **僅顯示** `is FY2027`（不可包含 FY2026）
-   - Bookmark 載入後 restatement 通常為 `is FY 2027 or FY 2026`，**此為未通過狀態**
-   - **修正操作**：
-     1. 先點擊 Clear filter（橡皮擦按鈕 `[aria-label="Clear filter"]`）清除現有選擇
-     2. 點擊 `Time Fiscal Year` filter card 的展開按鈕（`aria-label="Time Fiscal Year Expand or collapse filter card"`）展開該 Filter Card
-     3. 展開後找到 checkbox 清單，勾選 `FY 2027`（確認 `aria-checked="true"`）
-     4. 確認不勾選 `FY 2026`（若可見，確認 `aria-checked="false"`）
-   - **驗證**：restatement 變為 `is FY2027`（不含 `or FY 2026`）
+   **Step 3d — Time Fiscal Year (⚠️ the bookmark may default to `FY 2027 or FY 2026`; correct it manually)**
+   - Confirm the restatement shows **only** `is FY2027` (must not include FY2026)
+   - After the bookmark loads, the restatement is usually `is FY 2027 or FY 2026`; **this does not pass validation**
+   - **Correction steps**:
+     1. Click Clear filter (eraser button `[aria-label="Clear filter"]`) to clear the current selection
+     2. Click the expand button for the `Time Fiscal Year` filter card (`aria-label="Time Fiscal Year Expand or collapse filter card"`) to expand that Filter Card
+     3. In the expanded checkbox list, select `FY 2027` (confirm `aria-checked="true"`)
+     4. Confirm that `FY 2026` is not selected (if visible, confirm `aria-checked="false"`)
+   - **Validation**: the restatement becomes `is FY2027` (without `or FY 2026`)
 
-4. **【BLOCKING】Filter 變更後，等待 2 分鐘（120 秒）** 讓資料完成 Data Refresh
-   - 使用 `page.waitForTimeout(120000)` 或等效方式
-   - **禁止在等待時間內擷取任何資料**
-5. 從 Power BI iframe 中擷取「Key Metrics by Date」兩張表格的**整個 FY 年度數據**
-6. 收集每個 KPI 的 FM Jul 起至當前月份的所有數值及 Total
-   - 微軟 Fiscal Year 為 Jul ~ Jun（FY 2027 = FM Jul 2026 ~ FM Jun 2027）
-   - 年度尚未結束時，資料僅會到當前月份（例：2026 年 7 月時僅有 Jul 共 1 個月；2027 年 5 月時僅有 Jul ~ May 共 11 個月）
-   - Total 為已有月份的累計值，非完整 12 個月
-   - **Total 欄位即為 FY2027 YTD 值**（因 Filter 僅選 FY2027，Total = 當前財年累計）
+4. **[BLOCKING] After changing filters, wait 2 minutes (120 seconds)** for the data refresh to complete
+   - Use `page.waitForTimeout(120000)` or an equivalent method
+   - **Do not extract any data during the wait**
+5. Extract the **full FY data** from both “Key Metrics by Date” tables in the Power BI iframe
+6. Collect all values and the Total for each KPI from FM Jul through the current month
+   - Microsoft's Fiscal Year runs Jul–Jun (FY 2027 = FM Jul 2026 through FM Jun 2027)
+   - If the fiscal year is not yet complete, data extends only through the current month (for example, in July 2026 there is only Jul, one month; in May 2027 there are Jul–May, 11 months)
+   - Total is the cumulative value for the available months, not a full 12 months
+   - **The Total column is the FY2027 YTD value** (because only FY2027 is selected in the filter, Total = current fiscal-year cumulative value)
 
 ---
 
 ### Dashboard 2: OpEx Overall PCY Level
 
-| 項目 | 內容 |
+| Item | Details |
 |------|------|
-| **名稱** | OpEx Overall PCY Level A&I+DTP |
-| **平台** | Power BI (msit.powerbi.com) |
+| **Name** | OpEx Overall PCY Level A&I+DTP |
+| **Platform** | Power BI (msit.powerbi.com) |
 | **URL** | https://msit.powerbi.com/groups/me/reports/97cef847-3bf0-445c-b4b6-5e4f7e29fc8d/238752830e2a8090a3ca?experience=power-bi |
-| **必要 Filter** | Staff Group 僅選擇 **A&I-Azure-ASW Epic and SAP**（不可多選） |
-| **Refresh 等待** | 確認 Filter 後等待 **2 分鐘** 再擷取資料 |
-| **備註** | 此 Dashboard 預設僅顯示過去六個月數據，無需額外設定時間 Filter |
+| **Required filter** | Select **A&I-Azure-ASW Epic and SAP** as the only Staff Group (do not select multiple groups) |
+| **Refresh wait** | After confirming the filter, wait **2 minutes** before extracting data |
+| **Note** | This dashboard defaults to showing only the previous six months; no additional time filter is needed |
 
-#### 收集 KPI 清單（5 項，來自 Metric Trend View 表格）
+#### KPI List to Collect (5 items from the Metric Trend View table)
 
 | # | KPI | Category | Target |
 |---|-----|----------|--------|
@@ -257,107 +257,106 @@ MOR 各資料源採用不同的取得方式，職責明確劃分：
 | 4 | Quick Ownership Change % (0-15 Mins) | Case Assignment | ≤ 2.0% (Low Good) |
 | 5 | % Cases Closed within 7 days | Backlog Management | ≥ 50.0% |
 
-#### 操作步驟
+#### Procedure
 
-1. 開啟 URL
-2. 若出現帳號選擇頁面，選擇 `jacobw@microsoft.com`
-3. **【必要】** 確認左側 Staff Group 下拉選單**僅選擇** `A&I-Azure-ASW Epic and SAP`
-   - **點選方式**：找到 Slicer 中 class 為 `slicerText` 的 `<span>` 元素，文字內容為 `A&I-Azure-ASW Epic and SAP`，確認該項目為唯一勾選項目；若有其他項目被勾選，需先取消再僅保留此項
-4. 確認 Filter 後，等待 **2 分鐘** 讓資料完成 Data Refresh，再執行 KPI 資料擷取
-5. 找到頁面下方「Metric Trend View」表格
-6. 擷取 5 項 KPI 的過去六個月數據（Dashboard 預設顯示範圍）
+1. Open the URL
+2. If an account selection page appears, select `jacobw@microsoft.com`
+3. **[Required]** Confirm that the only selection in the Staff Group dropdown on the left is `A&I-Azure-ASW Epic and SAP`
+   - **How to select**: Find the `<span>` element in the Slicer with class `slicerText` and text `A&I-Azure-ASW Epic and SAP`. Confirm it is the only selected item; if any other item is selected, deselect it and leave only this item selected.
+4. After confirming the filter, wait **2 minutes** for the data refresh to complete, then extract KPI data
+5. Find the “Metric Trend View” table near the bottom of the page
+6. Extract the past six months of data for the five KPIs (the dashboard's default display range)
 
 ---
 
-## 輸出規範
+## Output Specifications
 
-### HTML 報告格式
+### HTML Report Format
 
-- **儲存位置**：`C:\GitHubCopilot\IronMan\Output\monthly_review_{month}{year}.html`
-- **時區標示**：表頭日期與時間使用 **UTC+8**，格式為 `YYYY-MM-DD HH:MM (UTC+8)`
-- **分頁結構**：HTML 報告採用 Tab 分頁設計，包含以下頁籤：
+- **Save location**: `C:\GitHubCopilot\IronMan\Output\monthly_review_{month}{year}.html`
+- **Time zone label**: Use **UTC+8** for the header date and time, in the format `YYYY-MM-DD HH:MM (UTC+8)`
+- **Tab structure**: The HTML report uses tabs and includes the following:
 
-| Tab | 名稱 | 內容 |
+| Tab | Name | Contents |
 |-----|------|------|
-| 主頁 | MOR Summary Report | KPI Dashboard 摘要、趨勢表格、MoM Summary、Business Analysis |
-| 分頁 1 | CPE Insight | 所有 Survey Case 明細，依 AgentAlias 分組（來源：Kusto Query） |
-| 分頁 2 | IR Missing Insight | 當前財年 IR Missing 案件明細（來源：Dashboard IR Missed Reasons + Kusto Query） |
-| 分頁 3 | SE Members Performance | FY26 各 SE 成員案件績效彙總表（來源：Kusto Query） |
+| Home | MOR Summary Report | KPI Dashboard summary, trend tables, MoM Summary, Business Analysis |
+| Tab 1 | CPE Insight | All Survey Case details, grouped by AgentAlias (source: Kusto Query) |
+| Tab 2 | IR Missing Insight | Current fiscal-year IR Missing case details (source: Dashboard IR Missed Reasons + Kusto Query) |
+| Tab 3 | SE Members Performance | Case-performance summary for each SE in FY26 (source: Kusto Query) |
 
-#### US / Costa Rica Engineer KPI Comparison（獨立 HTML 報告）
+#### US / Costa Rica Engineer KPI Comparison (standalone HTML report)
 
-當用戶要求比較 US / Costa Rica Engineers、按 FY 分頁、逐 Engineer drill-down，或加入 Customer Outreach / CaaS Lead 影響時，產出獨立自包含 HTML：
+When the user requests a comparison of US / Costa Rica Engineers, FY tabs, Engineer-by-Engineer drill-down, or Customer Outreach / CaaS Lead impact, produce a standalone, self-contained HTML report:
 
-- **檔名**：`us_cr_engineer_kpi_comparison_FY26_FY27.html`
-- **參考實作**：`review-reporter/us_cr_engineer_kpi_comparison_FY26_FY27.html`
-- **頁籤（固定 4 個）**：
+- **Filename**: `us_cr_engineer_kpi_comparison_FY26_FY27.html`
+- **Reference implementation**: `review-reporter/us_cr_engineer_kpi_comparison_FY26_FY27.html`
+- **Tabs (fixed at 4)**:
 
-| Tab | 名稱 | 內容 |
+| Tab | Name | Contents |
 |-----|------|------|
-| 1 | FY26 | FY26 個人 KPI、團隊加權平均、個人期間內相對排名、Engineer drill-down |
-| 2 | FY27 YTD | FY27 YTD 個人 KPI、團隊加權平均、個人期間內相對排名、Engineer drill-down |
-| 3 | FY26 vs FY27 | KPI 並排、DTC/DTS/≤7d 變化、跨 FY 改善排名與結論 |
-| 4 | Customer Outreach / CaaS Lead | CaaS Lead 角色、Customer assignments、Program maturity、FY27 Customer portfolio stats、逐 Engineer / Customer drill-down |
+| 1 | FY26 | Individual FY26 KPIs, team weighted averages, within-period relative individual rankings, Engineer drill-down |
+| 2 | FY27 YTD | Individual FY27 YTD KPIs, team weighted averages, within-period relative individual rankings, Engineer drill-down |
+| 3 | FY26 vs FY27 | Side-by-side KPIs, DTC/DTS/≤7d changes, cross-FY improvement rankings and conclusions |
+| 4 | Customer Outreach / CaaS Lead | CaaS Lead roles, Customer assignments, Program maturity, FY27 Customer portfolio stats, Engineer / Customer drill-down |
 
-> 此報告是 SE Members Performance 的特定 cohort 深入分析，不取代 MOR 主報告。UI 必須保留搜尋、Country filter、欄位排序、Expand All、鍵盤可操作 drill-down、light/dark theme。
+> This report is an in-depth analysis of a specific cohort within SE Members Performance; it does not replace the main MOR report. The UI must retain search, Country filter, column sorting, Expand All, keyboard-operable drill-down, and light/dark theme.
 
-#### MOR Summary Report 頁面結構
-  1. Executive Summary Cards（關鍵 KPI 快照，數值顯示該 KPI 的**年度累計 Total**，並顯示 MoM 變化箭頭）
-  2. Business Analysis（Highlights / Lowlights / Recommendations）
-  3. Dashboard 1 表格（Quality Metrics + Operational Metrics，含完整 FY 年度趨勢，有 Target 的 KPI 顯示 🟢🟡🔴 燈號）
-  4. Dashboard 2 表格（Actuals vs Targets + Metric Trend View 過去 6 個月趨勢）
-  5. Month-over-Month Summary（上月 vs 當月，含 Change 與 Trend 方向）
+#### MOR Summary Report Page Structure
+  1. Executive Summary Cards (key KPI snapshot; values show each KPI's **year-to-date Total**, with a MoM change arrow)
+  2. Business Analysis (Highlights / Lowlights / Recommendations)
+  3. Dashboard 1 tables (Quality Metrics + Operational Metrics, with the full FY trend; show 🟢🟡🔴 indicators for KPIs with targets)
+  4. Dashboard 2 tables (Actuals vs Targets + the past six months of Metric Trend View data)
+  5. Month-over-Month Summary (previous month vs current month, including Change and Trend direction)
 
-#### Executive Summary Cards 清單（9 項）
+#### Executive Summary Cards List (9 items)
 
-| # | Card 名稱 | 來源 | Status 判定 |
+| # | Card name | Source | Status determination |
 |---|-----------|------|-------------|
-| 1 | CSAT 5★ Avg | Dashboard 1 — Key Metrics by Date (上方) | ≥ 4.5 Green / ≥ 4.0 Yellow / < 4.0 Red |
-| 2 | % IR Met | Dashboard 1 — Key Metrics by Date (上方) | ≥ 95% Green / ≥ 90% Yellow / < 90% Red |
-| 3 | Created Cases | Dashboard 1 — Key Metrics by Date (下方) | 純資訊，無 Status |
-| 4 | Closed Cases | Dashboard 1 — Key Metrics by Date (下方) | 純資訊，無 Status |
-| 5 | Avg DTC | Dashboard 1 — Key Metrics by Date (下方) | ≤ 10 Green / ≤ 15 Yellow / > 15 Red |
-| 6 | % CritSit | Dashboard 1 — Key Metrics by Date (上方) | ≤ 15% Green / ≤ 20% Yellow / > 20% Red |
-| 7 | DSAT | Dashboard 1 — Key Metrics by Date (上方) | ≤ 1% Green / ≤ 2% Yellow / > 2% Red |
-| 8 | % Cases Closed within 7 days | **Dashboard 2** — Actuals \|\| Benchmarks \|\| Variance 表格 | ≥ 50% Green / ≥ 40% Yellow / < 40% Red |
-| 9 | Post IR Transfer % | Dashboard 1 — Key Metrics by Date (下方) | ≤ 20% Green / ≤ 25% Yellow / > 25% Red |
+| 1 | CSAT 5★ Avg | Dashboard 1 — Key Metrics by Date (upper table) | ≥ 4.5 Green / ≥ 4.0 Yellow / < 4.0 Red |
+| 2 | % IR Met | Dashboard 1 — Key Metrics by Date (upper table) | ≥ 95% Green / ≥ 90% Yellow / < 90% Red |
+| 3 | Created Cases | Dashboard 1 — Key Metrics by Date (lower table) | Informational only; no status |
+| 4 | Closed Cases | Dashboard 1 — Key Metrics by Date (lower table) | Informational only; no status |
+| 5 | Avg DTC | Dashboard 1 — Key Metrics by Date (lower table) | ≤ 10 Green / ≤ 15 Yellow / > 15 Red |
+| 6 | % CritSit | Dashboard 1 — Key Metrics by Date (upper table) | ≤ 15% Green / ≤ 20% Yellow / > 20% Red |
+| 7 | DSAT | Dashboard 1 — Key Metrics by Date (upper table) | ≤ 1% Green / ≤ 2% Yellow / > 2% Red |
+| 8 | % Cases Closed within 7 days | **Dashboard 2** — Actuals \|\| Benchmarks \|\| Variance table | ≥ 50% Green / ≥ 40% Yellow / < 40% Red |
+| 9 | Post IR Transfer % | Dashboard 1 — Key Metrics by Date (lower table) | ≤ 20% Green / ≤ 25% Yellow / > 25% Red |
 
-> **注意**：`% Cases Closed within 7 days` 是唯一來自 Dashboard 2 的 Executive Summary Card。  
-> 數值取自 Dashboard 2「Actuals || Benchmarks || Variance」矩陣表格中  
-> `% Cases Closed within 7 days` 列的 **Actual Value** 欄位，Target 為 **50.0%**。
+> **Note**: `% Cases Closed within 7 days` is the only Executive Summary Card from Dashboard 2.
+> Its value comes from the **Actual Value** column for the `% Cases Closed within 7 days` row
+> in Dashboard 2's “Actuals || Benchmarks || Variance” matrix table; the target is **50.0%**.
 
-#### Executive Summary Cards — MoM Change 顯示規則
+#### Executive Summary Cards — MoM Change Display Rules
 
-每張 Card 底部的 `.trend` 區域顯示**當月 vs 上月的變化**，格式為：`{箭頭} {±數值} vs {上月名}`
+The `.trend` area at the bottom of each card shows the **current month vs. previous month change**, in the format: `{arrow} {±value} vs {previous month}`
 
-- **箭頭方向**：`↑` = 數值上升、`↓` = 數值下降、`→` = 持平
-- **箭頭顏色**（依 KPI Direction 判定改善/惡化）：
-  - **High Good**（CSAT、% IR Met、Created/Closed Cases、% Closed ≤7d）：↑ 綠色 = 改善、↓ 紅色 = 惡化
-  - **Low Good**（Avg DTC、% CritSit、DSAT、Post IR Transfer %）：↓ 綠色 = 改善、↑ 紅色 = 惡化
-  - **純資訊**（Created Cases、Closed Cases）：箭頭使用灰色（`#6b7280`），不判定好壞
-- **變化值格式**：`+X.X` 或 `-X.X`（浮點）、`+N` 或 `-N`（整數）
-- **範例**：`<span style="color:#dc3545;font-weight:600;">↑ +4.1</span> <span style="color:#94a3b8;">vs Apr</span>`
+- **Arrow direction**: `↑` = value increased, `↓` = value decreased, `→` = unchanged
+- **Arrow color** (improvement or deterioration is determined by KPI Direction):
+  - **High Good** (CSAT, % IR Met, Created/Closed Cases, % Closed ≤7d): ↑ green = improved; ↓ red = worsened
+  - **Low Good** (Avg DTC, % CritSit, DSAT, Post IR Transfer %): ↓ green = improved; ↑ red = worsened
+  - **Informational only** (Created Cases, Closed Cases): use gray (`#6b7280`) arrows; do not judge as good or bad
+- **Change value format**: `+X.X` or `-X.X` (floating point); `+N` or `-N` (integer)
+- **Example**: `<span style="color:#dc3545;font-weight:600;">↑ +4.1</span> <span style="color:#94a3b8;">vs Apr</span>`
 
-#### MoM Change 對應數據（需每月更新）
+#### MoM Change Data Mapping (update monthly)
 
-| # | Card 名稱 | Direction | 計算方式 |
+| # | Card name | Direction | Calculation |
 |---|-----------|-----------|----------|
-| 1 | CSAT 5★ Avg | high | 當月 CSAT - 上月 CSAT |
-| 2 | % IR Met | high | 當月 % - 上月 % |
-| 3 | Created Cases | neutral | 當月 - 上月 |
-| 4 | Closed Cases | neutral | 當月 - 上月 |
-| 5 | Avg DTC | low | 當月 - 上月 |
-| 6 | % CritSit | low | 當月 % - 上月 % |
-| 7 | DSAT | low | 當月 % - 上月 %（若無數據則 0） |
-| 8 | % Closed ≤7d | high | 當月 % - 上月 % |
-| 9 | Post IR Transfer % | low | 當月 % - 上月 % |
+| 1 | CSAT 5★ Avg | high | Current-month CSAT - previous-month CSAT |
+| 2 | % IR Met | high | Current-month % - previous-month % |
+| 3 | Created Cases | neutral | Current month - previous month |
+| 4 | Closed Cases | neutral | Current month - previous month |
+| 5 | Avg DTC | low | Current month - previous month |
+| 6 | % CritSit | low | Current-month % - previous-month % |
+| 7 | DSAT | low | Current-month % - previous-month % (use 0 if there is no data) |
+| 8 | % Closed ≤7d | high | Current-month % - previous-month % |
+| 9 | Post IR Transfer % | low | Current-month % - previous-month % |
 
+#### Business Analysis Rules
 
-#### Business Analysis 規則
+The Business Analysis section is **between the Executive Summary Cards and the Dashboard 1 tables** and provides KPI insights from the Business Owner's perspective.
 
-Business Analysis 區塊位於 **Executive Summary Cards 與 Dashboard 1 表格之間**，以 Business Owner 視角提供 KPI 洞察。
-
-##### 結構
+##### Structure
 
 ```html
 <div class="analysis-grid">
@@ -367,49 +366,49 @@ Business Analysis 區塊位於 **Executive Summary Cards 與 Dashboard 1 表格�
 </div>
 ```
 
-##### Highlight 判定規則（當月表現突出）
+##### Highlight Determination Rules (outstanding current-month performance)
 
-針對有 Target 的 KPI，當月值達標或超標時列為 Highlight：
+For KPIs with a target, list the KPI as a Highlight when the current-month value meets or exceeds the target:
 
-| KPI | Highlight 條件 | 附加條件 |
+| KPI | Highlight condition | Additional condition |
 |-----|----------------|----------|
-| CSAT 5★ Avg | 當月 ≥ 4.8 | — |
-| % IR Met | 當月 ≥ 99% | — |
-| Avg DTC | 當月 ≤ 12 | — |
-| % Cases Closed ≤7d | 當月 ≥ 50% | — |
-| IPD Created | 當月 ≥ YTD Total (平均) | 或過去 3 個月呈上升趨勢 |
+| CSAT 5★ Avg | Current month ≥ 4.8 | — |
+| % IR Met | Current month ≥ 99% | — |
+| Avg DTC | Current month ≤ 12 | — |
+| % Cases Closed ≤7d | Current month ≥ 50% | — |
+| IPD Created | Current month ≥ YTD Total (average) | Or shows an upward trend over the past 3 months |
 
-##### Lowlight 判定規則（當月需關注）
+##### Lowlight Determination Rules (requires attention this month)
 
-針對有 Target 的 KPI，當月值未達標或趨勢下滑時列為 Lowlight：
+For KPIs with a target, list the KPI as a Lowlight when the current-month value misses the target or its trend is declining:
 
-| KPI | Lowlight 條件 | 附加條件 |
+| KPI | Lowlight condition | Additional condition |
 |-----|---------------|----------|
-| CSAT 5★ Avg | 當月 < 4.8 | 或過去 3 個月呈下滑趨勢 |
-| % IR Met | 當月 < 99% | — |
-| Avg DTC | 當月 > 12 | 或過去 3 個月呈上升趨勢 |
-| % Cases Closed ≤7d | 當月 < 50% | 或過去 3 個月呈下滑趨勢 |
-| IPD Created | 當月 < YTD Total (平均) | 或過去 3 個月呈下滑趨勢 |
+| CSAT 5★ Avg | Current month < 4.8 | Or shows a downward trend over the past 3 months |
+| % IR Met | Current month < 99% | — |
+| Avg DTC | Current month > 12 | Or shows an upward trend over the past 3 months |
+| % Cases Closed ≤7d | Current month < 50% | Or shows a downward trend over the past 3 months |
+| IPD Created | Current month < YTD Total (average) | Or shows a downward trend over the past 3 months |
 
-- **趨勢判定**：取最近 3 個月（M-2, M-1, M），若連續 3 個月同方向移動或有明顯波動，標註趨勢
-- **部分月數據**：若當月數據為部分月（月中報告），需加註 `⚠️ partial month data`
+- **Trend determination**: Use the most recent 3 months (M-2, M-1, M); label a trend when values move in the same direction for all 3 months or show a notable fluctuation
+- **Partial-month data**: If the current month is incomplete (mid-month report), add the note `⚠️ partial month data`
 
-##### Recommendation 撰寫原則
+##### Recommendation Writing Principles
 
-- 以 **Business Owner** 視角撰寫，聚焦可執行的行動建議
-- 針對每個 Lowlight KPI 提供對應建議
-- 包含：根因調查方向、短期緩解措施、長期改善目標
-- 對於持續達標的 KPI，建議維持現有做法並強化
-- 格式：`<strong>{建議標題}</strong> — {具體說明}`
+- Write from the **Business Owner** perspective and focus on actionable recommendations
+- Provide a corresponding recommendation for each Lowlight KPI
+- Include: root-cause investigation directions, short-term mitigations, and long-term improvement goals
+- For KPIs that consistently meet their targets, recommend maintaining and reinforcing current practices
+- Format: `<strong>{Recommendation title}</strong> — {specific details}`
 
-#### CPE Insight 頁面結構
+#### CPE Insight Page Structure
 
-- **資料來源**：Kusto Query（詳見 `kusto_query` Skill → `references/catalog-custom.md` §ASW CPE Survey）
+- **Data source**: Kusto Query (see `kusto_query` Skill → `references/catalog-custom.md` §ASW CPE Survey)
 - **Cluster**：`supportrptwus3prod.westus3.kusto.windows.net` / `KPISupportData`
-- **團隊成員篩選**：透過 `ASWStakeholder` 表格 lookup `AgentAlias` 欄位，僅取 ASW 團隊成員的 Survey
-- **排除名單**：已離開 ASW 的成員需排除，目前排除：`zhaobo`
-- **時間範圍**：**整個當前 Fiscal Year（FY）**，以 `CreatedDateTime` 篩選 FY 起訖日期（例：FY2027 = `2026-07-01` ~ `2027-06-01`）。**不可僅取單月資料**，CPE Insight 頁面需完整呈現整年所有 Survey 記錄
-- **資料條件**：`isnotempty(TotalCustomerSATScore)`（僅含有 CSAT 分數的案件）
+- **Team-member filtering**: Look up the `AgentAlias` field in the `ASWStakeholder` table and include Surveys only for ASW team members
+- **Exclusion list**: Exclude members who have left ASW; currently excluded: `zhaobo`
+- **Time range**: The **entire current Fiscal Year (FY)**, filtering on FY start and end dates using `CreatedDateTime` (for example, FY2027 = `2026-07-01` through `2027-06-01`). **Do not limit the data to a single month**; the CPE Insight page must show all Survey records for the full year
+- **Data condition**: `isnotempty(TotalCustomerSATScore)` (include only cases with a CSAT score)
 
 ##### Kusto Query
 
@@ -420,107 +419,107 @@ let ASWNames = cluster('bedrock.eastus.kusto.windows.net').database("CSI").ASWSt
 AllCloudsSupportIncidentWithReferenceModelVNext
 | where CreatedDateTime >= datetime(_fy_start) and CreatedDateTime < datetime(_fy_end)
 | where AgentAlias in (ASWNames | project AgentAlias)
-| where AgentAlias !in ('zhaobo','wessm','priyakumar','nmutya','francescav','joaguas','rtjoanda','','') // 已離開 ASW 的成員排除
+| where AgentAlias !in ('zhaobo','wessm','priyakumar','nmutya','francescav','joaguas','rtjoanda','','') // Exclude members who have left ASW
 | where isnotempty(TotalCustomerSATScore)
 | lookup ASWNames on AgentAlias
 | project IncidentId, Customer_TPName, ServiceName, ClosedDateTime, TotalCustomerSATScore, SurveyVerbatims, CreatedDateTime, AgentAlias, AgentName, Customer_TPID, RegionName
 | order by ClosedDateTime desc
 ```
 
-> **`_fy_start` / `_fy_end` 參數**：當前 Fiscal Year 的起訖日期。FY2027 = `2026-07-01` / `2027-06-01`。查詢涵蓋完整財年所有月份的 CPE Survey。
+> **`_fy_start` / `_fy_end` parameters**: Start and end dates for the current Fiscal Year. FY2027 = `2026-07-01` / `2027-06-01`. The query covers CPE Surveys from every month in the full fiscal year.
 
-##### 輸出欄位（11 欄）
+##### Output Fields (11 columns)
 
-| # | 欄位名稱 | 說明 |
+| # | Field name | Description |
 |---|----------|------|
 | 1 | IncidentId | Case ID |
-| 2 | Customer_TPName | 客戶名稱 |
-| 3 | ServiceName | 服務 / 產品名稱 |
-| 4 | ClosedDateTime | 結案日期時間 |
-| 5 | TotalCustomerSATScore | CSAT 分數（1-5） |
-| 6 | SurveyVerbatims | 客戶文字回饋 |
-| 7 | CreatedDateTime | 案件建立日期時間 |
-| 8 | AgentAlias | 工程師 Alias |
-| 9 | AgentName | 工程師姓名（SE Name），來源：`ASWStakeholder` 表 |
-| 10 | Customer_TPID | 客戶 TPID |
-| 11 | RegionName | 客戶所在區域 |
+| 2 | Customer_TPName | Customer name |
+| 3 | ServiceName | Service / product name |
+| 4 | ClosedDateTime | Case close date and time |
+| 5 | TotalCustomerSATScore | CSAT score (1–5) |
+| 6 | SurveyVerbatims | Customer written feedback |
+| 7 | CreatedDateTime | Case creation date and time |
+| 8 | AgentAlias | Engineer alias |
+| 9 | AgentName | Engineer name (SE Name), sourced from the `ASWStakeholder` table |
+| 10 | Customer_TPID | Customer TPID |
+| 11 | RegionName | Customer region |
 
-##### 頁面呈現規則
+##### Page Display Rules
 
-- **表格方式**：所有 Survey 整合為單一表格（不分組）
-- **欄位順序**：Case ID, Customer, Service, AgentAlias, SE Name, CSAT, Verbatim, Closed, Created, Region
-- **預設排序**：依 `ClosedDateTime` 降序排列（最新日期在最上方）
-- **可排序欄位**：**SE Name**（string）、**CSAT**（number）、**Closed**（date）三欄需加入前端排序功能，點擊欄位標頭可切換升冪/降冪
-- **排序 UI**：欄位標頭顯示排序方向箭頭（↑升冪 / ↓降冪），hover 高亮，預設 Closed 欄標示為 `desc`
-- **CSAT 分數標示**：5 = 🟢, 4 = 🟡, 1-3 = 🔴
+- **Table layout**: Combine all Surveys into one table (no grouping)
+- **Column order**: Case ID, Customer, Service, AgentAlias, SE Name, CSAT, Verbatim, Closed, Created, Region
+- **Default sort**: Sort by `ClosedDateTime` descending (most recent date first)
+- **Sortable columns**: Add client-side sorting to **SE Name** (string), **CSAT** (number), and **Closed** (date); clicking a column header toggles ascending / descending order
+- **Sorting UI**: Show sort-direction arrows (↑ ascending / ↓ descending) in column headers, highlight on hover, and mark Closed as `desc` by default
+- **CSAT score indicators**: 5 = 🟢, 4 = 🟡, 1–3 = 🔴
 
-#### IR Missing Insight 頁面結構
+#### IR Missing Insight Page Structure
 
-- **目的**：列出當前財年所有 IR Missing（Initial Response 未達標）的案件明細
-- **資料來源**：
-  1. **Dashboard（IR Missed Reasons）**：從 CES BI Hub 的「Service Request IR Missed Reasons」表格中，擷取 `Is IR Met = No` 的 Service Request Number
-  2. **Kusto Query**：以擷取到的 Case ID 查詢案件詳細資訊
+- **Purpose**: List detailed information for all IR Missing (Initial Response target missed) cases in the current fiscal year
+- **Data sources**:
+  1. **Dashboard (IR Missed Reasons)**: Extract Service Request Numbers with `Is IR Met = No` from the “Service Request IR Missed Reasons” table in CES BI Hub
+  2. **Kusto Query**: Query case details using the extracted Case IDs
 
-##### Dashboard: IR Missed Reasons（Playwright — fallback 專用）
+##### Dashboard: IR Missed Reasons (Playwright — fallback only)
 
-> **預設來源為 Cowork 匯入檔**：`Output/Cowork/asw_ir_missed_FY*.xlsx`（方式 A）已含完整 IR Missing 明細（Time to IR、Verbatim、SE Manager），無需 Dashboard scroll。IR Missing 定義為 `'Service Request'[Is IR Met] = "No"`（來自 Semantic Model，非 Kusto 判定）。以下 Playwright 流程只在 Cowork 檔案不可用時採用。
+> **The default source is the Cowork import file**: `Output/Cowork/asw_ir_missed_FY*.xlsx` (Method A) already contains all IR Missing details (Time to IR, Verbatim, SE Manager), so there is no need to scroll the dashboard. IR Missing is defined as `'Service Request'[Is IR Met] = "No"` (from the Semantic Model, not determined by Kusto). Use the Playwright workflow below only when the Cowork file is unavailable.
 
-| 項目 | 內容 |
+| Item | Details |
 |------|------|
-| **名稱** | CSS - A&I and DTP（IR Missed Reasons 分頁） |
-| **平台** | CES BI Hub |
+| **Name** | CSS - A&I and DTP (IR Missed Reasons tab) |
+| **Platform** | CES BI Hub |
 | **URL** | `https://cesbihub.microsoft.com/User/groups/10/report/81538463-21f0-45bc-8f08-71d5dc9ccc48/0/0?reportTab=ReportSection157aebf13d4b20b43fc5` |
-| **必要 Filter** | 與 Dashboard 1 相同：Channel Function Detail = `ASW_SAPEpicEsc`、Time Fiscal Year = 當前財年 |
-| **Filter 驗證** | 參照下方「操作步驟」Step 3a-3d |
+| **Required filter** | Same as Dashboard 1: Channel Function Detail = `ASW_SAPEpicEsc`; Time Fiscal Year = current fiscal year |
+| **Filter validation** | See Step 3a–3d below under “Procedure” |
 
-##### 操作步驟
+##### Procedure
 
-> **🚨 CRITICAL — 以下 Filter 設定為 BLOCKING 步驟，必須全部完成且等待 2 分鐘後才可擷取資料。**
+> **🚨 CRITICAL — The following filter setup is a BLOCKING step: complete every check and wait 2 minutes before extracting data.**
 
-1. 開啟 URL（使用 Edge）
-2. 等待 PBI iframe 載入完成
-3. **【BLOCKING】依序執行 Filter 驗證 Checklist（4 項全部通過）：**
+1. Open the URL (using Edge)
+2. Wait for the PBI iframe to finish loading
+3. **[BLOCKING] Run the Filter Validation Checklist in order (all four checks must pass):**
 
    **Step 3a — Channel Function Detail**
-   - 確認 restatement 顯示 `is ASW_SAPEpicEsc`
-   - 若不符：點擊 Filter Card restatement 展開 → 選取 `ASW_SAPEpicEsc`
+   - Confirm the restatement shows `is ASW_SAPEpicEsc`
+   - If not, expand the Filter Card restatement and select `ASW_SAPEpicEsc`
 
    **Step 3b — Time LastTwelveMonths**
-   - 確認 restatement 顯示 `is (All)`
-   - 若不符：點擊 Clear filter 按鈕（`[aria-label="Clear filter"]`）清除
+   - Confirm the restatement shows `is (All)`
+   - If not, click the Clear filter button (`[aria-label="Clear filter"]`) to clear it
 
-   **Step 3c — Time LastSixMonths（⚠️ 預設為 `is Yes`，必須清除）**
-   - 點擊 Clear filter 按鈕（`[aria-label="Clear filter"]`）→ restatement 變為 `is (All)`
-   - **若未清除將遺失 40-50% 案件**
+   **Step 3c — Time LastSixMonths (⚠️ defaults to `is Yes`; must be cleared)**
+   - Click the Clear filter button (`[aria-label="Clear filter"]`) → the restatement changes to `is (All)`
+   - **If not cleared, 40–50% of cases will be omitted**
 
-   **Step 3d — Time Fiscal Year（⚠️ Bookmark 預設可能含前一財年，必須修正）**
-   - 確認 restatement **僅顯示** `is FY2027`（不可包含 FY2026）
-   - **修正操作**：
-     1. 先點擊 Clear filter（橡皮擦按鈕 `[aria-label="Clear filter"]`）清除現有選擇
-     2. 點擊展開按鈕（`aria-label="Time Fiscal Year Expand or collapse filter card"`）展開
-     3. 勾選 `FY 2027`（確認 `aria-checked="true"`）
-     4. 確認不勾選 `FY 2026`（若可見，確認 `aria-checked="false"`）
-   - **驗證**：restatement 為 `is FY2027`（不含 `or FY 2026`）
+   **Step 3d — Time Fiscal Year (⚠️ the bookmark may default to include the prior FY; correct it)**
+   - Confirm the restatement shows **only** `is FY2027` (must not include FY2026)
+   - **Correction steps**:
+     1. First click Clear filter (eraser button `[aria-label="Clear filter"]`) to clear the current selection
+     2. Click the expand button (`aria-label="Time Fiscal Year Expand or collapse filter card"`) to expand the card
+     3. Select `FY 2027` (confirm `aria-checked="true"`)
+     4. Confirm `FY 2026` is not selected (if visible, confirm `aria-checked="false"`)
+   - **Validation**: the restatement is `is FY2027` (without `or FY 2026`)
 
-4. **設定頁面 Slicer**（與 Filter Pane 不同，這是頁面上的篩選器）：
-   1. Channel Function Detail Slicer → 搜尋 `ASW_SAP` → 勾選 `ASW_SAPEpicEsc`
-   2. Fiscal Year Slicer → 僅勾選 `FY 2027`
-5. **【BLOCKING】等待 2 分鐘（120 秒）** Data Refresh — `page.waitForTimeout(120000)`
-6. **驗證 scrollHeight**：≥ 25000px 則繼續；< 18000px 則回步驟 3 重做
-7. 找到「Service Request IR Missed Reasons」表格（`[role="grid"]`）
-8. **點擊 `Is IR Met` 欄位標題排序**：讓 `No` 值浮到最上方（點擊一次升冪排序，`No` < `Yes` 所以 `No` 在前）
-9. 透過 `.mid-viewport` div 逐步捲動（每次 400px）收集列，擷取 **Service Request Number**。當讀到的 `Is IR Met` 值從 `No` 變為 `Yes` 時即可停止，表示所有 IR Missing 案件已收集完畢
-10. **結果驗證**：確認案件涵蓋 Jul 起各月份（非僅最近 6 個月）
+4. **Set the page Slicers** (these differ from the Filter Pane; these are filters on the page):
+   1. Channel Function Detail Slicer → search for `ASW_SAP` → select `ASW_SAPEpicEsc`
+   2. Fiscal Year Slicer → select only `FY 2027`
+5. **[BLOCKING] Wait 2 minutes (120 seconds)** for Data Refresh — `page.waitForTimeout(120000)`
+6. **Validate `scrollHeight`**: continue if ≥ 25000px; if < 18000px, return to Step 3 and repeat
+7. Find the “Service Request IR Missed Reasons” table (`[role="grid"]`)
+8. **Sort by clicking the `Is IR Met` column header** so `No` values appear at the top (click once for ascending order; `No` < `Yes`, so `No` comes first)
+9. Scroll the `.mid-viewport` div in increments (400px each), collect the rows, and extract **Service Request Number**. Stop when `Is IR Met` changes from `No` to `Yes`, indicating that all IR Missing cases have been collected
+10. **Validate the results**: confirm that cases cover all months starting in Jul (not only the most recent six months)
 
 ##### Kusto Query
 
-以 Dashboard 擷取到的 IR Missing Case ID 清單，查詢案件詳細資訊：
+Use the IR Missing Case ID list extracted from the dashboard to query case details:
 
 ```kql
 let ASWNames = cluster('bedrock.eastus.kusto.windows.net').database("CSI").ASWStakeholder
 | where Role == "Engineer" | where BusinessUnit == "CSS-ASW"
 | project AgentAlias, AgentName;
-let IRMissingCases = dynamic([_caseIds]); // 從 Dashboard 擷取的 Case ID 清單
+let IRMissingCases = dynamic([_caseIds]); // Case ID list extracted from the dashboard
 database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
 | where IncidentId in (IRMissingCases)
 | lookup ASWNames on AgentAlias
@@ -528,55 +527,55 @@ database('KPISupportData').AllCloudsSupportIncidentWithReferenceModelVNext
 | order by CreatedDateTime desc
 ```
 
-> **`_caseIds` 參數**：從 Dashboard「Service Request IR Missed Reasons」表格中擷取的 IR Missing Case ID 清單，格式為 KQL dynamic array（例：`'2604010030001234', '2603150040005678'`）
-> **注意**：Kusto 表中 `IsIrMet` 欄位為空字串，IR Missing 狀態由 Dashboard（PBI Model）計算判定。因此 Kusto Query 不需要 `| where IsIrMet == 'No'` 篩選條件，僅以 Dashboard 擷取到的 Case ID 為準。
+> **`_caseIds` parameter**: The IR Missing Case ID list extracted from the Dashboard's “Service Request IR Missed Reasons” table, formatted as a KQL dynamic array (for example: `'2604010030001234', '2603150040005678'`)
+> **Note**: The `IsIrMet` field in the Kusto table is an empty string; the Dashboard (PBI Model) calculates the IR Missing status. Therefore, the Kusto Query does not need a `| where IsIrMet == 'No'` filter; use only the Case IDs extracted from the dashboard.
 
-##### 輸出欄位（10 欄）
+##### Output Fields (10 columns)
 
-| # | 欄位名稱 | 說明 |
+| # | Field name | Description |
 |---|----------|------|
 | 1 | IncidentId | Case ID |
-| 2 | Customer_TPName | 客戶名稱 |
-| 3 | ServiceName | 服務 / 產品名稱 |
-| 4 | AgentAlias | 工程師 Alias |
-| 5 | AgentName | 工程師姓名（SE Name） |
-| 6 | CreatedDateTime | 案件建立日期 |
-| 7 | ClosedDateTime | 結案日期 |
-| 8 | InitialSeverity | 初始嚴重等級 |
-| 9 | TTMS | Time To Meet SLA（分鐘） |
-| 10 | RegionName | 客戶所在區域 |
+| 2 | Customer_TPName | Customer name |
+| 3 | ServiceName | Service / product name |
+| 4 | AgentAlias | Engineer alias |
+| 5 | AgentName | Engineer name (SE Name) |
+| 6 | CreatedDateTime | Case creation date |
+| 7 | ClosedDateTime | Case close date |
+| 8 | InitialSeverity | Initial severity |
+| 9 | TTMS | Time To Meet SLA (minutes) |
+| 10 | RegionName | Customer region |
 
-##### 頁面呈現規則
+##### Page Display Rules
 
-- **表格方式**：所有 IR Missing 案件整合為單一表格
-- **欄位順序**：Case ID, Customer, Service, SE Manager, Created, Closed, Initial Severity, TTMS, Region
-- **隱藏欄位**：Agent（AgentAlias）、SE Name（AgentName）不顯示於表格中
-- **SE Manager 欄位**：使用 `AGENT_MANAGER_MAP` 字典將 AgentAlias 對應到其 SE Manager 名稱（資料來源：`bedrock.CSI.ASWStakeholder` 表的 `Manager` 欄位）；未在 mapping 中的 agent 使用 `DEFAULT_SE_MANAGER` 預設值（`Unknown`）
-- **排序**：依 `CreatedDateTime` 降序排列（最新日期在最上方）
-- **版面佈局**：頁面上方為 flex 橫向排列（左欄 320px + 右欄 flex:1），左欄含 Summary Cards（2×2 grid）+ Avg TTMS by Severity 統計面板，右欄為 SVG 趨勢圖；下方為全寬資料表格
+- **Table layout**: Combine all IR Missing cases into one table
+- **Column order**: Case ID, Customer, Service, SE Manager, Created, Closed, Initial Severity, TTMS, Region
+- **Hidden columns**: Do not display Agent (AgentAlias) or SE Name (AgentName) in the table
+- **SE Manager column**: Use the `AGENT_MANAGER_MAP` dictionary to map AgentAlias to the SE Manager name (source: the `Manager` field in the `bedrock.CSI.ASWStakeholder` table); for agents absent from the mapping, use the `DEFAULT_SE_MANAGER` default value (`Unknown`)
+- **Sort**: Sort by `CreatedDateTime` descending (most recent date first)
+- **Layout**: At the top of the page, use a horizontal flex layout (left column 320px + right column flex:1). The left column contains Summary Cards (2×2 grid) + an Avg TTMS by Severity statistics panel; the right column contains an SVG trend chart. Place a full-width data table below.
 
-#### SE Members Performance 頁面結構
+#### SE Members Performance Page Structure
 
-- **資料來源**：Kusto Query（整合案件指標 + CPE Survey + IR Missing + ASWStakeholder）
-- **Cluster / Database**：`supportrptwus3prod.westus3.kusto.windows.net` / `KPISupportData`（案件指標 + CSAT）；`bedrock.eastus.kusto.windows.net` / `CSI`（Stakeholder 中繼資料）
-- **財年範圍**：**FY26**（`2025-07-01` ~ `2026-06-30`），由 `CreatedDateTime` 篩選
-- **成員篩選**：`bedrock.CSI.ASWStakeholder | where Role == "Engineer" and BusinessUnit == "CSS-ASW"`
-- **排除名單**：已離開 ASW 的成員排除（同 CPE Insight）
+- **Data source**: Kusto Query (combines case metrics + CPE Survey + IR Missing + ASWStakeholder)
+- **Cluster / Database**: `supportrptwus3prod.westus3.kusto.windows.net` / `KPISupportData` (case metrics + CSAT); `bedrock.eastus.kusto.windows.net` / `CSI` (Stakeholder metadata)
+- **Fiscal-year range**: **FY26** (`2025-07-01` through `2026-06-30`), filtered by `CreatedDateTime`
+- **Member filter**: `bedrock.CSI.ASWStakeholder | where Role == "Engineer" and BusinessUnit == "CSS-ASW"`
+- **Exclusion list**: Exclude members who have left ASW (same as CPE Insight)
 
-##### 欄位規範（10 欄）
+##### Field Specifications (10 columns)
 
-| # | 欄位名稱 | 說明 | 來源 |
+| # | Field name | Description | Source |
 |---|----------|------|------|
-| 1 | SE Name | 工程師全名 | `ASWStakeholder.AgentName` |
-| 2 | SE Manager Name | 所屬 Manager 名稱 | `ASWStakeholder.Manager` |
-| 3 | Case Assignments | 該 FY 被 assign 的案件總數 | `count()` per AgentAlias |
-| 4 | Avg DTS | 平均 Day to Start（案件 assign → SE 首次接觸，天數） | `avg(DayToSchedule)` |
-| 5 | Avg DTC | 平均 Day to Close（結案天數） | `avg(DayToClose)` |
-| 6 | % Closed ≤7d | 7 天內結案比例 | `countif(DayToClose <= 7) / count()` |
-| 7 | SE Country | SE 所在國家 | `ASWStakeholder.Country` |
-| 8 | CSAT Avg | 收到 Survey 的平均 CSAT 分數（1–5） | `avg(TotalCustomerSATScore)` |
-| 9 | Surveys Count | 收到的 CSAT Survey 筆數 | `countif(isnotempty(TotalCustomerSATScore))` |
-| 10 | IR SLA Missed | 未達 Initial Response SLA 的案件數 | 來自 IR Missing 資料（Cowork xlsx 或 Dashboard）；以 AgentAlias join |
+| 1 | SE Name | Engineer's full name | `ASWStakeholder.AgentName` |
+| 2 | SE Manager Name | Name of the engineer's Manager | `ASWStakeholder.Manager` |
+| 3 | Case Assignments | Total cases assigned during that FY | `count()` per AgentAlias |
+| 4 | Avg DTS | Average Day to Start (days from case assignment to the SE's first contact) | `avg(DayToSchedule)` |
+| 5 | Avg DTC | Average Day to Close (days to close) | `avg(DayToClose)` |
+| 6 | % Closed ≤7d | Percentage of cases closed within 7 days | `countif(DayToClose <= 7) / count()` |
+| 7 | SE Country | Engineer's country | `ASWStakeholder.Country` |
+| 8 | CSAT Avg | Average CSAT score (1–5) from received Surveys | `avg(TotalCustomerSATScore)` |
+| 9 | Surveys Count | Number of CSAT Surveys received | `countif(isnotempty(TotalCustomerSATScore))` |
+| 10 | IR SLA Missed | Number of cases that missed the Initial Response SLA | From IR Missing data (Cowork xlsx or Dashboard); join by AgentAlias |
 
 ##### Kusto Query
 
@@ -586,7 +585,7 @@ let fy_start = datetime(2025-07-01);
 let fy_end   = datetime(2026-07-01);
 let ASWMembers = cluster('bedrock.eastus.kusto.windows.net').database("CSI").ASWStakeholder
 | where Role == "Engineer" and BusinessUnit == "CSS-ASW"
-| where AgentAlias !in ('zhaobo') // 已離開 ASW 的成員排除
+| where AgentAlias !in ('zhaobo') // Exclude members who have left ASW
 | project AgentAlias, AgentName, Manager, Country;
 let CaseSummary =
     AllCloudsSupportIncidentWithReferenceModelVNext
@@ -607,29 +606,29 @@ CaseSummary
 | order by AgentName asc
 ```
 
-> **IR SLA Missed** 欄位：從 Cowork xlsx（`asw_ir_missed_FY26.xlsx`）的 `FY26 IR Missed` sheet，依 `SR Owner`（AgentAlias）統計 `count()`，再 join 至上述查詢結果。若 Cowork 檔案不可用，改以 Dashboard IR Missed Reasons 擷取的 Case ID 清單，透過 `AgentAlias` 聚合取得件數。
+> **IR SLA Missed** column: In the Cowork xlsx (`asw_ir_missed_FY26.xlsx`), count by `SR Owner` (AgentAlias) from the `FY26 IR Missed` sheet, then join the result to the query above. If the Cowork file is unavailable, use the Case ID list extracted from the Dashboard IR Missed Reasons and aggregate counts by `AgentAlias`.
 
-##### 頁面呈現規則
+##### Page Display Rules
 
-- **表格方式**：單一彙總表（每位 SE 一列，按 SE Name 升序排列）
-- **預設排序**：SE Name 升序
-- **可排序欄位**：所有欄位均支援點擊標頭排序
-- **數值格式**：
-  - Avg DTS / Avg DTC：小數一位（例：`8.3`）
-  - % Closed ≤7d：百分比一位小數（例：`62.5%`）
-  - CSAT Avg：小數兩位（例：`4.75`）
-  - IR SLA Missed：整數
-- **色彩標示（CSAT Avg）**：5★=🟢 / 4★=🟡 / ≤3★=🔴（同 CPE Insight badge 規則，以四捨五入至整數判定）
-- **色彩標示（% Closed ≤7d）**：≥50%=🟢 / 40–49%=🟡 / <40%=🔴
-- **色彩標示（IR SLA Missed）**：0=🟢 / 1=🟡 / ≥2=🔴
-- **無資料顯示**：CSAT Avg 無 Survey 時顯示灰色 `-`；AvgDTS / AvgDTC 無數值時顯示灰色 `-`
-- **Summary Cards（頁面頂部）**：
-  - Total SE Members（成員總數）
-  - Total Case Assignments（全團隊案件總數）
-  - Team Avg CSAT（團隊平均 CSAT）
-  - Team Avg DTC（團隊平均 DTC）
-  - Total IR SLA Missed（全團隊未達 IR SLA 件數）
-  - Team % Closed ≤7d（全團隊 7 天內結案率）
+- **Table layout**: One summary table (one row per SE, sorted by SE Name ascending)
+- **Default sort**: SE Name ascending
+- **Sortable columns**: Every column supports sorting by clicking its header
+- **Number formats**:
+  - Avg DTS / Avg DTC: one decimal place (for example, `8.3`)
+  - % Closed ≤7d: one decimal place as a percentage (for example, `62.5%`)
+  - CSAT Avg: two decimal places (for example, `4.75`)
+  - IR SLA Missed: integer
+- **Color indicators (CSAT Avg)**: 5★=🟢 / 4★=🟡 / ≤3★=🔴 (same rounding-to-integer determination as the CPE Insight badge rules)
+- **Color indicators (% Closed ≤7d)**: ≥50%=🟢 / 40–49%=🟡 / <40%=🔴
+- **Color indicators (IR SLA Missed)**: 0=🟢 / 1=🟡 / ≥2=🔴
+- **Missing data display**: Show gray `-` for CSAT Avg when there are no Surveys and for AvgDTS / AvgDTC when there is no value
+- **Summary Cards (top of page)**:
+  - Total SE Members (total number of members)
+  - Total Case Assignments (total cases for the team)
+  - Team Avg CSAT (team average CSAT)
+  - Team Avg DTC (team average DTC)
+  - Total IR SLA Missed (team total of cases that missed the IR SLA)
+  - Team % Closed ≤7d (team percentage of cases closed within 7 days)
 
 #### ASW Engineers
 
@@ -696,11 +695,11 @@ CaseSummary
 - Interpret path categories as recurring support scenarios, not validated root causes. State source, period, refresh timestamp, ownership semantics, missing metrics, and denominator rules in the report.
 - Verification: `npm test`, then check collapsed sections, manager/path filters, all column sorts, hover/focus case lists, and both Excel downloads in a browser. Tests include real-data case-count/sum parity and workbook serialization/reload with cached formula results, no-data rows, zero DTC, filter scope, sort order, and string case IDs.
 
-#### US / Costa Rica cohort 與 FY 比較規範
+#### US / Costa Rica Cohort and FY Comparison Requirements
 
-##### 權威 cohort
+##### Authoritative Cohort
 
-除非用戶提供更新 roster，US / Costa Rica 報告固定使用以下 alias。**不可**以 `ASWStakeholder.Region == "America"` 代替，因 America 亦包含 Brazil、Portugal、Spain、India 等非目標成員。
+Unless the user provides an updated roster, the US / Costa Rica report must use the following aliases. **Do not** substitute `ASWStakeholder.Region == "America"`, because America also includes non-target members such as Brazil, Portugal, Spain, and India.
 
 ```kql
 let USEngineers = dynamic([
@@ -726,75 +725,75 @@ let CostaRicaEngineers = dynamic(["anrod"]);
 | USA | tholliday | Taylor Holliday |
 | Costa Rica | anrod | Angelica Rodriguez |
 
-##### Live schema drift（2026-10 查驗）
+##### Live Schema Drift (verified 2026-10)
 
-舊版 `SE Members Performance` Query 的以下假設已失效：
+The following assumptions in the previous `SE Members Performance` query are no longer valid:
 
-- `bedrock.CSI.ASWStakeholder.Country` **已移除**；目前僅有 `Region` / `Zone`，因此 Country 必須使用上述權威 alias roster。
-- `AllCloudsSupportIncidentWithReferenceModelVNext.AgentAlias` 與 `CoalescedAgentAlias` 在目前 view 內為空，不能直接 join Engineer。
-- `DayToSchedule` / `DayToClose` 已改為 string 欄位 `DTS` / `DTC`，需使用 `todouble(DTS)` / `todouble(DTC)`。
-- `TotalCustomerSATScore` 等 Survey 欄位在目前 Kusto identity 下被遮罩為空；FY27 CSAT 必須顯示 `No data`，不可用 0 代替。
+- `bedrock.CSI.ASWStakeholder.Country` **has been removed**; only `Region` / `Zone` are currently available, so Country must use the authoritative alias roster above.
+- `AllCloudsSupportIncidentWithReferenceModelVNext.AgentAlias` and `CoalescedAgentAlias` are empty in the current view and cannot be used to join directly to Engineer.
+- `DayToSchedule` / `DayToClose` have been replaced by the string fields `DTS` / `DTC`; use `todouble(DTS)` / `todouble(DTC)`.
+- Survey fields such as `TotalCustomerSATScore` are masked as empty under the current Kusto identity; FY27 CSAT must display `No data`, not 0.
 
-##### Ownership replacement join（權威方式）
+##### Ownership Replacement Join (authoritative method)
 
 1. **FY26 ownership**：`bedrock.CSI.SupportRequestHistory_Snapshot_Table2`
-   - Created：`TicketCreatedDateTime`
-   - Case ID：`SupportTicketId`
-   - Owner：`CaseOwnerAlias`
-   - 每 Case 使用 `summarize arg_max(dataRefreshDateTime, CaseOwnerAlias) by SupportTicketId`
+   - Created: `TicketCreatedDateTime`
+   - Case ID: `SupportTicketId`
+   - Owner: `CaseOwnerAlias`
+   - For each case, use `summarize arg_max(dataRefreshDateTime, CaseOwnerAlias) by SupportTicketId`
 2. **FY27 ownership**：`bedrock.CSI.SupportRequestHistory_Snapshot_Table3`
-   - Created：`todatetime(CreatedDateTime_UTC)`
-   - Case ID：`IncidentId`
-   - Owner：`CaseOwner`
-   - 每 Case 使用 `summarize arg_max(dataRefreshDateTime, CaseOwner) by IncidentId`
-3. 將兩個 ownership 結果以 `IncidentId` join：
+   - Created: `todatetime(CreatedDateTime_UTC)`
+   - Case ID: `IncidentId`
+   - Owner: `CaseOwner`
+   - For each case, use `summarize arg_max(dataRefreshDateTime, CaseOwner) by IncidentId`
+3. Join the two ownership results on `IncidentId`:
    `supportrptwus3prod.KPISupportData.AllCloudsSupportIncidentWithReferenceModelVNext`
-4. 指標：
+4. Metrics:
    - `AvgDTS = avg(todouble(DTS))`
    - `AvgDTC = avg(todouble(DTC))`
    - `% Closed ≤7d = dcountif(IncidentId, todouble(DTC) <= 7) / dcount(IncidentId)`
-   - DTS / DTC 平均僅使用非 null metric records；顯示時附 `DTSRecords` / `DTCRecords`
-5. Roster 中未匹配 ownership 的 Engineer（例如目前的 `brwurz`）仍需顯示，但所有 metric 顯示 **No data**；不得當作 0，亦不得納入排名。
+   - Calculate DTS / DTC averages using only non-null metric records; include `DTSRecords` / `DTCRecords` when displaying them.
+5. Engineers in the roster with no matching ownership (for example, current `brwurz`) must still be shown, but all metrics must display **No data**; do not treat them as 0 or include them in rankings.
 
-##### Team rollup 與評分
+##### Team Rollup and Scoring
 
-- Team Avg DTS：以 `DTSRecords` 加權。
-- Team Avg DTC：以 `DTCRecords` 加權。
-- Team % Closed ≤7d：以 `CaseAssignments` 加權。
-- Team CSAT：以 Survey count 加權；FY27 Survey 遮罩時顯示 `No data`。
-- **FY26 排名**：cohort 內 min-max normalized score，Avg DTC / Avg DTS（low good）+ Closed ≤7d / CSAT（high good）等權平均。
-- **FY27 排名**：Avg DTC / Avg DTS（low good）+ Closed ≤7d（high good）等權平均；CSAT 不可用時排除。
-- **FY26 vs FY27 改善排名**：`FY26 DTC - FY27 DTC`、`FY26 DTS - FY27 DTS`、`FY27 ≤7d - FY26 ≤7d` 三項各自 min-max normalize 後等權平均。
-- 排名是**cohort 內相對分數**，不是 target-based performance rating。報告結論必須同時列出 metric evidence，並註明不能取代正式績效評估。
+- Team Avg DTS: weight by `DTSRecords`.
+- Team Avg DTC: weight by `DTCRecords`.
+- Team % Closed ≤7d: weight by `CaseAssignments`.
+- Team CSAT: weight by survey count; display `No data` when FY27 survey data is masked.
+- **FY26 ranking**: equally weighted average of cohort min-max normalized scores for Avg DTC / Avg DTS (lower is better) and Closed ≤7d / CSAT (higher is better).
+- **FY27 ranking**: equally weighted average of Avg DTC / Avg DTS (lower is better) and Closed ≤7d (higher is better); exclude CSAT when unavailable.
+- **FY26 vs FY27 improvement ranking**: independently min-max normalize `FY26 DTC - FY27 DTC`, `FY26 DTS - FY27 DTS`, and `FY27 ≤7d - FY26 ≤7d`, then take their equally weighted average.
+- Rankings are **relative scores within the cohort**, not target-based performance ratings. Report conclusions must include supporting metric evidence and state that these rankings do not replace formal performance evaluations.
 
-#### Customer Outreach / CaaS Lead Tab 規範
+#### Customer Outreach / CaaS Lead Tab Requirements
 
-##### 角色與預期影響
+##### Roles and Expected Impact
 
-CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proactive、insight-driven KnowMe workload experience。Tab 頂部固定顯示 4 項角色：
+CaaS Lead 2.0 shifts SAP / EPIC support from reactive incident handling to a proactive, insight-driven KnowMe workload experience. Always display these four roles at the top of the tab:
 
-1. **Know the customer**：維護 workload architecture、customer context、support history、risk、Wiki / Plan of Record。
-2. **Connect stakeholders**：建立 CSAM / CSA / ACE / CSI / Product Engineering / Customer cadence。
-3. **Turn cases into insight**：分析 case pattern、customer pain point，使用 Grafana / Zebra AI 推動 proactive action。
-4. **Improve support readiness**：Change Event readiness、routing / monitoring、降低 critical incident 的 customer effort。
+1. **Know the customer**: maintain workload architecture, customer context, support history, risks, and Wiki / Plan of Record.
+2. **Connect stakeholders**: establish a cadence with CSAM / CSA / ACE / CSI / Product Engineering / Customer.
+3. **Turn cases into insight**: analyze case patterns and customer pain points, using Grafana / Zebra AI to drive proactive action.
+4. **Improve support readiness**: prepare for Change Events, routing / monitoring, and reduce customer effort for critical incidents.
 
-##### Assignment 來源與解析
+##### Assignment Sources and Interpretation
 
-1. **Current master**：`asw_caas_lead/scripts/generate_dashboard_v1.py` 的 `FOCUS` list（Customer、TPID、Workload、Lead、Stage、Contract、Program indicators）。
-2. **角色 / Deliverable 語意**：
+1. **Current master**: the `FOCUS` list in `asw_caas_lead/scripts/generate_dashboard_v1.py` (Customer, TPID, Workload, Lead, Stage, Contract, Program indicators).
+2. **Role / deliverable definitions**:
    - `asw_caas_lead/references/project_charter_digest.md`
    - `asw_caas_lead/references/stakeholder_deck_digest.md`
-3. **Legacy assignments**（仍需標為 Legacy，不可混成 current focus master）：
+3. **Legacy assignments** (must remain labeled Legacy; do not merge into the current focus master):
    - Curtis Schriever → Sealed Air（TPID `706691`）
    - Taylor Holliday → Mondelez（TPID `18214815`）
-4. **Live TPID 補充**（來源為 FY27 Kusto customer name resolution）：
+4. **Live TPID additions** (from FY27 Kusto customer name resolution):
    - Siddharth Sharma → General Motors（TPID `641658`）
    - Sheetal Joyce → CVS（TPID `782348`）
-5. `Medline` 同時由 Alex Kassap（co-lead）與 Shiva Addala（primary）負責：
-   - Assignment rollup 可計兩筆。
-   - Program-level unique-customer cases / closed **只能計一次**，不可雙重累加。
+5. `Medline` is assigned to both Alex Kassap (co-lead) and Shiva Addala (primary):
+   - The assignment rollup may count two assignments.
+   - Program-level unique-customer cases / closed **must only be counted once**; do not double-count them.
 
-##### 目前 13-person cohort assignments
+##### Current 13-Person Cohort Assignments
 
 | Engineer | Customer(s) |
 |----------|-------------|
@@ -812,11 +811,11 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 | Tanner King | MichMed; Mt. Sinai |
 | Taylor Holliday | Mondelez (Legacy) |
 
-##### Customer stats Query 與呈現
+##### Customer Stats Query and Presentation
 
-- Case source：`AllCloudsSupportIncidentWithReferenceModelVNext`，以 FY27 `CreatedDateTime` + `Customer_TPID` 篩選。
-- Lead-owned case：使用 `SupportRequestHistory_Snapshot_Table3` 最新 ownership，`CaseOwner == LeadAlias`。
-- 每個 Customer 顯示：
+- Case source: `AllCloudsSupportIncidentWithReferenceModelVNext`, filtered by FY27 `CreatedDateTime` + `Customer_TPID`.
+- Lead-owned cases: use the latest ownership from `SupportRequestHistory_Snapshot_Table3`, where `CaseOwner == LeadAlias`.
+- Display for each customer:
   - Cases / Closed
   - Avg DTC
   - % Closed ≤7d
@@ -827,61 +826,61 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
   - Top `SapSupportPathL3`
   - Workload / TPID / Engagement Stage / MC Contract / current-vs-legacy status
   - Case Insight / +AI / Wiki-PoR / Success Stories / Change Events / Executive Escalations
-- Engineer row顯示 assignment count、workload mix、assignment-level case exposure、加權 Avg DTC、加權 ≤7d、CritSit / Sev A、Stage。
-- CaaS portfolio 排序可使用 case exposure，但標題必須寫明這不是個人績效排名。
+- Engineer rows show assignment count, workload mix, assignment-level case exposure, weighted Avg DTC, weighted ≤7d, CritSit / Sev A, and Stage.
+- CaaS portfolio sorting may use case exposure, but the title must state that this is not an individual performance ranking.
 
-##### 因果與資料品質護欄
+##### Causality and Data-Quality Guardrails
 
-- Customer KPIs 描述 CaaS Lead 的 **portfolio environment**，不代表該 Lead 單獨造成 customer outcome。
-- 只有 `Lead-owned cases` 能聲明直接 case ownership；即使為 0，仍可能完成 stakeholder engagement、Wiki、PoR、case analysis 或 change-event work。
-- Current / Legacy / Co-lead / Primary lead 必須明確標示。
-- 無 TPID 或尚未 routing 的 onboarding customer 顯示 0 / No data，不可移除。
-- Program indicator 是 manual / master-list tally；Customer operational KPI 是 Kusto observation。兩者不可混成單一「impact score」。
-- 報告結論需分開描述：
+- Customer KPIs describe the CaaS Lead's **portfolio environment**; they do not mean that the Lead alone caused a customer outcome.
+- Only `Lead-owned cases` can be stated as direct case ownership; even with zero such cases, stakeholder engagement, Wiki, PoR, case analysis, or change-event work may still have been completed.
+- Clearly label Current / Legacy / Co-lead / Primary lead.
+- Show 0 / No data for onboarding customers without a TPID or not yet routed; do not remove them.
+- Program indicators are manual / master-list tallies; Customer operational KPIs are Kusto observations. Do not combine them into a single "impact score."
+- Report conclusions separately describe:
   1. Customer support exposure / outcome
   2. Program maturity / deliverable completion
   3. Next-action opportunity
 
 ---
 
-- **KPI Target 色彩標示規則**（適用於 Dashboard 1 有 Target 的 KPI）：
-  - 🟢 = 達標（At or above Target）
-  - 🟡 = 接近目標（Below Target but within 5% gap）
-  - 🔴 = 未達標（More than 5% gap below Target）
-  - 5% gap 計算方式：以 Target 值的 5% 為閾值（例：Target ≥ 4.8，5% = 0.24，Yellow 範圍為 4.56~4.79）
-  - 指標一律使用燈號（🟢🟡🔴）表示，不使用文字符號（✓/⚠/✗）
-  - KPI 數值一律以**黑色**顯示，燈號置於數值後方（例：`4.86 🟢`、`4.67 🟡`、`4.50 🔴`）
-  - **標示位置**：僅在各月份欄位數值後顯示燈號；**Total 欄位不顯示燈號**（Total 為年度累計值，不作單一標示）
-  - **適用 KPI 清單**：
+- **KPI Target color-coding rules** (apply to Dashboard 1 KPIs with a Target):
+  - 🟢 = Meets target (at or above Target)
+  - 🟡 = Near target (below Target but within a 5% gap)
+  - 🔴 = Below target (more than 5% below Target)
+  - Calculate the 5% gap using 5% of the Target value as the threshold (for example, for Target ≥ 4.8, 5% = 0.24 and the Yellow range is 4.56–4.79).
+  - Always use traffic-light indicators (🟢🟡🔴); do not use text symbols (✓/⚠/✗).
+  - Always display KPI values in **black**, with the indicator after the value (for example, `4.86 🟢`, `4.67 🟡`, `4.50 🔴`).
+  - **Indicator placement**: show indicators only after monthly values; **do not show an indicator in the Total column** (Total is a fiscal-year cumulative value, not a single-month indicator).
+  - **Applicable KPI list**:
     | KPI | Target | Direction |
     |-----|--------|-----------|
-    | CSAT 5★ Avg | ≥ 4.8 | high (越高越好) |
+    | CSAT 5★ Avg | ≥ 4.8 | high (higher is better) |
     | % IR Met | ≥ 99% | high |
-    | Avg Day to Close | ≤ 12 | low (越低越好) |
+    | Avg Day to Close | ≤ 12 | low (lower is better) |
     | % Cases Closed ≤7d | ≥ 50% | high |
-- **vs Total 標示規則**（適用於無明確 Target 但以 Total 為基準的 KPI，如 IPD Created）：
-  - 🟢 = 當月值 ≥ Total（達到平均水準）
-  - 🟡 = 當月值低於 Total，但落差在 5% 以內
-  - 🔴 = 當月值低於 Total 超過 5%
-  - Total 欄本身不做色彩標示
-  - Target 欄位顯示為「vs Total」
-- **無標示的 KPI**：Target 與 Direction 均為 `-` 的 KPI 不做任何色彩標示
-- **Trend 標示規則**（MoM Summary 等）：
-  - 🟢 綠色 = 改善中 / 達標
-  - 🟡 橙色 = 接近目標 / 需觀察
-  - 🔴 紅色 = 未達標 / 需立即行動
-- **Footer** 需註明：
-  - 各 Dashboard 使用的 Filter 條件
-  - 資料日期（Data as of）
-  - 報告產生時間（UTC+8）
+- **vs Total indicator rules** (for KPIs without an explicit Target that use Total as the baseline, such as IPD Created):
+  - 🟢 = Monthly value ≥ Total (at or above the average level)
+  - 🟡 = Monthly value is below Total, but the gap is within 5%
+  - 🔴 = Monthly value is more than 5% below Total
+  - Do not apply color coding to the Total column itself.
+  - Display "vs Total" in the Target column.
+- **KPIs without indicators**: do not apply color coding to KPIs whose Target and Direction are both `-`.
+- **Trend indicator rules** (for MoM Summary, etc.):
+  - 🟢 Green = improving / on target
+  - 🟡 Orange = near target / monitor
+  - 🔴 Red = below target / immediate action required
+- **The footer** must specify:
+  - Filter conditions used for each dashboard
+  - Data date (Data as of)
+  - Report generation time (UTC+8)
 
 ---
 
-## HTML 報告固定模板（Standard Template）
+## Standard HTML Report Template
 
-以下為 MOR Summary Report HTML 輸出的固定格式模板。未來每月報告均應遵循此結構產出，僅替換數據內容。
+The following is the standard format template for MOR Summary Report HTML output. Future monthly reports should follow this structure, replacing only the data.
 
-### 整體架構
+### Overall Structure
 
 ```
 <!DOCTYPE html>
@@ -889,58 +888,58 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 <head>
   <meta charset="UTF-8">
   <title>MOR Summary Report - {Month} {Year} | ASW SAP & Epic Support</title>
-  <style>/* 共用 CSS（見 Design System）*/</style>
+  <style>/* Shared CSS (see Design System) */</style>
 </head>
 <body>
-  <div class="header">（報告標頭）</div>
-  <div class="tab-nav">（分頁導航按鈕 × 4）</div>
-  <div id="tab-mor" class="tab-panel active">（Tab 1: MOR Summary Report）</div>
-  <div id="tab-cpe" class="tab-panel">（Tab 2: CPE Insight）</div>
-  <div id="tab-irmissing" class="tab-panel">（Tab 3: IR Missing Insight）</div>
-  <div id="tab-sembers" class="tab-panel">（Tab 4: SE Members Performance）</div>
-  <script>/* switchTab 函數 */</script>
+  <div class="header">(Report header)</div>
+  <div class="tab-nav">(4 tab-navigation buttons)</div>
+  <div id="tab-mor" class="tab-panel active">(Tab 1: MOR Summary Report)</div>
+  <div id="tab-cpe" class="tab-panel">(Tab 2: CPE Insight)</div>
+  <div id="tab-irmissing" class="tab-panel">(Tab 3: IR Missing Insight)</div>
+  <div id="tab-sembers" class="tab-panel">(Tab 4: SE Members Performance)</div>
+  <script>/* switchTab function */</script>
 </body>
 </html>
 ```
 
-### Design System（CSS 變數與共用樣式）
+### Design System (CSS Variables and Shared Styles)
 
 ```css
 :root {
-    --green: #28a745;    /* 達標 */
-    --yellow: #ffc107;   /* 接近目標 */
-    --red: #dc3545;      /* 未達標 */
-    --blue: #0078d4;     /* Microsoft Blue，主色 */
-    --dark: #1a1a2e;     /* 標題 / 深色背景 */
+    --green: #28a745;    /* Meets target */
+    --yellow: #ffc107;   /* Near target */
+    --red: #dc3545;      /* Below target */
+    --blue: #0078d4;     /* Microsoft Blue, primary color */
+    --dark: #1a1a2e;     /* Title / dark background */
     --card-bg: #ffffff;
-    --bg: #f4f6f9;       /* 頁面底色 */
+    --bg: #f4f6f9;       /* Page background */
     --text: #333333;
     --border: #e0e0e0;
 }
 ```
 
-**主要元件類別**：
+**Main component classes**:
 
-| CSS Class | 用途 |
+| CSS Class | Purpose |
 |-----------|------|
-| `.header` | 頁面最上方深色 Banner（gradient: `--dark` → `#16213e`） |
-| `.tab-nav` / `.tab-btn` | 分頁切換按鈕列 |
-| `.tab-panel` | 分頁內容區域（`.active` 顯示） |
-| `.section` / `.section-title` | 區塊標題（藍色底線） |
-| `.cards` / `.card` | Executive Summary KPI 卡片（grid layout, 左側色帶） |
-| `.card.green` / `.card.yellow` / `.card.red` | 卡片色帶變體 |
-| `.table-wrapper` / `table` | 資料表格（圓角白底、hover 高亮） |
-| `.highlight-col` | 當前月份欄（黃底加粗） |
-| `.total-col` | Total 欄位（綠底加粗） |
-| `.badge` / `.badge-green` / `.badge-yellow` / `.badge-red` | CSAT 分數標籤（5★=green, 4★=yellow, ≤3★=red） |
-| `.analysis-grid` / `.analysis-box` | Business Analysis 區塊（2 欄 grid） |
-| `.highlight-box` / `.lowlight-box` / `.recommend-box` | Analysis 區塊色帶（green/red/blue） |
-| `.cpe-summary-cards` / `.cpe-card` | CPE / IR Missing 摘要卡片（上方色帶，非左側） |
-| `th.sortable` / `.asc` / `.desc` | 可排序欄位表頭（hover 高亮、方向箭頭指示） |
-| `.verbatim-col` | Verbatim 欄位（white-space: normal，允許自動換行） |
-| `.footer` | 頁尾（資料來源、Filter、日期） |
+| `.header` | Dark banner at the top of the page (gradient: `--dark` → `#16213e`) |
+| `.tab-nav` / `.tab-btn` | Tab-switching button row |
+| `.tab-panel` | Tab content area (shown when `.active`) |
+| `.section` / `.section-title` | Section heading (blue underline) |
+| `.cards` / `.card` | Executive Summary KPI cards (grid layout, left-side color band) |
+| `.card.green` / `.card.yellow` / `.card.red` | Card color-band variants |
+| `.table-wrapper` / `table` | Data table (rounded white background, hover highlight) |
+| `.highlight-col` | Current-month column (yellow background, bold) |
+| `.total-col` | Total column (green background, bold) |
+| `.badge` / `.badge-green` / `.badge-yellow` / `.badge-red` | CSAT score badges (5★=green, 4★=yellow, ≤3★=red) |
+| `.analysis-grid` / `.analysis-box` | Business Analysis section (2-column grid) |
+| `.highlight-box` / `.lowlight-box` / `.recommend-box` | Analysis section color bands (green/red/blue) |
+| `.cpe-summary-cards` / `.cpe-card` | CPE / IR Missing summary cards (top color band, not left-side) |
+| `th.sortable` / `.asc` / `.desc` | Sortable column headers (hover highlight, direction arrow indicator) |
+| `.verbatim-col` | Verbatim column (`white-space: normal`, allowing automatic line wrapping) |
+| `.footer` | Footer (data source, Filter, date) |
 
-### Header 區塊
+### Header Section
 
 ```html
 <div class="header">
@@ -953,7 +952,7 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-### Tab 導航
+### Tab Navigation
 
 ```html
 <div class="tab-nav">
@@ -964,27 +963,27 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-### Tab 1: MOR Summary Report 結構
+### Tab 1: MOR Summary Report Structure
 
-依序包含以下 6 個 Section：
+Include the following six sections in order:
 
-#### 1. Executive Summary Cards（9 張）
+#### 1. Executive Summary Cards (9 cards)
 
 ```html
 <div class="section">
     <h2 class="section-title">Executive Summary (Year-to-Date Total)</h2>
     <div class="cards">
         <div class="card {color}">
-            <div class="label">{KPI 名稱}</div>
-            <div class="value">{YTD Total 數值}</div>
+            <div class="label">{KPI Name}</div>
+            <div class="value">{YTD Total value}</div>
             <div class="trend">FY{YY} YTD</div>
         </div>
-        <!-- 重複 9 張，參照 Executive Summary Cards 清單 -->
+        <!-- Repeat for 9 cards, referring to the Executive Summary Cards list -->
     </div>
 </div>
 ```
 
-- `{color}` = `green` | `yellow` | `red`（依 Status 判定規則）或不填（純資訊 Card）
+- `{color}` = `green` | `yellow` | `red` (according to the Status determination rules), or omit it for an informational card.
 
 #### 2. Business Analysis
 
@@ -992,23 +991,23 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 <div class="analysis-grid">
     <div class="analysis-box highlight-box">
         <h4>🟢 Highlights</h4>
-        <ul><li><strong>{標題}</strong> — {說明}</li>...</ul>
+        <ul><li><strong>{Title}</strong> — {Description}</li>...</ul>
     </div>
     <div class="analysis-box lowlight-box">
         <h4>🔴 Lowlights / Areas of Concern</h4>
-        <ul><li><strong>{標題}</strong> — {說明}</li>...</ul>
+        <ul><li><strong>{Title}</strong> — {Description}</li>...</ul>
     </div>
     <div class="analysis-box recommend-box" style="grid-column: span 2;">
         <h4>💡 Recommendations</h4>
-        <ul><li><strong>{標題}</strong> — {說明}</li>...</ul>
+        <ul><li><strong>{Title}</strong> — {Description}</li>...</ul>
     </div>
 </div>
 ```
 
-- Highlights / Lowlights 各佔一欄（2-column grid）
-- Recommendations 橫跨兩欄（`grid-column: span 2`）
+- Highlights / Lowlights occupy one column each (2-column grid).
+- Recommendations span both columns (`grid-column: span 2`).
 
-#### 3. Dashboard 1 — Quality Metrics 表格
+#### 3. Dashboard 1 — Quality Metrics Table
 
 ```html
 <div class="section">
@@ -1018,18 +1017,18 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
             <thead>
                 <tr>
                     <th>KPI</th><th>Target</th>
-                    <th>Jul</th><th>Aug</th>...<th class="highlight-col">{當月}</th>
+                    <th>Jul</th><th>Aug</th>...<th class="highlight-col">{Current month}</th>
                     <th class="total-col">Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{KPI名稱}</td>
-                    <td style="font-weight:600;color:#555;">{Target值}</td>
-                    <td>{月值} {燈號}</td>
+                    <td>{KPI Name}</td>
+                    <td style="font-weight:600;color:#555;">{Target value}</td>
+                    <td>{Monthly value} {indicator}</td>
                     ...
-                    <td class="highlight-col">{當月值} {燈號}</td>
-                    <td class="total-col">{Total值} {燈號}</td>
+                    <td class="highlight-col">{Current-month value} {indicator}</td>
+                    <td class="total-col">{Total value} {indicator}</td>
                 </tr>
             </tbody>
         </table>
@@ -1037,18 +1036,18 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-- **Quality Metrics KPI**（6 項，來自上方表格）：CSAT 5★ Avg, DSAT, CSAT Surveys, CSAT Response Rate, % CritSit, % IR Met
-- **Operational Metrics KPI**（12 項，來自下方表格）：IPD Created, IPD Closed, Open Cases, Created Cases, Closed Cases, CSS TMPI, Avg DTC, Backlog Count, Backlog DtC, Collaboration Tasks, Post IR Transfer %, % Transfer
-- 當月為年度最後一個有資料的月份，使用 `highlight-col` class 標示
-- 「部分月數據」加 `⚠️` 提示（如月中資料）
+- **Quality Metrics KPIs** (6 items, from the upper table): CSAT 5★ Avg, DSAT, CSAT Surveys, CSAT Response Rate, % CritSit, % IR Met
+- **Operational Metrics KPIs** (12 items, from the lower table): IPD Created, IPD Closed, Open Cases, Created Cases, Closed Cases, CSS TMPI, Avg DTC, Backlog Count, Backlog DtC, Collaboration Tasks, Post IR Transfer %, % Transfer
+- Mark the last month with data for the fiscal year using the `highlight-col` class.
+- Add a `⚠️` notice for "partial-month data" (for example, mid-month data).
 
-#### 4. Dashboard 2 — OpEx Metric Trend View 表格
+#### 4. Dashboard 2 — OpEx Metric Trend View Table
 
-包含兩個子表格：
-- **主要 OpEx Metrics（5 項有 Target）**：欄位 = Category | KPI | Target | 最近 6 個月
-- **Additional OpEx Metrics（6 項無 Target）**：欄位 = Category | KPI | 最近 6 個月
+Includes two subtables:
+- **Primary OpEx Metrics (5 items with a Target)**: columns = Category | KPI | Target | Most recent 6 months
+- **Additional OpEx Metrics (6 items without a Target)**: columns = Category | KPI | Most recent 6 months
 
-接著是 **FYTD Actuals vs Benchmarks** 表格：
+Follow these with the **FYTD Actuals vs Benchmarks** table:
 
 ```html
 <table>
@@ -1057,38 +1056,38 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
     </thead>
     <tbody>
         <tr>
-            <td>{KPI名稱}</td>
-            <td>{Actual值}</td>
-            <td>{Target值}</td>
-            <td class="improved|declined">{差異值}</td>
+            <td>{KPI Name}</td>
+            <td>{Actual value}</td>
+            <td>{Target value}</td>
+            <td class="improved|declined">{Variance}</td>
             <td>🟢 Met | 🔴 Not Met</td>
         </tr>
     </tbody>
 </table>
 ```
 
-#### 5. Month-over-Month Summary 表格
+#### 5. Month-over-Month Summary Table
 
 ```html
 <table class="mom-table">
     <thead>
-        <tr><th>KPI</th><th>{上月} {Year}</th><th>{當月} {Year}</th><th>Change</th><th>Trend</th></tr>
+        <tr><th>KPI</th><th>{Previous month} {Year}</th><th>{Current month} {Year}</th><th>Change</th><th>Trend</th></tr>
     </thead>
     <tbody>
         <tr>
             <td>{KPI}</td>
-            <td>{上月值}</td>
-            <td>{當月值}</td>
-            <td class="improved|declined">{變化值}</td>
-            <td>{燈號} {方向箭頭}</td>
+            <td>{Previous-month value}</td>
+            <td>{Current-month value}</td>
+            <td class="improved|declined">{Change value}</td>
+            <td>{Indicator} {Direction arrow}</td>
         </tr>
     </tbody>
 </table>
 ```
 
-- **Trend 方向**：`↑` = 數值上升、`↓` = 數值下降、`→` = 持平
-- **class**：`.improved` = 改善（綠色）、`.declined` = 惡化（紅色）
-- 需附 `⚠️` 部分月數據提示
+- **Trend direction**: `↑` = value increased, `↓` = value decreased, `→` = unchanged
+- **class**: `.improved` = improvement (green), `.declined` = deterioration (red)
+- Include a `⚠️` partial-month data notice.
 
 #### 6. Footer
 
@@ -1104,7 +1103,7 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-### Tab 2: CPE Insight 結構
+### Tab 2: CPE Insight Structure
 
 ```html
 <div id="tab-cpe" class="tab-panel">
@@ -1135,7 +1134,7 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
                 <th class="sortable" data-col="4">SE Name</th><th>CSAT</th><th>Verbatim</th><th class="sortable desc" data-col="7">Closed</th><th class="sortable" data-col="8">Created</th><th class="sortable" data-col="9">Region</th>
             </tr></thead>
             <tbody>
-                <!-- 每一列 -->
+                <!-- One row per record -->
                 <tr>
                     <td>{IncidentId}</td>
                     <td>{Customer_TPName}</td>
@@ -1144,7 +1143,7 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
                     <td>{AgentName}</td>
                     <td><span class="badge badge-{green|yellow|red}">{Score} ★</span></td>
                     <td class="verbatim-col" style="text-align:left;white-space:normal;font-size:12px;">
-                        {Verbatim 文字，無內容時顯示 <span style="color:#ccc;">-</span>}
+                        {Verbatim text; when empty, display <span style="color:#ccc;">-</span>}
                     </td>
                     <td>{YYYY-MM-DD}</td>
                     <td>{YYYY-MM-DD}</td>
@@ -1156,17 +1155,17 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-**CPE 表格規則**：
-- **表格佈局**：`table-layout: auto`，使用 `<colgroup>` 設定建議欄寬，其他欄位自動適配內容寬度
-- **欄寬配置**：Case ID 130px, Customer auto, Service auto, AgentAlias 95px, SE Name auto, CSAT 50px, Verbatim 30%（剩餘空間）, Closed 85px, Created 85px, Region auto
-- **互動排序**：Customer, Service, SE Name, Closed, Created, Region 六欄支援點擊表頭排序（`th.sortable`），預設以 Closed 降序排列
-- **排序標示**：`th.sortable::after` 顯示 ⇅（未排序）、↑（升序 `.asc`）、↓（降序 `.desc`）
-- CSAT Badge：`badge-green`（5★）、`badge-yellow`（4★）、`badge-red`（≤3★）
-- Verbatim 文字自動換行（`white-space: normal`，class `verbatim-col`），其餘欄位 `white-space: nowrap` + `text-overflow: ellipsis`
-- 無 Verbatim 時顯示灰色 `-`
-- 排序：預設 `ClosedDateTime` 降序（最近日期在上方）
+**CPE table rules**:
+- **Table layout**: use `table-layout: auto` and `<colgroup>` to set suggested column widths; other columns automatically fit their content.
+- **Column widths**: Case ID 130px, Customer auto, Service auto, AgentAlias 95px, SE Name auto, CSAT 50px, Verbatim 30% (remaining space), Closed 85px, Created 85px, Region auto.
+- **Interactive sorting**: clicking the headers of Customer, Service, SE Name, Closed, Created, and Region (`th.sortable`) sorts those six columns; default sort is Closed descending.
+- **Sort indicators**: `th.sortable::after` displays ⇅ (unsorted), ↑ (ascending `.asc`), or ↓ (descending `.desc`).
+- CSAT badges: `badge-green` (5★), `badge-yellow` (4★), `badge-red` (≤3★).
+- Wrap Verbatim text automatically (`white-space: normal`, class `verbatim-col`); use `white-space: nowrap` + `text-overflow: ellipsis` for other columns.
+- Display a gray `-` when Verbatim is empty.
+- Sorting: default to `ClosedDateTime` descending (most recent date first).
 
-### Tab 3: IR Missing Insight 結構
+### Tab 3: IR Missing Insight Structure
 
 ```html
 <div id="tab-irmissing" class="tab-panel">
@@ -1176,9 +1175,9 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
             FY{YYYY} YTD IR Missing cases for ASW_SAPEpicEsc (Jul {YYYY-1} – {Month} {Year}).
             Source: CES BI Hub IR Missed Reasons Dashboard + Kusto
         </p>
-        <!-- 主要 Flex 容器：左側 Cards+TTMS、右側 Chart -->
+        <!-- Main Flex container: Cards+TTMS on the left, Chart on the right -->
         <div style="display:flex; gap:20px; align-items:stretch; margin-bottom:20px;">
-            <!-- 左側欄（固定 320px）：Summary Cards + TTMS 統計 -->
+            <!-- Left column (fixed at 320px): Summary Cards + TTMS statistics -->
             <div style="display:flex; flex-direction:column; gap:12px; width:320px; flex-shrink:0;">
                 <!-- Summary Cards (2×2 grid) -->
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -1195,10 +1194,10 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
                         <div class="cpe-label">Severity B</div><div class="cpe-value">{N}</div>
                     </div>
                 </div>
-                <!-- Average TTMS by Severity（填滿左側下方空間） -->
+                <!-- Average TTMS by Severity (fills the remaining space at the bottom of the left column) -->
                 <div style="flex:1; background:#fff; border-radius:10px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:3px solid #6366f1;">
                     <div style="font-size:0.7rem; color:#64748b; text-transform:uppercase; margin-bottom:10px;">Avg TTMS by Severity</div>
-                    <!-- 每個 Severity 一張卡片（A / B / C），垂直堆疊 -->
+                    <!-- One card per Severity (A / B / C), stacked vertically -->
                     <div style="margin-bottom:10px; padding:8px 10px; background:#f8fafc; border-radius:6px; border-left:3px solid #e74c3c;">
                         <div style="font-weight:600; font-size:0.8rem; color:#e74c3c;">Severity A</div>
                         <div style="font-size:1.3rem; font-weight:700; color:#1e293b;">{avg} <span style="font-size:0.7rem; color:#94a3b8;">mins</span></div>
@@ -1216,11 +1215,11 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
                     </div>
                 </div>
             </div>
-            <!-- 右側欄（flex:1）：IR Missing Trend Chart -->
+            <!-- Right column (flex:1): IR Missing Trend Chart -->
             <div style="flex:1; min-width:350px; background:#fff; border-radius:10px; padding:12px 16px; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:3px solid #0078d4;">
                 <div style="font-size:0.7rem; color:#64748b; text-transform:uppercase; margin-bottom:4px;">IR Missing Trend (FY{YYYY})</div>
                 <svg viewBox="0 0 550 180" style="width:100%; height:auto; font-family:sans-serif;">
-                    <!-- Grid: Y-axis 0~{maxCumulative}, X-axis Jul~{最後月份} -->
+                    <!-- Grid: Y-axis 0~{maxCumulative}, X-axis Jul~{last month} -->
                     <!-- Cumulative line: stroke #0078d4, stroke-width 2.5 -->
                     <!-- Data points: circle r=3.5, fill #0078d4, value labels above -->
                     <!-- Monthly bars: fill #f97316, opacity 0.5, with count labels -->
@@ -1239,11 +1238,11 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
                     <td>{IncidentId}</td>
                     <td>{Customer_TPName}</td>
                     <td>{ServiceName}</td>
-                    <td>{SE Manager（透過 AGENT_MANAGER_MAP 查詢）}</td>
+                    <td>{SE Manager (looked up via AGENT_MANAGER_MAP)}</td>
                     <td>{YYYY-MM-DD}</td>
                     <td>{YYYY-MM-DD}</td>
-                    <td>{Sev A 紅色加粗，其餘一般}</td>
-                    <td>{TTMS 值，null 顯示灰色 -，異常高值紅色加粗}</td>
+                    <td>{Sev A in bold red; others in normal style}</td>
+                    <td>{TTMS value; display null as a gray -, unusually high values in bold red}</td>
                     <td>{RegionName}</td>
                 </tr>
             </tbody>
@@ -1252,22 +1251,22 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-**IR Missing 頁面版面設計原則**：
-- **整體佈局**：上方為 flex 橫向排列（左欄固定 320px + 右欄 flex:1），下方為全寬資料表格
-- **左欄**：Summary Cards（2×2 grid）+ Avg TTMS by Severity（垂直堆疊，填滿剩餘高度）
-- **右欄**：SVG 折線圖（Cumulative 藍線 + Monthly Count 橘色 bar），自動填滿右側空間
-- **視覺平衡**：左右兩欄等高（`align-items:stretch`），避免任一側出現空白
+**IR Missing page layout principles**:
+- **Overall layout**: the top uses a horizontal flex layout (left column fixed at 320px + right column flex:1), with a full-width data table below.
+- **Left column**: Summary Cards (2×2 grid) + Avg TTMS by Severity (vertically stacked to fill the remaining height).
+- **Right column**: SVG line chart (blue Cumulative line + orange Monthly Count bars), automatically filling the available right-side space.
+- **Visual balance**: both columns have equal height (`align-items:stretch`) to avoid blank space on either side.
 
-**IR Missing 表格規則**：
+**IR Missing table rules**:
 - Severity A：`<span style="color:#e74c3c; font-weight:600;">A</span>`
-- Severity B/C：一般文字
-- TTMS null（Sev B/C 常見）：`<span style="color:#ccc;">-</span>`
-- TTMS 數值：**四捨五入至小數點第一位**（例：`2.48` → `2.5`、`29.98` → `30.0`）
-- TTMS 異常值（> 480 mins / 8 hours）：`style="color:#e74c3c; font-weight:600;"`
-- SE Name 為空：灰色 `-`
-- 排序：`CreatedDateTime` 降序
+- Severity B/C: normal text
+- TTMS null (common for Sev B/C): `<span style="color:#ccc;">-</span>`
+- TTMS values: **round to one decimal place** (for example, `2.48` → `2.5`, `29.98` → `30.0`)
+- Unusually high TTMS values (> 480 mins / 8 hours): `style="color:#e74c3c; font-weight:600;"`
+- If SE Name is empty: gray `-`
+- Sorting: `CreatedDateTime` descending
 
-### Tab 4: SE Members Performance 結構
+### Tab 4: SE Members Performance Structure
 
 ```html
 <div id="tab-sembers" class="tab-panel">
@@ -1313,16 +1312,16 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
                 <th class="sortable" data-col="9">IR SLA Missed</th>
             </tr></thead>
             <tbody>
-                <!-- 每位 SE 一列，依 SE Name 升序排列 -->
+                <!-- One row per SE, sorted by SE Name ascending -->
                 <tr>
                     <td>{AgentName}</td>
                     <td>{Manager}</td>
                     <td style="text-align:right;">{CaseAssignments}</td>
-                    <td style="text-align:right;">{AvgDTS 或 <span style="color:#ccc;">-</span>}</td>
-                    <td style="text-align:right;">{AvgDTC 或 <span style="color:#ccc;">-</span>}</td>
+                    <td style="text-align:right;">{AvgDTS or <span style="color:#ccc;">-</span>}</td>
+                    <td style="text-align:right;">{AvgDTC or <span style="color:#ccc;">-</span>}</td>
                     <td style="text-align:right;">{PctClosedIn7d}% {🟢|🟡|🔴}</td>
                     <td>{Country}</td>
-                    <td style="text-align:right;">{CSATAvg} {🟢|🟡|🔴} 或 <span style="color:#ccc;">-</span></td>
+                    <td style="text-align:right;">{CSATAvg} {🟢|🟡|🔴} or <span style="color:#ccc;">-</span></td>
                     <td style="text-align:right;">{SurveysCount}</td>
                     <td style="text-align:right;">{IRSLAMissed} {🟢|🟡|🔴}</td>
                 </tr>
@@ -1332,39 +1331,39 @@ CaaS Lead 2.0 將 SAP / EPIC 支援由 reactive incident handling 推向 proacti
 </div>
 ```
 
-**SE Members Performance 表格規則**：
-- **預設排序**：SE Name 升序（`th.sortable.asc` 標示在 SE Name 欄標頭）
-- **可排序欄位**：所有 10 欄均支援點擊標頭排序
-- **數值格式**：Avg DTS / Avg DTC 小數一位；% Closed ≤7d 小數一位（附 %）；CSAT Avg 小數兩位；IR SLA Missed 整數
-- **色彩燈號規則**：
-  - CSAT Avg：avg 四捨五入至整數 → 5=🟢 / 4=🟡 / ≤3=🔴；無 Survey 時顯示灰色 `-`
+**SE Members Performance table rules**:
+- **Default sort**: SE Name ascending (`th.sortable.asc` is shown on the SE Name column header).
+- **Sortable columns**: all 10 columns support sorting by clicking their headers.
+- **Number formats**: Avg DTS / Avg DTC to one decimal place; % Closed ≤7d to one decimal place (with %); CSAT Avg to two decimal places; IR SLA Missed as an integer.
+- **Color indicator rules**:
+  - CSAT Avg: round the average to the nearest integer → 5=🟢 / 4=🟡 / ≤3=🔴; display a gray `-` when there are no surveys.
   - % Closed ≤7d：≥50%=🟢 / 40–49%=🟡 / <40%=🔴
   - IR SLA Missed：0=🟢 / 1=🟡 / ≥2=🔴
-- **無資料顯示**：Avg DTS / Avg DTC / CSAT Avg 無數值時顯示 `<span style="color:#ccc;">-</span>`
-- **數值對齊**：數字欄位（Case Assignments、Avg DTS、Avg DTC、% Closed ≤7d、CSAT Avg、Surveys Count、IR SLA Missed）均靠右對齊（`text-align:right`）
-- **資料來源標注**：Footer 需加入 `• SE Members: Kusto KPISupportData + bedrock.CSI.ASWStakeholder | IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx (or Dashboard fallback) | FY26 (Jul 2025 – Jun 2026)`
+- **Missing data display**: display `<span style="color:#ccc;">-</span>` when Avg DTS / Avg DTC / CSAT Avg has no value.
+- **Number alignment**: right-align all numeric columns (Case Assignments, Avg DTS, Avg DTC, % Closed ≤7d, CSAT Avg, Surveys Count, IR SLA Missed) with `text-align:right`.
+- **Data source attribution**: add `• SE Members: Kusto KPISupportData + bedrock.CSI.ASWStakeholder | IR SLA Missed: Cowork asw_ir_missed_FY26.xlsx (or Dashboard fallback) | FY26 (Jul 2025 – Jun 2026)` to the footer.
 
-**Average TTMS by Severity 統計規則**：
-- 位置：左欄 Summary Cards 下方（同一 flex column），填滿左側剩餘垂直空間
-- 以垂直堆疊卡片呈現，每個 Severity 一張卡片（A / B / C）
-- 計算邏輯：取該 Severity 所有 TTMS 非 null 值，計算平均值（四捨五入小數一位）
-- 若該 Severity 所有 TTMS 均為 null，顯示 `N/A` 並標注 "No SLA requirement"
-- 卡片內容：Severity 名稱、平均值、case 數量、數值範圍（min – max）
-- 色彩：Sev A `#e74c3c` / Sev B `#e67e22` / Sev C `#3498db`
-- 容器樣式：`border-top: 3px solid #6366f1`，白底圓角
+**Average TTMS by Severity calculation rules**:
+- Position: below the Summary Cards in the left column (same flex column), filling the remaining vertical space.
+- Present as vertically stacked cards, one per Severity (A / B / C).
+- Calculation: average all non-null TTMS values for that Severity (round to one decimal place).
+- If all TTMS values for that Severity are null, display `N/A` and the note "No SLA requirement".
+- Card contents: Severity name, average, case count, and value range (min – max).
+- Colors: Sev A `#e74c3c` / Sev B `#e67e22` / Sev C `#3498db`.
+- Container style: `border-top: 3px solid #6366f1`, rounded white background.
 
-**SVG 月度趨勢圖規則**：
-- **位置**：右欄（flex:1），與左欄等高
-- **viewBox**：`0 0 550 180`（較緊湊，適配右側空間）
-- **圖表類型**：複合圖（Cumulative 折線 + Monthly Count 長條）
-- **Cumulative 折線**：`stroke #0078d4`（Microsoft Blue）、`stroke-width 2.5`、圓形數據點 r=3.5
-- **Monthly 長條**：`fill #f97316`（橘色）、`opacity 0.5`、底部對齊
-- **Y 軸**：以 cumulative 最大值為上限，兩種圖共用同一 scale
-- **X 軸**：Jul ~ 當月，等距排列
-- **Legend**：左上方，藍色圓點 = Cumulative、橘色方塊 = Monthly
-- **容器樣式**：`border-top: 3px solid #0078d4`，白底圓角
+**SVG monthly trend chart rules**:
+- **Position**: right column (flex:1), same height as the left column.
+- **viewBox**: `0 0 550 180` (compact to fit the available right-side space).
+- **Chart type**: combination chart (Cumulative line + Monthly Count bars).
+- **Cumulative line**: `stroke #0078d4` (Microsoft Blue), `stroke-width 2.5`, circular data points r=3.5.
+- **Monthly bars**: `fill #f97316` (orange), `opacity 0.5`, bottom-aligned.
+- **Y-axis**: maximum cumulative value; use the same scale for both chart series.
+- **X-axis**: Jul through the current month, evenly spaced.
+- **Legend**: upper left, blue dot = Cumulative, orange square = Monthly.
+- **Container style**: `border-top: 3px solid #0078d4`, rounded white background.
 
-### Tab 切換 Script
+### Tab-Switching Script
 
 ```html
 <script>
@@ -1377,63 +1376,63 @@ function switchTab(tabId) {
 </script>
 ```
 
-### 模板替換變數一覽
+### Template Replacement Variables
 
-| 變數 | 說明 | 範例 |
+| Variable | Description | Example |
 |------|------|------|
-| `{Month}` | 報告月份（英文全名） | `May` |
-| `{Year}` | 報告年份 | `2026` |
-| `{YYYY}` | 財年年份 | `2026` |
-| `{YYYY-1}` | 財年起始年份 | `2025` |
-| `{YY}` | 財年年份縮寫 | `26` |
-| `{N}` | 各摘要卡片的計數值 | `43` |
-| `{當月}` | 當前月份（英文縮寫） | `May` |
-| `{上月}` | 上一個月份（英文全名） | `Apr` |
+| `{Month}` | Report month (full English name) | `May` |
+| `{Year}` | Report year | `2026` |
+| `{YYYY}` | Fiscal year | `2026` |
+| `{YYYY-1}` | Fiscal-year start year | `2025` |
+| `{YY}` | Abbreviated fiscal year | `26` |
+| `{N}` | Count value for each summary card | `43` |
+| `{Current month}` | Current month (English abbreviation) | `May` |
+| `{Previous month}` | Previous month (full English name) | `Apr` |
 
 ---
 
-## 工作流程
+## Workflow
 
 ### Step 0 — Select the report option
 
 Use [Report options and request routing](#report-options-and-request-routing) before collecting data. If RCA Standardization is selected, follow [RCA Standardization Report](#rca-standardization-report) and its refresh/verification instructions instead of the MOR-only steps below. For other standalone reports, follow their corresponding sections; apply the full monthly-review workflow only when producing MOR.
 
-### Step 1 — 數據收集
+### Step 1 — Data Collection
 
-> 🚀 **預設路徑**：Dashboard 1 KPI + IR Missing 一律由 Cowork 提供（檔案落地在 `Output/Cowork/`）；Dashboard 2 OpEx 依然用 Playwright + 外部 Edge 抓；CPE Survey 用 Kusto MCP。Cowork 檔案遺失／過期時才回從 Dashboard 1 / IR Missed 的 Playwright fallback。
+> 🚀 **Default path**: Cowork always provides Dashboard 1 KPI + IR Missing data (files are placed in `Output/Cowork/`); continue to retrieve Dashboard 2 OpEx with Playwright + external Edge; use Kusto MCP for CPE Survey. Use the Dashboard 1 / IR Missed Playwright fallback only if Cowork files are missing or expired.
 
-> 🚨 **瀏覽器規定（Playwright fallback / Dashboard 2 專用，BLOCKING RULE，每次執行必遵守）**：
+> 🚨 **Browser requirements (Playwright fallback / Dashboard 2 only; BLOCKING RULE, required on every run)**:
 >
-> 所有 Dashboard 頁面（Dashboard 1、Dashboard 2、IR Missed Reasons）**一律使用外部 Microsoft Edge 瀏覽器開啟**。**以下瀏覽器全部禁止使用**：
+> **Always open** all Dashboard pages (Dashboard 1, Dashboard 2, IR Missed Reasons) in an external Microsoft Edge browser. **The following browsers are prohibited**:
 >
-> - ❌ **VS Code Simple Browser**（內嵌瀏覽器）
-> - ❌ **`open_browser_page` / VS Code Chat 整合式 Playwright 瀏覽器**（也算內嵌，同樣被 Conditional Access 拒絕存取）
-> - ❌ 任何非 Edge 的第三方瀏覽器
+> - ❌ **VS Code Simple Browser** (embedded browser)
+> - ❌ **`open_browser_page` / VS Code Chat integrated Playwright browser** (also embedded and blocked by Conditional Access)
+> - ❌ Any third-party browser other than Edge
 >
-> **正確操作方式**：
+> **Correct procedure**:
 >
-> 1. 透過終端機執行 `Start-Process msedge '<URL>'` 開啟外部 Edge 瀏覽器
-> 2. 使用 **Playwright MCP 工具（`mcp_playwright_browser_*`）** 透過 CDP 連接該外部 Edge 進行頁面操作與資料擷取
-> 3. **禁止呼叫 `open_browser_page`**（會開啟整合式瀏覽器，違反規則）
+> 1. Open external Edge by running `Start-Process msedge '<URL>'` in a terminal.
+> 2. Use **Playwright MCP tools (`mcp_playwright_browser_*`)** to connect to that external Edge via CDP for page interaction and data extraction.
+> 3. **Do not call `open_browser_page`** (it opens the integrated browser and violates this rule).
 >
-> **原因**：VS Code 內嵌 / Chat 整合瀏覽器因 Conditional Access 合規政策無法存取 CES BI Hub 等內部系統，會被卡在登入頁或直接拒絕。
+> **Reason**: VS Code embedded / Chat integrated browsers cannot access internal systems such as CES BI Hub under Conditional Access compliance policies; they may be stuck on the sign-in page or denied access.
 >
-> **若 Playwright MCP 無法連接外部 Edge**：通知用戶並暫停執行，不可退回使用整合式瀏覽器。可請用戶手動操作 Edge 並提供 screenshot / 匯出檔，或以 `Start-Process msedge --remote-debugging-port=9222` 啟動具 CDP debug port 的 Edge instance 供 Playwright attach。
+> **If Playwright MCP cannot connect to external Edge**: notify the user and pause execution; do not fall back to the integrated browser. Ask the user to operate Edge manually and provide a screenshot / exported file, or start an Edge instance with a CDP debug port using `Start-Process msedge --remote-debugging-port=9222` for Playwright to attach to.
 
-> ⚠️ **強制查驗規則（每次執行必做）**：每次產出 Monthly Summary Report 時，**必須重新拉取以下 4 類資料來源**，不可跳過或僅使用快取/歷史資料：
+> ⚠️ **Mandatory verification (required on every run)**: every time a Monthly Summary Report is produced, **retrieve these four categories of data sources again**; do not skip them or use cached / historical data only:
 >
-> | # | 資料來源 | 用途 | 優先方式 | Fallback |
+> | # | Data source | Purpose | Preferred method | Fallback |
 > |---|----------|------|---------|----------|
 > | 1 | **Commercial Insights+ V2** — KPI by Month | 19 KPI（Dashboard 1 Quality + Operational） | Cowork xlsx | Playwright + CES BI Hub |
-> | 2 | **Commercial Insights+ V2** — IR Missed | IR Missing 明細 | Cowork xlsx | Playwright + CES BI Hub IR Missed Reasons |
-> | 3 | **OpEx Overall PCY Level A&I+DTP** | OpEx 5 KPI | Playwright + Edge（無 Cowork 版本） | — |
-> | 4 | **Kusto — CPE Survey** | CPE Insight（CSAT、Verbatim、AgentName） | Kusto MCP | — |
+> | 2 | **Commercial Insights+ V2** — IR Missed | IR Missing details | Cowork xlsx | Playwright + CES BI Hub IR Missed Reasons |
+> | 3 | **OpEx Overall PCY Level A&I+DTP** | 5 OpEx KPIs | Playwright + Edge (no Cowork version) | — |
+> | 4 | **Kusto — CPE Survey** | CPE Insight (CSAT, Verbatim, AgentName) | Kusto MCP | — |
 >
-> 即使上次報告已收集過資料，每次執行仍須**重新拉取**，確保報告反映最新數據。禁止使用任何快取、歷史記錄或先前對話中的資料。
+> Even if data was collected for the previous report, **retrieve it again** on every run to ensure the report reflects the latest data. Do not use cached data, historical records, or data from previous conversations.
 
-> **US / Costa Rica + CaaS 報告的額外強制來源（僅在請求該獨立報告時）**：
+> **Additional mandatory sources for US / Costa Rica + CaaS reports (only when that standalone report is requested)**:
 >
-> | # | 資料來源 | 用途 |
+> | # | Data source | Purpose |
 > |---|----------|------|
 > | 5 | `CSI.SupportRequestHistory_Snapshot_Table2` | FY26 Engineer ownership |
 > | 6 | `CSI.SupportRequestHistory_Snapshot_Table3` | FY27 Engineer ownership + Lead-owned cases |
@@ -1441,123 +1440,116 @@ Use [Report options and request routing](#report-options-and-request-routing) be
 > | 8 | `asw_caas_lead/scripts/generate_dashboard_v1.py` → `FOCUS` | Current CaaS assignments / Stage / indicators |
 > | 9 | Customer Outreach charter + stakeholder deck digests | CaaS role / legacy assignment context |
 >
-> 來源 5–9 每次執行須重新查驗。可沿用 assignment master，但必須重新查詢 FY27 Customer stats，並確認 skill 中的 roster / TPID mapping 是否仍與 current master 一致。
+> Re-verify sources 5–9 on every run. The assignment master may be reused, but FY27 Customer stats must be queried again, and the roster / TPID mapping in the skill must be confirmed against the current master.
 
-**預設執行順序**：
+**Default execution order**:
 
-0. **前置（由用戶完成）**：在 Cowork 跑完 `asw-team-kpi-monthly`（KPI + IR Missed），將產出 xlsx／選用 json 複製到 `C:\GitHubCopilot\IronMan\Output\Cowork\`。
-1. 本 Agent 自 `Output/Cowork/` 讀取最新 `asw_kpi_by_month_FY*.xlsx` → 得 Dashboard 1 全部 KPI。
-2. 本 Agent 自 `Output/Cowork/` 讀取最新 `asw_ir_missed_FY*.xlsx` → 得 IR Missing 明細（含 Verbatim、SE Manager）。
-3. 開啟 Dashboard 2（使用外部 Edge + Playwright MCP），確認 Staff Group Filter，等待 **2 分鐘** 後擷取 OpEx Metric Trend View 資料。
-4. 呈交 CPE Survey Kusto Query（`mcp_kusto_kusto_query`），查詢**整個當前 FY**（例 FY2027 = `datetime(2026-07-01) ~ datetime(2027-06-01)`）。
+0. **Prerequisite (completed by the user)**: run `asw-team-kpi-monthly` in Cowork (KPI + IR Missed), then copy the generated xlsx / optional json to `C:\GitHubCopilot\IronMan\Output\Cowork\`.
+1. This Agent reads the latest `asw_kpi_by_month_FY*.xlsx` from `Output/Cowork/` → all Dashboard 1 KPIs.
+2. This Agent reads the latest `asw_ir_missed_FY*.xlsx` from `Output/Cowork/` → IR Missing details (including Verbatim and SE Manager).
+3. Open Dashboard 2 (using external Edge + Playwright MCP), verify the Staff Group Filter, wait **2 minutes**, then extract OpEx Metric Trend View data.
+4. Submit the CPE Survey Kusto Query (`mcp_kusto_kusto_query`) to query the **entire current FY** (for example, FY2027 = `datetime(2026-07-01) ~ datetime(2027-06-01)`).
 
-**US / Costa Rica + CaaS 獨立報告追加步驟**：
+**Additional steps for the standalone US / Costa Rica + CaaS report**:
 
-5. 使用固定 13-person roster，分別由 Snapshot Table 2 / 3 產生 FY26 / FY27 latest-owner Case set。
-6. 以 `IncidentId` join KPI table，產生 Engineer metrics；將無 ownership match 的成員保留為 `No data`。
-7. 讀取 CaaS `FOCUS` + legacy assignment，解析所有 Customer TPID；若 RISE Selected TPID 為空，以 Customer name 在 Kusto resolve，但必須將 mapping 標為 live resolution。
-8. 查詢每個 Customer 的 FY27 portfolio stats + Lead-owned cases + Top L2/L3，並對 shared Customer 做 unique-customer de-dup。
-9. 產出 4-tab HTML，Browser 驗證每個 Tab、至少一個 Engineer drill-down，以及 CaaS Customer drill-down。
+5. Use the fixed 13-person roster to generate the FY26 / FY27 latest-owner case sets from Snapshot Tables 2 / 3, respectively.
+6. Join the KPI table by `IncidentId` to produce Engineer metrics; retain members without an ownership match as `No data`.
+7. Read the CaaS `FOCUS` + legacy assignments and resolve all Customer TPIDs. If RISE Selected TPID is empty, resolve it in Kusto using the Customer name, but label the mapping as a live resolution.
+8. Query each Customer's FY27 portfolio stats + Lead-owned cases + Top L2/L3, and de-duplicate shared Customers at the unique-customer level.
+9. Produce 4-tab HTML and verify each tab in a browser, including at least one Engineer drill-down and the CaaS Customer drill-down.
 
-**Fallback 步驟（僅在 Cowork 檔案遺失時執行，需取得用戶導向后才進行）**：
-1. 開啟 Dashboard 1（Edge），**嚴格依序執行 4 項 Filter 驗證**（① Channel=ASW_SAPEpicEsc → ② LastTwelveMonths=(All) → ③ LastSixMonths=(All) → ④ FY=僅當前財年），確認 restatement 全部正確後等待 **2 分鐘**，再擷取資料。
-2. 開啟 IR Missed Reasons Dashboard（Edge），**嚴格依序執行 4 項 Filter 驗證**（⚠️ **順序至關重要，必須依序**：① Channel=ASW_SAPEpicEsc → ② LastTwelveMonths=(All) → ③ **LastSixMonths 必須先清除**（預設為 `is Yes`，清除為 `is (All)`） → ④ **最後才設定** FY=僅當前財年），設定 Slicer，等待 **2 分鐘** 後擷取 IR Missing Case ID 清單。**驗證：案件月份應涵蓋完整 FY（Jul 起），scrollHeight ≥ 25000px**。
-3. 以 IR Missing Case ID 清單執行 Kusto Query（補充 AgentName、Region 等 Dashboard 未提供欄位）。
+**Fallback steps (run only if Cowork files are missing, and only after receiving user direction)**:
+1. Open Dashboard 1 (Edge), **perform the four Filter validations strictly in order** (① Channel=ASW_SAPEpicEsc → ② LastTwelveMonths=(All) → ③ LastSixMonths=(All) → ④ FY=current fiscal year only); after confirming all restatements are correct, wait **2 minutes** before extracting data.
+2. Open the IR Missed Reasons Dashboard (Edge), **perform the four Filter validations strictly in order** (⚠️ **order is critical**: ① Channel=ASW_SAPEpicEsc → ② LastTwelveMonths=(All) → ③ **clear LastSixMonths first** (default is `is Yes`; clear it to `is (All)`) → ④ **set FY last**, to current fiscal year only), set the Slicer, wait **2 minutes**, then extract the IR Missing Case ID list. **Verify that case months cover the entire FY (starting in Jul) and that `scrollHeight ≥ 25000px`.**
+3. Run a Kusto Query using the IR Missing Case ID list (to supplement fields unavailable in the Dashboard, such as AgentName and Region).
 
-### Step 2 — 內容組織
-將原始數據整理為結構化報告內容，進行初步 Business Analysis
+### Step 2 — Organize Content
+Organize the raw data into structured report content and perform an initial Business Analysis.
 
-### Step 3 — HTML 產出
-將數據與分析結果輸出為 HTML 報告，存放至指定路徑
+### Step 3 — Generate HTML
+Output the data and analysis as an HTML report and save it to the specified path.
 
-### Step 4 — 簡報製作（可選）
-搭配 `ppt_creator` 技能，將報告內容轉為 Monthly Review 簡報
+### Step 4 — Create Slides (Optional)
+Use the `ppt_creator` skill to convert the report content into a Monthly Review presentation.
 
 ---
 
-## 已知問題與經驗教訓（Known Issues & Lessons Learned）
+## Known Issues & Lessons Learned
 
-### PBI Filter Pane 互動限制
+### PBI Filter Pane Interaction Limitations
 
-| 嚴重度 | 問題 | 說明 | 解法 |
+| Severity | Issue | Description | Resolution |
 |--------|------|------|------|
-| 🚨 **P0** | **Time Fiscal Year Bookmark 預設含前一財年** | Dashboard 1 與 IR Missed Reasons 的 bookmark 載入後，`Time Fiscal Year` restatement 通常會同時包含當前財年與前一財年（例：FY2027 環境下顯示 `is FY 2027 or FY 2026`）。**若未修正為僅當前財年，Total/YTD 數據將混入上一財年，導致所有累計值錯誤。** | **必須**展開 Filter Card → 取消勾選前一財年 → 確認 restatement 僅為當前財年（例：`is FY2027`）。若展開失敗，用 Clear filter 清除後重新勾選當前財年。此操作優先級等同 P0。 |
-| 🚨 **P0** | **LastSixMonths 預設為 `is Yes`** | Dashboard 1 與 IR Missed Reasons 的 `Time LastSixMonths` filter card 預設為 `is Yes`，導致資料僅涵蓋過去 6 個月而非完整財年。**若未清除將遺失 40-50% 案件。** | 依照 Filter 驗證順序 Step 3c 點擊 Clear filter 按鈕清除此篩選（`[aria-label="Clear filter"]`），確認 restatement 變為 `is (All)`。操作後驗證 scrollHeight ≥ 25000px。 |
-| ⚠️ P1 | **Filter Card 無法展開** | IR Drill 頁面的「Filters on all pages」中，部分 Filter Card 的展開按鈕（`aria-expanded="false"`）點擊後不會展開內容，無法直接操作內部 checkbox | 改用 **Clear filter（橡皮擦按鈕）** 重置為 `is (All)`，或使用**頁面上的 Slicer** 進行篩選 |
-| ℹ️ P2 | **Clear filter 按鈕判斷** | Clear filter 按鈕有兩種狀態：`aria-disabled="false"`（可點擊）與 `disabled="" aria-disabled="true"`（已為 All，無需操作） | 檢查 `aria-disabled` 屬性後再決定是否點擊 |
+| 🚨 **P0** | **Time Fiscal Year bookmark defaults to including the previous fiscal year** | After the Dashboard 1 and IR Missed Reasons bookmarks load, the `Time Fiscal Year` restatement usually includes both the current and previous fiscal years (for example, in an FY2027 environment it shows `is FY 2027 or FY 2026`). **If not corrected to the current fiscal year only, Total/YTD data will include the previous fiscal year and all cumulative values will be wrong.** | **Must** expand the Filter Card → deselect the previous fiscal year → confirm the restatement shows only the current fiscal year (for example, `is FY2027`). If expansion fails, use Clear filter and reselect the current fiscal year. This is a P0-priority operation. |
+| 🚨 **P0** | **LastSixMonths defaults to `is Yes`** | The `Time LastSixMonths` filter card on Dashboard 1 and IR Missed Reasons defaults to `is Yes`, so data covers only the past 6 months rather than the full fiscal year. **If not cleared, 40-50% of cases will be missed.** | Following the Filter validation order, click the Clear filter button in Step 3c to clear this filter (`[aria-label="Clear filter"]`), then confirm the restatement becomes `is (All)`. Verify `scrollHeight ≥ 25000px` afterwards. |
+| ⚠️ P1 | **Filter Card cannot be expanded** | On the IR Drill page's "Filters on all pages", clicking the expand button (`aria-expanded="false"`) for some Filter Cards does not expand their contents, so their internal checkboxes cannot be operated directly. | Use **Clear filter (eraser button)** to reset to `is (All)`, or filter using the **Slicer on the page**. |
+| ℹ️ P2 | **Clear filter button state** | The Clear filter button has two states: `aria-disabled="false"` (clickable) and `disabled="" aria-disabled="true"` (already All; no action needed). | Check the `aria-disabled` property before deciding whether to click. |
 
-### PBI Slicer 操作技巧
+### PBI Slicer Interaction Tips
 
-| 問題 | 說明 | 解法 |
+| Issue | Description | Resolution |
 |------|------|------|
-| **🚨 P0：Show/hide filter pane 按鈕的所有標準 click 全失效** | 位於 PBI 右上角的 `button[aria-label="Show/hide filter pane"]` 使用 Playwright `click()` 會被 CES BI Hub 外層 Angular 的 `<div class="toggleBtn" data-testid="filter-btn">` overlay 攔截（`subtree intercepts pointer events`）；`click({force:true})` 與 `focus() + keyboard.press('Enter')` 雖無錯誤但 `aria-expanded` 不會變 `true` | **改用 `page.mouse` 座標點擊**（實測 2026-07 唯一可靠方式）：<br>```js
-const box = await btn.boundingBox();
-await page.mouse.move(box.x + box.width/2, box.y + box.height/2);
-await page.waitForTimeout(150);
-await page.mouse.down();
-await page.waitForTimeout(50);
-await page.mouse.up();
-```<br>同樣模式適用於 Filter Card 的 **Clear filter 按鈕**、**Expand/collapse 按鈕**、以及展開後的 **checkbox**。點擊前務必先 `await loc.scrollIntoViewIfNeeded()`，否則 boundingBox 會回報 filter pane scroll 容器內的原始座標（可能超出 viewport），mouse.click 打不到。 |
-| **Filter Card 內 checkbox 為虛擬捲動，無法直接定位目標值** | Filter Card 展開後 checkbox 使用虛擬捲動；例如 Time Fiscal Year 只渲染 FY 2007–2013 附近幾項，`[role="checkbox"][title="FY 2027"]` 直接查會回傳 count=0，`scrollIntoViewIfNeeded` 也無法喚出（元素根本不在 DOM 中） | **必用 Filter Card 內建 Search 框先過濾**：<br>1. 找到該 filter card 內 `input[placeholder="Search"]`<br>2. 座標 mouse click 聚焦 → `await search.pressSequentially('FY 2027', { delay: 80 })`（`fill()` 無效）<br>3. Search 過濾後目標 checkbox 會出現，再 `boundingBox` + mouse.down/up 勾選<br>Channel Function Detail 選 `ASW_SAPEpicEsc` 走完全一致流程 |
-| **Slicer 搜尋框 `fill()` 無效** | PBI Slicer 搜尋框使用 `fill()` 或 `type()` 方法填入文字後不會觸發篩選更新 | 使用 `pressSequentially('ASW_SAP', { delay: 80-100 })` 逐字輸入，模擬人工鍵入以觸發 PBI 的 key handler |
-| **Checkbox aria-label 為 null** | Filter Card 展開後的 checkbox 元素其 `aria-label` 可能為 null，實際文字位於 `title` 屬性或子元素 `.slicerText` | 使用 `[role="checkbox"][title="FY 2027"]` 或讀取 `title` 屬性辨識目標項目 |
+| **🚨 P0: All standard clicks on the Show/hide filter pane button fail** | Playwright `click()` on the PBI top-right `button[aria-label="Show/hide filter pane"]` is intercepted by the outer CES BI Hub Angular `<div class="toggleBtn" data-testid="filter-btn">` overlay (`subtree intercepts pointer events`); `click({force:true})` and `focus() + keyboard.press('Enter')` produce no errors, but `aria-expanded` does not become `true`. | **Use coordinate clicks with `page.mouse`** (the only reliable method tested in 2026-07):<br><code>const box = await btn.boundingBox();</code><br><code>await page.mouse.move(box.x + box.width/2, box.y + box.height/2);</code><br><code>await page.waitForTimeout(150);</code><br><code>await page.mouse.down();</code><br><code>await page.waitForTimeout(50);</code><br><code>await page.mouse.up();</code><br>The same pattern applies to the Filter Card **Clear filter button**, **Expand/collapse button**, and expanded **checkboxes**. Always run `await loc.scrollIntoViewIfNeeded()` before clicking; otherwise, `boundingBox` reports the original coordinates inside the filter pane's scroll container (which may be outside the viewport), and mouse clicks will miss. |
+| **Virtualized checkboxes inside a Filter Card prevent direct targeting of the desired value** | Checkboxes in an expanded Filter Card use virtual scrolling; for example, Time Fiscal Year renders only a few values near FY 2007–2013. A direct lookup of `[role="checkbox"][title="FY 2027"]` returns count=0, and `scrollIntoViewIfNeeded` cannot make it appear (the element is not in the DOM). | **First filter the list using the Filter Card's built-in Search box**:<br>1. Find `input[placeholder="Search"]` inside the filter card.<br>2. Focus it with a coordinate mouse click → `await search.pressSequentially('FY 2027', { delay: 80 })` (`fill()` does not work).<br>3. The target checkbox appears after Search filters the list; select it using `boundingBox` + mouse.down/up.<br>Use exactly the same process to select `ASW_SAPEpicEsc` in Channel Function Detail. |
+| **`fill()` does not work in the Slicer search box** | Entering text into the PBI Slicer search box with `fill()` or `type()` does not trigger a filter update. | Type character by character using `pressSequentially('ASW_SAP', { delay: 80-100 })` to simulate manual typing and trigger PBI's key handler. |
+| **Checkbox aria-label is null** | A checkbox in an expanded Filter Card may have a null `aria-label`; its text is actually in the `title` property or child `.slicerText` element. | Identify the target item using `[role="checkbox"][title="FY 2027"]` or read its `title` property. |
 
-### PBI Grid 虛擬捲動
+### PBI Grid Virtual Scrolling
 
-| 問題 | 說明 | 解法 |
+| Issue | Description | Resolution |
 |------|------|------|
-| **Grid 僅渲染可見行** | PBI 表格使用虛擬捲動（virtual scroll），一次僅渲染約 20 行，其餘行不在 DOM 中 | 透過 `.mid-viewport` div 逐步捲動（每次 400px，間隔 300ms），在每個位置收集可見行，使用 `Set` 去重 |
-| **Grid 僅渲染可見欄（水平虛擬捲動）** | PBI 表格欄位數超出可見寬度時（如 13 欄僅顯示 10 欄），DOM 中不會渲染隱藏的欄位。`scrollLeft` 程式設定或 CSS scroll 無法觸發 PBI 的虛擬欄位渲染 | **使用 `page.mouse.wheel(deltaX, 0)` 在 Grid 上觸發水平捲動**。步驟：①取得 grid 的 `boundingBox()` ② `page.mouse.move(box.x + box.width/2, box.y + box.height - 20)` 移到表格底部捲軸區域 ③ `page.mouse.wheel(300, 0)` 向右捲動（負值向左）④ 等待 2 秒後讀取新渲染的欄位。需**分兩次讀取**：先讀左半部（Jul-Apr），再 wheel 右移讀取 May + Total |
-| **scrollHeight 隨資料量變化** | 全年資料（`LastSixMonths = All`）的 scrollHeight 約為六個月資料的 2 倍（例：33966 vs 17000） | 以 `scrollHeight` 計算需要的捲動次數，確保涵蓋所有行 |
+| **Grid renders only visible rows** | PBI tables use virtual scrolling, rendering only about 20 rows at a time; the remaining rows are not in the DOM. | Scroll the `.mid-viewport` div incrementally (400px each time, 300ms intervals), collect visible rows at each position, and de-duplicate with a `Set`. |
+| **Grid renders only visible columns (horizontal virtual scrolling)** | When a PBI table has more columns than fit in the visible width (for example, only 10 of 13 columns are visible), hidden columns are not rendered in the DOM. Setting `scrollLeft` in code or using CSS scroll does not trigger PBI's virtual column rendering. | **Trigger horizontal scrolling over the Grid with `page.mouse.wheel(deltaX, 0)`**. Steps: ① get the grid's `boundingBox()` ② `page.mouse.move(box.x + box.width/2, box.y + box.height - 20)` to move to the bottom scrollbar area ③ `page.mouse.wheel(300, 0)` to scroll right (negative values scroll left) ④ wait 2 seconds, then read the newly rendered columns. **Read in two passes**: first the left side (Jul-Apr), then wheel right to read May + Total. |
+| **scrollHeight changes with data volume** | The scrollHeight for full-year data (`LastSixMonths = All`) is about twice that of six months of data (for example, 33966 vs 17000). | Use `scrollHeight` to calculate the required number of scrolls to ensure all rows are covered. |
 
-### Kusto 資料注意事項
+### Kusto Data Notes
 
-| 問題 | 說明 | 解法 |
+| Issue | Description | Resolution |
 |------|------|------|
-| **🚨 使用 Kusto MCP 工具** | Kusto 查詢**直接使用 `mcp_kusto_kusto_query` MCP 工具**執行，無需 Azure CLI 驗證（`az login`）或 `kusto_runner.py` 腳本。MCP 工具已具備完整認證能力，可直接傳入 cluster_uri、database、query 三個參數執行查詢 | 直接呼叫 `mcp_kusto_kusto_query`，指定 `cluster_uri="https://supportrptwus3prod.westus3.kusto.windows.net"`、`database="KPISupportData"`、`query="..."` |
-| **`IsIrMet` 欄位為空** | Kusto `AllCloudsSupportIncidentWithReferenceModelVNext` 表中 `IsIrMet` 欄位在 FY2026 之後的所有記錄均為空字串（`""`），無法用於判斷 IR Missing 狀態 | IR Missing 狀態由 **PBI Model 計算**（基於 `InitialResponseDateTime` 是否為 null），必須從 Dashboard 擷取 Case ID，而非直接在 Kusto 中篩選 |
-| **InitialSeverity 值** | 大部分案件為 `A` / `B` / `C`，但偶爾出現 `1` 等非標準值 | HTML 報告中直接顯示原始值，不做轉換 |
-| **TTMS 與 Severity 關聯** | Sev B/C 案件的 TTMS 通常為 `null`（無 SLA 要求） | HTML 中 TTMS 為 null 時顯示 `-`（灰色） |
+| **🚨 Use the Kusto MCP tool** | Execute Kusto queries **directly with the `mcp_kusto_kusto_query` MCP tool**; Azure CLI authentication (`az login`) or the `kusto_runner.py` script is not required. The MCP tool is fully authenticated and can execute queries by passing the three parameters cluster_uri, database, and query. | Call `mcp_kusto_kusto_query` directly, specifying `cluster_uri="https://supportrptwus3prod.westus3.kusto.windows.net"`, `database="KPISupportData"`, and `query="..."`. |
+| **`IsIrMet` field is empty** | In the Kusto `AllCloudsSupportIncidentWithReferenceModelVNext` table, the `IsIrMet` field is an empty string (`""`) for all records after FY2026, so it cannot be used to determine IR Missing status. | IR Missing status is **calculated by the PBI Model** (based on whether `InitialResponseDateTime` is null); Case IDs must be extracted from the Dashboard, not filtered directly in Kusto. |
+| **InitialSeverity values** | Most cases have `A` / `B` / `C`, but nonstandard values such as `1` occasionally appear. | Display the raw value in the HTML report without converting it. |
+| **TTMS and Severity relationship** | TTMS is usually `null` for Sev B/C cases (no SLA requirement). | Display `-` (gray) in HTML when TTMS is null. |
 
-### PBI iframe 結構
+### PBI iframe Structure
 
 ```
 Page (cesbihub.microsoft.com)                                       ← top document
-  ├─ (Angular) 外層 wrapper（含 `<div data-testid="filter-btn">` overlay）
+  ├─ (Angular) outer wrapper (contains `<div data-testid="filter-btn">` overlay)
   ├─ iframe name="exportiFrame" src="about:blank"                    ← same-origin
   ├─ iframe name="refreshAccessTokenIframe" (cesbihub.microsoft.com) ← same-origin
-  └─ iframe name="reportPageiFrame" src="about:blank"                ← same-origin，但內含 PBI
-       └─ iframe src="https://msit.powerbi.com/reportEmbed?..."      ← CROSS-ORIGIN，PBI 實際內容在這
+  └─ iframe name="reportPageiFrame" src="about:blank"                ← same-origin, but contains PBI
+       └─ iframe src="https://msit.powerbi.com/reportEmbed?..."      ← CROSS-ORIGIN; the actual PBI content is here
 ```
 
-#### 🚨 P0：PBI 內容為 Cross-Origin iframe — 頂層 `document.querySelector` 無法穿透
+#### 🚨 P0: PBI content is in a Cross-Origin iframe — top-level `document.querySelector` cannot reach inside it
 
-- CES BI Hub 把 PBI 報告嵌在 `msit.powerbi.com/reportEmbed` iframe 內，該 iframe 相對於頁面頂層是 **cross-origin**，因此：
-  - `document.querySelector('[data-testid="filter-btn"]')` 或 `button[aria-label="Show/hide filter pane"]` 從頂層文件永遠回傳 `null`
-  - 從頂層文件 `contentDocument` 存取 PBI iframe 會被 SOP 阻擋（return `null`）
-  - `mcp_playwright_browser_evaluate`（在頂層執行）**無法**跨進 PBI frame 操作 DOM
-- **正確做法**：透過 `mcp_playwright_browser_run_code_unsafe` 執行 Playwright 自身的 frame API（Playwright 內部可跨 origin 存取所有 frames）：
+- CES BI Hub embeds the PBI report in an `msit.powerbi.com/reportEmbed` iframe, which is **cross-origin** relative to the top-level page. Therefore:
+  - `document.querySelector('[data-testid="filter-btn"]')` or `button[aria-label="Show/hide filter pane"]` always returns `null` from the top-level document.
+  - Accessing the PBI iframe's `contentDocument` from the top-level document is blocked by SOP (returns `null`).
+  - `mcp_playwright_browser_evaluate` (running at the top level) **cannot** cross into the PBI frame to manipulate the DOM.
+- **Correct approach**: use `mcp_playwright_browser_run_code_unsafe` to run Playwright's own frame API (Playwright can internally access all frames across origins):
   ```js
   async () => {
     const pbi = page.frames().find(f => f.url().includes('powerbi.com/reportEmbed'));
     if (!pbi) return { err: 'no pbi frame' };
-    // 後續所有 locator 都掛在 pbi 上，例如：
+    // Attach all subsequent locators to pbi, for example:
     const cards = await pbi.locator('[data-automation-type="filterCard"]').all();
-    // 或者搜尋 filter 標題：
+    // Or search for the filter title:
     const fy = pbi.locator('[data-automation-type="filterCard"]').filter({
       has: pbi.locator('[data-testid="filter-card-title"][aria-label^="Time Fiscal Year"]')
     }).first();
     return { count: cards.length };
   }
   ```
-  **注意**：`mcp_playwright_browser_run_code_unsafe` 只接受 async 箭頭函式或表達式，不接受 top-level `const` 宣告；必須包在 `async () => { ... }` 內。
-- **禁止**：不要用 `page.frames()[4]` 這種靠 index 尋找 PBI frame — index 會因 CES BI Hub 頁面版本或載入時序不同而改變。永遠用 `find(f => f.url().includes('powerbi.com/reportEmbed'))`。
+  **Note**: `mcp_playwright_browser_run_code_unsafe` accepts only async arrow functions or expressions, not top-level `const` declarations; it must be wrapped in `async () => { ... }`.
+- **Prohibited**: do not locate the PBI frame by index using a pattern such as `page.frames()[4]` — the index can change with CES BI Hub versions or load timing. Always use `find(f => f.url().includes('powerbi.com/reportEmbed'))`.
 
-#### 常用 Locator 樣板
+#### Common Locator Patterns
 
-- **Filter Card 定位**：`pbiFrame.locator('[data-automation-type="filterCard"]')` 取得所有 filter cards，再透過 `[data-testid="filter-card-title"]` 的 `aria-label` 屬性判斷是哪個 filter
-- **Restatement 文字**：`[data-testid="filter-card-restatement"]` 取得 filter 的當前設定值描述
-- **展開/收合按鈕**：`pbi.locator('[aria-label="Time Fiscal Year Expand or collapse filter card"]')`（把 filter 名稱換掉）
-- **Clear filter 按鈕**：卡片內 `[aria-label="Clear filter"]`
-- **Search 輸入框**：卡片內 `input[placeholder="Search"]`
-- **Checkbox**：`pbi.locator('[role="checkbox"][title="FY 2027"]')`（虛擬捲動下 Search 過濾後才會出現）
+- **Filter Card locator**: `pbiFrame.locator('[data-automation-type="filterCard"]')` gets all filter cards; identify the desired filter using the `aria-label` property of `[data-testid="filter-card-title"]`.
+- **Restatement text**: `[data-testid="filter-card-restatement"]` gets the description of the filter's current setting.
+- **Expand/collapse button**: `pbi.locator('[aria-label="Time Fiscal Year Expand or collapse filter card"]')` (replace with the filter name).
+- **Clear filter button**: `[aria-label="Clear filter"]` inside the card.
+- **Search input**: `input[placeholder="Search"]` inside the card.
+- **Checkbox**: `pbi.locator('[role="checkbox"][title="FY 2027"]')` (appears only after Search filters the virtualized list).

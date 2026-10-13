@@ -30,8 +30,8 @@ try {
     }
     $payload = $primary[0].Rows[0][0]
     if ($payload -is [string]) { $payload = $payload | ConvertFrom-Json }
-    if ($null -eq $payload.rows -or $null -eq $payload.cohort -or $null -eq $payload.dtcCases) {
-        throw 'Report payload lacks rows, cohort, or DTC cases; report data was not changed.'
+    if ($null -eq $payload.rows -or $null -eq $payload.cohort -or $null -eq $payload.dtcCases -or $null -eq $payload.reopenCases) {
+        throw 'Report payload lacks rows, cohort, DTC cases, or re-open cases; report data was not changed.'
     }
     $caseIds = [System.Collections.Generic.HashSet[string]]::new()
     foreach ($case in $payload.dtcCases) {
@@ -45,6 +45,24 @@ try {
         })
         if ($matching.Count -ne $engineer.DTCRecords) {
             throw "DTC case list is incomplete for $($engineer.Scope) / $($engineer.Engineer); report data was not changed."
+        }
+    }
+    $reopenIds = [System.Collections.Generic.HashSet[string]]::new()
+    foreach ($case in $payload.reopenCases) {
+        if ([string]::IsNullOrWhiteSpace($case.IncidentId) -or -not $reopenIds.Add($case.IncidentId) -or $case.ReopenedCount -le 0) {
+            throw 'Re-open cases contain empty/duplicate IDs or invalid counts; report data was not changed.'
+        }
+    }
+    foreach ($row in @($payload.rows | Where-Object { $_.Kind -in @('Engineer', 'PathEngineer', 'Path') })) {
+        $matching = @($payload.reopenCases | Where-Object {
+            ($row.Scope -eq 'All' -or $_.Scope -eq $row.Scope) -and
+            ($row.Kind -eq 'Path' -or $_.Engineer -eq $row.Engineer) -and
+            ($row.Kind -eq 'Engineer' -or ($_.SapSupportPathL2 -eq $row.SapSupportPathL2 -and $_.SapSupportPathL3 -eq $row.SapSupportPathL3))
+        })
+        if ($null -eq $row.ReopenRecords -or $null -eq $row.ReopenKnownRecords -or
+            $matching.Count -ne $row.ReopenRecords -or $row.ReopenRecords -gt $row.ReopenKnownRecords -or
+            $row.ReopenKnownRecords -gt $row.Tickets) {
+            throw "Re-open metrics or case details are invalid for $($row.Scope) / $($row.Engineer); report data was not changed."
         }
     }
     $dataPath = Join-Path $PSScriptRoot 'rca_standardization_FY27.data.js'

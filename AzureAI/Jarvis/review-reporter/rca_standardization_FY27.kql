@@ -56,7 +56,7 @@ let Cases = materialize(
     | where isnotempty(IncidentId)
     | where IncidentId in (Owners | project IncidentId) or tolower(AgentAlias) in (Roster | project AgentAlias)
     | project IncidentId, CaseUri, ModifiedDateTime, AgentAlias, SapSupportPathL2, SapSupportPathL3,
-              Customer_TPID, Customer_TPName, ClosedDateTime, DTC, TotalCustomerSATScore
+              Customer_TPID, Customer_TPName, ClosedDateTime, DTC, TotalCustomerSATScore, ReopenedCount
     | summarize arg_max(ModifiedDateTime, *) by IncidentId
     | lookup kind=leftouter Owners on IncidentId
     | extend AgentAlias = tolower(iff(isnotempty(AgentAlias), AgentAlias, SnapshotOwner))
@@ -64,7 +64,7 @@ let Cases = materialize(
     | extend DTCValue = iff(isnotnull(ClosedDateTime) and todouble(DTC) >= 0, todouble(DTC), real(null)),
              CSATValue = iff(TotalCustomerSATScore between (1 .. 5), todouble(TotalCustomerSATScore), real(null)),
              Customer = iff(isempty(Customer_TPName), "Unknown / not available", Customer_TPName)
-    | project IncidentId, CaseUri, ManagerAlias, Engineer, SapSupportPathL2, SapSupportPathL3, Customer_TPID, Customer, DTCValue, CSATValue
+    | project IncidentId, CaseUri, ManagerAlias, Engineer, SapSupportPathL2, SapSupportPathL3, Customer_TPID, Customer, DTCValue, CSATValue, ReopenedCount
 );
 let Scoped = materialize(
     union (Cases | extend Scope = ManagerAlias), (Cases | extend Scope = "All")
@@ -72,7 +72,8 @@ let Scoped = materialize(
 let Paths = materialize(
     Scoped
     | summarize Tickets=count(), DTCSum=sum(DTCValue), DTCRecords=countif(isnotnull(DTCValue)),
-                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue))
+                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue)),
+                ReopenRecords=countif(ReopenedCount > 0), ReopenKnownRecords=countif(ReopenedCount >= 0)
       by Scope, SapSupportPathL2, SapSupportPathL3
     | partition hint.strategy=native by Scope
       (sort by Tickets desc, SapSupportPathL2 asc, SapSupportPathL3 asc | take 10)
@@ -87,7 +88,8 @@ let Customers =
 let Engineers =
     Scoped
     | summarize Tickets=count(), DTCSum=sum(DTCValue), DTCRecords=countif(isnotnull(DTCValue)),
-                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue))
+                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue)),
+                ReopenRecords=countif(ReopenedCount > 0), ReopenKnownRecords=countif(ReopenedCount >= 0)
       by Scope, Engineer
     | extend Kind = "Engineer";
 let PathEngineers =
@@ -95,7 +97,8 @@ let PathEngineers =
     | join kind=inner (Paths | project Scope, SapSupportPathL2, SapSupportPathL3)
       on Scope, SapSupportPathL2, SapSupportPathL3
     | summarize Tickets=count(), DTCSum=sum(DTCValue), DTCRecords=countif(isnotnull(DTCValue)),
-                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue))
+                CSATSum=sum(CSATValue), SurveysCount=countif(isnotnull(CSATValue)),
+                ReopenRecords=countif(ReopenedCount > 0), ReopenKnownRecords=countif(ReopenedCount >= 0)
       by Scope, Engineer, SapSupportPathL2, SapSupportPathL3
     | extend Kind = "PathEngineer";
 let Results = union Paths, Customers, Engineers, PathEngineers;
@@ -104,6 +107,13 @@ let DTCCases = toscalar(
     Cases
     | where isnotnull(DTCValue)
     | project Scope=ManagerAlias, Engineer, IncidentId, CaseUri, SapSupportPathL2, SapSupportPathL3, DTCValue
+    | summarize Rows=make_list(pack_all())
+    | project Rows
+);
+let ReopenCases = toscalar(
+    Cases
+    | where ReopenedCount > 0
+    | project Scope=ManagerAlias, Engineer, IncidentId, CaseUri, SapSupportPathL2, SapSupportPathL3, ReopenedCount
     | summarize Rows=make_list(pack_all())
     | project Rows
 );
@@ -118,5 +128,6 @@ Results
     "ownership", "Incident owner; FY27 latest ownership snapshot used when the source owner is unavailable",
     "cohort", Cohort,
     "rows", Rows,
-    "dtcCases", DTCCases
+    "dtcCases", DTCCases,
+    "reopenCases", ReopenCases
 )

@@ -91,6 +91,13 @@
       <p class="small">Lowest average DTC ranks first. Only closed tickets with a valid, non-negative DTC contribute. Hover, focus, or click a DTC record count to inspect case IDs and DTC values; click a case ID to open its source-provided DFM link in a new tab. Rows with zero tickets are hidden; rows with tickets but no valid DTC remain unranked. No minimum sample threshold is applied; inspect DTC record counts before drawing conclusions.</p>
       <div class="scroll"><table><thead><tr><th>Rank</th><th id="comparison-identity">Engineer (Identities Redacted)</th><th class="num">Tickets</th><th class="num">Avg DTC (days)</th><th>DTC comparison</th><th class="num">DTC records</th><th class="num">Avg CSAT</th><th class="num">Surveys</th></tr></thead><tbody id="engineers"></tbody></table></div>
     </details>
+    <details id="reopen-section">
+      <summary id="reopen-title">Engineer Re-Open comparison (Identities Redacted)</summary>
+      <a class="export" id="export-reopen" href="#">Export to Excel (.xlsx)</a>
+      <label id="reopen-label" for="reopen-path">Compare engineers for</label><select id="reopen-path"></select>
+      <p class="small">Lowest re-open percentage ranks first; exact ties share a rank. % Re-Open Cases = distinct cases with ReopenedCount &gt; 0 / all tickets, including open and closed tickets. Each case counts once, even if reopened repeatedly. Missing/invalid source counts show No data and remain unranked. Zero-ticket rows are hidden. Select All managers for weighted manager aggregates. Hover, focus, or click re-open records to inspect cases and their DFM links.</p>
+      <div class="scroll"><table><thead><tr><th>Rank</th><th id="reopen-identity">Engineer (Identities Redacted)</th><th class="num">Tickets</th><th class="num">% Re-Open Cases</th><th>Re-Open comparison</th><th class="num">re-open records</th></tr></thead><tbody id="reopen"></tbody></table></div>
+    </details>
     <details><summary>Source and methodology</summary>
     <footer id="provenance"></footer>
     <footer>Support-path categories identify recurring scenarios, not verified root causes. Blank paths and customers are shown as unknown. Metrics use sums and valid-record counts, never an unweighted average of engineer averages. Missing or masked CSAT is No data, not zero. Engineer labels are fixed across manager and path filters; ties in DTC share a rank.</footer>
