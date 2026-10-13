@@ -50,7 +50,7 @@ let Owners = materialize(
     | project IncidentId, SnapshotOwner = tolower(CaseOwner)
     | where SnapshotOwner in (Roster | project AgentAlias)
 );
-let Cases = materialize(
+let RawCases = materialize(
     cluster("supportrptwus3prod.westus3.kusto.windows.net").database("KPISupportData").AllCloudsSupportIncidentWithReferenceModelVNext
     | where CreatedDateTime >= fy_start and CreatedDateTime < fy_end
     | where isnotempty(IncidentId)
@@ -60,6 +60,9 @@ let Cases = materialize(
     | summarize arg_max(ModifiedDateTime, *) by IncidentId
     | lookup kind=leftouter Owners on IncidentId
     | extend AgentAlias = tolower(iff(isnotempty(AgentAlias), AgentAlias, SnapshotOwner))
+);
+let Cases = materialize(
+    RawCases
     | lookup kind=inner Roster on AgentAlias
     | extend DTCValue = iff(isnotnull(ClosedDateTime) and todouble(DTC) >= 0, todouble(DTC), real(null)),
              CSATValue = iff(TotalCustomerSATScore between (1 .. 5), todouble(TotalCustomerSATScore), real(null)),

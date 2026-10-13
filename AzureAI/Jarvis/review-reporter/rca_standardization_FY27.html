@@ -95,8 +95,11 @@
       <summary id="reopen-title">Engineer Re-Open comparison (Identities Redacted)</summary>
       <a class="export" id="export-reopen" href="#">Export to Excel (.xlsx)</a>
       <label id="reopen-label" for="reopen-path">Compare engineers for</label><select id="reopen-path"></select>
-      <p class="small">Lowest re-open percentage ranks first; exact ties share a rank. % Re-Open Cases = distinct cases with ReopenedCount &gt; 0 / all tickets, including open and closed tickets. Each case counts once, even if reopened repeatedly. Missing/invalid source counts show No data and remain unranked. Zero-ticket rows are hidden. Select All managers for weighted manager aggregates. Hover, focus, or click re-open records to inspect cases and their DFM links.</p>
+      <p class="small">Validate only reopened FY27 cases currently assigned to the selected manager's directs. Credit each case to its verified initial closer, not its current owner. If the initial closer is outside that manager, show the credit separately below; never count it against a direct. % Re-Open Cases = credited distinct reopened cases / currently assigned FY27 tickets for that engineer and path. This current-ownership denominator is not a historical initial-closure failure rate; reassignment can make the ratio exceed 100%. Each case counts once even if reopened repeatedly. Missing counts or pending audit verification show No data and remain unranked. All managers uses weighted manager aggregates and withholds ranks until every manager is verified. DTC, support-path, and customer metrics remain unchanged. Hover, focus, or click re-open records to inspect cases and their DFM links.</p>
+      <p id="reopen-status" class="small" role="status"></p>
       <div class="scroll"><table><thead><tr><th>Rank</th><th id="reopen-identity">Engineer (Identities Redacted)</th><th class="num">Tickets</th><th class="num">% Re-Open Cases</th><th>Re-Open comparison</th><th class="num">re-open records</th></tr></thead><tbody id="reopen"></tbody></table></div>
+      <p class="small">Verified cases credited outside the selected manager (excluded from directs' numerator):</p>
+      <div class="scroll"><table><thead><tr><th>Case ID</th><th>Current manager</th><th>Current engineer (redacted)</th><th>Initial manager</th><th>Initial closer (redacted)</th><th>ReopenedCount</th></tr></thead><tbody id="reopen-outside"></tbody></table></div>
     </details>
     <details><summary>Source and methodology</summary>
     <footer id="provenance"></footer>

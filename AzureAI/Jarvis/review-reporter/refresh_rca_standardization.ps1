@@ -1,75 +1,72 @@
 [CmdletBinding()]
-param()
+param([Parameter(Mandatory)][string]$ClosureEvidencePath)
 
 $ErrorActionPreference = 'Stop'
-$bodyPath = [System.IO.Path]::GetTempFileName()
-$responsePath = [System.IO.Path]::GetTempFileName()
-try {
-    $queryPath = Join-Path $PSScriptRoot 'rca_standardization_FY27.kql'
-    $body = @{
-        db = 'KPISupportData'
-        csl = Get-Content -LiteralPath $queryPath -Raw
-    } | ConvertTo-Json -Compress
-    [System.IO.File]::WriteAllText($bodyPath, $body)
-    & az rest --method post `
-        --uri 'https://supportrptwus3prod.westus3.kusto.windows.net/v2/rest/query' `
-        --resource 'https://kusto.kusto.windows.net' `
-        --headers 'Content-Type=application/json' `
-        --body "@$bodyPath" --output-file $responsePath --only-show-errors
-    if ($LASTEXITCODE -ne 0) {
-        throw "Kusto export failed (Azure CLI exit code $LASTEXITCODE). Existing report data was not changed."
-    }
-    $response = Get-Content -LiteralPath $responsePath -Raw | ConvertFrom-Json
-    $completion = @($response | Where-Object FrameType -eq 'DataSetCompletion')
-    if ($completion.Count -ne 1 -or $completion[0].HasErrors -or $completion[0].Cancelled) {
-        throw "Kusto returned an incomplete or failed query. Existing report data was not changed. $($completion | ConvertTo-Json -Depth 20 -Compress)"
-    }
-    $primary = @($response | Where-Object { $_.FrameType -eq 'DataTable' -and $_.TableKind -eq 'PrimaryResult' })
-    if ($primary.Count -ne 1 -or $primary[0].Rows.Count -ne 1) {
-        throw 'Expected exactly one primary payload row; report data was not changed.'
-    }
-    $payload = $primary[0].Rows[0][0]
-    if ($payload -is [string]) { $payload = $payload | ConvertFrom-Json }
-    if ($null -eq $payload.rows -or $null -eq $payload.cohort -or $null -eq $payload.dtcCases -or $null -eq $payload.reopenCases) {
-        throw 'Report payload lacks rows, cohort, DTC cases, or re-open cases; report data was not changed.'
-    }
-    $caseIds = [System.Collections.Generic.HashSet[string]]::new()
-    foreach ($case in $payload.dtcCases) {
-        if ([string]::IsNullOrWhiteSpace($case.IncidentId) -or -not $caseIds.Add($case.IncidentId)) {
-            throw 'DTC cases contain empty or duplicate case IDs; report data was not changed.'
-        }
-    }
-    foreach ($engineer in @($payload.rows | Where-Object Kind -eq 'Engineer')) {
-        $matching = @($payload.dtcCases | Where-Object {
-            $_.Engineer -eq $engineer.Engineer -and ($engineer.Scope -eq 'All' -or $_.Scope -eq $engineer.Scope)
-        })
-        if ($matching.Count -ne $engineer.DTCRecords) {
-            throw "DTC case list is incomplete for $($engineer.Scope) / $($engineer.Engineer); report data was not changed."
-        }
-    }
-    $reopenIds = [System.Collections.Generic.HashSet[string]]::new()
-    foreach ($case in $payload.reopenCases) {
-        if ([string]::IsNullOrWhiteSpace($case.IncidentId) -or -not $reopenIds.Add($case.IncidentId) -or $case.ReopenedCount -le 0) {
-            throw 'Re-open cases contain empty/duplicate IDs or invalid counts; report data was not changed.'
-        }
-    }
-    foreach ($row in @($payload.rows | Where-Object { $_.Kind -in @('Engineer', 'PathEngineer', 'Path') })) {
-        $matching = @($payload.reopenCases | Where-Object {
-            ($row.Scope -eq 'All' -or $_.Scope -eq $row.Scope) -and
-            ($row.Kind -eq 'Path' -or $_.Engineer -eq $row.Engineer) -and
-            ($row.Kind -eq 'Engineer' -or ($_.SapSupportPathL2 -eq $row.SapSupportPathL2 -and $_.SapSupportPathL3 -eq $row.SapSupportPathL3))
-        })
-        if ($null -eq $row.ReopenRecords -or $null -eq $row.ReopenKnownRecords -or
-            $matching.Count -ne $row.ReopenRecords -or $row.ReopenRecords -gt $row.ReopenKnownRecords -or
-            $row.ReopenKnownRecords -gt $row.Tickets) {
-            throw "Re-open metrics or case details are invalid for $($row.Scope) / $($row.Engineer); report data was not changed."
-        }
-    }
-    $dataPath = Join-Path $PSScriptRoot 'rca_standardization_FY27.data.js'
-    $json = $payload | ConvertTo-Json -Depth 30 -Compress
-    [System.IO.File]::WriteAllText($dataPath, "globalThis.RCA_REPORT_DATA = $json;`n", [System.Text.UTF8Encoding]::new($false))
-    Write-Output "Refreshed $dataPath ($($payload.rows.Count) aggregate rows)."
+$evidence = Get-Content -LiteralPath $ClosureEvidencePath -Raw | ConvertFrom-Json -Depth 100
+if ($evidence.schemaVersion -ne 2 -or -not $evidence.collectionComplete -or -not $evidence.complete -or
+    $evidence.checkedCount -ne $evidence.candidateCount -or @($evidence.records).Count -ne $evidence.checkedCount -or
+    -not $evidence.completedAt) {
+    throw 'Selected-manager re-open evidence collection is incomplete; existing report data was not changed.'
 }
-finally {
-    Remove-Item -LiteralPath $bodyPath, $responsePath -ErrorAction SilentlyContinue
+$dataPath = Join-Path $PSScriptRoot 'rca_standardization_FY27.data.js'
+$text = Get-Content -LiteralPath $dataPath -Raw
+$payload = ($text -replace '^globalThis.RCA_REPORT_DATA\s*=\s*', '' -replace ';\s*$', '') | ConvertFrom-Json -Depth 100
+if ($payload.generatedAt -ne $evidence.snapshotGeneratedAt -or $evidence.managerAlias -notin $payload.cohort.Scope) {
+    throw 'Evidence does not match the current snapshot or maintained manager; report data was not changed.'
 }
+$candidates = if ($null -ne $payload.reopenCandidates) { @($payload.reopenCandidates) } else { @($payload.reopenCases) }
+$selected = @($candidates | Where-Object Scope -eq $evidence.managerAlias)
+if ($selected.Count -ne $evidence.candidateCount) { throw 'Selected-manager candidate coverage changed.' }
+$ids = [System.Collections.Generic.HashSet[string]]::new()
+$verified = foreach ($record in $evidence.records) {
+    $source = @($selected | Where-Object IncidentId -eq $record.IncidentId)
+    if (-not $ids.Add($record.IncidentId) -or $source.Count -ne 1 -or
+        $record.CurrentScope -ne $source[0].Scope -or $record.CurrentEngineer -ne $source[0].Engineer -or
+        $record.AuditReopenedCount -ne $source[0].ReopenedCount -or $record.AuditReopenedCount -le 0 -or
+        -not $record.ClosureAuditId -or -not $record.InitialClosureActorId -or -not $record.InitialClosedAt) {
+        throw "Invalid or mismatched attribution for $($record.IncidentId); report data was not changed."
+    }
+    $uri = [uri]$source[0].CaseUri
+    if ($uri.Scheme -ne 'https' -or $uri.Host -ne 'onesupport.crm.dynamics.com' -or
+        $uri.Query -notmatch '(?:^\?|&)id=([0-9a-fA-F-]{36})(?:&|$)' -or $Matches[1] -ne $record.IncidentGuid) {
+        throw "Evidence incident GUID disagrees with source DFM link for $($record.IncidentId)."
+    }
+    $member = @($payload.cohort | Where-Object { $_.Scope -eq $record.Scope -and $_.Engineer -eq $record.Engineer })
+    if ((-not $record.OutsideRoster -and $member.Count -ne 1) -or
+        ($record.OutsideRoster -and ($record.Scope -or $record.Engineer))) { throw 'Invalid initial-closer roster mapping.' }
+    $sameOwner = [bool](-not $record.OutsideRoster -and $record.Engineer -eq $source[0].Engineer)
+    if ($record.CurrentOwnerMatchesInitial -ne $sameOwner) { throw 'Owner comparison disagrees with verified initial closer.' }
+    [pscustomobject]@{
+        IncidentId = $source[0].IncidentId
+        CaseUri = $source[0].CaseUri
+        SapSupportPathL2 = $source[0].SapSupportPathL2
+        SapSupportPathL3 = $source[0].SapSupportPathL3
+        ReopenedCount = $source[0].ReopenedCount
+        Scope = $record.Scope
+        Engineer = $record.Engineer
+        CurrentScope = $source[0].Scope
+        CurrentEngineer = $source[0].Engineer
+        CurrentOwnerMatchesInitial = $sameOwner
+        OutsideRoster = [bool]$record.OutsideRoster
+        InitialClosedAt = ([datetimeoffset]$record.InitialClosedAt).UtcDateTime.ToString('o')
+        VerifiedAt = $record.VerifiedAt
+    }
+}
+$existing = if ($payload.reopenAttribution -eq 'Selected-manager reopened cases: DFM initial closer') {
+    @($payload.reopenCases | Where-Object CurrentScope -ne $evidence.managerAlias)
+} else { @() }
+$coverage = if ($payload.reopenVerifiedScopes) { @($payload.reopenVerifiedScopes) } else { @() }
+$coverage = @(@($coverage) + @($evidence.managerAlias) | Select-Object -Unique)
+$payload | Add-Member -Force -NotePropertyName reopenCandidates -NotePropertyValue @($candidates)
+$payload | Add-Member -Force -NotePropertyName reopenCases -NotePropertyValue @(@($existing) + @($verified))
+$payload | Add-Member -Force -NotePropertyName reopenVerifiedScopes -NotePropertyValue $coverage
+$payload | Add-Member -Force -NotePropertyName reopenAttribution -NotePropertyValue 'Selected-manager reopened cases: DFM initial closer'
+$payload | Add-Member -Force -NotePropertyName reopenDenominator -NotePropertyValue 'Currently assigned FY27 tickets'
+$payload | Add-Member -Force -NotePropertyName closureVerifiedAt -NotePropertyValue $evidence.completedAt
+$payload.PSObject.Properties.Remove('closureCases')
+$payload.PSObject.Properties.Remove('reopenIncompleteScopes')
+$json = $payload | ConvertTo-Json -Depth 100 -Compress
+$temporary = "$dataPath.tmp"
+[System.IO.File]::WriteAllText($temporary, "globalThis.RCA_REPORT_DATA = $json;`n", [System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::Move($temporary, $dataPath, $true)
+Write-Output "Updated $($evidence.managerAlias): $($verified.Count) reopened cases verified; current-ticket metrics unchanged."

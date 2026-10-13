@@ -100,7 +100,9 @@ function metricCases(data, scope, engineer, selectedPath, metric) {
   const value = metric === "reopen" ? "ReopenedCount" : "DTCValue";
   if (!Array.isArray(cases)) throw new Error(`Case details are unavailable. Refresh the Kusto export to load ${metric} cases.`);
   return cases.filter(row =>
-    (scope === "All" || row.Scope === scope) && (engineer === null || row.Engineer === engineer) && (selectedPath === null || pathMatches(row, selectedPath))
+    (metric !== "reopen" || (!row.OutsideRoster && row.Scope === row.CurrentScope)) &&
+    (scope === "All" || (metric === "reopen" ? row.CurrentScope : row.Scope) === scope) &&
+    (engineer === null || row.Engineer === engineer) && (selectedPath === null || pathMatches(row, selectedPath))
   ).sort((a, b) => b[value] - a[value] || a.IncidentId.localeCompare(b.IncidentId));
 }
 
@@ -113,14 +115,14 @@ function comparisonCases(data, scope, row, selectedPath = null, metric = "dtc") 
 }
 
 function reopenRate(row) {
-  return row.Tickets > 0 && row.ReopenKnownRecords === row.Tickets && Number.isFinite(row.ReopenRecords)
+  return !row.CoverageIncomplete && row.Tickets > 0 && row.ReopenKnownRecords === row.Tickets && Number.isFinite(row.ReopenRecords)
     ? row.ReopenRecords / row.Tickets : null;
 }
 
 function reopenRows(report) {
   let previous = null;
   let rank = 0;
-  return report.engineers.filter(row => row.Tickets > 0).sort((a, b) => {
+  return report.engineers.filter(row => row.Tickets > 0 || row.ReopenRecords > 0 || row.CoverageIncomplete).sort((a, b) => {
     const left = reopenRate(a);
     const right = reopenRate(b);
     if (left === null && right !== null) return 1;
@@ -130,8 +132,44 @@ function reopenRows(report) {
     const rate = reopenRate(row);
     if (rate !== null && rate !== previous) rank = index + 1;
     previous = rate;
-    return { ...row, ReopenRate: rate, Rank: rate === null ? "-" : rank };
+    return { ...row, ReopenRate: rate, Rank: rate === null || report.rankingsIncomplete ? "-" : rank };
   });
+}
+
+function reopenComparisonReport(data, scope, selectedPath = null) {
+  if (data.reopenAttribution !== "Selected-manager reopened cases: DFM initial closer" ||
+      !Array.isArray(data.reopenCandidates) || !Array.isArray(data.reopenCases)) {
+    throw new Error("Initial-closer evidence is unavailable. Validate only the selected manager's currently assigned reopened cases; latest-owner re-open counts are not used.");
+  }
+  const report = comparisonReport(data, scope, selectedPath);
+  const verifiedScopes = new Set(data.reopenVerifiedScopes || []);
+  const candidates = new Map(data.reopenCandidates.map(item => [item.IncidentId, item]));
+  const verified = new Map(data.reopenCases.map(item => [item.IncidentId, item]));
+  if (candidates.size !== data.reopenCandidates.length || verified.size !== data.reopenCases.length) throw new Error("Duplicate re-open case details.");
+  for (const item of data.reopenCases) {
+    const source = candidates.get(item.IncidentId);
+    const closer = data.cohort.find(member => member.Scope === item.Scope && member.Engineer === item.Engineer);
+    if (!source || !item.InitialClosedAt || item.CurrentScope !== source.Scope || item.CurrentEngineer !== source.Engineer ||
+        item.ReopenedCount !== source.ReopenedCount || !pathMatches(item, source) ||
+        (!item.OutsideRoster && !closer) || (item.OutsideRoster && (item.Engineer || item.Scope)) ||
+        item.CurrentOwnerMatchesInitial !== (!item.OutsideRoster && item.Engineer === item.CurrentEngineer)) {
+      throw new Error("Invalid or mismatched initial-closer attribution.");
+    }
+  }
+  for (const candidate of data.reopenCandidates) {
+    if (verifiedScopes.has(candidate.Scope) && !verified.has(candidate.IncidentId)) throw new Error("Incomplete selected-manager re-open details.");
+  }
+  const managers = [...new Set(data.cohort.map(member => member.Scope))];
+  const incompleteScopes = managers.filter(manager => !verifiedScopes.has(manager));
+  const engineers = report.engineers.map(row => {
+    const manager = row.ManagerAlias || scope;
+    return { ...row, ReopenRecords: comparisonCases(data, scope, row, selectedPath, "reopen").length,
+      CoverageIncomplete: !verifiedScopes.has(manager) };
+  });
+  const outsideCases = data.reopenCases.filter(item =>
+    (scope === "All" || item.CurrentScope === scope) && (item.OutsideRoster || item.Scope !== item.CurrentScope) &&
+    (selectedPath === null || pathMatches(item, selectedPath)));
+  return { ...report, engineers, outsideCases, incompleteScopes, rankingsIncomplete: scope === "All" && incompleteScopes.length > 0 };
 }
 
 function dfmLink(caseUri) {
@@ -150,7 +188,7 @@ function createWorkbook(ExcelJS, kind, data, scope, selectedPath = null, sort = 
   const workbook = new ExcelJS.Workbook();
   workbook.creator = "Jarvis Review Reporter";
   workbook.calcProperties.fullCalcOnLoad = true;
-  const report = comparisonReport(data, scope, selectedPath);
+  const report = isReopen ? reopenComparisonReport(data, scope, selectedPath) : comparisonReport(data, scope, selectedPath);
   const identityHeader = scope === "All" ? "Manager alias" : "Engineer (Identities Redacted)";
   const sheet = workbook.addWorksheet(isReopen ? "Re-Open comparison" : kind === "paths" ? "Support paths" : scope === "All" ? "Manager comparison" : "Engineer comparison", { views: [{ state: "frozen", ySplit: 1 }] });
   const columns = kind === "paths" ? [
@@ -166,13 +204,14 @@ function createWorkbook(ExcelJS, kind, data, scope, selectedPath = null, sort = 
   const rows = isReopen ? reopenRows(report) : kind === "paths" ? sortPaths(pathRows(report), sort.key, sort.direction) : engineerRows(report);
   rows.forEach(row => {
     if (isReopen) {
-      const added = sheet.addRow([row.Rank, row.Engineer, row.Tickets, null, row.ReopenRecords, row.ReopenKnownRecords]);
+      const added = sheet.addRow([row.Rank, row.Engineer, row.Tickets, null, row.ReopenRecords, row.CoverageIncomplete ? -1 : row.ReopenKnownRecords]);
       const n = added.number;
       added.getCell(4).value = {
         formula: `IF(OR(C${n}=0,F${n}<>C${n}),"No data",E${n}/C${n})`,
         result: row.ReopenRate ?? "No data"
       };
       added.getCell(4).numFmt = "0.0%";
+      if (row.CoverageIncomplete) added.getCell(3).note = "Selected-manager reopened cases have not all been verified; percentage unavailable.";
       return;
     }
     const values = kind === "paths"
@@ -217,6 +256,22 @@ function createWorkbook(ExcelJS, kind, data, scope, selectedPath = null, sort = 
       });
     });
   }
+  if (isReopen) {
+    const outside = workbook.addWorksheet("Outside-manager credits");
+    outside.columns = [
+      { header: "Case ID", width: 25 }, { header: "Current manager", width: 20 },
+      { header: "Current engineer (redacted)", width: 30 }, { header: "Initial manager", width: 20 },
+      { header: "Initial closer (redacted)", width: 30 }, { header: "ReopenedCount", width: 18 }
+    ];
+    for (const item of report.outsideCases) {
+      const added = outside.addRow([item.IncidentId, item.CurrentScope, item.CurrentEngineer,
+        item.Scope || "Outside roster", item.Engineer || "Outside roster (redacted)", item.ReopenedCount]);
+      added.getCell(1).numFmt = "@";
+      const link = dfmLink(item.CaseUri);
+      if (link) added.getCell(1).value = { text: item.IncidentId, hyperlink: link };
+      else added.getCell(1).note = "DFM link unavailable in the source.";
+    }
+  }
   const metadata = workbook.addWorksheet("Report context");
   metadata.columns = [{ header: "Field", width: 25 }, { header: "Value", width: 100 }];
   [
@@ -226,7 +281,9 @@ function createWorkbook(ExcelJS, kind, data, scope, selectedPath = null, sort = 
     ["Ownership", data.ownership], ["Source", "KPISupportData + CSI ownership snapshot"],
     ["Order", isReopen ? "Lowest re-open percentage first; exact ties share a rank" : kind === "paths" ? `${sort.key} ${sort.direction}; 10 most frequent pairs` : "Lowest average DTC first; exact ties share a rank"],
     ["DTC definition", "Closed tickets with a valid non-negative DTC; sum / valid record count"],
-    ["Re-open definition", "Distinct cases with ReopenedCount > 0 / all tickets; each case counts once. Missing/invalid counts yield No data."],
+    ["Re-open definition", "Only reopened cases currently assigned to the selected manager's directs are audited. Credit the initial closer within that manager; credit outside-manager cases separately. Divide by currently assigned FY27 tickets, not historical initial closures. This is not a historical closure failure rate."],
+    ["Initial-closure verification", data.closureVerifiedAt || "Unavailable"],
+    ["Incomplete re-open scopes", isReopen ? report.incompleteScopes.join(", ") || "None" : "Not applicable"],
     ["CSAT definition", "Valid scores (1-5); sum / scored ticket count. Missing/masked scores are No data."],
     ["Engineer identities", "Redacted; stable roster identifiers A-AM"],
     ["Case details", "DTC case IDs are internal support data; share only with authorized recipients."]
@@ -448,7 +505,36 @@ function startReport(data, doc) {
     get("reopen-label").textContent = all ? "Compare managers for" : "Compare engineers for";
     const body = get("reopen");
     body.replaceChildren();
-    const rows = reopenRows(comparisonReport(data, manager.value, selected));
+    get("reopen-outside").replaceChildren();
+    let rows;
+    try {
+      const report = reopenComparisonReport(data, manager.value, selected);
+      get("reopen-status").textContent = report.rankingsIncomplete
+        ? `All-manager verification is incomplete (${report.incompleteScopes.join(", ")}); comparison ranks are withheld.`
+        : report.incompleteScopes.includes(manager.value)
+          ? "This manager's reopened cases have not all been verified; percentages and ranks are withheld."
+          : `Selected-manager reopened cases verified from DFM audit history. Denominator: currently assigned FY27 tickets. ${report.outsideCases.length} cases credited outside the selected manager.`;
+      for (const item of report.outsideCases) {
+        const tr = addRow(get("reopen-outside"), [item.IncidentId, item.CurrentScope, item.CurrentEngineer,
+          item.Scope || "Outside roster", item.Engineer || "Outside roster (redacted)", item.ReopenedCount]);
+        const link = dfmLink(item.CaseUri);
+        if (link) {
+          const anchor = doc.createElement("a");
+          anchor.href = link;
+          anchor.target = "_blank";
+          anchor.rel = "noopener noreferrer";
+          anchor.textContent = item.IncidentId;
+          tr.firstElementChild.replaceChildren(anchor);
+        } else tr.firstElementChild.append(" (DFM link unavailable)");
+      }
+      rows = reopenRows(report);
+    } catch (error) {
+      get("reopen-status").textContent = error.message;
+      const tr = addRow(body, [error.message]);
+      tr.firstElementChild.colSpan = 6;
+      tr.setAttribute("role", "alert");
+      return;
+    }
     if (!Array.isArray(data.reopenCases) || rows.some(row => !Number.isFinite(row.ReopenRecords) || !Number.isFinite(row.ReopenKnownRecords))) {
       const tr = addRow(body, ["Re-open data is unavailable. Refresh the Kusto export."]);
       tr.firstElementChild.colSpan = 6;
@@ -457,7 +543,7 @@ function startReport(data, doc) {
     }
     rows.forEach(row => {
       const percent = row.ReopenRate === null ? "No data" : `${number(row.ReopenRate * 100, 1)}%`;
-      const tr = addRow(body, [row.Rank, row.Engineer, row.Tickets, percent, row.ReopenRate === null ? "No data" : "", row.ReopenRecords]);
+      const tr = addRow(body, [row.Rank, row.Engineer, row.Tickets, percent, row.CoverageIncomplete ? "Selected-manager audit verification pending" : row.ReopenRate === null ? "No data" : "", row.ReopenRecords]);
       if (row.ReopenRate !== null) {
         const bar = doc.createElement("div");
         bar.className = "bar";
@@ -567,5 +653,5 @@ function startReport(data, doc) {
   get("report").hidden = false;
 }
 
-if (typeof module !== "undefined" && module.exports) module.exports = { average, compareDTC, pathMatches, scopeReport, sortPaths, pathRows, engineerRows, dtcCases, comparisonReport, comparisonCases, reopenRate, reopenRows, dfmLink, createWorkbook };
+if (typeof module !== "undefined" && module.exports) module.exports = { average, compareDTC, pathMatches, scopeReport, sortPaths, pathRows, engineerRows, dtcCases, comparisonReport, comparisonCases, reopenRate, reopenRows, reopenComparisonReport, dfmLink, createWorkbook };
 if (typeof document !== "undefined") startReport(globalThis.RCA_REPORT_DATA, document);
