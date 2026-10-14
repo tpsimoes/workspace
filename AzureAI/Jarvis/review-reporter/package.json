@@ -2,6 +2,7 @@
   "name": "jarvis-review-reporter",
   "private": true,
   "scripts": {
+    "build:shareable": "node build_shareable_report.js",
     "test": "node --test rca_standardization.test.js",
     "vendor": "node -e \"const fs=require('node:fs');fs.mkdirSync('vendor',{recursive:true});fs.copyFileSync('node_modules/exceljs/dist/exceljs.min.js','vendor/exceljs.min.js');fs.copyFileSync('node_modules/exceljs/LICENSE','vendor/exceljs.LICENSE');\""
   },

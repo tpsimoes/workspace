@@ -69,4 +69,6 @@ $json = $payload | ConvertTo-Json -Depth 100 -Compress
 $temporary = "$dataPath.tmp"
 [System.IO.File]::WriteAllText($temporary, "globalThis.RCA_REPORT_DATA = $json;`n", [System.Text.UTF8Encoding]::new($false))
 [System.IO.File]::Move($temporary, $dataPath, $true)
+& node (Join-Path $PSScriptRoot 'build_shareable_report.js')
+if ($LASTEXITCODE -ne 0) { throw 'Report data was updated, but the shareable HTML build failed.' }
 Write-Output "Updated $($evidence.managerAlias): $($verified.Count) reopened cases verified; current-ticket metrics unchanged."
